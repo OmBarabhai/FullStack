@@ -1,7 +1,3 @@
-Perfect Om 🔥 — this is your **FINAL FULL DAY 1 FILE**
-👉 Clean + no repetition + interview-ready + easy to revise
-
-👉 Just copy–paste into `Notes/Day1.md` or `README.md`
 
 ---
 
