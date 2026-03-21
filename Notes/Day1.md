@@ -1,8 +1,5 @@
 
 ---
-
-# 🚀 FULL DAY 1 – GIT NOTES
-
 ````md
 # 🚀 Day 1 – Git Basics
 
@@ -12,7 +9,7 @@
 
 Git is a version control system used to track changes in code.
 
-👉 Speak:
+👉 Speak:  
 Git helps track changes and manage code versions.
 
 ---
@@ -22,10 +19,10 @@ Git helps track changes and manage code versions.
 ### What:
 Initializes Git in a project and creates a `.git` folder
 
-👉 Speak:
+👉 Speak:  
 Git init starts version control in my project.
 
-👉 Why:
+👉 Why:  
 To start tracking all changes from beginning
 
 ---
@@ -35,7 +32,7 @@ To start tracking all changes from beginning
 ### What:
 Shows current state of files
 
-👉 Speak:
+👉 Speak:  
 Git status shows which files are modified or staged.
 
 ---
@@ -45,7 +42,6 @@ Git status shows which files are modified or staged.
 ### What:
 Moves changes to staging area
 
-👉 Command:
 ```bash
 git add .
 ````
@@ -60,8 +56,6 @@ Git add prepares files for commit.
 ### What:
 
 Saves changes as a snapshot
-
-👉 Command:
 
 ```bash
 git commit -m "message"
@@ -99,8 +93,6 @@ Git pull updates my local code from remote repository.
 ### What:
 
 Separate version of project
-
-👉 Commands:
 
 ```bash
 git branch
@@ -166,7 +158,7 @@ This is the complete Git workflow.
 
 ---
 
-## ⚠️ Important Learnings (From Practice)
+## ⚠️ Important Learnings
 
 * Git tracks from `.git` folder (project root)
 * If not added → not committed
@@ -178,14 +170,23 @@ This is the complete Git workflow.
 
 ## 🎯 Interview Master Line
 
-If stuck, say:
-
-I have worked with Git practically. I used branching, merging, and resolved merge conflicts.
-
-
-
-
-````
-![Git Diagram 1](images/image1.png)
+I have worked with Git practically.
+I used branching, merging, and resolved merge conflicts.
 
 ---
+
+## 🖼️ Diagram (Workflow)
+
+![Git Workflow](images/image2.png)
+
+---
+
+# 🧠 WHY THIS MATTERS
+
+👉 GitHub cannot see:
+
+* Your local PC path ❌
+
+👉 GitHub only sees:
+
+* Files inside repo ✅
