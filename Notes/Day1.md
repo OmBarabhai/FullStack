@@ -217,5 +217,5 @@ git add .
 git commit -m "Final Day 1 Notes"
 git push
 ````
-
+![alt text](images/image.png)
 ---
