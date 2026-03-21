@@ -186,5 +186,6 @@ I have worked with Git practically. I used branching, merging, and resolved merg
 
 
 ````
-![alt text](images/image2.png)
+![Git Diagram 1](images/image1.png)
+
 ---
