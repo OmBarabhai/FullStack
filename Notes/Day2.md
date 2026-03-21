@@ -1,6 +1,3 @@
-Got it 🔥 — you want **Day 2 README with upstream explained + image included properly** (clean, paste-ready).
-
-👉 Use this FINAL version:
 
 ````md
 # 🚀 Day 2 – Git Remote, Upstream & Branching
