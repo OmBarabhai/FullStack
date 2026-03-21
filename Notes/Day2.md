@@ -1,11 +1,6 @@
-Perfect Om 🔥 — now you’ve done **REAL multi-branch + upstream + PR workflow**.
-I’ll convert YOUR PRACTICE into a **perfect Day 2 README (clean + real + interview-ready)**.
-
-👉 Just copy–paste this 👇
 
 ---
 
-# 🚀 Day 2 – Git Remote, Branching, Upstream & PR (Real Practice)
 
 ````md
 # 🚀 Day 2 – Git Remote, Branching, Upstream & PR
