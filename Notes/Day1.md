@@ -182,40 +182,9 @@ If stuck, say:
 
 I have worked with Git practically. I used branching, merging, and resolved merge conflicts.
 
----
 
-## 🧠 Daily Revision (2 Minutes)
 
-1. What is Git?
-2. What is commit?
-3. What is branch?
-4. What is merge conflict?
 
----
-
-## 🚀 Goal
-
-To build strong Git & GitHub understanding and become confident in interviews.
-
-````
-
----
-
-# 🧠 WHY THIS IS PERFECT
-
-👉 Clean structure  
-👉 No duplicate content  
-👉 Speak lines included  
-👉 Interview-ready  
-
----
-
-# 🚀 NEXT STEP
-
-```bash
-git add .
-git commit -m "Final Day 1 Notes"
-git push
 ````
 ![alt text](images/image2.png)
 ---
