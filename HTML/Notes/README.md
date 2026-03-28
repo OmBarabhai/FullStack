@@ -1,4 +1,3 @@
-
 ---
 
 ````md
@@ -20,8 +19,7 @@ HyperText means:
 - Text that contains links
 - Allows navigation between pages
 
-👉 Example:
-Clicking a link takes you to another page
+👉 Example: Clicking a link takes you to another page
 
 ---
 
@@ -36,27 +34,25 @@ Markdown is a lightweight markup language used to format text.
 
 👉 Example:
 
-```md
-# Heading
-**Bold**
-- List
-````
+# Heading  
+**Bold**  
+- List  
 
 ---
 
 ## 🧠 How Web Works
 
-* You write code in editor (VS Code)
-* Browser reads HTML
-* Displays output
+- You write code in editor (VS Code)
+- Browser reads HTML
+- Displays output
 
 ---
 
 ## 🧩 HTML vs CSS vs JS
 
-* HTML → Structure
-* CSS → Styling
-* JS → Logic
+- HTML → Structure  
+- CSS → Styling  
+- JS → Logic  
 
 ---
 
@@ -74,7 +70,7 @@ Markdown is a lightweight markup language used to format text.
 
 </body>
 </html>
-```
+````
 
 ---
 
@@ -94,15 +90,13 @@ Markdown is a lightweight markup language used to format text.
 <html lang="en">
 ```
 
-👉 UTF-8:
-
-* Supports text, symbols, emoji
+👉 UTF-8 supports text, symbols, emoji
 
 ---
 
 ## 📄 Text Elements
 
-* `<h1> to <h6>` → headings
+* `<h1>` to `<h6>` → headings
 * `<p>` → paragraph
 * `<span>` → inline
 
@@ -196,7 +190,7 @@ Markdown is a lightweight markup language used to format text.
 
 * Head → not visible
 * Body → visible
-* HTML is not programming language
+* HTML is not a programming language
 * index.html = default file
 
 ---
@@ -210,111 +204,224 @@ Markdown is a lightweight markup language used to format text.
 ![HTML Diagram 5](image5.png)
 ![HTML Diagram 6](image6.png)
 ![HTML Diagram 7](image7.png)
+![HTML Diagram 8](image8.png)
+![HTML Diagram 9](image9.png)
+![HTML Diagram 10](image10.png)
 
 ---
 
-# 🎤 HTML INTERVIEW QUESTIONS (BASED ON YOUR NOTES)
+# 🎤 Image-Based Interview Questions + Answers
 
 ---
 
-## 🟢 Basic
+## 🟢 Image 1 (Basics)
 
-### 1. What is HTML?
+**Q1: What are HTML tags and elements?**
+👉 Tag is `<p>`
+👉 Element is `<p>Text</p>`
 
-HTML is a markup language used to structure web pages.
+**Q2: Heading vs Paragraph?**
+👉 Heading → titles
+👉 Paragraph → content
 
----
-
-### 2. What is HyperText?
-
-HyperText allows linking between web pages.
-
----
-
-### 3. What is Markdown?
-
-Markdown is used to format text in README and documentation.
+**Q3: What is span?**
+👉 Inline text grouping
 
 ---
 
-### 4. What is difference between HTML and programming language?
+## 🟡 Image 2 (Rendering)
 
-HTML structures content, it does not perform logic.
+**Q4: How browser renders HTML?**
+👉 HTML → DOM → Rendering Engine → UI
 
----
+**Q5: What is rendering engine?**
+👉 Converts code to UI
 
-## 🟡 Medium
+**Q6: Block vs Inline?**
+👉 Block → full width
+👉 Inline → content width
 
-### 5. What is DOCTYPE?
-
-Defines HTML version (HTML5).
-
----
-
-### 6. What is difference between div and span?
-
-* div → block
-* span → inline
+**Q7: Self-closing tags?**
+👉 `<img>`, `<br>`
 
 ---
 
-### 7. What is semantic HTML?
+## 🟠 Image 3 (Navigation)
 
-Tags that give meaning (header, footer, section).
+**Q8: Types of navigation?**
+👉 Internal / External
 
----
+**Q9: What is # navigation?**
+👉 Jump within page
 
-### 8. What is meta tag?
-
-Provides metadata (charset, viewport).
-
----
-
-### 9. What is UTF-8?
-
-Character encoding supporting all symbols.
+**Q10: Download attribute?**
+👉 Forces file download
 
 ---
 
-## 🔴 Advanced (Fresher Level)
+## 🔵 Image 4 (Code)
 
-### 10. What is difference between head and body?
+**Q11: Viewport meta?**
+👉 Makes responsive
 
-* head → browser info
-* body → visible content
+**Q12: Title tag?**
+👉 Tab + SEO
 
----
-
-### 11. What is index.html?
-
-Default file loaded by browser.
+**Q13: strong vs em vs mark vs u?**
+👉 bold / italic / highlight / underline
 
 ---
 
-### 12. Why HTML is important?
+## 🟣 Image 5 (Charset)
 
-It defines structure of every website.
+**Q14: UTF-8?**
+👉 Character encoding
+
+**Q15: Why charset?**
+👉 Prevents errors
+
+**Q16: SEO reading?**
+👉 Tags + meta
 
 ---
 
-## 🎯 Interview Master Line
+## 🔴 Image 6 (Version)
 
-HTML is a markup language used to structure web pages using tags and elements. It works with CSS and JavaScript to build complete websites.
+**Q17: DOCTYPE?**
+👉 HTML version
+
+**Q18: HTML5?**
+👉 Modern features
+
+**Q19: Backward compatibility?**
+👉 Supports older systems
+
+---
+
+## ⚫ Image 7 (HyperText)
+
+**Q20: HyperText?**
+👉 Linking
+
+**Q21: Internal vs External links?**
+👉 Same vs other site
+
+---
+
+## 🟤 Image 8 (Accessibility)
+
+**Q22: Accessibility?**
+👉 Usable for all
+
+**Q23: Semantic tags?**
+👉 Better SEO
+
+**Q24: HTML & SEO?**
+👉 Proper structure helps ranking
+
+
+---
+
+## 🟤 Image 8 (Accessibility + SEO + Headings)
+
+**Q25: Why proper heading order (h1 → h6) is important?**  
+👉 Helps SEO + improves readability  
+
+**Q26: What are the 3 main priorities in HTML?**  
+👉 User  
+👉 SEO  
+👉 Accessibility  
+
+**Q27: What is accessibility?**  
+👉 Making websites usable for everyone (including disabled users)  
+
+**Q28: What is screen reader?**  
+👉 Tool that reads content for visually impaired users  
+
+**Q29: What happens if we ignore accessibility rules?**  
+👉 Bad user experience + SEO penalty  
+
+---
+
+## 🟠 Image 9 (Rendering + Tags Deep Understanding)
+
+**Q30: What is difference between tag and element?**  
+👉 Tag → `<p>`  
+👉 Element → `<p>Text</p>`  
+
+**Q31: What are types of tags?**  
+👉 Normal tags  
+👉 Self-closing (void) tags  
+
+---
+
+**Q32: What is rendering?**  
+👉 Process of converting HTML → visible UI  
+
+---
+
+**Q33: What is rendering engine?**  
+👉 Browser component that displays content  
+
+---
+
+**Q34: What are block and inline elements?**  
+👉 Block → takes full width  
+👉 Inline → takes content width  
+
+---
+
+**Q35: Why comments are used in HTML?**  
+👉 Code explanation  
+👉 Notes for future  
+👉 Debugging  
+
+---
+
+## 🔵 Image 10 (Navigation + Linking Deep)
+
+**Q36: What are different types of links in HTML?**  
+👉 Internal (same project)  
+👉 External (other website)  
+👉 Same page (#id)  
+👉 File download  
+
+---
+
+**Q37: What is same-page navigation?**  
+👉 Using `#id` to jump inside page  
+
+---
+
+**Q38: What is download attribute in anchor tag?**  
+👉 Downloads file instead of opening  
+
+---
+
+**Q39: What happens when we click a link?**  
+👉 Browser loads:
+- Another HTML page  
+- Another website  
+- Section of same page  
+- Resource (image/file)  
+
+---
+
+**Q40: What are resources in HTML?**  
+👉 Files like images, PDFs, videos  
+
+---
+
+## 🎯 FINAL MASTER LINE (VERY IMPORTANT)
+
+HTML is a markup language used to structure web pages. It works with browsers to render content and supports navigation, SEO, accessibility, and linking between resources.
 
 ---
 
 ## 🚀 Quick Revision
 
 * HTML = structure
-* HyperText = links
-* Markdown = formatting
+* Tags = building blocks
+* HyperText = linking
 * Head = metadata
 * Body = content
-
----
-
-## 🎯 Goal
-
-* Build strong fundamentals
-* Explain clearly in interview
-* Use HTML in projects confidently
