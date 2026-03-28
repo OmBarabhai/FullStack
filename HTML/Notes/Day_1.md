@@ -1,8 +1,8 @@
 
 ---
 
-````md
-# 🚀 HTML Complete Revision (Beginner → Interview Ready)
+<!-- ````md -->
+# 🚀 HTML Complete Revision
 
 ---
 
@@ -218,14 +218,19 @@ Markdown is a lightweight markup language used to format text.
 ## 🟢 Image 1 (Basics)
 
 **Q1: What are HTML tags and elements?**
+
 👉 Tag is `<p>`
+
 👉 Element is `<p>Text</p>`
 
 **Q2: Heading vs Paragraph?**
+
 👉 Heading → titles
+
 👉 Paragraph → content
 
 **Q3: What is span?**
+
 👉 Inline text grouping
 
 ---
@@ -233,16 +238,20 @@ Markdown is a lightweight markup language used to format text.
 ## 🟡 Image 2 (Rendering)
 
 **Q4: How browser renders HTML?**
+
 👉 HTML → DOM → Rendering Engine → UI
 
 **Q5: What is rendering engine?**
+
 👉 Converts code to UI
 
 **Q6: Block vs Inline?**
+
 👉 Block → full width
 👉 Inline → content width
 
 **Q7: Self-closing tags?**
+
 👉 `<img>`, `<br>`
 
 ---
@@ -250,12 +259,15 @@ Markdown is a lightweight markup language used to format text.
 ## 🟠 Image 3 (Navigation)
 
 **Q8: Types of navigation?**
+
 👉 Internal / External
 
 **Q9: What is # navigation?**
+
 👉 Jump within page
 
 **Q10: Download attribute?**
+
 👉 Forces file download
 
 ---
@@ -263,12 +275,15 @@ Markdown is a lightweight markup language used to format text.
 ## 🔵 Image 4 (Code)
 
 **Q11: Viewport meta?**
+
 👉 Makes responsive
 
 **Q12: Title tag?**
+
 👉 Tab + SEO
 
 **Q13: strong vs em vs mark vs u?**
+
 👉 bold / italic / highlight / underline
 
 ---
@@ -276,12 +291,15 @@ Markdown is a lightweight markup language used to format text.
 ## 🟣 Image 5 (Charset)
 
 **Q14: UTF-8?**
+
 👉 Character encoding
 
 **Q15: Why charset?**
+
 👉 Prevents errors
 
 **Q16: SEO reading?**
+
 👉 Tags + meta
 
 ---
@@ -289,12 +307,15 @@ Markdown is a lightweight markup language used to format text.
 ## 🔴 Image 6 (Version)
 
 **Q17: DOCTYPE?**
+
 👉 HTML version
 
 **Q18: HTML5?**
+
 👉 Modern features
 
 **Q19: Backward compatibility?**
+
 👉 Supports older systems
 
 ---
@@ -302,9 +323,12 @@ Markdown is a lightweight markup language used to format text.
 ## ⚫ Image 7 (HyperText)
 
 **Q20: HyperText?**
+
 👉 Linking
 
+
 **Q21: Internal vs External links?**
+
 👉 Same vs other site
 
 ---
@@ -312,12 +336,15 @@ Markdown is a lightweight markup language used to format text.
 ## 🟤 Image 8 (Accessibility)
 
 **Q22: Accessibility?**
+
 👉 Usable for all
 
 **Q23: Semantic tags?**
+
 👉 Better SEO
 
 **Q24: HTML & SEO?**
+
 👉 Proper structure helps ranking
 
 
@@ -326,20 +353,28 @@ Markdown is a lightweight markup language used to format text.
 ## 🟤 Image 8 (Accessibility + SEO + Headings)
 
 **Q25: Why proper heading order (h1 → h6) is important?**  
+
 👉 Helps SEO + improves readability  
 
 **Q26: What are the 3 main priorities in HTML?**  
+
 👉 User  
+
 👉 SEO  
+
 👉 Accessibility  
 
+
 **Q27: What is accessibility?**  
+
 👉 Making websites usable for everyone (including disabled users)  
 
 **Q28: What is screen reader?**  
+
 👉 Tool that reads content for visually impaired users  
 
 **Q29: What happens if we ignore accessibility rules?**  
+
 👉 Bad user experience + SEO penalty  
 
 ---
@@ -347,34 +382,43 @@ Markdown is a lightweight markup language used to format text.
 ## 🟠 Image 9 (Rendering + Tags Deep Understanding)
 
 **Q30: What is difference between tag and element?**  
+
 👉 Tag → `<p>`  
 👉 Element → `<p>Text</p>`  
 
 **Q31: What are types of tags?**  
+
 👉 Normal tags  
 👉 Self-closing (void) tags  
 
 ---
 
 **Q32: What is rendering?**  
+
 👉 Process of converting HTML → visible UI  
 
 ---
 
 **Q33: What is rendering engine?**  
+
 👉 Browser component that displays content  
 
 ---
 
 **Q34: What are block and inline elements?**  
+
 👉 Block → takes full width  
+
 👉 Inline → takes content width  
 
 ---
 
 **Q35: Why comments are used in HTML?**  
+
 👉 Code explanation  
+
 👉 Notes for future  
+
 👉 Debugging  
 
 ---
@@ -382,24 +426,31 @@ Markdown is a lightweight markup language used to format text.
 ## 🔵 Image 10 (Navigation + Linking Deep)
 
 **Q36: What are different types of links in HTML?**  
+
 👉 Internal (same project)  
+
 👉 External (other website)  
+
 👉 Same page (#id)  
+
 👉 File download  
 
 ---
 
 **Q37: What is same-page navigation?**  
+
 👉 Using `#id` to jump inside page  
 
 ---
 
 **Q38: What is download attribute in anchor tag?**  
+
 👉 Downloads file instead of opening  
 
 ---
 
 **Q39: What happens when we click a link?**  
+
 👉 Browser loads:
 - Another HTML page  
 - Another website  
@@ -409,6 +460,7 @@ Markdown is a lightweight markup language used to format text.
 ---
 
 **Q40: What are resources in HTML?**  
+
 👉 Files like images, PDFs, videos  
 
 ---
