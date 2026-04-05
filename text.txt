@@ -1,1 +1,138 @@
 Hello Om How Are U  
+[33mcommit 57043458cc33250b0226d37c7e5bebb67362b4d8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: OmBarabhai <om.r.barabhai@gmail.com>
+Date:   Sat Mar 28 20:17:16 2026 +0530
+
+    Add Day 1 git And Html Rev
+
+[33mcommit d80eab0485741d22d89de823ea09a53cd5a59d48[m
+Author: OmBarabhai <oraghuwanshi37@gmail.com>
+Date:   Sat Mar 28 14:40:00 2026 +0530
+
+    Add Readme File revision Html1
+
+[33mcommit 3f5afae89e451e17b259e7f188cbcafb9f059d17[m
+Author: OmBarabhai <oraghuwanshi37@gmail.com>
+Date:   Sat Mar 28 14:38:56 2026 +0530
+
+    Add Readme File revision Html1
+
+[33mcommit fa9eb4f84a6637cffe8cc84bf2d18dd5c7f71750[m
+Author: OmBarabhai <oraghuwanshi37@gmail.com>
+Date:   Sat Mar 28 12:40:38 2026 +0530
+
+    add readme file rev html
+
+[33mcommit 9f3ca3557d824d6d6bc554fd1063a1aa2c54aa1b[m
+Author: OmBarabhai <oraghuwanshi37@gmail.com>
+Date:   Sat Mar 28 12:18:38 2026 +0530
+
+    Reorganized folders, moved files to Git directory, added phase1 and phase2 files, updated HTML section
+
+[33mcommit 0bbb8e4b9df99a7c79c147de8db4e82d29a2aeff[m
+Author: OmBarabhai <oraghuwanshi37@gmail.com>
+Date:   Sat Mar 21 15:35:21 2026 +0530
+
+    Add Notes
+
+[33mcommit c65d4fc5cb7a5c6dcaf9cc67a6ff89f012073af7[m
+Author: OmBarabhai <oraghuwanshi37@gmail.com>
+Date:   Sat Mar 21 15:34:07 2026 +0530
+
+    Add Notes
+
+[33mcommit b2efdd2853db97e4babe550e5ab78f2014b99907[m
+Author: OmBarabhai <oraghuwanshi37@gmail.com>
+Date:   Sat Mar 21 13:24:48 2026 +0530
+
+    Add Notes
+
+[33mcommit c128bb87a20942de6b2570aa3e371504c6840944[m
+Author: OmBarabhai <oraghuwanshi37@gmail.com>
+Date:   Sat Mar 21 13:24:00 2026 +0530
+
+    Add Notes
+
+[33mcommit 14b29b265c25aec4c0543a78679671ed6fb6358b[m
+Author: OmBarabhai <oraghuwanshi37@gmail.com>
+Date:   Sat Mar 21 13:20:06 2026 +0530
+
+    Add Notes
+
+[33mcommit 17c68ce0d321879738d85838789ae20057edf8b5[m
+Author: OmBarabhai <oraghuwanshi37@gmail.com>
+Date:   Sat Mar 21 13:15:17 2026 +0530
+
+    Add Notes
+
+[33mcommit b5ad39d2359940e8d1a7fc4e71cb42ac20cd270d[m
+Author: OmBarabhai <oraghuwanshi37@gmail.com>
+Date:   Sat Mar 21 13:10:01 2026 +0530
+
+    Add Notes
+
+[33mcommit 6fd94434dd9cd1e5c8e5d4bd042d59bd74f22cc5[m
+Author: OmBarabhai <oraghuwanshi37@gmail.com>
+Date:   Sat Mar 21 13:08:02 2026 +0530
+
+    Add Notes
+
+[33mcommit 1a881fa103e45eff99951c8fac5dad5e89ed7640[m
+Author: OmBarabhai <oraghuwanshi37@gmail.com>
+Date:   Sat Mar 21 13:01:59 2026 +0530
+
+    Add Notes
+
+[33mcommit 98f44bd56bdae9436a3a6d503ccb266ea363f02e[m
+Author: Om <om.r.barabhai@gmail.com>
+Date:   Fri Mar 20 15:25:08 2026 +0530
+
+    Add initial HTML file
+
+[33mcommit d89911ffae5c366de9390096b862603a6e4e57e2[m
+Author: Om <oraghuwanshi37@gmail.com>
+Date:   Fri Mar 20 15:24:01 2026 +0530
+
+    Add files via upload
+
+[33mcommit be1405f65256f19afeb4b08123b2928d57c2c050[m
+Author: OmBarabhai <oraghuwanshi37@gmail.com>
+Date:   Fri Mar 20 14:07:01 2026 +0530
+
+    Added README
+
+[33mcommit e61b1ac02ad46a66e3fb22e6df350e4bf8eda92c[m
+Author: OmBarabhai <oraghuwanshi37@gmail.com>
+Date:   Fri Mar 20 14:05:49 2026 +0530
+
+    Added README
+
+[33mcommit 0e523b525bd82b59ab72f6d93b5bd62c5d11c504[m[33m ([m[1;31morigin/om[m[33m, [m[1;32mom[m[33m)[m
+Author: OmBarabhai <oraghuwanshi37@gmail.com>
+Date:   Fri Mar 20 13:58:22 2026 +0530
+
+    Added README
+
+[33mcommit ab13235b910135d61bcf9c1fedbd9f0e4fc0c55c[m
+Author: OmBarabhai <oraghuwanshi37@gmail.com>
+Date:   Fri Mar 20 13:55:36 2026 +0530
+
+    Added README
+
+[33mcommit a56fddfcecafc8edc0e46a5cd1aaffdbbf0e42c7[m
+Author: OmBarabhai <oraghuwanshi37@gmail.com>
+Date:   Fri Mar 20 13:49:51 2026 +0530
+
+    Day 1 Notes
+
+[33mcommit 8d39aaa501ce34900029997f19518825e3eac6ca[m
+Author: OmBarabhai <oraghuwanshi37@gmail.com>
+Date:   Wed Mar 18 12:12:14 2026 +0530
+
+    Add two.txt
+
+[33mcommit d42472dece77107724931262b9b4e0e6221a9fbf[m
+Author: OmBarabhai <oraghuwanshi37@gmail.com>
+Date:   Wed Mar 18 12:07:52 2026 +0530
+
+    Add Day_2 Initial commit
