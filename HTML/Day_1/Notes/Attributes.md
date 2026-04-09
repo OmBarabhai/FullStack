@@ -6,7 +6,7 @@
 
 # 🧩 HTML Structure
 
-![Structure](./images/image1.png)
+![HTML Structure](./images/image4.png)
 
 ### 📌 Explanation
 
@@ -20,7 +20,7 @@
 
 # 🧩 HTML Element
 
-![Element](./images/image2.png)
+![HTML Element](./images/image2.png)
 
 ### ✅ Definition
 
@@ -40,7 +40,7 @@ An HTML element consists of:
 
 # 🌍 HTML Attributes
 
-![Attributes](./images/image3.png)
+![HTML Attributes](./images/image12.png)
 
 ### ✅ Common Attributes
 
@@ -54,7 +54,7 @@ An HTML element consists of:
 
 # 📘 HTML Attribute Reference
 
-![Reference](./images/image4.png)
+![Attribute Reference](./images/image13.png)
 
 ### 🔹 Important Attributes
 
@@ -72,7 +72,7 @@ An HTML element consists of:
 
 # 🔗 Attribute Structure
 
-![Structure](./images/image5.png)
+![Attribute Structure](./images/image1.png)
 
 ### ✅ Example
 
@@ -90,12 +90,16 @@ An HTML element consists of:
 # 🎨 CSS Types
 
 ![CSS Types](./images/image6.png)
+![CSS Types](./images/image9.png)
+
 
 ### 🔹 1. Inline CSS
 
 ```html
 <p style="color: blue;">Text</p>
 ```
+
+---
 
 ### 🔹 2. Internal CSS
 
@@ -104,6 +108,8 @@ An HTML element consists of:
 p { color: yellow; }
 </style>
 ```
+
+---
 
 ### 🔹 3. External CSS
 
@@ -115,7 +121,9 @@ p { color: yellow; }
 
 # 📝 Formatting Tags
 
-![Formatting](./images/image8.png)
+![Formatting Tags](./images/image8.png)
+![Formatting Tags](./images/image11.png)
+
 
 ### 🔹 Text Formatting
 
@@ -138,6 +146,8 @@ p { color: yellow; }
 # 📦 Inline vs Block Elements
 
 ![Inline vs Block](./images/image7.png)
+![Inline vs Block](./images/image10.png)
+
 
 ---
 
@@ -145,8 +155,6 @@ p { color: yellow; }
 
 * Do NOT start on new line
 * Take only required width
-
-Examples:
 
 ```html
 <span></span>
@@ -161,8 +169,6 @@ Examples:
 
 * Start on new line
 * Take full width
-
-Examples:
 
 ```html
 <div></div>
@@ -200,7 +206,7 @@ HTML/
                 ├── image5.png
                 ├── image6.png
                 ├── image7.png
-                └── image8.png
+                ├── image8.png
 ```
 
 ---
