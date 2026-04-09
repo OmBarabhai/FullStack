@@ -191,26 +191,6 @@ p { color: yellow; }
 
 ---
 
-# 📂 Folder Structure
-
-```
-HTML/
- └── Day_1/
-      └── Notes/
-           ├── README.md
-           └── images/
-                ├── image1.png
-                ├── image2.png
-                ├── image3.png
-                ├── image4.png
-                ├── image5.png
-                ├── image6.png
-                ├── image7.png
-                ├── image8.png
-```
-
----
-
 # ⭐ Pro Tip
 
 👉 Always write clean HTML
