@@ -10,11 +10,11 @@
 
 ### 📌 Explanation
 
-* HTML document starts with `<html>`
-* Two main parts:
+- HTML document starts with `<html>`
+- Two main parts:
 
-  * `<head>` → metadata
-  * `<body>` → visible content
+  - `<head>` → metadata
+  - `<body>` → visible content
 
 ---
 
@@ -44,11 +44,11 @@ An HTML element consists of:
 
 ### ✅ Common Attributes
 
-* `id` → unique identifier
-* `class` → group elements
-* `title` → tooltip
-* `style` → inline CSS
-* `lang` → language
+- `id` → unique identifier
+- `class` → group elements
+- `title` → tooltip
+- `style` → inline CSS
+- `lang` → language
 
 ---
 
@@ -80,10 +80,10 @@ An HTML element consists of:
 <a href="https://example.com">Visit</a>
 ```
 
-* `<a>` → element
-* `href` → attribute
-* `"URL"` → value
-* `Visit` → content
+- `<a>` → element
+- `href` → attribute
+- `"URL"` → value
+- `Visit` → content
 
 ---
 
@@ -316,16 +316,6 @@ The `<a>` (anchor) tag is used to create hyperlinks that connect one page to ano
 👉 `href` is mandatory
 👉 `target="_blank"` commonly used
 👉 Always use `rel="noopener noreferrer"` for security
-
----
-
-### ⚠️ Common Mistakes
-
-❌ `< a >` (wrong)
-✔ `<a>` (correct)
-
-❌ Missing `href`
-✔ Always include URL
 
 ---
 
@@ -1359,7 +1349,9 @@ The `<a>` (anchor) tag is used to create hyperlinks that connect one page to ano
 
 ```html
 <style>
-p { color: yellow; }
+  p {
+    color: yellow;
+  }
 </style>
 ```
 
@@ -1368,9 +1360,8 @@ p { color: yellow; }
 ### 🔹 3. External CSS
 
 ```html
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css" />
 ```
-
 
 ---
 
@@ -1406,13 +1397,13 @@ p { color: yellow; }
 
 ## 🔹 Inline Elements
 
-* Do NOT start on new line
-* Take only required width
+- Do NOT start on new line
+- Take only required width
 
 ```html
 <span></span>
 <a></a>
-<img>
+<img />
 <strong></strong>
 ```
 
@@ -1420,8 +1411,8 @@ p { color: yellow; }
 
 ## 🔹 Block Elements
 
-* Start on new line
-* Take full width
+- Start on new line
+- Take full width
 
 ```html
 <div></div>
@@ -1434,13 +1425,13 @@ p { color: yellow; }
 
 # 🚀 Summary
 
-* HTML is built using **elements**
-* Attributes provide **extra information**
-* CSS is used for **styling**
-* Elements are:
+- HTML is built using **elements**
+- Attributes provide **extra information**
+- CSS is used for **styling**
+- Elements are:
 
-  * Inline
-  * Block
+  - Inline
+  - Block
 
 ---
 
