@@ -20,7 +20,7 @@
 
 ## 🔢 Ordered List
 
-![Ordered List](./images/list1.png)
+![Ordered List](./Images/list1.png)
 
 ```html
 <ol>
@@ -33,7 +33,7 @@
 
 ## 🔸 Unordered List
 
-![Unordered List](./images/list2.png)
+![Unordered List](./Images/list2.png)
 
 ```html
 <ul>
@@ -46,7 +46,7 @@
 
 ## 🔹 Description List
 
-![Description List](./images/list3.png)
+![Description List](./Images/list3.png)
 
 ```html
 <dl>
@@ -63,9 +63,9 @@
 
 ## 🔹 Table Structure
 
-![Table Structure](./images/table1.png)
-![Table Structure](./images/table2.png)
-![Table Structure](./images/table3.png)
+![Table Structure](./Images/table1.png)
+![Table Structure](./Images/table2.png)
+![Table Structure](./Images/table3.png)
 
 
 ```html
