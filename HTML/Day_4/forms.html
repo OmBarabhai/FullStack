@@ -1,26 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact Form</title>
-  </head>
-  <body>
-    <h1>Contact Form</h1>
+<head>
+  <!-- Character encoding -->
+  <meta charset="UTF-8">
 
-    <form action="/submit_form" method="post" enctype="application/x-www-form-urlencoded" name="contactform" novalidate target="_blank">
-      <label for="email">Email: </label>
-      <input type="email" id="email" name="email" placeholder="Enter Your Email" required />
-      <br><br>
-      <label for="Username">Username: </label>
-      <input type="text" name="Username" id="Username" placeholder="Enter Your Username">
+  <!-- Responsive design -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Registration Form</title>
+</head>
+
+<body>
+
+  <!-- Main Heading -->
+  <h1>Registration Form</h1>
+
+  <!-- FORM START -->
+  <!-- action: backend URL -->
+  <!-- method: POST (secure) -->
+  <!-- enctype: default encoding -->
+  <!-- novalidate: disables browser validation -->
+  <form
+    action="/submit_form"
+    method="post"
+    enctype="application/x-www-form-urlencoded"
+    name="contactform"
+    novalidate
+    target="_top"
+  >
+
+    <!-- GROUPING -->
+    <fieldset>
+      <legend>SignUp</legend>
+
+      <!-- EMAIL -->
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Enter Your Email"
+        required
+      />
       <br><br>
 
-      <label for="password">Password: </label>
-      <input type="password" name="password" id="password" placeholder="Enter Your Password">
+      <!-- USERNAME -->
+      <label for="Username">Username:</label>
+      <input
+        type="text"
+        id="Username"
+        name="Username"
+        placeholder="Enter Your Username"
+      />
       <br><br>
 
+      <!-- PASSWORD -->
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Enter Your Password"
+      />
+      <br><br>
+
+      <!-- DATALIST -->
+      <label for="language">Select a programming language:</label>
+      <input list="languages" id="language" name="languages" />
+
+      <datalist id="languages">
+        <option value="Java">
+        <option value="Python">
+        <option value="JavaScript">
+        <option value="C++">
+      </datalist>
+      <br><br>
+
+      <!-- TEXTAREA -->
+      <textarea name="hobbies" id="hobbies" placeholder="Enter hobbies"></textarea>
+      <br><br>
+
+      <!-- DROPDOWN -->
+      <label for="selectNum">Select your favorite number:</label>
+      <select id="selectNum" name="selectNum">
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+        <option value="4">Four</option>
+      </select>
+      <br><br>
+
+      <!-- NUMBER INPUT -->
+      <label for="quantity">Select quantity:</label>
+      <input type="number" id="quantity" name="quantity" step="5" />
+      <br><br>
+
+      <!-- RANGE -->
+      <label for="volumeCtrl">Volume Control:</label>
+      <input type="range" id="volumeCtrl" name="volumeCtrl" step="1" />
+      <br><br>
+
+      <!-- DATE -->
+      <label for="monthP">Select month and year:</label>
+      <input type="month" id="monthP" name="monthP" />
+      <br><br>
+
+      <label for="dateP">Select date:</label>
+      <input type="date" id="dateP" name="dateP" />
+      <br><br>
+
+      <label for="dateT">Select date and time:</label>
+      <input type="datetime-local" id="dateT" name="dateT" />
+      <br><br>
+
+      <!-- FILE -->
+      <label for="fileU">Select a file:</label>
+      <input type="file" id="fileU" name="fileU" />
+      <br><br>
+
+      <!-- HIDDEN -->
+      <input type="hidden" name="hidden" value="this is hidden" />
+
+      <!-- COLOR -->
+      <label for="colorP">Choose your color:</label>
+      <input type="color" id="colorP" name="colorP" />
+      <br><br>
+
+      <!-- BUTTONS -->
       <button type="submit">Submit</button>
-    </form>
-  </body>
+      <button type="reset">Reset</button>
+
+    </fieldset>
+  </form>
+
+</body>
 </html>
