@@ -1,0 +1,53 @@
+1. Home Page
+
+Navbar
+  - Home 
+  - Contact
+  - Resume
+
+Intro Section 
+  - Heading 
+  - Image
+  - About Us
+
+Experience 
+  - List all my Experience
+
+Skills 
+  - List all my Skills
+
+Achievements
+  - List All my Achievements
+
+footer
+  - Home 
+  - Contact
+  - Resume
+  - Social Links
+
+2. Contact Us Page
+
+Navbar
+  - Home
+  - Contact
+  - Resume
+
+Contact Me Form
+  - First name
+  - Last name
+  - Email
+  - Phone
+  - Submit  
+
+Social Links
+  - LinkedIn
+  - YouTube
+
+Embed Map
+  - Pune 
+
+footer
+  - Home 
+  - Contact
+  - Resume
+  - Social Links
