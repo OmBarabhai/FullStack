@@ -1,0 +1,20 @@
+//======================================================= 
+Deployment Services: - Github Pages [ Public Repo ] setting > pages > select branch > save actions > get link 
+- Netlify login > add new site > github > check config > deploy 
+- Vercel login > add new site > github > check config > deploy 
+
+Optimization: 
+1. File size: Choose proper formats, Don't include larger media files, Remove unwanted files. 
+2. No 3rd party dependency: Keep images in your project. 
+3. Inbuilt functionalities: Lazy loading [ Load when required ] 
+
+Security: 
+
+1. XSS Attack: Cross-Site Scripting 
+* On form submission you can run javascript. 
+* A hacker will create a malicious/virus js code 
+* He will introduce a button inside iframe website [ Ads ] 
+* Data will be stored in database. 
+* We access data from database using queries/commands 
+* They will put these queries in your text fields 
+* Validate input data
