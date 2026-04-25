@@ -1,0 +1,38 @@
+header{
+  background-color:blanchedalmond;
+  padding: 10px;
+  text-align: center;
+  color: rgb(163, 202, 237);
+}
+h1,h2,p{
+  color: rgb(68, 68, 30);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-bottom: 15px;
+}
+
+.box{
+  color: burlywood;
+}
+
+.highlight,.importance,.secondary{
+  color: chocolate;
+}
+
+#box {
+color: aquamarine;
+}
+#box importance{
+  color: blueviolet;
+}
+
+#box-importance{
+  color: blue;
+}
+
+#box-secondary , #box-highlight, #box-importance{
+  color: cornflowerblue;
+}
+
+main,.content,#main-header, footer{
+  color: rgb(0, 134, 131);
+}
