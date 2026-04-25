@@ -1,0 +1,35 @@
+/* Block */
+.card{
+  background-color: rgb(46, 91, 93);
+  padding:20px;
+  border-radius: 8px;
+  box-shadow: 0 3px 5px rgb(108, 19, 19);
+}
+
+/* Elements */
+.card_title{
+  color: cyan;
+  font-family: cursive, sans-serif;
+}
+
+/* Elements */
+.card_text{
+  color: crimson;
+  font-family: monospace,sans-serif;
+}
+/* Elements */
+.card_button{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: rgb(177, 130, 54);
+  background-color: rgb(111, 16, 16);
+}
+
+/* Modifier | Card*/
+.card--featured{
+  background-color: #fffb3b;
+}
+
+/* Modifier | Button */
+.card_button_highlighted{
+  background-color: #282828;
+}

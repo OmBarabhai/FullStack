@@ -1,0 +1,40 @@
+
+/* Universal CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #ccbfbf;
+}
+/* Tag Based Selector */
+h1 {
+  color: burlywood;
+  text-align: center;
+  background-color: aliceblue;
+}
+/* Class Selector */
+.highlight {
+  color: rgb(191, 109, 8);
+  font-weight: bold;
+  background-color: beige;
+  padding: 10px;
+  border-radius: 5px;
+}
+/* Id Selector */
+#unique-paragraph {
+  color: rgb(129, 179, 2);
+  font-size: 20px;
+  text-align: justify;
+  background-color: lightgray;
+  padding: 15px;
+  border: 1px solid rgb(9, 120, 120);
+  border-radius: 3px;
+}
+
+.footer-text {
+  text-align: center;
+  color: azure;
+  background-color: rgb(1, 78, 81);
+  padding: 10px 0;
+  margin-top: 30px;
+}
