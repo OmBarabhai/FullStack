@@ -1,0 +1,73 @@
+/*
+ Base style
+*/
+body{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 2px;
+  padding: 2px;
+}
+
+h1,h2,h3{
+  margin: 2px;
+
+}
+p{
+  margin: 2px;
+}
+
+/* Layout 
+
+header
+sidebars
+footer
+
+*/
+.header{
+ padding: 10px;
+ background-color: bisque;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+}
+
+.header_nav{
+  display: flex;
+}
+.header_logo{
+font-size: 24px;
+}
+
+/*
+ Module 
+*/
+.button{
+  background-color: lightblue;
+  border-radius: 5px;
+}
+.nav_item{
+  text-decoration: none;
+  color:black;
+  padding: 5px;
+}
+
+/*
+ State 
+
+ How Element behave in certain states, for ex when they are Hover
+*/
+.button:hover{
+  background-color:chocolate;
+}
+
+ /*
+  Theme
+  It Allows you to change the look and feel of the components
+*/
+
+.theme-dark .header{
+  background-color: gray;
+
+}
+.theme-dark .button{
+  background-color: rgb(57, 68, 79);
+}

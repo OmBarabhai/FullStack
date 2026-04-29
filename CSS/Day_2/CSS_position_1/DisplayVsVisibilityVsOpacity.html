@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale =1.0" />
+  <title>CSS</title>
+  <style>
+    div {
+      background-color: bisque;
+      border: 2px solid black;
+    }
+    #div-01 {
+      display: none;
+    }
+    #div-02 {
+      visibility: hidden;
+    }
+    #div-03 {
+      opacity: 0;
+    }
+    /* Display: None vs. Visibility: Hidden vs. Opacity: 0
+
+          · Display: None
+          It completely removes the element from the page.
+
+          · Visibility: Hidden
+          It hides the element but leaves the space it occupies intact
+
+          · Opacity: 0
+          it makes the element fully transparent (invisible) but still interactive and taking up space
+
+    */
+  </style>
+  <body>
+    <div id="div-01">Hello There 1</div>
+    <div id="div-02">Hello There 2</div>
+    <div id="div-03">Hello There 3</div>
+  </body>
+</html>
