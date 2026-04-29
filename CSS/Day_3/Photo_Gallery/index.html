@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @media (max-width: 768px) {
+        .parent {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto;
+        }
+        .parent > div {
+          grid-column: auto !important;
+          grid-row: auto !important;
+          min-height: 150px;
+        }
+      }
+      .parent {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 300px 150px 100px 300px;
+        gap: 4px;
+      }
+
+      .child-1 {
+        background-color: rgb(88, 189, 155);
+      }
+      .child-2 {
+        background-color: #e67d7d;
+        grid-row-start: 2;
+        grid-row-end: 4;
+      }
+      .child-3 {
+        background-color: rgb(234, 176, 100);
+        grid-row-start: 4;
+        grid-row-end: 5;
+      }
+      .child-4 {
+        background-color: rgb(60, 244, 244);
+        grid-row-start: 1;
+        grid-row-end: 3;
+        grid-column-start: 2;
+        grid-column-end: 3;
+      }
+      .child-5 {
+        background-color: rgb(96, 96, 247);
+        grid-row-start: 3;
+        grid-row-end: 5;
+        grid-column-start: 2;
+        grid-column-end: 3;
+      }
+      .child-6 {
+        background-color: #ea4b66;
+        grid-row-start: 2;
+        grid-row-end: 4;
+        grid-column-start: 3;
+        grid-column-end: 4;
+      }
+      .child-7 {
+        background-color: rgb(25, 187, 250);
+      }
+      .child-8 {
+        background-color: rgb(249, 249, 181);
+        grid-row-start: 4;
+        grid-row-end: 5;
+        grid-column-start: 3;
+        grid-column-end: 4;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Photo Gallery</h1>
+    <div class="parent">
+      <div class="child-1">Item-1</div>
+      <div class="child-2">Item-2</div>
+      <div class="child-3">Item-3</div>
+      <div class="child-4">Item-4</div>
+      <div class="child-5">Item-5</div>
+      <div class="child-6">Item-6</div>
+      <div class="child-7">Item-7</div>
+      <div class="child-8">Item-8</div>
+    </div>
+  </body>
+</html>
