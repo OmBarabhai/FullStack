@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      img {
+        height: 100px;
+        width: 100px;
+        background-color: cadetblue;
+        border: 2px solid black;
+      }
+      #img-1 {
+        float: right;
+        /* parent Collapse Happen XX Problem*/
+      }
+      #img-2 {
+        float: right;
+        clear: right;
+        /* parent Collapse Happen XX Problem*/
+      }
+      div {
+        background-color: aqua;
+        /* it is remove collapse */
+      }
+      /* 
+      Clear Property
+            Float Property Values
+                  · right: The element is placed below the right-floated element.
+                  · left: The element is placed below the left-floated element.
+                  · both: The element is placed below both left and right-floated elements.
+                  · none: The element is not moved down to clear the space.
+                  · inherit: The element inherits the clear value from its parent. */
+    </style>
+  </head>
+  <body>
+    <div>
+      <img
+        src="https://images.unsplash.com/photo-1706028024882-0b972506d02d?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwcm9maWxlLXBhZ2V8MXx8fGVufDB8fHx8fA%3D%3D"
+        id="img-1"
+        alt="Sea"
+      />
+      <img
+        src="https://images.unsplash.com/photo-1502899576159-f224dc2349fa?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTV8NDQ4OTAwNXx8ZW58MHx8fHx8"
+        id="img-2"
+        alt="breage"
+      />
+    </div>
+  </body>
+</html>

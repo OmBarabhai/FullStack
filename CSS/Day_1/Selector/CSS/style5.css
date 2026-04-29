@@ -1,0 +1,25 @@
+
+/* Structure: Ryusable ase class for all buttons */
+.btn {
+padding: 10px 20px;
+border-radius: 5px;
+cursor: pointer;
+}
+
+/* Skin: Different visual styles */
+.btn-primary {
+background-color: blue;
+color: white;
+}
+
+.btn-secondary {
+background-color: gray;
+color: white;
+
+}
+
+/* State: Disabled button */
+.btn-disabled {
+background-color: lightgray;
+cursor: not-allowed;
+}
