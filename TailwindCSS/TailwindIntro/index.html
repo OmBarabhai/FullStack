@@ -3,17 +3,86 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>One Card</title>
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-     <script type="module" src="/main.js"></script>
-     <link rel="stylesheet" href="main.css">
+    <!-- <link rel="stylesheet" href="main.css" /> -->
+  <script type="module" src="/main.js"></script>
+
   </head>
   <body>
-<nav>
-  <ul class="flex justify-evenly px-2">
-    <li class="mx-4">Home</li>
-    <li class="bg-cyan-950 text-white px-7">Product</li>
-    <li class="bg-slate-800 text-white px-9">Contact Us</li>
-  </ul>
-</nav>
+    <div class="max-w-[1300px] mx-auto px-5">
+      <nav class="flex justify-between items-center py-4">
+        <div>
+          <img
+            class="w-[80px] mt-0"
+            src="https://www.getonecard.app/images/OneCard_Logo_OneCard_Logo_1.png"
+            alt="logo"
+          />
+        </div>
+        <div class="gap-10 w-[70%] justify-end flex md:hidden">☰</div>
+        <div class="hidden md:flex gap-8 text-gray-700 font-medium">
+          <a href="#" class="hover:text-black"> Home </a>
+          <a href="#" class="hover:text-black"> About Us </a>
+          <div class="relative group">
+            <button class="hover:text-black focus:outline-none">
+              Credit Card ▾
+            </button>
+            <div
+              class="absolute hidden group-hover:block bg-white shadow-md mt-2 rounded-md z-10 w-[200px]"
+            >
+              <a href="" class="block px-4 py-2 hover:bg-gray-100"
+                >Credit Card</a
+              >
+              <a href="" class="block px-4 py-2 hover:bg-gray-100">Fees</a>
+              <a href="" class="block px-4 py-2 hover:bg-gray-100"
+                >Eligibility</a
+              >
+            </div>
+          </div>
+          <a href="#"> Offers</a>
+          <a href="#"> FAQ</a>
+          <a href="#"> Contact Us</a>
+          <a href="#"> Careers </a>
+        </div>
+      </nav>
+      <div class="mt-20 flex justify-center">
+        <div class="w-[50%]">
+          <div class="mt-20 flex flex-col items-start space-y-4">
+            <span class="text-xl text-gray-800"> Say Hi to </span>
+
+            <h1
+              class="text-4xl md:text-6xl font-bold text-blue-500 leading-tight"
+            >
+              One Credit Card
+            </h1>
+
+            <p class="text-lg text-blue-500 font-medium">
+              Our Banking Partners:
+            </p>
+
+            <img
+              src="https://assets.getonecard.app/assets/legal/App_Asset_Logos.png"
+              alt="partners"
+              class="w-[300px] md:w-[400px]"
+            />
+
+            <p class="text-gray-700 max-w-[600px] leading-relaxed">
+              India’s best metal credit card. Built with full-stack tech. Backed
+              by the principles of simplicity, transparency, and giving back
+              control to the user.
+            </p>
+          </div>
+        </div>
+        <div class="w-[50%]">
+          <video
+            class="h-[600px]"
+            src="https://assets.getonecard.app/assets/app/say_hi.mp4"
+            autoplay
+            loop
+            muted
+          ></video>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
