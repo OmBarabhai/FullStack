@@ -179,3 +179,88 @@ function printNum(n) {
 }
 
 printNum(7);
+//==================================================================
+
+// 1. Function Chaining
+// 2. Function expressions
+// 3. Anonymous .functions
+// 4. IIFE
+// 5. Pure & Impure Functions
+// 6. Callback Functions
+// 7. Lambda Expressions.
+// 8. Higher Order Functions.
+// 9. Function Currying.
+
+// Function Chaining: SRP: Single Responsibility Principle => One function should perform only one functionality.
+
+/*
+
+Create a variable and store value 0
+Add 10 to that variable
+Substract 6 from that variable
+Multiply 3 from the variable
+print the result
+
+*/
+
+const calculate = {
+  value: 0,
+  add: function (x) {
+    this.value += x;
+    return this;
+  },
+  sub: function (x) {
+    this.value -= x;
+    return this;
+  },
+  mul: function (x) {
+    this.value *= x;
+    return this;
+  },
+  result: function (x) {
+    return this.value;
+  },
+};
+
+const res2 = calculate.add(10).sub(6).mul(3).result();
+console.log(res2);
+
+//IIFE : Immediatly Invoked function Expression : ()()
+
+(function sayHi() {
+  console.log("hi");
+})();
+
+//Pure And Impure
+// Pure : if Your input is same output will same
+//Impure: for same input their might be different output. This is dependent on values outside the function. side effect is observed.
+
+function addTwoNum(a, b) {
+  return a + b;
+}
+// pure : if Your input is same output will same
+
+console.log(addTwoNum(2, 3));
+console.log(addTwoNum(2, 3));
+console.log(addTwoNum(2, 3));
+console.log(addTwoNum(2, 3));
+
+let count = 0;
+function counter() {
+  count++;
+  return count;
+}
+//Impure: for same input their might be different output. This is dependent on values outside the function. side effect is observed.
+
+console.log(counter());
+console.log(counter());
+console.log(counter());
+console.log(counter()); 
+
+// 7. Lambda Expressions
+
+const addTwoNumbers = (a, b) => (a + b);
+console.log(addTwoNumbers(2, 3));
+
+// Callback: I will create a function, accept as parameter and call whenever needed.
+
