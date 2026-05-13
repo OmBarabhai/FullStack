@@ -1,24 +1,3 @@
-function addTwoNum(a, b) {
-  console.log(a + b);
-}
-
-// addTwoNum(2, 3);
-
-function addThreeNum(a, b, c) {
-  console.log(a + b + c);
-}
-// addThreeNum(4, 5, 3);
-
-function addNum() {
-  let sum = 0;
-  for (let i = 0; i < arguments.length; i++) {
-    sum += arguments[i];
-  }
-  return sum;
-}
-// addNum(3, 4);
-// const res = addNum(3, 4, 8);
-// console.log(res);
 // ======================================================
 // FUNCTIONS IN JAVASCRIPT
 // ======================================================
@@ -33,234 +12,218 @@ function addNum() {
 // 1. FUNCTION DECLARATION
 // ======================================================
 
-function hey() {
-  console.log("Hey!");
+function sayHi() {
+  console.log("Hi");
 }
 
-// Calling Function
-hey();
+sayHi();
 
 // ======================================================
-// 2. FUNCTION EXPRESSION
+// 2. FUNCTION WITH PARAMETERS
 // ======================================================
 
-// Function stored inside a variable
+function addTwoNum(a, b) {
+  return a + b;
+}
 
-const sayHello = function () {
-  console.log("Hello!");
+const sum = addTwoNum(2, 3);
+console.log(sum);
+
+// ======================================================
+// 3. FUNCTION EXPRESSION
+// ======================================================
+
+const greet = function () {
+  console.log("Hello");
 };
 
-sayHello();
+greet();
 
 // ======================================================
-// 3. ARROW FUNCTION
+// 4. ARROW FUNCTION
 // ======================================================
 
-const heyOm = (name) => {
-  console.log(`Hello ${name}`);
+const multiply = (a, b) => {
+  return a * b;
 };
 
-heyOm("Om");
-
-// ======================================================
-// EXPLICIT RETURN vs IMPLICIT RETURN
-// ======================================================
-
-// ======================================================
-// 4. EXPLICIT RETURN
-// ======================================================
-
-// Using {} requires RETURN keyword
-// Multiple operations can be performed
-
-const HeyOm = () => {
-  return "Hey Om, How are you?";
-};
-
-const res = HeyOm();
-
-console.log(res);
+console.log(multiply(2, 3));
 
 // ======================================================
 // 5. IMPLICIT RETURN
 // ======================================================
 
-// No {} and no RETURN keyword needed
-// Used for single-line return
+const sub = (a, b) => a - b;
 
-const HeyOmHowru = () => "Hey, I am Good";
-
-const res1 = HeyOmHowru();
-
-console.log(res1);
+console.log(sub(10, 4));
 
 // ======================================================
-// THIS BINDING
+// 6. THIS KEYWORD
 // ======================================================
 
-// Arrow functions and regular functions
-// behave differently with "this"
+// Arrow Function
 
-// ======================================================
-// 6. THIS IN ARROW FUNCTION
-// ======================================================
-
-var name = "Om Global";
+var name = "Global";
 
 const person = {
-  name: "Om R",
+  name: "Om",
 
-  // Arrow function
-  sayHey: () => {
-    console.log(`Hey ${this.name}`);
+  sayName: () => {
+    console.log(this.name);
   },
 };
 
-person.sayHey();
+person.sayName();
 
 // OUTPUT:
-// Hey undefined
-// OR
-// Hey Om Global
-//
-// WHY?
-// Arrow functions do NOT have their own "this".
-// They take "this" from the outer/global scope.
+// undefined OR Global
 
-// ======================================================
-// 7. THIS IN REGULAR FUNCTION
-// ======================================================
+// Regular Function
 
 const person1 = {
-  name: "Om R",
+  name: "Om",
 
-  // Regular function
-  sayHey1: function () {
-    console.log(`Hey ${this.name}`);
+  sayName: function () {
+    console.log(this.name);
   },
 };
 
-person1.sayHey1();
+person1.sayName();
 
 // OUTPUT:
-// Hey Om R
-//
-// WHY?
-// Regular functions get their own "this".
-// Here "this" refers to person1 object.
+// Om
 
 // ======================================================
-// IMPORTANT INTERVIEW POINTS
+// 7. RECURSION
 // ======================================================
 
-// Arrow Function:
-// ❌ No own "this"
-
-// Regular Function:
-// ✅ Has own "this"
-
-// Use Arrow Function:
-// ✅ Callbacks
-// ✅ Short functions
-// ✅ Array methods
-
-// Use Regular Function:
-// ✅ Object methods
-// ✅ Constructors
-// ✅ When using "this"
-
-// Recursion
 function printNum(n) {
   if (n == 0) {
     return;
   }
+
   console.log(n);
+
   printNum(n - 1);
 }
 
-printNum(7);
-//==================================================================
+printNum(5);
 
-// 1. Function Chaining
-// 2. Function expressions
-// 3. Anonymous .functions
-// 4. IIFE
-// 5. Pure & Impure Functions
-// 6. Callback Functions
-// 7. Lambda Expressions.
-// 8. Higher Order Functions.
-// 9. Function Currying.
+// ======================================================
+// 8. FUNCTION CHAINING
+// ======================================================
 
-// Function Chaining: SRP: Single Responsibility Principle => One function should perform only one functionality.
-
-/*
-
-Create a variable and store value 0
-Add 10 to that variable
-Substract 6 from that variable
-Multiply 3 from the variable
-print the result
-
-*/
-
-const calculate = {
+const calculator = {
   value: 0,
+
   add: function (x) {
     this.value += x;
     return this;
   },
+
   sub: function (x) {
     this.value -= x;
     return this;
   },
+
   mul: function (x) {
     this.value *= x;
     return this;
   },
-  result: function (x) {
+
+  result: function () {
     return this.value;
   },
 };
 
-const res2 = calculate.add(10).sub(6).mul(3).result();
-console.log(res2);
+const ans = calculator.add(10).sub(6).mul(3).result();
 
-//IIFE : Immediatly Invoked function Expression : ()()
+console.log(ans);
 
-(function sayHi() {
-  console.log("hi");
+// ======================================================
+// 9. IIFE
+// Immediately Invoked Function Expression
+// ======================================================
+
+(function () {
+  console.log("IIFE Executed");
 })();
 
-//Pure And Impure
-// Pure : if Your input is same output will same
-//Impure: for same input their might be different output. This is dependent on values outside the function. side effect is observed.
+// ======================================================
+// 10. PURE FUNCTION
+// Same input => Same output
+// ======================================================
 
-function addTwoNum(a, b) {
+function add(a, b) {
   return a + b;
 }
-// pure : if Your input is same output will same
 
-console.log(addTwoNum(2, 3));
-console.log(addTwoNum(2, 3));
-console.log(addTwoNum(2, 3));
-console.log(addTwoNum(2, 3));
+console.log(add(2, 3));
+console.log(add(2, 3));
+
+// ======================================================
+// 11. IMPURE FUNCTION
+// Depends on outside value
+// ======================================================
 
 let count = 0;
+
 function counter() {
   count++;
   return count;
 }
-//Impure: for same input their might be different output. This is dependent on values outside the function. side effect is observed.
 
 console.log(counter());
 console.log(counter());
 console.log(counter());
-console.log(counter()); 
 
-// 7. Lambda Expressions
+// ======================================================
+// 12. CALLBACK FUNCTION
+// ======================================================
 
-const addTwoNumbers = (a, b) => (a + b);
-console.log(addTwoNumbers(2, 3));
+function printValue(value) {
+  console.log(value);
+}
 
-// Callback: I will create a function, accept as parameter and call whenever needed.
+function addNum(a, b) {
+  return a + b;
+}
 
+function calculate(x, y, callback) {
+  const res = addNum(x, y);
+
+  callback(res);
+}
+
+calculate(2, 3, printValue);
+
+// ======================================================
+// 13. HIGHER ORDER FUNCTION
+// Pass function OR return function
+// ======================================================
+
+function addAndPrint(a, b) {
+  const res = a + b;
+
+  return function () {
+    console.log(res);
+  };
+}
+
+const output = addAndPrint(7, 5);
+
+output();
+
+// ======================================================
+// 14. FUNCTION CURRYING
+// ======================================================
+
+function addThreeNumbers(a) {
+  return function (b) {
+    return function (c) {
+      return a + b + c;
+    };
+  };
+}
+
+console.log(addThreeNumbers(1)(2)(3));
