@@ -227,3 +227,240 @@ function addThreeNumbers(a) {
 }
 
 console.log(addThreeNumbers(1)(2)(3));
+
+
+let word = "JavaScript";
+let count1 = {};
+for (let key in word) {
+  count1[word[key]] = (count1[word[key]] || 0) + 1;
+}
+console.log(count1);
+
+// ======================================================
+// 15. SCOPE
+// ======================================================
+
+/*
+
+Scope:
+Where a variable can be accessed.
+
+Types:
+1. Global Scope
+2. Function Scope
+3. Block Scope
+4. Lexical Scope
+
+*/
+
+// ======================================================
+// var
+// ======================================================
+
+/*
+
+var:
+-> Global Scope
+-> Can reassign
+-> Can redeclare
+-> Function scoped
+
+*/
+
+var name = "Om";
+
+{
+  // accessible inside block
+  console.log(name);
+
+  // reassign
+  name = "Om R";
+
+  // redeclare possible
+  var name = "Om Rajput";
+}
+
+console.log(name);
+
+// OUTPUT:
+// Om Rajput
+
+// ======================================================
+// let
+// ======================================================
+
+/*
+
+let:
+-> Block Scope
+-> Can reassign
+-> Cannot redeclare in same scope
+
+*/
+
+let city = "Pune";
+
+// let city = "Mumbai"; // ERROR
+city = "Mumbai"; // reassign possible
+
+{
+  // outer variable accessible
+  console.log(city);
+
+  // new block scoped variable
+  let city = "Satara";
+
+  console.log(city);
+}
+
+console.log(city);
+
+// OUTPUT:
+// Mumbai
+// Satara
+// Mumbai
+
+// ======================================================
+// const
+// ======================================================
+
+/*
+
+const:
+-> Block Scope
+-> Cannot reassign
+-> Cannot redeclare
+
+*/
+
+const country = "India";
+
+// country = "USA"; // ERROR
+
+{
+  const country = "Japan";
+
+  console.log(country);
+}
+
+console.log(country);
+
+// OUTPUT:
+// Japan
+// India
+
+// ======================================================
+// FUNCTION SCOPE
+// ======================================================
+
+/*
+
+Variables declared inside function
+cannot be accessed outside function.
+
+*/
+
+function test() {
+  let value = 100;
+
+  console.log(value);
+}
+
+test();
+
+// console.log(value); // ERROR
+
+// ======================================================
+// LEXICAL SCOPE
+// ======================================================
+
+/*
+
+Child function can access
+parent function variables.
+
+Parent cannot access child variables.
+
+*/
+
+function outer() {
+  let outerVar = "Outer Variable";
+
+  function inner() {
+    console.log(outerVar);
+  }
+
+  inner();
+}
+
+outer();
+
+// ======================================================
+// SCOPE CHAINING
+// ======================================================
+
+/*
+
+JavaScript first checks local scope.
+If variable not found,
+it checks parent scope,
+then global scope.
+
+*/
+
+let globalVar = "Global";
+
+function parent() {
+  let parentVar = "Parent";
+
+  function child() {
+    let childVar = "Child";
+
+    console.log(childVar);
+    console.log(parentVar);
+    console.log(globalVar);
+  }
+
+  child();
+}
+
+parent();
+
+// ======================================================
+// CLOSURE
+// ======================================================
+
+/*
+
+Closure:
+Child function remembers
+parent variables even after
+parent execution completes.
+
+Used for:
+-> Data hiding
+-> Private variables
+-> Encapsulation
+
+*/
+
+function counter() {
+  let count = 0;
+
+  return function () {
+    count++;
+
+    console.log(count);
+  };
+}
+
+const counterFun = counter();
+
+counterFun();
+counterFun();
+counterFun();
+
+// OUTPUT:
+// 1
+// 2
+// 3
