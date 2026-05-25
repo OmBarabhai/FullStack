@@ -131,62 +131,47 @@ return false;
 
 Now all elements are checked.
 */
-const arr1 = [1, 2, 3];
-const res = arr1.map((items) => {
-  return items * 2;
-});
-console.log(arr1);
-
-Array.prototype.myMap = function (callback) {
-  const arr2 = [];
-  for (let items of this) {
-    arr2.push(callback(items));
+const arr1 = [1, 2, 3, 4, 5];
+console.log("includes Feature: " + arr1.includes(7));
+//call back behaviour
+Array.prototype.myIncludes = function (callback) {
+  for (let item of this) {
+    if (callback(item) ) {
+      return true;
+    }
   }
-  // console.log(arr2);
-  return arr2;
-};
+  return false;
+}
+const res1 = arr1.myIncludes((item) => {
+  return item == 6;
+})
+console.log(res1);
 
-const arr3 = [2, 4, 5, 6, 8];
-const res2 = arr3.filter((items) => {
-  return items > 5;
-});
+Array.prototype.mySome = function (element) {
+  for (let item of this) {
+    if (item == element) {
+      return true;
+    }
+  }
+  return false;
+}
+
+console.log(arr1.mySome(2));
+
+const res2 = arr1.map((item) => {
+  return item * 2;
+})
 console.log(res2);
 
-Array.prototype.myFilter = function (callback) {
-  const arr4 = [];
-
-  for (let items of this) {
-    if (callback(items)) {
-      arr4.push(items);
-    }
+Array.prototype.myMap = function (callback) {
+  let num = [];
+  for (let item of this) {
+      num.push(callback(item));
   }
-  return arr4;
-};
-// const arr3 = [2,4,5,6,8];
+  return num
+}
 
-const res3 = arr3.myFilter((item) => {
-  return item > 5;
-});
-
+let res3 = arr1.myMap((item) => {
+  return item * 2;
+})
 console.log(res3);
-
-const arr5 = [1, 2, 3, 4, 5, 6, 7];
-const res5 = arr5.find((items) => {
-  return items > 5;
-});
-console.log(res5);
-
-Array.prototype.myFind = function (callback) {
-  for (let items of this) {
-    if (callback(items)) {
-      return items;
-    }
-  }
-  return undefined;
-};
-const arr6 = [1, 2, 3, 4, 5, 6, 7, 5, 6];
-
-const ans3 = arr6.myFind((items) => {
-  return items > 6;
-});
-console.log(ans3);
