@@ -1,0 +1,16 @@
+Auto-Scaling
+*********
+1. Create ELB with Empty Target Group
+1.1: Keep HTTP in your SG, and make sure you have default rule ALL TRAFFIC with self
+2. Create Launch Configurations(select AMI ID, provide user data script)
+3. Create ASG from the created Launch configuration (min, DC, max)
+3.1: Check your targets in target groups, it should be healthy
+4. Access your ELB DNS Name.
+--> try to do manual scaling
+--> try to do schedule scaling
+--> try to do instance refresh
+--> try to terminate ec2 instances manually and see what happens
+
+5. Delete ASG
+6. Delete launch Config
+7. Delete ELB and TG
