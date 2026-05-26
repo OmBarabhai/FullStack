@@ -10,7 +10,7 @@ The setup distributes incoming traffic across multiple EC2 instances and routes 
 
 # 🏗️ Architecture Diagram
 
-![Architecture](./LoadBalancer.png)
+![AWS application load balancer architecture diagram showing EC2 instances grouped into two target groups with path-based routing and health check flow](./Notes/LoadBalancer.png)
 
 ---
 
@@ -31,10 +31,10 @@ The setup distributes incoming traffic across multiple EC2 instances and routes 
 
 ## 🔹 Main Application Servers (TG1)
 
-| Instance | Availability Zone | Page |
-|---|---|---|
-| Server-1 | ap-south-1a | `/index.html` |
-| Server-2 | ap-south-1b | `/index.html` |
+| Instance | Availability Zone | Page          |
+| -------- | ----------------- | ------------- |
+| Server-1 | ap-south-1a       | `/index.html` |
+| Server-2 | ap-south-1b       | `/index.html` |
 
 ### User Data Script
 
@@ -45,7 +45,7 @@ service httpd start
 chkconfig httpd on
 
 echo 'Hey!! My first website on Server1' > /var/www/html/index.html
-````
+```
 
 ---
 
@@ -84,9 +84,9 @@ echo 'Hey!! This is my Admin Page-1' > /var/www/html/admin
 
 ## TG1 - My-App
 
-* Protocol: HTTP
-* Port: 80
-* Health Check Path:
+- Protocol: HTTP
+- Port: 80
+- Health Check Path:
 
 ```text
 /index.html
@@ -96,9 +96,9 @@ echo 'Hey!! This is my Admin Page-1' > /var/www/html/admin
 
 ## TG2 - Admin-PageTG
 
-* Protocol: HTTP
-* Port: 80
-* Health Check Path:
+- Protocol: HTTP
+- Port: 80
+- Health Check Path:
 
 ```text
 /admin
@@ -110,7 +110,7 @@ echo 'Hey!! This is my Admin Page-1' > /var/www/html/admin
 
 ## Listener
 
-* HTTP : 80
+- HTTP : 80
 
 ---
 
@@ -142,11 +142,11 @@ Hey!! My first website on Server2
 
 #### Server 1 Response
 
-![Server1](../Project_Demo/Server1.png)
+![browser response screenshot showing Server 1 returning Hey!! My first website on Server1 after ALB routing](./Project_Demo/Server1.png)
 
 #### Server 2 Response
 
-![Server2](../Project_Demo/Server2.png)
+![browser response screenshot showing Server 2 returning Hey!! My first website on Server2 after ALB routing](./Project_Demo/Server2.png)
 
 ---
 
@@ -167,11 +167,11 @@ Hey!! This is my Admin Page-2
 
 #### Admin Page 1
 
-![Admin1](../Project_Demo/AdminPg1.png)
+![browser response screenshot showing Admin Page 1 returning Hey!! This is my Admin Page-1 after ALB admin path routing](./Project_Demo/AdminPg1.png)
 
 #### Admin Page 2
 
-![Admin2](../Project_Demo/AdminPg2.png)
+![browser response screenshot showing Admin Page 2 returning Hey!! This is my Admin Page-2 after ALB admin path routing](./Project_Demo/AdminPg2.png)
 
 ---
 
@@ -181,15 +181,15 @@ Hey!! This is my Admin Page-2
 
 Traffic successfully distributed between:
 
-* Server-1
-* Server-2
+- Server-1
+- Server-2
 
 ## ✅ Path-Based Routing Working
 
 `/admin` requests routed successfully to:
 
-* Server-3
-* Server-4
+- Server-3
+- Server-4
 
 ## ✅ Health Checks
 
@@ -203,23 +203,23 @@ Healthy
 
 # 🎥 Demo Video
 
-[▶️ Watch Demo Video](../Project_Demo/FirstMiniTaskProject.mp4)
+[▶️ Watch Demo Video](./Project_Demo/FirstMiniTaskProject.mp4)
 
 ---
 
 # 📚 Concepts Learned
 
-* Launching EC2 instances
-* Installing Apache Web Server
-* Configuring Security Groups
-* Creating Application Load Balancer
-* Creating Target Groups
-* Registering Targets
-* Configuring Health Checks
-* Multi-AZ Architecture
-* Listener Rules
-* Path-Based Routing
-* AWS Networking Basics
+- Launching EC2 instances
+- Installing Apache Web Server
+- Configuring Security Groups
+- Creating Application Load Balancer
+- Creating Target Groups
+- Registering Targets
+- Configuring Health Checks
+- Multi-AZ Architecture
+- Listener Rules
+- Path-Based Routing
+- AWS Networking Basics
 
 ---
 
@@ -227,10 +227,10 @@ Healthy
 
 After completing the project:
 
-* Terminated EC2 instances
-* Deleted ALB
-* Deleted Target Groups
-* Verified no unused EBS volumes remained
+- Terminated EC2 instances
+- Deleted ALB
+- Deleted Target Groups
+- Verified no unused EBS volumes remained
 
 This helps avoid unnecessary AWS charges.
 
@@ -241,4 +241,5 @@ This helps avoid unnecessary AWS charges.
 This project successfully demonstrated how AWS Application Load Balancer distributes traffic and performs Path-Based Routing across multiple EC2 instances deployed in different Availability Zones.
 
 ```
+
 ```
