@@ -38,7 +38,7 @@ def lambda_handler(event, context):
     print('Stopped instances: ' + str(instances))
 
 
-    *******
+*******
 CloudWatch 
 ********
 --> Stop or Terminate the EC2 instance by creating Alarm (if the CPU is less than 10%)
