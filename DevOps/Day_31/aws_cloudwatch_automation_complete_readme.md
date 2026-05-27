@@ -56,13 +56,13 @@ Stop / Start EC2
 
 # 📸 CloudWatch Concepts
 
-![CloudWatch Concepts](Demo/CloudWatch.png)
+![CloudWatch Concepts](Notes/CloudWatch.png)
 
 ---
 
 # 📸 Lambda + EventBridge Architecture
 
-![Lambda Architecture](Demo/ProjectAutomateSTOPSTART.png)
+![Lambda Architecture](Notes/ProjectAutomateSTOPSTART.png)
 
 ---
 
@@ -179,13 +179,13 @@ def lambda_handler(event, context):
 
 ## 1. Lambda Policy
 
-![Lambda Policy](Demo/2.0LambdaPolicy.png)
+![Lambda Policy](Demo/2.0.LambdaPolicy.png)
 
 ---
 
 ## 2. IAM Role Trusted Entity
 
-![IAM Role](Demo/2.1StartStopForRoleCreatedPermissionsEC2.png)
+![IAM Role](Demo/2.1.StartStopForRoleCreatedPermissionsEC2.png)
 
 ---
 
@@ -197,19 +197,19 @@ def lambda_handler(event, context):
 
 ## 4. Lambda Function Created
 
-![Lambda Function](Demo/3.0StopFUnct.png)
+![Lambda Function](Demo/3.0.StopFUnct.png)
 
 ---
 
 ## 5. Lambda Function Overview
 
-![Lambda Overview](Demo/3.1TriggerBeforeEventBridge.png)
+![Lambda Overview](Demo/3.1.TriggerBeforeEventBridge.png)
 
 ---
 
 ## 6. EventBridge Scheduler Created
 
-![Scheduler](Demo/4.0StopSchedulesCreated.png)
+![Scheduler](Demo/4.0.StopScheduleIsCreated.png)
 
 ---
 
