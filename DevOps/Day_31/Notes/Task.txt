@@ -36,3 +36,17 @@ def lambda_handler(event, context):
     ec2.stop_instances(InstanceIds=instances)
 
     print('Stopped instances: ' + str(instances))
+
+
+    *******
+CloudWatch 
+********
+--> Stop or Terminate the EC2 instance by creating Alarm (if the CPU is less than 10%)
+--> Create a sample Dashboard and add widgets
+--> Create Alarm from CloudWatch Console
+--> Create a billing alarm 
+--> Create an Event and get the Email notification if any one launch the EC2 instance
+--> Try Schedular in CloudWatch with Lambda
+--> Setup CloudWatch Logs on Linux
+--> Clean up Everything(Terminate EC2, delete dashboard,events,Logs) 
+--> Setup CloudWatch Logs on Windows(explore)
