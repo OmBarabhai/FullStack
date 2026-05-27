@@ -1,0 +1,38 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:*:*:*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:StartInstances",
+        "ec2:StopInstances"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+
+import boto3
+
+region = 'ap-south-1'
+
+instances = [
+    'i-01d070ed01c9b02a5','i-0087a935e64cbd7e2'
+]
+
+ec2 = boto3.client('ec2', region_name=region)
+
+def lambda_handler(event, context):
+
+    ec2.stop_instances(InstanceIds=instances)
+
+    print('Stopped instances: ' + str(instances))
