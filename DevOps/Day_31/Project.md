@@ -312,13 +312,13 @@ The following screenshots demonstrate the full AWS workflow from EC2 creation to
 
 ## 1️⃣ Create Secure IAM Inline Policy
 
-![Lambda Policy](Demo/2.0LambdaPolicy.png)
+![Lambda Policy](Demo/2.0.LambdaPolicy.png)
 
 ---
 
 ## 2️⃣ Create IAM Role for Lambda
 
-![IAM Role](Demo/2.1StartStopForRoleCreatedPermissionsEC2.png)
+![IAM Role](Demo/2.1.StartStopForRoleCreatedPermissionsEC2.png)
 
 ---
 
