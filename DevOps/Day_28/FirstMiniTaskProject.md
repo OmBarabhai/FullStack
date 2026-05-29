@@ -10,7 +10,7 @@ The setup distributes incoming traffic across multiple EC2 instances and routes 
 
 # 🏗️ Architecture Diagram
 
-![AWS application load balancer architecture diagram showing EC2 instances grouped into two target groups with path-based routing and health check flow](./Notes/LoadBalancer.png)
+![AWS Load Balancer Architecture](./Notes/LoadBalancer.png)
 
 ---
 
@@ -31,15 +31,16 @@ The setup distributes incoming traffic across multiple EC2 instances and routes 
 
 ## 🔹 Main Application Servers (TG1)
 
-| Instance | Availability Zone | Page          |
-| -------- | ----------------- | ------------- |
-| Server-1 | ap-south-1a       | `/index.html` |
-| Server-2 | ap-south-1b       | `/index.html` |
+| Instance | Availability Zone | Page |
+|----------|-------------------|------|
+| Server-1 | ap-south-1a | `/index.html` |
+| Server-2 | ap-south-1b | `/index.html` |
 
 ### User Data Script
 
 ```bash
 #!/bin/bash
+
 yum install httpd -y
 service httpd start
 chkconfig httpd on
@@ -51,15 +52,16 @@ echo 'Hey!! My first website on Server1' > /var/www/html/index.html
 
 ## 🔹 Admin Application Servers (TG2)
 
-| Instance | Availability Zone | Page     |
-| -------- | ----------------- | -------- |
-| Server-3 | ap-south-1a       | `/admin` |
-| Server-4 | ap-south-1b       | `/admin` |
+| Instance | Availability Zone | Page |
+|----------|-------------------|------|
+| Server-3 | ap-south-1a | `/admin` |
+| Server-4 | ap-south-1b | `/admin` |
 
 ### User Data Script
 
 ```bash
 #!/bin/bash
+
 yum install httpd -y
 service httpd start
 chkconfig httpd on
@@ -73,10 +75,10 @@ echo 'Hey!! This is my Admin Page-1' > /var/www/html/admin
 
 ## Inbound Rules
 
-| Type | Port | Source    |
-| ---- | ---- | --------- |
-| HTTP | 80   | 0.0.0.0/0 |
-| SSH  | 22   | My IP     |
+| Type | Port | Source |
+|------|------|---------|
+| HTTP | 80 | 0.0.0.0/0 |
+| SSH | 22 | My IP |
 
 ---
 
@@ -86,7 +88,8 @@ echo 'Hey!! This is my Admin Page-1' > /var/www/html/admin
 
 - Protocol: HTTP
 - Port: 80
-- Health Check Path:
+
+### Health Check Path
 
 ```text
 /index.html
@@ -98,7 +101,8 @@ echo 'Hey!! This is my Admin Page-1' > /var/www/html/admin
 
 - Protocol: HTTP
 - Port: 80
-- Health Check Path:
+
+### Health Check Path
 
 ```text
 /admin
@@ -116,84 +120,92 @@ echo 'Hey!! This is my Admin Page-1' > /var/www/html/admin
 
 ## Listener Rules
 
-| Path     | Forward To   |
-| -------- | ------------ |
-| `/`      | My-App       |
+| Path | Forward To |
+|------|-------------|
+| `/` | My-App |
 | `/admin` | Admin-PageTG |
 
 ---
 
 # 🌐 Testing
 
-## Main Application
+## ✅ Main Application
 
 ```text
 http://ALB-DNS
 ```
 
-### Output
+### Example Output
 
 ```text
 Hey!! My first website on Server1
 Hey!! My first website on Server2
 ```
 
-### Screenshots
+---
 
-#### Server 1 Response
+## 📷 Main Application Screenshots
 
-![browser response screenshot showing Server 1 returning Hey!! My first website on Server1 after ALB routing](./Project_Demo/Server1.png)
+### 🔹 Server-1 Response
 
-#### Server 2 Response
+![Server1](./Project_Demo/Server1.png)
 
-![browser response screenshot showing Server 2 returning Hey!! My first website on Server2 after ALB routing](./Project_Demo/Server2.png)
+### 🔹 Server-2 Response
+
+![Server2](./Project_Demo/Server2.png)
 
 ---
 
-## Admin Application
+# 🌐 Admin Application Testing
 
 ```text
 http://ALB-DNS/admin
 ```
 
-### Output
+### Example Output
 
 ```text
 Hey!! This is my Admin Page-1
 Hey!! This is my Admin Page-2
 ```
 
-### Screenshots
+---
 
-#### Admin Page 1
+## 📷 Admin Page Screenshots
 
-![browser response screenshot showing Admin Page 1 returning Hey!! This is my Admin Page-1 after ALB admin path routing](./Project_Demo/AdminPg1.png)
+### 🔹 Admin Page-1
 
-#### Admin Page 2
+![AdminPg1](./Project_Demo/AdminPg1.png)
 
-![browser response screenshot showing Admin Page 2 returning Hey!! This is my Admin Page-2 after ALB admin path routing](./Project_Demo/AdminPg2.png)
+### 🔹 Admin Page-2
+
+![AdminPg2](./Project_Demo/AdminPg2.png)
 
 ---
 
-# 📸 Project Demo
+# 📸 Project Highlights
 
 ## ✅ Load Balancer Working
 
-Traffic successfully distributed between:
+Traffic distributed successfully between:
 
 - Server-1
 - Server-2
 
+---
+
 ## ✅ Path-Based Routing Working
 
-`/admin` requests routed successfully to:
+Requests to `/admin` routed successfully to:
 
 - Server-3
 - Server-4
 
-## ✅ Health Checks
+---
 
-All targets showing:
+## ✅ Health Checks Working
+
+All EC2 targets showing:
 
 ```text
 Healthy
@@ -201,24 +213,30 @@ Healthy
 
 ---
 
-# 🎥 Demo Video
+# 🎥 Demonstration Recording
 
-[▶️ Watch Demo Video](./Project_Demo/FirstMiniTaskProject.mp4)
+This project includes a full demonstration video.
+
+## ▶️ Watch Project Demo
+
+[![ALB Project Demo](./Project_Demo/Server2.png)](./Project_Demo/FirstMiniTaskProject.mp4)
+
+Click the image above to watch the project demonstration video.
 
 ---
 
 # 📚 Concepts Learned
 
-- Launching EC2 instances
-- Installing Apache Web Server
+- Launching EC2 Instances
+- Installing Apache HTTP Server
 - Configuring Security Groups
 - Creating Application Load Balancer
 - Creating Target Groups
 - Registering Targets
 - Configuring Health Checks
-- Multi-AZ Architecture
 - Listener Rules
 - Path-Based Routing
+- Multi-AZ Architecture
 - AWS Networking Basics
 
 ---
@@ -230,16 +248,21 @@ After completing the project:
 - Terminated EC2 instances
 - Deleted ALB
 - Deleted Target Groups
-- Verified no unused EBS volumes remained
+- Verified unused resources were removed
 
 This helps avoid unnecessary AWS charges.
 
 ---
 
-# ✅ Conclusion
+# 🎯 Project Outcome
 
-This project successfully demonstrated how AWS Application Load Balancer distributes traffic and performs Path-Based Routing across multiple EC2 instances deployed in different Availability Zones.
+Successfully:
 
-```
+- Configured AWS Application Load Balancer
+- Implemented Path-Based Routing
+- Distributed traffic across EC2 instances
+- Configured Target Groups & Health Checks
+- Built a Multi-AZ web infrastructure
+- Understood AWS networking workflow
 
-```
+---
