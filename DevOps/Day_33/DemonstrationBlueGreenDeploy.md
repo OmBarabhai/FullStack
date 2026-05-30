@@ -30,7 +30,7 @@ This hands-on project helped in understanding how real-world production deployme
 
 ## 📷 Blue-Green Deployment Flow
 
-![Blue Green Deployment](./Notes/BLUE\&GREEN_DEPLOY.png)
+![Blue Green Deployment](./Notes/BLUE&GREEN_DEPLOY.png)
 
 ---
 
