@@ -192,6 +192,37 @@ Deleted environments and unused AWS resources.
 
 ---
 
+# 🗑️ EC2 Auto-Created Resource Cleanup
+
+Elastic Beanstalk automatically created EC2 instances during environment deployment.
+
+After completing the Blue-Green deployment practice, all auto-created EC2 instances were terminated successfully to avoid unnecessary AWS charges.
+
+## 📷 Cleanup Verification
+
+![EC2 Cleanup](./Demo/10.DeletingEC2AutoCreated.png)
+
+---
+
+# 💰 Cost Optimization Practice
+
+Performed cleanup for:
+
+* EC2 Instances
+* Elastic Beanstalk Environments
+* Auto Scaling Groups
+* Load Balancers
+* Related Networking Resources
+
+This helped in understanding:
+
+✅ AWS resource lifecycle
+✅ Infrastructure cleanup best practices
+✅ Cloud cost optimization
+✅ Production environment maintenance
+
+---
+
 # 🛠️ Deployment Strategies Learned
 
 | Deployment Strategy           | Description                               |
