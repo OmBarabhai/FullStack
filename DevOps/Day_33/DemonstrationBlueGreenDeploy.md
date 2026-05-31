@@ -352,16 +352,16 @@ This reduces deployment risk significantly.
 
 # 📚 Key Learnings
 
-✅ Elastic Beanstalk Fundamentals
-✅ Blue-Green Deployment
-✅ Zero Downtime Deployment
-✅ Environment URL Swapping
-✅ IAM Role Management
-✅ Deployment Strategies
-✅ Auto Scaling Basics
-✅ Elastic Beanstalk Configurations
-✅ Monitoring & Health Checks
-✅ AWS Infrastructure Cleanup
+- ✅ Elastic Beanstalk Fundamentals
+- ✅ Blue-Green Deployment
+- ✅ Zero Downtime Deployment
+- ✅ Environment URL Swapping
+- ✅ IAM Role Management
+- ✅ Deployment Strategies
+- ✅ Auto Scaling Basics
+- ✅ Elastic Beanstalk Configurations
+- ✅ Monitoring & Health Checks
+- ✅ AWS Infrastructure Cleanup
 
 ---
 
