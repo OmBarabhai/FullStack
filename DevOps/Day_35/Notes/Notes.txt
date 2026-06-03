@@ -1,0 +1,25 @@
+copy s3 URL & URI is different
+url start with http://
+uri start with s3:// --> used in cli
+Action --> share with presigned url --> min / hr --> for public access for pvt bucket
+
+Security Layer
+Multi-factor authentication (MFA) delete 
+An additional layer of security that requires multi-factor authentication for changing
+Bucket Versioning settings and permanently deleting object versions. To modify MFA delete
+settings, use the AWS CLI
+
+
+Event type
+Choose the type of events that you want to log.
+
+Management events
+Capture management operations performed on your AWS resources.
+
+Data events
+Log the resource operations performed on or within a resource.
+
+Insights events
+Identify unusual activity, errors, or user behavior in your account.
+Network activity events
+Network activity events provide information about resource operations performed on a resource within a virtual private cloud endpoint.
