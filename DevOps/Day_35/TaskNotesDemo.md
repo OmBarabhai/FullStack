@@ -202,7 +202,7 @@ Objects cannot be accessed publicly.
 
 # 📷 Private Bucket
 
-![Private Bucket](/DevOps/Day_35/Demo/PVT.gif)
+![Private Bucket](./Demo/PVT.gif)
 
 ---
 
@@ -237,7 +237,7 @@ https://bucket-name.s3.ap-south-1.amazonaws.com/file.png
 
 # 📷 Public Bucket Practical
 
-![Public Bucket](/DevOps/Day_35/Demo/Public_And_PVT.gif)
+![Public Bucket](./Demo/Public_And_PVT.gif)
 
 ---
 
@@ -282,7 +282,7 @@ AWS stores multiple versions.
 
 # 📷 Versioning
 
-![Versioning](/DevOps/Day_35/Demo/Versioning.png)
+![Versioning](./Demo/Versioning.png)
 
 ---
 
@@ -313,7 +313,7 @@ Delete creates:
 
 # 📷 Delete Marker
 
-![Delete Marker](/DevOps/Day_35/Demo/DeleteMarker.png)
+![Delete Marker](./Demo/DeleteMarker.png)
 
 ---
 
@@ -410,13 +410,13 @@ Whenever file uploaded:
 
 # 📷 Event Notification
 
-![Event Notification](/DevOps/Day_35/Demo/EventNotif.png)
+![Event Notification](./Demo/EventNotif.png)
 
 ---
 
 # 📷 Notification Demo
 
-![Notification Demo](/DevOps/Day_35/Demo/NotificationDemo.gif)
+![Notification Demo](./Demo/NotificationDemo.gif)
 
 ---
 
@@ -565,7 +565,7 @@ http://bucket-name.s3-website-ap-south-1.amazonaws.com
 
 # 📷 Static Website Hosting
 
-![Hosting Static Website](/DevOps/Day_35/Demo/HostingStaticWeb.gif)
+![Hosting Static Website](./Demo/HostingStaticWeb.gif)
 
 ---
 
@@ -576,7 +576,7 @@ http://bucket-name.s3-website-ap-south-1.amazonaws.com
 
 # 📷 Website Files
 
-![Website Files](/DevOps/Day_35/Demo/WebsiteFilesStatic.gif)
+![Website Files](./Demo/WebsiteFilesStatic.gif)
 
 ---
 
@@ -587,7 +587,7 @@ http://bucket-name.s3-website-ap-south-1.amazonaws.com
 
 # 📷 S3 Static Website Endpoint
 
-![Static Website Endpoint](/DevOps/Day_35/Demo/Public_And_PVT.gif)
+![Static Website Endpoint](./Demo/Public_And_PVT.gif)
 
 ---
 
@@ -598,7 +598,7 @@ http://bucket-name.s3-website-ap-south-1.amazonaws.com
 
 # 📷 Event Notification Created
 
-![S3 Event Notification](/DevOps/Day_35/Demo/EventNotif.png)
+![S3 Event Notification](./Demo/EventNotif.png)
 
 ---
 
@@ -609,7 +609,7 @@ http://bucket-name.s3-website-ap-south-1.amazonaws.com
 
 # 📷 S3 Event Success
 
-![S3 Event Success](/DevOps/Day_35/Demo/NotificationDemo.gif)
+![S3 Event Success](./Demo/NotificationDemo.gif)
 
 ---
 
@@ -620,19 +620,18 @@ http://bucket-name.s3-website-ap-south-1.amazonaws.com
 
 # 📷 Static Website Hosting Enabled
 
-![Static Website Hosting](/DevOps/Day_35/Demo/HostingStaticWeb.gif)
+![Static Website Hosting](./Demo/HostingStaticWeb.gif)
 
 ---
 
 > 📂 Open Demo File:  
 > [View Hosting Static Website Demo](./Demo/HostingStaticWeb.gif)
 
-
 ---
 
 # 📷 Bucket Website Endpoint
 
-![Website Endpoint](/DevOps/Day_35/Demo/WebsiteFilesStatic.gif)
+![Website Endpoint](./Demo/WebsiteFilesStatic.gif)
 
 ---
 
@@ -643,19 +642,18 @@ http://bucket-name.s3-website-ap-south-1.amazonaws.com
 
 # 📷 S3 Event Configuration
 
-![S3 Event Configuration](/DevOps/Day_35/Demo/EventNotif.png)
+![S3 Event Configuration](./Demo/EventNotif.png)
 
 ---
 
 # 📷 Private Bucket
 
-![Private Bucket Screenshot](/DevOps/Day_35/Demo/Public_And_PVT.gif)
+![Private Bucket Screenshot](./Demo/Public_And_PVT.gif)
 
 ---
 
 > 📂 Open Demo File:  
 > [View Public & Private Bucket Demo](./Demo/Public_And_PVT.gif)
-
 
 ---
 
