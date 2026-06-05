@@ -1,0 +1,1 @@
+{"name":"Local: multiple","url":"c:\\Users\\LOQ\\Desktop\\FullStack\\CP\\multiple.java","tests":[{"id":1780641294315,"input":"9 3\n","output":"Multiples\n"},{"id":1780641383486,"input":"12 5\n","output":"No Multiples\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\LOQ\\Desktop\\FullStack\\CP\\multiple.java","group":"local","local":true}
