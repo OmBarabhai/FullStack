@@ -241,6 +241,11 @@ https://bucket-name.s3.ap-south-1.amazonaws.com/file.png
 
 ---
 
+> 📂 Open Demo File:  
+> [View Public & Private Bucket Demo](./Demo/Public_And_PVT.gif)
+
+---
+
 # ✅ TASK 3 — Enable Versioning
 
 ## What is Versioning?
@@ -415,6 +420,11 @@ Whenever file uploaded:
 
 ---
 
+> ⚠️ If GIF preview is not loading on GitHub,  
+> [Click Here To Open Demo](./Demo/NotificationDemo.gif)
+
+---
+
 # ✅ TASK 6 — Enable Server Access Logs
 
 ## Purpose
@@ -559,15 +569,30 @@ http://bucket-name.s3-website-ap-south-1.amazonaws.com
 
 ---
 
+> ⚠️ If GIF preview is not loading on GitHub,  
+> [Click Here To Open Demo](./Demo/HostingStaticWeb.gif)
+
+---
+
 # 📷 Website Files
 
 ![Website Files](/DevOps/Day_35/Demo/WebsiteFilesStatic.gif)
 
 ---
 
-# 📷 Static Website Endpoint
+> 📂 Open Demo File:  
+> [View Website Files Demo](./Demo/WebsiteFilesStatic.gif)
+
+---
+
+# 📷 S3 Static Website Endpoint
 
 ![Static Website Endpoint](/DevOps/Day_35/Demo/Public_And_PVT.gif)
+
+---
+
+> 📂 Open Demo File:  
+> [View Website Files Demo](./Demo/WebsiteFilesStatic.gif)
 
 ---
 
@@ -577,9 +602,19 @@ http://bucket-name.s3-website-ap-south-1.amazonaws.com
 
 ---
 
+> 📂 Open Screenshot:  
+> [View Event Notification Screenshot](./Demo/EventNotif.png)
+
+---
+
 # 📷 S3 Event Success
 
 ![S3 Event Success](/DevOps/Day_35/Demo/NotificationDemo.gif)
+
+---
+
+> 📂 Open Screenshot:  
+> [View Event Notification Screenshot](./Demo/EventNotif.png)
 
 ---
 
@@ -589,9 +624,20 @@ http://bucket-name.s3-website-ap-south-1.amazonaws.com
 
 ---
 
+> 📂 Open Demo File:  
+> [View Hosting Static Website Demo](./Demo/HostingStaticWeb.gif)
+
+
+---
+
 # 📷 Bucket Website Endpoint
 
 ![Website Endpoint](/DevOps/Day_35/Demo/WebsiteFilesStatic.gif)
+
+---
+
+> 📂 Open Demo File:  
+> [View Website Files Demo](./Demo/WebsiteFilesStatic.gif)
 
 ---
 
@@ -607,9 +653,9 @@ http://bucket-name.s3-website-ap-south-1.amazonaws.com
 
 ---
 
-# 📷 S3 Static Website Endpoint
+> 📂 Open Demo File:  
+> [View Public & Private Bucket Demo](./Demo/Public_And_PVT.gif)
 
-![Static Website Endpoint Screenshot](/DevOps/Day_35/Demo/WebsiteFilesStatic.gif)
 
 ---
 
