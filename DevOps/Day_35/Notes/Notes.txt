@@ -23,3 +23,23 @@ Insights events
 Identify unusual activity, errors, or user behavior in your account.
 Network activity events
 Network activity events provide information about resource operations performed on a resource within a virtual private cloud endpoint.
+
+
+S3: Simple Storage Service
+*********
+TASKS
+1. Create private bucket and upload the objects
+2. Create a public bucket and upload the object and access the object using endpoint
+    --> Make sure you make the object public "Make Public"
+3. Create a bucket (public or private) with versioning enabled
+   upload the objects and check versioning
+4. Suspend the versioning and perform few tasks on the objects
+   upload the objects and check versioning
+5. You should receive the notification if anyone upload a object inside the bucket (you should use S3 EVENT)
+6. Enable Server access logs on S3 Bucket
+7. Setup static website hosting on S3.
+   --> create a public bucket
+   --> upload all your images, html files
+   --> select all objects and make public
+   --> go to bucket properties --> enable static webite hosting --> index.html and error.html
+8. Delete all buckets
