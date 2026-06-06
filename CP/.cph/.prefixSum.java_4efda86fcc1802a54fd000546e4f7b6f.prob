@@ -1,0 +1,1 @@
+{"name":"Local: prefixSum","url":"c:\\Users\\LOQ\\Desktop\\FullStack\\CP\\prefixSum.java","tests":[{"id":1780762921743,"input":"2\n1 10\n5 8","output":"55\n26"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\LOQ\\Desktop\\FullStack\\CP\\prefixSum.java","group":"local","local":true}
