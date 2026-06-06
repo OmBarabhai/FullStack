@@ -576,18 +576,18 @@ http://bucket-name.s3-website-ap-south-1.amazonaws.com
 
 # 📷 Website Files
 
-![Website Files](./Demo/WebsiteFilesStatic.gif)
+![Website Files](./Demo/WebsiteFilesStatic3.gif)
 
 ---
 
 > 📂 Open Demo File:  
-> [View Website Files Demo](./Demo/WebsiteFilesStatic.gif)
+> [View Website Files Demo](./Demo/WebsiteFilesStatic3.gif)
 
 ---
 
 # 📷 S3 Static Website Endpoint
 
-![Static Website Endpoint](./Demo/Public_And_PVT.gif)
+![Static Website Endpoint](./Demo/WebsiteFilesStatic.gif)
 
 ---
 
