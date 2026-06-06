@@ -646,17 +646,6 @@ http://bucket-name.s3-website-ap-south-1.amazonaws.com
 
 ---
 
-# 📷 Private Bucket
-
-![Private Bucket Screenshot](./Demo/Public_And_PVT.gif)
-
----
-
-> 📂 Open Demo File:  
-> [View Public & Private Bucket Demo](./Demo/Public_And_PVT.gif)
-
----
-
 # ✅ TASK 8 — Delete Buckets
 
 ## Important Rule
