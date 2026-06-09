@@ -1,0 +1,125 @@
+click on open network and internet setings
+click on change adapter options
+get ethernet 2 then double click of ethernet 2
+click on properties
+then select internet protocol ver 4 ipv4
+then click on properties
+click on use the follo dns ser address
+there u have to puth both ip from ad
+for join to domain open server manager
+go to start
+then click on local server
+see workgrp and click on that
+then click on change
+see member of then add domain which created in ad then ok
+then asking for usrname and password default admin then password: Root123456 click on ok get msg welcome to \_\_.com domain click on ok then see u must restat ur computer then restart now we have repeat this for 3 ec2 instance
+
+
+open server manager click on add roles and features 
+step 1 : next 
+step 2 : next
+step 3 : next
+step 4 : next
+step 5 : scroll down expand remote server administration tools 
+--> expand role administration tool --> select AD DS and AD LDS TOols 
+select active dir certif tool
+active dir rights magmnt
+remote desk service tools
+click on next 
+then install.
+after installation succed then 
+after install ad service we need to do restart 
+
+after restart search active 
+then see actie dir users and computers
+u see expand __.com  expand __ click on user u see admin
+this users we have to create user same as console 
+to create user right click then new then user first name 
+last name 
+initial 
+logon name 
+__\ user 
+then click on next 
+password is nasty password u have to add ga^D&&*S*&C((*&&^CSc))
+check on pass never expired then next then finish it 
+
+
+** double click on the user go to member of then add then write admin click on check names we need to select admins click on ok apply ok
+another user same this step we are adding user to admin grp 
+
+
+after fsx done we go to ec2 File
+
+| This PC
+
+Computer
+
+View
+
+> This PC
+
+Search This PC
+X
+
+# Quick access
+
+Desktop
+
+Documents
+
+Downloads
+
+Pictures
+
+This PC
+
+Network
+
+v Folders (7
+
+3D
+
+Map Network Drive
+
+*
+
+*
+
+*
+
+Do
+
+Vic
+
+What network folder would you like to map?
+
+Specify the drive letter for the connection and the folder that you want to connect to:
+
+Drive:
+
+Folder:
+
+Z
+
+Browse ...
+
+v Devices a
+
+Lo
+
+5.9
+
+
+
+Example: \\amznfsxmwaqufmf.reyaz.com\share
+
+Reconnect at sign-in
+
+Connect using different credentials
+Connect to a Web site that you can use to store your documents and pictures.
+
+Finish click this
+
+Cancel
+
+8 items
