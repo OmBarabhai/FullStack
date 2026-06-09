@@ -423,3 +423,234 @@ Matrix + Hard
 Revision + Re-solve without help
 
 That final day is extremely important.
+Yes — this is a very good reusable Binary Search pattern.
+
+Your code is using the:
+
+> **“Find First Occurrence” template**
+
+and this template works for MANY problems.
+
+Your logic:
+
+* if condition satisfied → store answer + move left
+* else → move right
+
+is one of the most important binary search patterns.
+
+---
+
+Your code:
+
+```java
+if (mat[i][mid] == 1) {
+    firstOcc = mid;
+    e = mid - 1;
+} else {
+    s = mid + 1;
+}
+```
+
+means:
+
+* “I found a possible answer”
+* “but maybe there is a better one on the left side”
+
+This is exactly how:
+
+* lower bound
+* first occurrence
+* first true
+* minimum valid answer
+
+type problems work.
+
+---
+
+# Main Binary Search Templates
+
+You do NOT need 20 templates.
+
+Mostly only 3–4 core patterns are enough.
+
+---
+
+# 1. Exact Search Template
+
+Used for:
+
+* normal binary search
+* search element
+
+```java
+while(s <= e) {
+    int mid = s + (e - s)/2;
+
+    if(arr[mid] == target)
+        return mid;
+
+    else if(arr[mid] < target)
+        s = mid + 1;
+
+    else
+        e = mid - 1;
+}
+```
+
+---
+
+# 2. First Occurrence / Lower Bound Template
+
+Your current pattern.
+
+```java
+int ans = n;
+
+while(s <= e) {
+    int mid = s + (e - s)/2;
+
+    if(condition true) {
+        ans = mid;
+        e = mid - 1;
+    } else {
+        s = mid + 1;
+    }
+}
+```
+
+Used in:
+
+* first occurrence
+* lower bound
+* first 1 in binary array
+* first true
+* search insert position
+
+---
+
+# 3. Last Occurrence / Upper Bound Template
+
+```java
+int ans = -1;
+
+while(s <= e) {
+    int mid = s + (e - s)/2;
+
+    if(condition true) {
+        ans = mid;
+        s = mid + 1;
+    } else {
+        e = mid - 1;
+    }
+}
+```
+
+Used in:
+
+* last occurrence
+* upper bound
+* last true
+
+---
+
+# 4. Binary Search on Answer Pattern
+
+Very important.
+
+```java
+while(s <= e) {
+    int mid = s + (e - s)/2;
+
+    if(isPossible(mid)) {
+        ans = mid;
+        e = mid - 1;
+    } else {
+        s = mid + 1;
+    }
+}
+```
+
+Used in:
+
+* Aggressive Cows
+* Book Allocation
+* Painter Partition
+* Roti Prata
+* EKO
+* Minimize Maximum problems
+
+This is why Babbar spent many lectures here.
+
+---
+
+# Your Current Problem
+
+Your matrix row looks like:
+
+```text
+0 0 0 1 1 1
+```
+
+You are finding:
+
+> first occurrence of 1
+
+Then:
+
+```java
+zero += firstOcc;
+```
+
+because all elements before first 1 are zeros.
+
+Very good approach.
+
+Complexity:
+
+* O(n log m)
+
+Excellent.
+
+---
+
+# One Important Insight
+
+Most Binary Search problems are actually:
+
+> “Find first true”
+> or
+> “Find last true”
+
+Once you understand this, many problems become easy.
+
+---
+
+# Example Mapping
+
+| Problem           | Template                |
+| ----------------- | ----------------------- |
+| First occurrence  | First true              |
+| Lower bound       | First true              |
+| Search insert     | First true              |
+| Peak element      | modified BS             |
+| Aggressive cows   | Binary search on answer |
+| Book allocation   | Binary search on answer |
+| Painter partition | Binary search on answer |
+| Rotated array     | sorted half logic       |
+
+---
+
+# Final Answer
+
+Yes — your current template is one of the main reusable binary search templates.
+
+You do NOT need many different templates.
+
+Mainly master:
+
+1. Exact Search
+2. First Occurrence / Lower Bound
+3. Last Occurrence / Upper Bound
+4. Binary Search on Answer
+
+These cover most interview Binary Search problems.
