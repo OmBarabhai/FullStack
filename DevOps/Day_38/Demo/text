@@ -1,0 +1,28 @@
+// // ~ $ aws ssm get-parameter --name /aws/service/datasync/ami --region ap-south-1
+
+// {
+
+//     "Parameter": {
+
+//         "Name": "/aws/service/datasync/ami",
+
+//         "Type": "String",
+
+//         "Value": "ami-0e617743295a316a7",
+
+//         "Version": 152,
+
+//         "LastModifiedDate": "2026-06-03T22:05:00.810000+00:00",
+
+//         "ARN": "arn:aws:ssm:ap-south-1::parameter/aws/service/datasync/ami",
+
+//         "DataType": "text"
+
+//     }
+
+// };
+
+// https://console.aws.amazon.com/ec2/v2/home?region=agent-region#LaunchInstanceWizard:ami=ami-id
+
+// https://console.aws.amazon.com/ec2/v2/home?region=agent-region#LaunchInstanceWizard:ami=ami-0e617743295a316a7
+
