@@ -1,10 +1,7 @@
-
 ---
-
 # ⚡ Essential Markdown for Developers
 
 A **must-know Markdown guide** for developers writing GitHub READMEs, documentation, and technical notes.
-
 ---
 
 ## 🎯 Why Developers MUST Learn Markdown
@@ -19,7 +16,8 @@ A **must-know Markdown guide** for developers writing GitHub READMEs, documentat
 ## 🧱 1. Headings (Structure Your Docs)
 
 ### 🔹 Rules
-- Use `#` (1–6 levels)
+
+- Use `#` (1-6 levels)
 - Always add a space after `#`
 - Use **only one H1 (`#`) per file**
 
@@ -27,9 +25,11 @@ A **must-know Markdown guide** for developers writing GitHub READMEs, documentat
 
 ```md
 # Project Name
+
 ## Installation
+
 ### Usage
-````
+```
 
 ---
 
@@ -37,14 +37,14 @@ A **must-know Markdown guide** for developers writing GitHub READMEs, documentat
 
 ### 🔹 Rules
 
-* Use formatting for emphasis only
-* Avoid overusing styles
+- Use formatting for emphasis only
+- Avoid overusing styles
 
 ### ✅ Example
 
 ```md
 **Bold**
-*Italic*
+_Italic_
 ~~Strikethrough~~
 `Inline code`
 ```
@@ -55,9 +55,9 @@ A **must-know Markdown guide** for developers writing GitHub READMEs, documentat
 
 ### 🔹 Rules
 
-* Use `-` for unordered lists
-* Use numbers for ordered lists
-* Maintain consistent indentation
+- Use `-` for unordered lists
+- Use numbers for ordered lists
+- Maintain consistent indentation
 
 ### ✅ Example
 
@@ -77,8 +77,8 @@ A **must-know Markdown guide** for developers writing GitHub READMEs, documentat
 
 ### 🔹 Rules
 
-* Always specify language
-* Keep code clean and minimal
+- Always specify language
+- Keep code clean and minimal
 
 ### ✅ Example
 
@@ -103,8 +103,8 @@ console.log("Hello World");
 
 ### 🔹 Rules
 
-* Use meaningful link text
-* Always include full URL
+- Use meaningful link text
+- Always include full URL
 
 ### ✅ Example
 
@@ -118,8 +118,8 @@ console.log("Hello World");
 
 ### 🔹 Rules
 
-* Always include alt text
-* Use for UI or diagrams
+- Always include alt text
+- Use for UI or diagrams
 
 ### ✅ Example
 
@@ -133,7 +133,7 @@ console.log("Hello World");
 
 ### 🔹 Rules
 
-* Use for tracking progress
+- Use for tracking progress
 
 ### ✅ Example
 
@@ -148,24 +148,22 @@ console.log("Hello World");
 
 ### 🔹 Rules
 
-* Use `|` to separate columns
-* Keep alignment clean
+- Use `|` to separate columns
+- Keep alignment clean
 
 ### ✅ Example
 
-| Command    | Description     |
-|------------|-----------------|
-| npm i      | Install deps    |
-| npm start  | Run app         |
+| Command   | Description  |
+| --------- | ------------ |
+| npm i     | Install deps |
+| npm start | Run app      |
 
-| Command    | Description     |
-|:------------|-----------------:|
-| npm i      | Install deps    |
-| npm start  | Run app         |
+| Command   |  Description |
+| :-------- | -----------: |
+| npm i     | Install deps |
+| npm start |      Run app |
 
-
-
-```
+````
 
 ---
 
@@ -179,7 +177,7 @@ console.log("Hello World");
 
 ```md
 > ⚠️ This is a warning
-```
+````
 
 ---
 
@@ -187,7 +185,7 @@ console.log("Hello World");
 
 ### 🔹 Rules
 
-* Use `---` to separate sections
+- Use `---` to separate sections
 
 ### ✅ Example
 
@@ -227,6 +225,7 @@ npm start
 ## 📄 License
 
 MIT
+
 ```
 
 ---
@@ -250,7 +249,9 @@ MIT
 * Follow structure:
 
 ```
+
 Project → Install → Usage → Features → Contribute
+
 ```
 
 ---
@@ -273,7 +274,11 @@ Project → Install → Usage → Features → Contribute
 ---
 
 If you want next step, I can:
+
 - 🔥 Turn this into a **real GitHub project README (with badges)**
 - 🎨 Add **professional UI-style sections**
 - 📦 Customize it for your **own project**
+
+```
+
 ```
