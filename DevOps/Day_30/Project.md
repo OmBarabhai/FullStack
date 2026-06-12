@@ -12,14 +12,14 @@ This project demonstrates how to automate and monitor AWS EC2 instances using mu
 
 The system can:
 
-* Automatically stop/start EC2 instances
-* Monitor CPU utilization using CloudWatch
-* Trigger alarms based on thresholds
-* Send email notifications using SNS
-* Schedule EC2 operations using EventBridge
-* Create CloudWatch Dashboards
-* Use Lambda for automation
-* Maintain centralized monitoring and logging
+- Automatically stop/start EC2 instances
+- Monitor CPU utilization using CloudWatch
+- Trigger alarms based on thresholds
+- Send email notifications using SNS
+- Schedule EC2 operations using EventBridge
+- Create CloudWatch Dashboards
+- Use Lambda for automation
+- Maintain centralized monitoring and logging
 
 ---
 
@@ -44,30 +44,30 @@ This project follows a real AWS automation workflow.
 
 ## Step-by-Step Flow
 
-### 🔹 Step 1 — Create EC2 Instance
+### 🔹 Step 1 - Create EC2 Instance
 
 First, EC2 instances are launched which act as servers.
 
-### 🔹 Step 2 — Create IAM Role for Lambda
+### 🔹 Step 2 - Create IAM Role for Lambda
 
 An IAM Role is created with:
 
-* Trusted Entity = Lambda
-* Permissions = Start/Stop EC2
-* CloudWatch Logs permissions
+- Trusted Entity = Lambda
+- Permissions = Start/Stop EC2
+- CloudWatch Logs permissions
 
 ⚠️ Instead of using `AmazonEC2FullAccess`, an inline custom policy is used for better security.
 
-### 🔹 Step 3 — Create Lambda Functions
+### 🔹 Step 3 - Create Lambda Functions
 
 Two Lambda functions are created:
 
-* Start EC2 Function
-* Stop EC2 Function
+- Start EC2 Function
+- Stop EC2 Function
 
 These functions automate EC2 operations.
 
-### 🔹 Step 4 — Create EventBridge Schedule
+### 🔹 Step 4 - Create EventBridge Schedule
 
 EventBridge Rules are used to trigger Lambda functions automatically.
 
@@ -78,17 +78,17 @@ Example:
 | 9 PM | Stop EC2  |
 | 6 AM | Start EC2 |
 
-### 🔹 Step 5 — Configure CloudWatch Monitoring
+### 🔹 Step 5 - Configure CloudWatch Monitoring
 
 CloudWatch continuously monitors:
 
-* CPU Utilization
-* Network Usage
-* Disk Usage
-* Status Checks
-* Logs
+- CPU Utilization
+- Network Usage
+- Disk Usage
+- Status Checks
+- Logs
 
-### 🔹 Step 6 — Create CloudWatch Alarm
+### 🔹 Step 6 - Create CloudWatch Alarm
 
 An alarm is configured when:
 
@@ -98,25 +98,25 @@ CPU Utilization < 10%
 
 CloudWatch can:
 
-* Send SNS Notification
-* Stop EC2
-* Terminate EC2
-* Trigger Lambda
+- Send SNS Notification
+- Stop EC2
+- Terminate EC2
+- Trigger Lambda
 
-### 🔹 Step 7 — SNS Email Notifications
+### 🔹 Step 7 - SNS Email Notifications
 
 SNS sends real-time notifications for:
 
-* EC2 Launch
-* EC2 Stop
-* Alarm Triggered
-* Instance State Changes
+- EC2 Launch
+- EC2 Stop
+- Alarm Triggered
+- Instance State Changes
 
 ---
 
 # 🏗️ Architecture Diagram
 
-````text
+```text
                          ┌──────────────────────┐
                          │      EventBridge     │
                          │   (Schedule Rules)   │
@@ -158,22 +158,24 @@ SNS sends real-time notifications for:
       │ Email Notification │
       └────────────────────┘
 
-````
+```
 
 ---
- ```text
+
+```text
 EC2 Instance
-      ↓
+     ↓
 CloudWatch Metrics
-      ↓
+     ↓
 CloudWatch Alarm
-      ↓
+     ↓
 SNS Notification
-      ↓
+     ↓
 Lambda Function
-      ↓
+     ↓
 Start / Stop EC2
 ```
+
 ---
 
 # 📸 CloudWatch Concepts
@@ -190,7 +192,7 @@ Start / Stop EC2
 
 # 📂 Project Structure
 
-````bash
+```bash
 AWS-CloudWatch-Automation/
 │
 ├── README.md
@@ -208,7 +210,7 @@ AWS-CloudWatch-Automation/
     ├── CloudWatch.png
     └── ProjectAutomateSTOPSTART.png
 
-````
+```
 
 ---
 
@@ -248,10 +250,7 @@ CloudWatch Logs
     },
     {
       "Effect": "Allow",
-      "Action": [
-        "ec2:StartInstances",
-        "ec2:StopInstances"
-      ],
+      "Action": ["ec2:StartInstances", "ec2:StopInstances"],
       "Resource": "*"
     }
   ]
@@ -447,11 +446,11 @@ EventBridge Scheduler is used to automate EC2 start/stop operations.
 
 CloudWatch monitors:
 
-* CPU Utilization
-* Network Metrics
-* Disk Metrics
-* Status Checks
-* Logs
+- CPU Utilization
+- Network Metrics
+- Disk Metrics
+- Status Checks
+- Logs
 
 ---
 
@@ -465,9 +464,9 @@ CPU Utilization < 10%
 
 Actions:
 
-* Stop Instance
-* Terminate Instance
-* Send Notification
+- Stop Instance
+- Terminate Instance
+- Send Notification
 
 ---
 
@@ -475,9 +474,9 @@ Actions:
 
 SNS sends email notifications when:
 
-* EC2 launches
-* EC2 stops
-* Alarm triggers
+- EC2 launches
+- EC2 stops
+- Alarm triggers
 
 ---
 
@@ -485,14 +484,14 @@ SNS sends email notifications when:
 
 CloudWatch Logs helps centralize logs from:
 
-* EC2 Instances
-* Lambda Functions
-* Applications
+- EC2 Instances
+- Lambda Functions
+- Applications
 
 Important Concepts:
 
-* Log Groups
-* Log Streams
+- Log Groups
+- Log Streams
 
 ---
 
@@ -502,8 +501,8 @@ Important Concepts:
 
 Composite alarms help monitor multiple alarms together using:
 
-* AND Conditions
-* OR Conditions
+- AND Conditions
+- OR Conditions
 
 ---
 
@@ -513,10 +512,10 @@ Namespace = Collection of Metrics
 
 Example:
 
-````text
+```text
 AWS/EC2
 AWS/EC2
-````
+```
 
 ---
 
@@ -526,9 +525,9 @@ AWS/EC2
 
 Used to collect:
 
-* Memory Metrics
-* Disk Metrics
-* Application Logs
+- Memory Metrics
+- Disk Metrics
+- Application Logs
 
 ---
 
@@ -536,39 +535,39 @@ Used to collect:
 
 After completing the project, delete unused AWS resources to avoid unnecessary billing:
 
-* EC2 Instances
-* Lambda Functions
-* EventBridge Rules
-* CloudWatch Alarms
-* SNS Topics
-* Dashboards
+- EC2 Instances
+- Lambda Functions
+- EventBridge Rules
+- CloudWatch Alarms
+- SNS Topics
+- Dashboards
 
 ---
 
 # 📚 Key AWS Concepts Covered
 
-* EC2 Automation
-* IAM Roles & Policies
-* Lambda Functions
-* EventBridge Scheduling
-* CloudWatch Monitoring
-* CloudWatch Alarms
-* SNS Notifications
-* CloudWatch Dashboards
-* CloudWatch Logs
-* AWS Security Best Practices
+- EC2 Automation
+- IAM Roles & Policies
+- Lambda Functions
+- EventBridge Scheduling
+- CloudWatch Monitoring
+- CloudWatch Alarms
+- SNS Notifications
+- CloudWatch Dashboards
+- CloudWatch Logs
+- AWS Security Best Practices
 
 ---
 
 # 🔮 Future Improvements
 
-* Terraform Automation
-* CloudFormation Templates
-* Slack Notifications
-* Auto Scaling Monitoring
-* Memory Monitoring
-* Grafana Integration
-* Prometheus Integration
+- Terraform Automation
+- CloudFormation Templates
+- Slack Notifications
+- Auto Scaling Monitoring
+- Memory Monitoring
+- Grafana Integration
+- Prometheus Integration
 
 ---
 
@@ -584,16 +583,16 @@ Built an AWS cloud monitoring and automation system using EC2, Lambda, CloudWatc
 
 This project demonstrates practical AWS DevOps concepts including:
 
-* Infrastructure monitoring
-* Automation
-* Event-driven architecture
-* Cloud security
-* Serverless computing
-* Alerting systems
+- Infrastructure monitoring
+- Automation
+- Event-driven architecture
+- Cloud security
+- Serverless computing
+- Alerting systems
 
 It is a strong beginner-to-intermediate AWS DevOps showcase project suitable for:
 
-* GitHub portfolio
-* Resume projects
-* Interviews
-* AWS practice labs
+- GitHub portfolio
+- Resume projects
+- Interviews
+- AWS practice labs

@@ -12,7 +12,7 @@ Day 34 covers advanced Amazon S3 concepts that go beyond basic object storage. T
 ✅ Configure cross-region and same-region replication  
 ✅ Design lifecycle policies for cost optimization  
 ✅ Implement CORS and advanced access patterns  
-✅ Apply storage class strategies for cost management  
+✅ Apply storage class strategies for cost management
 
 ---
 
@@ -53,10 +53,10 @@ Reference the markdown files in this folder for detailed implementation guidance
 
 ## 🔑 Key Takeaways
 
-✨ Encryption is not optional for production S3 buckets—implement it from day one  
+✨ Encryption is not optional for production S3 buckets-implement it from day one  
 ✨ Replication strategies are essential for disaster recovery and compliance requirements  
 ✨ Lifecycle policies dramatically reduce storage costs for large datasets  
-✨ Storage class transitions balance access speed with cost optimization  
+✨ Storage class transitions balance access speed with cost optimization
 
 ---
 

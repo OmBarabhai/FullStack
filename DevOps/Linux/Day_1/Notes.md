@@ -21,14 +21,14 @@
 
 ## 📷 OS Basics
 
-![Linux Notes](./Notes/L1.png)
+![Linux Notes](./Images/L1.png)
 
 
 ---
 
 ## 📷 Linux vs Windows + UNIX
 
-![Linux Notes](./Notes/L2.png)
+![Linux Notes](./Images/L2.png)
 
 ---
 

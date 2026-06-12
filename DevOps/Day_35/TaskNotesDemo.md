@@ -1,4 +1,4 @@
-# ☁️ AWS S3 Practical — Simple Storage Service
+# ☁️ AWS S3 Practical - Simple Storage Service
 
 # 📌 Objective
 
@@ -177,7 +177,7 @@ Capture:
 
 ---
 
-# ✅ TASK 1 — Create Private Bucket
+# ✅ TASK 1 - Create Private Bucket
 
 ## Steps
 
@@ -206,7 +206,7 @@ Objects cannot be accessed publicly.
 
 ---
 
-# ✅ TASK 2 — Create Public Bucket
+# ✅ TASK 2 - Create Public Bucket
 
 ## Steps
 
@@ -246,7 +246,7 @@ https://bucket-name.s3.ap-south-1.amazonaws.com/file.png
 
 ---
 
-# ✅ TASK 3 — Enable Versioning
+# ✅ TASK 3 - Enable Versioning
 
 ## What is Versioning?
 
@@ -286,7 +286,7 @@ AWS stores multiple versions.
 
 ---
 
-# ✅ TASK 4 — Suspend Versioning
+# ✅ TASK 4 - Suspend Versioning
 
 ## Steps
 
@@ -317,7 +317,7 @@ Delete creates:
 
 ---
 
-# ✅ TASK 5 — S3 Event Notification
+# ✅ TASK 5 - S3 Event Notification
 
 ## Objective
 
@@ -344,7 +344,7 @@ Email Notification
 
 # 🔧 Steps
 
-## Step 1 — Create SNS Topic
+## Step 1 - Create SNS Topic
 
 Go to:
 
@@ -363,7 +363,7 @@ s3-upload-alert
 
 ---
 
-## Step 2 — Create Subscription
+## Step 2 - Create Subscription
 
 Protocol:
 
@@ -377,7 +377,7 @@ Confirm subscription from email inbox.
 
 ---
 
-## Step 3 — Create S3 Event
+## Step 3 - Create S3 Event
 
 Go to:
 
@@ -425,7 +425,7 @@ Whenever file uploaded:
 
 ---
 
-# ✅ TASK 6 — Enable Server Access Logs
+# ✅ TASK 6 - Enable Server Access Logs
 
 ## Purpose
 
@@ -473,11 +473,11 @@ inside destination bucket.
 
 # 📷 Server Access Logging
 
-![S3 Task AP](./Notes/S3Task_AP.png)
+![S3 Task AP](./Images/S3Task_AP.png)
 
 ---
 
-# ✅ TASK 7 — Static Website Hosting
+# ✅ TASK 7 - Static Website Hosting
 
 ## Objective
 
@@ -499,7 +499,7 @@ HTML / CSS / JS / Images
 
 # 🔧 Steps
 
-## Step 1 — Create Public Bucket
+## Step 1 - Create Public Bucket
 
 Disable:
 
@@ -507,7 +507,7 @@ Disable:
 
 ---
 
-## Step 2 — Upload Website Files
+## Step 2 - Upload Website Files
 
 Upload:
 
@@ -518,7 +518,7 @@ Upload:
 
 ---
 
-## Step 3 — Make Objects Public
+## Step 3 - Make Objects Public
 
 Select all objects:
 
@@ -528,7 +528,7 @@ Actions → Make Public
 
 ---
 
-## Step 4 — Enable Static Website Hosting
+## Step 4 - Enable Static Website Hosting
 
 Go to:
 
@@ -553,7 +553,7 @@ error.html
 
 ---
 
-## Step 5 — Open Website Endpoint
+## Step 5 - Open Website Endpoint
 
 AWS generates endpoint like:
 
@@ -646,7 +646,7 @@ http://bucket-name.s3-website-ap-south-1.amazonaws.com
 
 ---
 
-# ✅ TASK 8 — Delete Buckets
+# ✅ TASK 8 - Delete Buckets
 
 ## Important Rule
 

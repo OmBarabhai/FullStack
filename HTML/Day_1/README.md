@@ -2,7 +2,7 @@
 
 ## 📖 Overview
 
-Today you'll learn the **building blocks of HTML**—the fundamental concepts that form the foundation of all web development. You'll understand what elements are, how attributes work, how to structure an HTML document, and how to use Emmet shortcuts to code faster.
+Today you'll learn the **building blocks of HTML**-the fundamental concepts that form the foundation of all web development. You'll understand what elements are, how attributes work, how to structure an HTML document, and how to use Emmet shortcuts to code faster.
 
 ---
 

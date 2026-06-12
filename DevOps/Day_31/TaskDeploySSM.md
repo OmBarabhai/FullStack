@@ -2,13 +2,13 @@
 
 This project demonstrates:
 
-* Creating Linux & Windows EC2 instances
-* Creating and attaching IAM Roles
-* Managing EC2 using AWS Systems Manager
-* Using Session Manager & Fleet Manager
-* Deploying frontend templates on Linux EC2
-* Configuring CloudWatch Agent
-* Monitoring EC2 metrics
+- Creating Linux & Windows EC2 instances
+- Creating and attaching IAM Roles
+- Managing EC2 using AWS Systems Manager
+- Using Session Manager & Fleet Manager
+- Deploying frontend templates on Linux EC2
+- Configuring CloudWatch Agent
+- Monitoring EC2 metrics
 
 ---
 
@@ -146,7 +146,7 @@ This project includes complete deployment demonstration videos.
 
 ---
 
-## 🚀 Linux EC2 Frontend Deployment — Portfolio Website
+## 🚀 Linux EC2 Frontend Deployment - Portfolio Website
 
 [![Portfolio Deployment Demo](./Demo2/3rdDeploymentEC2lx2.png)](./Demo2/3rdDeploymentEC2lx2.mp4)
 
@@ -154,7 +154,7 @@ This project includes complete deployment demonstration videos.
 
 ---
 
-## ☕ Linux EC2 Frontend Deployment — Cafe Website
+## ☕ Linux EC2 Frontend Deployment - Cafe Website
 
 [![Cafe Deployment Demo](./Demo2/2ndDeploymentEC2lx1.png)](./Demo2/2ndDeploymentEC2lx1.mp4)
 
@@ -164,15 +164,15 @@ This project includes complete deployment demonstration videos.
 
 # 🛠️ Technologies Used
 
-* AWS EC2
-* IAM
-* AWS Systems Manager
-* Session Manager
-* Fleet Manager
-* CloudWatch
-* Linux
-* Apache HTTP Server
-* HTML/CSS Templates
+- AWS EC2
+- IAM
+- AWS Systems Manager
+- Session Manager
+- Fleet Manager
+- CloudWatch
+- Linux
+- Apache HTTP Server
+- HTML/CSS Templates
 
 ---
 
@@ -200,8 +200,8 @@ CloudWatchAgentServerPolicy
 
 Created:
 
-* Linux EC2 instances
-* Windows EC2 instances
+- Linux EC2 instances
+- Windows EC2 instances
 
 Attached IAM role during instance launch.
 
@@ -217,9 +217,9 @@ EC2 → Connect → Session Manager
 
 Benefits:
 
-* No SSH keys required
-* Browser-based Linux access
-* Secure instance management
+- No SSH keys required
+- Browser-based Linux access
+- Secure instance management
 
 ---
 
@@ -292,10 +292,10 @@ EC2 → Monitoring → Configure CloudWatch Agent
 
 Configured Metrics:
 
-* CPU Usage
-* Memory Usage
-* Disk Usage
-* Network Metrics
+- CPU Usage
+- Memory Usage
+- Disk Usage
+- Network Metrics
 
 ---
 
@@ -319,9 +319,9 @@ Used for browser-based Linux terminal access.
 
 Benefits:
 
-* No SSH required
-* No PEM key required
-* Secure AWS-managed access
+- No SSH required
+- No PEM key required
+- Secure AWS-managed access
 
 ---
 
@@ -331,9 +331,9 @@ Used for GUI-based Windows instance management.
 
 Benefits:
 
-* Remote desktop-like experience
-* Browser-based management
-* Centralized instance control
+- Remote desktop-like experience
+- Browser-based management
+- Centralized instance control
 
 ---
 
@@ -343,10 +343,10 @@ Used to execute Linux commands remotely.
 
 Example tasks:
 
-* Install Apache
-* Download templates
-* Restart services
-* Deploy websites
+- Install Apache
+- Download templates
+- Restart services
+- Deploy websites
 
 ---
 
@@ -370,10 +370,10 @@ Website Live
 
 CloudWatch Agent monitors:
 
-* CPU metrics
-* Memory metrics
-* Disk usage
-* Network traffic
+- CPU metrics
+- Memory metrics
+- Disk usage
+- Network traffic
 
 Metrics are pushed to CloudWatch every 60 seconds.
 
@@ -389,17 +389,18 @@ Metrics are pushed to CloudWatch every 60 seconds.
 - ✅ Apache HTTP Server Setup
 - ✅ CloudWatch Agent Configuration
 - ✅ EC2 Monitoring & Metrics
+
 ---
 
 # 🎯 Project Outcome
 
 Successfully:
 
-* Managed EC2 without SSH keys
-* Connected Linux & Windows instances
-* Deployed frontend templates
-* Configured infrastructure monitoring
-* Learned AWS Systems Manager workflow
-* Understood CloudWatch monitoring architecture
+- Managed EC2 without SSH keys
+- Connected Linux & Windows instances
+- Deployed frontend templates
+- Configured infrastructure monitoring
+- Learned AWS Systems Manager workflow
+- Understood CloudWatch monitoring architecture
 
 ---

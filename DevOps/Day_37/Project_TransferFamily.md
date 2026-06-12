@@ -122,7 +122,7 @@ SFTP
 
 ## 📷 AWS Transfer Family Architecture
 
-![Architecture](./Notes/aws-transfer-family-architecture.png)
+![Architecture](./Images/aws-transfer-family-architecture.png)
 
 ## 📷 Transfer Family Server Created
 

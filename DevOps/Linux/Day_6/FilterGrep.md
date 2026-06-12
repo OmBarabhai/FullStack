@@ -1,14 +1,14 @@
-# 🐧 Linux Day 6 — grep / less / more Notes
+# 🐧 Linux Day 6 - grep / less / more Notes
 
 ---
 
 # 📌 Important Files
 
-| File | Use |
-|---|---|
-| /etc/passwd | User details |
-| /etc/group | Group details |
-| /dev | Device files |
+| File        | Use           |
+| ----------- | ------------- |
+| /etc/passwd | User details  |
+| /etc/group  | Group details |
+| /dev        | Device files  |
 
 ---
 
@@ -22,7 +22,7 @@
 
 ```bash id="jlwm601"
 grep root /etc/passwd
-````
+```
 
 Search:
 
@@ -42,9 +42,9 @@ grep -i hello xyz
 
 Matches:
 
-* hello
-* Hello
-* HELLO
+- hello
+- Hello
+- HELLO
 
 ---
 
@@ -80,8 +80,8 @@ grep -nB4 sudo /etc/group
 
 Shows:
 
-* matched line
-* 4 lines before
+- matched line
+- 4 lines before
 
 ---
 
@@ -93,8 +93,8 @@ grep -nA9 sudo /etc/group
 
 Shows:
 
-* matched line
-* 9 lines after
+- matched line
+- 9 lines after
 
 ---
 
@@ -177,10 +177,10 @@ more /etc/passwd
 
 # 📌 Important Learning
 
-* grep → search text
-* less → open large file
-* more → read file slowly
-* pipe `|` → send output to another command
+- grep → search text
+- less → open large file
+- more → read file slowly
+- pipe `|` → send output to another command
 
 ---
 
@@ -215,7 +215,8 @@ more     → simple file view
 ```
 
 ---
-# 🐧 Linux Day 6 — grep / less / more Notes
+
+# 🐧 Linux Day 6 - grep / less / more Notes
 
 ---
 
@@ -223,7 +224,7 @@ more     → simple file view
 
 ```text id="jlwm701"
 grep = Global Regular Expression Print
-````
+```
 
 ➡️ Used to search text/pattern inside file.
 
@@ -265,9 +266,9 @@ grep -i hello xyz
 
 Matches:
 
-* hello
-* Hello
-* HELLO
+- hello
+- Hello
+- HELLO
 
 ---
 
@@ -303,8 +304,8 @@ grep -nB4 sudo /etc/group
 
 Shows:
 
-* matched line
-* 4 lines before
+- matched line
+- 4 lines before
 
 ---
 
@@ -316,8 +317,8 @@ grep -nA9 sudo /etc/group
 
 Shows:
 
-* matched line
-* 9 lines after
+- matched line
+- 9 lines after
 
 ---
 
@@ -398,10 +399,10 @@ more /etc/passwd
 
 # ⚡ Important Learning
 
-* grep → search text
-* less → large file viewer
-* more → simple file viewer
-* pipe → connect commands
+- grep → search text
+- less → large file viewer
+- more → simple file viewer
+- pipe → connect commands
 
 ---
 

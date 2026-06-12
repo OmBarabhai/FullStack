@@ -2,21 +2,22 @@
 
 ---
 
-# Step 1 — Open Elastic IPs
+# Step 1 - Open Elastic IPs
 
 Go to:
+
 ```text
 EC2 → Elastic IPs
-````
+```
 
 ### Why?
 
-* Used to create static public IP
-* Public IP will not change after restart
+- Used to create static public IP
+- Public IP will not change after restart
 
 ---
 
-# Step 2 — Allocate Elastic IP
+# Step 2 - Allocate Elastic IP
 
 Click:
 
@@ -32,11 +33,11 @@ Allocate
 
 ### Why?
 
-* AWS creates a new static public IP
+- AWS creates a new static public IP
 
 ---
 
-# Step 3 — Select Elastic IP
+# Step 3 - Select Elastic IP
 
 Select:
 
@@ -46,11 +47,11 @@ Allocated Elastic IP
 
 ### Why?
 
-* Need to choose IP before attaching
+- Need to choose IP before attaching
 
 ---
 
-# Step 4 — Associate Elastic IP
+# Step 4 - Associate Elastic IP
 
 Click:
 
@@ -61,11 +62,11 @@ Actions
 
 ### Why?
 
-* Connect Elastic IP to EC2 instance
+- Connect Elastic IP to EC2 instance
 
 ---
 
-# Step 5 — Select Instance
+# Step 5 - Select Instance
 
 Choose:
 
@@ -87,11 +88,11 @@ MyLinuxInstance
 
 ### Why?
 
-* Select which EC2 should receive static IP
+- Select which EC2 should receive static IP
 
 ---
 
-# Step 6 — Associate
+# Step 6 - Associate
 
 Click:
 
@@ -101,7 +102,7 @@ Associate
 
 ### Why?
 
-* Final attachment of Elastic IP to EC2
+- Final attachment of Elastic IP to EC2
 
 ---
 
@@ -119,14 +120,14 @@ Static Public IP
 
 # Why Elastic IP?
 
-* Static Public IP
-* IP does not change after restart
-* Useful for:
+- Static Public IP
+- IP does not change after restart
+- Useful for:
 
-  * Websites
-  * SSH
-  * Remote access
-  * DNS mapping
+  - Websites
+  - SSH
+  - Remote access
+  - DNS mapping
 
 ---
 
@@ -143,25 +144,28 @@ Release Elastic IP if not using
 ```
 
 ```
+
 ```
+
 # Delete / Remove Elastic IP
 
 ---
 
-# Step 1 — Open Elastic IPs
+# Step 1 - Open Elastic IPs
 
 Go to:
+
 ```text
 EC2 → Elastic IPs
-````
+```
 
 ### Why?
 
-* Manage static public IPs
+- Manage static public IPs
 
 ---
 
-# Step 2 — Select Elastic IP
+# Step 2 - Select Elastic IP
 
 Select:
 
@@ -171,11 +175,11 @@ Elastic IP
 
 ### Why?
 
-* Choose which Elastic IP to remove
+- Choose which Elastic IP to remove
 
 ---
 
-# Step 3 — Disassociate Elastic IP
+# Step 3 - Disassociate Elastic IP
 
 Click:
 
@@ -186,11 +190,11 @@ Actions
 
 ### Why?
 
-* Remove Elastic IP from EC2 instance
+- Remove Elastic IP from EC2 instance
 
 ---
 
-# Step 4 — Release Elastic IP
+# Step 4 - Release Elastic IP
 
 Click:
 
@@ -201,8 +205,8 @@ Actions
 
 ### Why?
 
-* Delete Elastic IP permanently
-* Avoid unnecessary AWS charges
+- Delete Elastic IP permanently
+- Avoid unnecessary AWS charges
 
 ---
 
@@ -233,5 +237,5 @@ Release Elastic IP if not using
 ```
 
 ```
-```
 
+```

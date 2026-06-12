@@ -2,12 +2,13 @@
 
 ---
 
-# Step 1 — Convert PEM to PPK
+# Step 1 - Convert PEM to PPK
 
 Open:
+
 ```text
 PuTTYgen
-````
+```
 
 Click:
 
@@ -59,7 +60,7 @@ Om-Aws.ppk
 
 ---
 
-# Step 2 — Configure Security Group
+# Step 2 - Configure Security Group
 
 Go to:
 
@@ -93,7 +94,7 @@ Save Rules.
 
 ---
 
-# Step 3 — Open PuTTY
+# Step 3 - Open PuTTY
 
 Enter:
 
@@ -111,7 +112,7 @@ Example:
 
 ---
 
-# Step 4 — Add PPK File
+# Step 4 - Add PPK File
 
 Go to:
 
@@ -136,7 +137,7 @@ Om-Aws.ppk
 
 ---
 
-# Step 5 — Connect
+# Step 5 - Connect
 
 Click:
 
@@ -152,7 +153,7 @@ Security Alert → Accept
 
 ---
 
-# Step 6 — Login to Linux
+# Step 6 - Login to Linux
 
 Login as:
 
@@ -179,4 +180,5 @@ Login as ec2-user
 ```
 
 ```
+
 ```

@@ -1,6 +1,6 @@
 # 🚀 FullStack Development Learning Repository
 
-Welcome to a comprehensive, structured learning repository covering the entire FullStack development journey—from frontend fundamentals to cloud infrastructure.
+Welcome to a comprehensive, structured learning repository covering the entire FullStack development journey-from frontend fundamentals to cloud infrastructure.
 
 ---
 

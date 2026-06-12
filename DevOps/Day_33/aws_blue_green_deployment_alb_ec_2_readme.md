@@ -48,7 +48,7 @@ This helps achieve:
 
 ## 📷 Blue-Green Deployment Architecture
 
-![Architecture](./Notes/ProjectBlue_Green_Deploy_EC2.png)
+![Architecture](./Images/ProjectBlue_Green_Deploy_EC2.png)
 
 ---
 

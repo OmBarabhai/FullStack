@@ -1,13 +1,12 @@
-# 🐧 Linux Day 5 — Vim Editor Notes
+# 🐧 Linux Day 5 - Vim Editor Notes
 
 ---
 
 # 📷 Vim Modes Diagram
 
-![Vim Modes](./Notes/VimEditorcmd.png)
-![Vim Commands](./Notes/VimEditorcmd2.png)
-![Vim Commands](./Notes/VimEditorcmd3.png)
-
+![Vim Modes](./Images/VimEditorcmd.png)
+![Vim Commands](./Images/VimEditorcmd2.png)
+![Vim Commands](./Images/VimEditorcmd3.png)
 
 ---
 
@@ -16,6 +15,7 @@
 Vim is a terminal-based text editor used in Linux.
 
 Used for:
+
 - editing files
 - writing scripts
 - changing configuration files
@@ -39,7 +39,7 @@ Insert Mode  → Writing text
 Command Mode → Navigation & commands
 Visual Mode  → Select text
 Ex Mode      → Save/Quit commands
-````
+```
 
 ---
 
@@ -155,9 +155,9 @@ v
 
 Used for:
 
-* selecting text
-* copying
-* deleting text
+- selecting text
+- copying
+- deleting text
 
 ---
 
@@ -219,9 +219,9 @@ Esc
 
 Because DevOps engineers:
 
-* edit configuration files
-* update scripts
-* manage servers remotely
+- edit configuration files
+- update scripts
+- manage servers remotely
 
 ---
 
@@ -253,14 +253,15 @@ G      → bottom
 
 Vim is used in:
 
-* Linux servers
-* AWS EC2
-* Docker containers
-* Kubernetes nodes
-* Shell scripting
-* Configuration management
+- Linux servers
+- AWS EC2
+- Docker containers
+- Kubernetes nodes
+- Shell scripting
+- Configuration management
 
 ---
 
 ```
+
 ```

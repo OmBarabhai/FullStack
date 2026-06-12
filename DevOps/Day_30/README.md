@@ -2,7 +2,7 @@
 
 ## 📖 Overview
 
-Day 30 focuses on CloudWatch, AWS's native monitoring and observability service. This project demonstrates how to build automated operations where CloudWatch metrics drive decisions and trigger actions—enabling truly intelligent infrastructure management.
+Day 30 focuses on CloudWatch, AWS's native monitoring and observability service. This project demonstrates how to build automated operations where CloudWatch metrics drive decisions and trigger actions-enabling truly intelligent infrastructure management.
 
 ---
 
@@ -12,7 +12,7 @@ Day 30 focuses on CloudWatch, AWS's native monitoring and observability service.
 ✅ Implement CloudWatch alarms with automated actions  
 ✅ Integrate SNS for notifications and escalations  
 ✅ Design monitoring strategies for operational insights  
-✅ Automate infrastructure operations based on metrics  
+✅ Automate infrastructure operations based on metrics
 
 ---
 
@@ -51,7 +51,7 @@ This project builds observability and automation into your infrastructure.
 ✨ Effective monitoring enables proactive issue detection before user impact  
 ✨ CloudWatch alarms driving automated actions reduce manual operational work  
 ✨ Dashboards provide team visibility into infrastructure health  
-✨ Custom metrics enable application-specific operational intelligence  
+✨ Custom metrics enable application-specific operational intelligence
 
 ---
 

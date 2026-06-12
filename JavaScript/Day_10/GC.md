@@ -18,9 +18,9 @@ Objects stored in heap memory occupy memory space.
 
 If unused objects are not removed:
 
-* memory usage increases
-* application becomes slow
-* memory leaks can occur
+- memory usage increases
+- application becomes slow
+- memory leaks can occur
 
 Garbage Collection helps free unused memory automatically.
 
@@ -61,12 +61,12 @@ Then Garbage Collector removes it later.
 
 ---
 
-# Example 1 — Reachable Object
+# Example 1 - Reachable Object
 
 ```js id="w8m2k5"
 let car = {
-   brand: "Tesla",
-   model: "Model 3"
+  brand: "Tesla",
+  model: "Model 3",
 };
 ```
 
@@ -174,7 +174,7 @@ Example:
 
 ```js id="m5q1k8"
 let car = {
-   brand: "Tesla"
+  brand: "Tesla",
 };
 
 console.log(car.brand);
@@ -235,11 +235,11 @@ GC removes it later 🗑️
 
 ---
 
-# Example 2 — Multiple References
+# Example 2 - Multiple References
 
 ```js id="v1k8m5"
 let user = {
-   name: "Vishwa"
+  name: "Vishwa",
 };
 
 let admin = user;
@@ -291,15 +291,13 @@ GC removes it later.
 
 ---
 
-# Example 3 — Function Scope
+# Example 3 - Function Scope
 
 ```js id="x1m5q9"
 function test() {
-
-   let person = {
-      name: "Alice"
-   };
-
+  let person = {
+    name: "Alice",
+  };
 }
 
 test();
@@ -335,19 +333,19 @@ Mark and Sweep
 
 ---
 
-# Step 1 — Mark Phase
+# Step 1 - Mark Phase
 
 JavaScript starts from ROOT references:
 
-* global variables
-* local variables
-* active function references
+- global variables
+- local variables
+- active function references
 
 Then marks all reachable objects.
 
 ---
 
-# Step 2 — Sweep Phase
+# Step 2 - Sweep Phase
 
 Objects NOT marked:
 
@@ -377,7 +375,7 @@ NOT your JavaScript source code.
 
 ```js id="t8m4q1"
 let car = {
-   brand: "Tesla"
+  brand: "Tesla",
 };
 
 car = null;
@@ -395,7 +393,7 @@ BUT this code still exists:
 
 ```js id="h9x1m6"
 let car = {
-   brand: "Tesla"
+  brand: "Tesla",
 };
 
 car = null;
@@ -466,9 +464,9 @@ player gives no performance
 
 Still:
 
-* occupying team spot
-* blocking new players
-* reducing team performance
+- occupying team spot
+- blocking new players
+- reducing team performance
 
 This is exactly like a Memory Leak.
 
@@ -486,7 +484,7 @@ This is exactly like a Memory Leak.
 
 ---
 
-# Example — Growing Array Leak
+# Example - Growing Array Leak
 
 ```js id="v3m7k1"
 let cache = [];
@@ -494,8 +492,7 @@ let cache = [];
 
 ```js id="w1x8m4"
 function store(data) {
-
-   cache.push(data);
+  cache.push(data);
 }
 ```
 
@@ -525,20 +522,20 @@ Memory keeps growing.
 
 # Preventing Memory Leaks
 
-* Remove unused references
-* Clear intervals/timeouts
-* Remove event listeners
-* Avoid unnecessary globals
-* Limit cache sizes
+- Remove unused references
+- Clear intervals/timeouts
+- Remove event listeners
+- Avoid unnecessary globals
+- Limit cache sizes
 
 ---
 
 # Important Notes
 
-* Garbage collection is automatic
-* Developers cannot manually free memory
-* Developers only remove references
-* JavaScript decides when to clean memory
+- Garbage collection is automatic
+- Developers cannot manually free memory
+- Developers only remove references
+- JavaScript decides when to clean memory
 
 ---
 
@@ -547,6 +544,7 @@ Memory keeps growing.
 > JavaScript Garbage Collection works on reachability. Objects that cannot be reached from active references become eligible for garbage collection, while memory leaks happen when unnecessary objects remain reachable.
 
 ---
+
 # JavaScript Memory Leaks
 
 ![Memory Leak](./Images/MemoryLeaks.png)
@@ -576,11 +574,11 @@ So memory usage keeps increasing over time.
 
 Memory leaks can cause:
 
-* Increased RAM usage
-* Slow applications
-* Browser lag
-* Frequent garbage collection
-* App crashes
+- Increased RAM usage
+- Slow applications
+- Browser lag
+- Frequent garbage collection
+- App crashes
 
 ---
 
@@ -608,7 +606,7 @@ even if it is useless.
 let container = document.getElementById("container");
 
 container.addEventListener("click", () => {
-   console.log("Clicked!");
+  console.log("Clicked!");
 });
 
 container = null;
@@ -706,7 +704,7 @@ Remove event listener before removing reference.
 
 ```js id="m8x2q1"
 function handleClick() {
-   console.log("Clicked!");
+  console.log("Clicked!");
 }
 
 container.addEventListener("click", handleClick);
@@ -771,21 +769,21 @@ GC cannot remove it.
 
 # Symptoms of Memory Leaks
 
-* RAM usage continuously increases
-* Application slows over time
-* Browser becomes sluggish
-* Frequent GC pauses
-* Crashes after long runtime
+- RAM usage continuously increases
+- Application slows over time
+- Browser becomes sluggish
+- Frequent GC pauses
+- Crashes after long runtime
 
 ---
 
 # How to Prevent Memory Leaks
 
-* Remove event listeners
-* Clear intervals/timeouts
-* Remove unused references
-* Avoid unnecessary globals
-* Limit cache sizes
+- Remove event listeners
+- Clear intervals/timeouts
+- Remove unused references
+- Avoid unnecessary globals
+- Limit cache sizes
 
 ---
 
