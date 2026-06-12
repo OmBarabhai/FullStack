@@ -1,8 +1,6 @@
-
 ---
 <!-- ````md -->
-# 🚀 Day 1 – Git Basics
-
+# 🚀 Day 1 - Git Basics
 ---
 
 ## 📌 What is Git?
@@ -17,6 +15,7 @@ Git helps track changes and manage code versions.
 ## 🟢 1. git init
 
 ### What:
+
 Initializes Git in a project and creates a `.git` folder
 
 👉 Speak:  
@@ -30,6 +29,7 @@ To start tracking all changes from beginning
 ## 🟡 2. git status
 
 ### What:
+
 Shows current state of files
 
 👉 Speak:  
@@ -40,11 +40,12 @@ Git status shows which files are modified or staged.
 ## 🔵 3. git add
 
 ### What:
+
 Moves changes to staging area
 
 ```bash
 git add .
-````
+```
 
 👉 Speak:
 Git add prepares files for commit.
@@ -160,11 +161,11 @@ This is the complete Git workflow.
 
 ## ⚠️ Important Learnings
 
-* Git tracks from `.git` folder (project root)
-* If not added → not committed
-* Branch matters (main vs dev)
-* Merge conflicts require manual resolution
-* One project should have one `.git`
+- Git tracks from `.git` folder (project root)
+- If not added → not committed
+- Branch matters (main vs dev)
+- Merge conflicts require manual resolution
+- One project should have one `.git`
 
 ---
 
@@ -185,8 +186,8 @@ I used branching, merging, and resolved merge conflicts.
 
 👉 GitHub cannot see:
 
-* Your local PC path ❌
+- Your local PC path ❌
 
 👉 GitHub only sees:
 
-* Files inside repo ✅
+- Files inside repo ✅

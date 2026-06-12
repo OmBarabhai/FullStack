@@ -7,11 +7,7 @@ function App() {
     <h1>Counter</h1>
       <Counter initialValue={90} />
       <br/>
-      <br/>
-      <Counter initialValue={100} />
-      <br/>
-      <br/>
-      <Counter initialValue= { 110 } />
+      
     </>
   )
 }

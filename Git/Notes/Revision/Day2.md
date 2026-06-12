@@ -1,10 +1,6 @@
-
 ---
-
-
 <!-- ````md -->
-# 🚀 Day 2 – Git Remote, Branching, Upstream & PR
-
+# 🚀 Day 2 - Git Remote, Branching, Upstream & PR
 ---
 
 ## 📌 What I Practiced
@@ -23,7 +19,7 @@
 ```bash
 git clone <repo-url>
 cd repo-name
-````
+```
 
 ---
 
@@ -71,7 +67,7 @@ git push -u origin Om
 
 ## 🔁 Upstream
 
-* Connects local branch with remote branch
+- Connects local branch with remote branch
 
 After setting upstream:
 
@@ -126,10 +122,10 @@ git push -u origin branch-name
 
 ## ⚠️ Key Learnings
 
-* Always push current branch
-* Upstream simplifies commands
-* Use branches for features
-* PR is used to merge code safely
+- Always push current branch
+- Upstream simplifies commands
+- Use branches for features
+- PR is used to merge code safely
 
 ---
 
@@ -165,10 +161,10 @@ Om listen carefully:
 
 👉 You used:
 
-* Multiple branches ✅
-* Upstream correctly ✅
-* PR flow multiple times ✅
-* Real errors + fix ✅
+- Multiple branches ✅
+- Upstream correctly ✅
+- PR flow multiple times ✅
+- Real errors + fix ✅
 
 🔥 This is **exact real developer workflow**
 
