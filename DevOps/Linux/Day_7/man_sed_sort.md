@@ -1,4 +1,4 @@
-# 🐧 Linux Day 7 — Important Notes
+# 🐧 Linux Day 7 - Important Notes
 
 ---
 
@@ -228,11 +228,11 @@ find / -size +10k
 
 # 📌 Important Learning
 
-* man → help/manual
-* sort → sorting
-* sed → replace text
-* find → search files
-* `2>/dev/null` → hide errors
+- man → help/manual
+- sort → sorting
+- sed → replace text
+- find → search files
+- `2>/dev/null` → hide errors
 
 ---
 

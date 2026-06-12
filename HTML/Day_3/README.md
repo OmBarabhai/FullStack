@@ -2,7 +2,7 @@
 
 ## 📖 Overview
 
-Today you'll learn to embed **multimedia content**—images, audio, and video—into your web pages. Media makes websites more engaging and interactive.
+Today you'll learn to embed **multimedia content**-images, audio, and video-into your web pages. Media makes websites more engaging and interactive.
 
 ---
 

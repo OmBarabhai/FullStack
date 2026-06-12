@@ -1,4 +1,4 @@
-# LC 69 — Sqrt(x)
+# LC 69 - Sqrt(x)
 
 ## Type
 
@@ -8,9 +8,9 @@ Binary Search on Values
 
 ## Pattern Clue
 
-* Square Root
-* Search on numbers
-* Largest valid value
+- Square Root
+- Search on numbers
+- Largest valid value
 
 ---
 
@@ -22,7 +22,7 @@ mid^2 \le x
 
 If exact root not possible:
 
-* return closest smaller integer
+- return closest smaller integer
 
 ---
 
@@ -163,7 +163,7 @@ Use factor:
 
 Each round:
 
-* increases one decimal place
+- increases one decimal place
 
 ---
 
@@ -230,8 +230,8 @@ epsilon usually NOT needed
 
 Because:
 
-* precision is manually controlled
-* factor already limits decimal places
+- precision is manually controlled
+- factor already limits decimal places
 
 ---
 

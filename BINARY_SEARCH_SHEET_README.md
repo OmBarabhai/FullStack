@@ -6,110 +6,110 @@ A curated list of pure Binary Search problems for placements and interview prepa
 
 # EASY Binary Search
 
-| LC No. | Problem |
-|---|---|
-| 704 | Binary Search |
-| 35 | Search Insert Position |
-| 69 | Sqrt(x) |
-| 367 | Valid Perfect Square |
-| 278 | First Bad Version |
-| 374 | Guess Number Higher or Lower |
-| 852 | Peak Index in Mountain Array |
-| 744 | Find Smallest Letter Greater Than Target |
-| 1539 | Kth Missing Positive Number |
-| 1346 | Check If N and Its Double Exist |
+| LC No. | Problem                                  |
+| ------ | ---------------------------------------- |
+| 704    | Binary Search                            |
+| 35     | Search Insert Position                   |
+| 69     | Sqrt(x)                                  |
+| 367    | Valid Perfect Square                     |
+| 278    | First Bad Version                        |
+| 374    | Guess Number Higher or Lower             |
+| 852    | Peak Index in Mountain Array             |
+| 744    | Find Smallest Letter Greater Than Target |
+| 1539   | Kth Missing Positive Number              |
+| 1346   | Check If N and Its Double Exist          |
 
 ---
 
 # LOWER BOUND / UPPER BOUND
 
-| LC No. | Problem |
-|---|---|
-| 34 | Find First and Last Position |
-| 35 | Search Insert Position |
-| 275 | H-Index II |
-| 540 | Single Element in Sorted Array |
-| 1064 | Fixed Point |
-| 1150 | Check If Majority Element |
-| 1287 | Element Appearing More Than 25% |
-| 2089 | Find Target Indices After Sorting |
+| LC No. | Problem                           |
+| ------ | --------------------------------- |
+| 34     | Find First and Last Position      |
+| 35     | Search Insert Position            |
+| 275    | H-Index II                        |
+| 540    | Single Element in Sorted Array    |
+| 1064   | Fixed Point                       |
+| 1150   | Check If Majority Element         |
+| 1287   | Element Appearing More Than 25%   |
+| 2089   | Find Target Indices After Sorting |
 
 ---
 
 # ROTATED SORTED ARRAY
 
-| LC No. | Problem |
-|---|---|
-| 33 | Search in Rotated Sorted Array |
-| 81 | Search in Rotated Sorted Array II |
-| 153 | Find Minimum in Rotated Sorted Array |
-| 154 | Find Minimum in Rotated Sorted Array II |
-| 1752 | Check if Array Is Sorted and Rotated |
+| LC No. | Problem                                 |
+| ------ | --------------------------------------- |
+| 33     | Search in Rotated Sorted Array          |
+| 81     | Search in Rotated Sorted Array II       |
+| 153    | Find Minimum in Rotated Sorted Array    |
+| 154    | Find Minimum in Rotated Sorted Array II |
+| 1752   | Check if Array Is Sorted and Rotated    |
 
 ---
 
 # PEAK / MOUNTAIN ARRAY
 
-| LC No. | Problem |
-|---|---|
-| 162 | Find Peak Element |
-| 852 | Peak Index in Mountain Array |
-| 1095 | Find in Mountain Array |
-| 1901 | Find a Peak Element II |
+| LC No. | Problem                      |
+| ------ | ---------------------------- |
+| 162    | Find Peak Element            |
+| 852    | Peak Index in Mountain Array |
+| 1095   | Find in Mountain Array       |
+| 1901   | Find a Peak Element II       |
 
 ---
 
 # BINARY SEARCH ON ANSWER
 
-| LC No. | Problem |
-|---|---|
-| 875 | Koko Eating Bananas |
-| 1011 | Capacity To Ship Packages Within D Days |
-| 410 | Split Array Largest Sum |
-| 1482 | Minimum Number of Days to Make m Bouquets |
-| 1283 | Smallest Divisor Given Threshold |
-| 1552 | Magnetic Force Between Two Balls |
-| 1760 | Minimum Limit of Balls in a Bag |
-| 2064 | Minimized Maximum of Products |
-| 2226 | Maximum Candies Allocated to K Children |
-| 2187 | Minimum Time to Complete Trips |
-| 1870 | Minimum Speed to Arrive on Time |
-| 2594 | Minimum Time to Repair Cars |
-| 2616 | Minimize the Maximum Difference |
-| 2560 | House Robber IV |
-| 2517 | Maximum Tastiness of Candy Basket |
-| 2141 | Maximum Running Time of N Computers |
-| 2861 | Maximum Number of Alloys |
-| 2439 | Minimize Maximum of Array |
-| 774 | Minimize Max Distance to Gas Station |
-| 1231 | Divide Chocolate |
+| LC No. | Problem                                   |
+| ------ | ----------------------------------------- |
+| 875    | Koko Eating Bananas                       |
+| 1011   | Capacity To Ship Packages Within D Days   |
+| 410    | Split Array Largest Sum                   |
+| 1482   | Minimum Number of Days to Make m Bouquets |
+| 1283   | Smallest Divisor Given Threshold          |
+| 1552   | Magnetic Force Between Two Balls          |
+| 1760   | Minimum Limit of Balls in a Bag           |
+| 2064   | Minimized Maximum of Products             |
+| 2226   | Maximum Candies Allocated to K Children   |
+| 2187   | Minimum Time to Complete Trips            |
+| 1870   | Minimum Speed to Arrive on Time           |
+| 2594   | Minimum Time to Repair Cars               |
+| 2616   | Minimize the Maximum Difference           |
+| 2560   | House Robber IV                           |
+| 2517   | Maximum Tastiness of Candy Basket         |
+| 2141   | Maximum Running Time of N Computers       |
+| 2861   | Maximum Number of Alloys                  |
+| 2439   | Minimize Maximum of Array                 |
+| 774    | Minimize Max Distance to Gas Station      |
+| 1231   | Divide Chocolate                          |
 
 ---
 
 # MATRIX BINARY SEARCH
 
-| LC No. | Problem |
-|---|---|
-| 74 | Search a 2D Matrix |
-| 240 | Search a 2D Matrix II |
-| 378 | Kth Smallest Element in Sorted Matrix |
-| 668 | Kth Smallest Number in Multiplication Table |
-| 786 | K-th Smallest Prime Fraction |
+| LC No. | Problem                                     |
+| ------ | ------------------------------------------- |
+| 74     | Search a 2D Matrix                          |
+| 240    | Search a 2D Matrix II                       |
+| 378    | Kth Smallest Element in Sorted Matrix       |
+| 668    | Kth Smallest Number in Multiplication Table |
+| 786    | K-th Smallest Prime Fraction                |
 
 ---
 
 # ADVANCED PURE BINARY SEARCH
 
-| LC No. | Problem |
-|---|---|
-| 4 | Median of Two Sorted Arrays |
-| 719 | Find K-th Smallest Pair Distance |
-| 878 | Nth Magical Number |
-| 1201 | Ugly Number III |
-| 644 | Maximum Average Subarray II |
-| 302 | Smallest Rectangle Enclosing Black Pixels |
-| 793 | Preimage Size of Factorial Zeroes Function |
-| 483 | Smallest Good Base |
+| LC No. | Problem                                    |
+| ------ | ------------------------------------------ |
+| 4      | Median of Two Sorted Arrays                |
+| 719    | Find K-th Smallest Pair Distance           |
+| 878    | Nth Magical Number                         |
+| 1201   | Ugly Number III                            |
+| 644    | Maximum Average Subarray II                |
+| 302    | Smallest Rectangle Enclosing Black Pixels  |
+| 793    | Preimage Size of Factorial Zeroes Function |
+| 483    | Smallest Good Base                         |
 
 ---
 
@@ -154,16 +154,17 @@ while(low <= high){
     }
 }
 ```
+
 Yes. Since this is a temporary chat, save the prompts below somewhere safe (Notion/GitHub/README/text file).
 
 These prompts are designed specifically for:
 
-* Binary Search
-* Binary Search on Answer
-* Placement-style DSA
-* Java
-* Pattern recognition
-* Interview thinking
+- Binary Search
+- Binary Search on Answer
+- Placement-style DSA
+- Java
+- Pattern recognition
+- Interview thinking
 
 ---
 
@@ -345,8 +346,8 @@ Always ask:
 
 If YES:
 
-* store answer
-* try smaller/bigger depending on minimize/maximize
+- store answer
+- try smaller/bigger depending on minimize/maximize
 
 ---
 
@@ -372,58 +373,58 @@ Before coding ask:
 
 Classic BS
 
-* 704
-* 35
-* 34
-* 69
+- 704
+- 35
+- 34
+- 69
 
 ### Day 2
 
 Rotated + Peak
 
-* 33
-* 153
-* 162
-* 852
+- 33
+- 153
+- 162
+- 852
 
 ### Day 3
 
 Binary Search on Answer
 
-* 875
-* 1283
-* 1482
+- 875
+- 1283
+- 1482
 
 ### Day 4
 
 Harder Answer Search
 
-* 1011
-* 410
-* 1552
+- 1011
+- 410
+- 1552
 
 ### Day 5
 
 Advanced
 
-* 2187
-* 2226
-* 1760
+- 2187
+- 2226
+- 1760
 
 ### Day 6
 
 Matrix + Hard
 
-* 74
-* 240
-* 378
+- 74
+- 240
+- 378
 
 ### Day 7
 
 Revision + Re-solve without help
 
 That final day is extremely important.
-Yes — this is a very good reusable Binary Search pattern.
+Yes - this is a very good reusable Binary Search pattern.
 
 Your code is using the:
 
@@ -433,8 +434,8 @@ and this template works for MANY problems.
 
 Your logic:
 
-* if condition satisfied → store answer + move left
-* else → move right
+- if condition satisfied → store answer + move left
+- else → move right
 
 is one of the most important binary search patterns.
 
@@ -453,15 +454,15 @@ if (mat[i][mid] == 1) {
 
 means:
 
-* “I found a possible answer”
-* “but maybe there is a better one on the left side”
+- “I found a possible answer”
+- “but maybe there is a better one on the left side”
 
 This is exactly how:
 
-* lower bound
-* first occurrence
-* first true
-* minimum valid answer
+- lower bound
+- first occurrence
+- first true
+- minimum valid answer
 
 type problems work.
 
@@ -479,8 +480,8 @@ Mostly only 3–4 core patterns are enough.
 
 Used for:
 
-* normal binary search
-* search element
+- normal binary search
+- search element
 
 ```java
 while(s <= e) {
@@ -520,11 +521,11 @@ while(s <= e) {
 
 Used in:
 
-* first occurrence
-* lower bound
-* first 1 in binary array
-* first true
-* search insert position
+- first occurrence
+- lower bound
+- first 1 in binary array
+- first true
+- search insert position
 
 ---
 
@@ -547,9 +548,9 @@ while(s <= e) {
 
 Used in:
 
-* last occurrence
-* upper bound
-* last true
+- last occurrence
+- upper bound
+- last true
 
 ---
 
@@ -572,12 +573,12 @@ while(s <= e) {
 
 Used in:
 
-* Aggressive Cows
-* Book Allocation
-* Painter Partition
-* Roti Prata
-* EKO
-* Minimize Maximum problems
+- Aggressive Cows
+- Book Allocation
+- Painter Partition
+- Roti Prata
+- EKO
+- Minimize Maximum problems
 
 This is why Babbar spent many lectures here.
 
@@ -607,7 +608,7 @@ Very good approach.
 
 Complexity:
 
-* O(n log m)
+- O(n log m)
 
 Excellent.
 
@@ -642,7 +643,7 @@ Once you understand this, many problems become easy.
 
 # Final Answer
 
-Yes — your current template is one of the main reusable binary search templates.
+Yes - your current template is one of the main reusable binary search templates.
 
 You do NOT need many different templates.
 

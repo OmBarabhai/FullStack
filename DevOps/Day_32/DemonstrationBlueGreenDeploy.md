@@ -22,7 +22,7 @@ This hands-on project helped in understanding how real-world production deployme
 
 ## 📷 Elastic Beanstalk Overview
 
-![Elastic Beanstalk Architecture](./Notes/EBS.png)
+![Elastic Beanstalk Architecture](./Images/EBS.png)
 
 ---
 
@@ -30,7 +30,7 @@ This hands-on project helped in understanding how real-world production deployme
 
 ## 📷 Blue-Green Deployment Flow
 
-![Blue Green Deployment](./Notes/BLUE_nd_GREEN_DEPLOY.png)
+![Blue Green Deployment](./Images/BLUE_nd_GREEN_DEPLOY.png)
 
 ---
 
@@ -38,7 +38,7 @@ This hands-on project helped in understanding how real-world production deployme
 
 ## 📷 IAM Roles Used
 
-![IAM Roles](./Notes/Roles.png)
+![IAM Roles](./Images/Roles.png)
 
 ---
 

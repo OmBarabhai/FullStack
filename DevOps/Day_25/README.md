@@ -12,7 +12,7 @@ Day 25 covers the foundational skills needed to launch and configure Amazon EC2 
 ✅ Connect to instances via both Linux SSH and Windows RDP protocols  
 ✅ Manage Elastic IPs for static addressing  
 ✅ Convert PEM keys to PPK format for Windows connectivity  
-✅ Secure instances with proper key management  
+✅ Secure instances with proper key management
 
 ---
 
@@ -48,10 +48,10 @@ This day includes comprehensive step-by-step guides for all aspects of EC2 setup
 
 ## 🔑 Key Takeaways
 
-✨ EC2 instances are the foundation of AWS infrastructure—mastering launch procedures is essential  
+✨ EC2 instances are the foundation of AWS infrastructure-mastering launch procedures is essential  
 ✨ Secure key management is critical; never share PEM files and use proper permissions  
 ✨ Understanding both SSH and RDP protocols enables flexibility across different operating systems  
-✨ Elastic IPs are valuable for production workloads requiring consistent addressing  
+✨ Elastic IPs are valuable for production workloads requiring consistent addressing
 
 ---
 

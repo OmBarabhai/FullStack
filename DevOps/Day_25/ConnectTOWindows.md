@@ -2,12 +2,13 @@
 
 ---
 
-# Step 1 — Launch Windows EC2
+# Step 1 - Launch Windows EC2
 
 Select:
+
 ```text
 Windows Server
-````
+```
 
 Example:
 
@@ -17,7 +18,7 @@ Windows Server 2022
 
 ---
 
-# Step 2 — Configure Security Group
+# Step 2 - Configure Security Group
 
 Go to:
 
@@ -51,7 +52,7 @@ Save Rules.
 
 ---
 
-# Step 3 — Get Windows Password
+# Step 3 - Get Windows Password
 
 Go to:
 
@@ -75,7 +76,7 @@ Actions
 
 ---
 
-# Step 4 — Upload PEM File
+# Step 4 - Upload PEM File
 
 Upload:
 
@@ -97,7 +98,7 @@ Decrypt Password
 
 ---
 
-# Step 5 — Copy Credentials
+# Step 5 - Copy Credentials
 
 Username:
 
@@ -115,7 +116,7 @@ Copy password.
 
 ---
 
-# Step 6 — Open Remote Desktop
+# Step 6 - Open Remote Desktop
 
 Open:
 
@@ -131,7 +132,7 @@ mstsc
 
 ---
 
-# Step 7 — Enter Public IP
+# Step 7 - Enter Public IP
 
 Example:
 
@@ -147,7 +148,7 @@ Connect
 
 ---
 
-# Step 8 — Login
+# Step 8 - Login
 
 Username:
 
@@ -190,4 +191,5 @@ Enter IP + Administrator + Password
 ```
 
 ```
+
 ```

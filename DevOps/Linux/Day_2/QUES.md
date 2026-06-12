@@ -1,4 +1,4 @@
-# 🐧 Linux Day 2 — Interview Questions & Revision
+# 🐧 Linux Day 2 - Interview Questions & Revision
 
 > RHCSA + DevOps + Placement Preparation Notes
 
@@ -6,13 +6,13 @@
 
 # 📌 Important Concepts Learned
 
-* Multi User OS
-* Multi Tasking
-* Client vs Server
-* Linux Architecture
-* Shell
-* Kernel
-* Networking Services
+- Multi User OS
+- Multi Tasking
+- Client vs Server
+- Linux Architecture
+- Shell
+- Kernel
+- Networking Services
 
 ---
 
@@ -24,7 +24,7 @@
 
 ### 📌 Example
 
-* MS-DOS
+- MS-DOS
 
 ---
 
@@ -36,7 +36,7 @@
 
 ### 📌 Example
 
-* Windows
+- Windows
 
 ---
 
@@ -48,8 +48,8 @@
 
 ### 📌 Example
 
-* UNIX
-* Linux
+- UNIX
+- Linux
 
 ---
 
@@ -69,9 +69,9 @@
 
 ### 📌 Examples
 
-* Browser
-* Laptop
-* Mobile
+- Browser
+- Laptop
+- Mobile
 
 ---
 
@@ -83,9 +83,9 @@
 
 ### 📌 Examples
 
-* Web Server
-* Database Server
-* Mail Server
+- Web Server
+- Database Server
+- Mail Server
 
 ---
 
@@ -206,10 +206,10 @@ google.com → IP Address
 
 Linux is important because:
 
-* AWS servers use Linux
-* Docker runs on Linux
-* Kubernetes uses Linux
-* CI/CD tools run on Linux
+- AWS servers use Linux
+- Docker runs on Linux
+- Kubernetes uses Linux
+- CI/CD tools run on Linux
 
 ---
 
@@ -219,10 +219,10 @@ Linux is important because:
 
 Linux is preferred because it is:
 
-* Secure
-* Stable
-* Lightweight
-* Open source
+- Secure
+- Stable
+- Lightweight
+- Open source
 
 ---
 
@@ -273,11 +273,11 @@ Displays file content.
 
 Important topics for certification:
 
-* Linux basics
-* Shell
-* Kernel
-* Networking basics
-* Commands
-* Server concepts
+- Linux basics
+- Shell
+- Kernel
+- Networking basics
+- Commands
+- Server concepts
 
 ---

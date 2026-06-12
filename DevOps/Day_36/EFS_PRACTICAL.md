@@ -127,13 +127,13 @@ EFS file system created successfully.
 
 # 📷 EFS Dashboard
 
-![EFS Dashboard](./Notes/EFS.png)
+![EFS Dashboard](./Images/EFS.png)
 
 ---
 
 # 📷 EFS Basics
 
-![EFS Basics](./Notes/EFS_BASICS.png)
+![EFS Basics](./Images/EFS_BASICS.png)
 
 ---
 

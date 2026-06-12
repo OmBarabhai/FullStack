@@ -10,7 +10,7 @@ The setup distributes incoming traffic across multiple EC2 instances and routes 
 
 # 🏗️ Architecture Diagram
 
-![AWS Load Balancer Architecture](./Notes/LoadBalancer.png)
+![AWS Load Balancer Architecture](./Images/LoadBalancer.png)
 
 ---
 

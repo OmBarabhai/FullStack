@@ -2,7 +2,7 @@
 
 ## 📖 Overview
 
-Day 29 extends the previous project by adding automatic scaling capabilities. This project demonstrates how to build self-healing, elastic infrastructure that automatically adapts to changing demand—a critical pattern in modern cloud architecture.
+Day 29 extends the previous project by adding automatic scaling capabilities. This project demonstrates how to build self-healing, elastic infrastructure that automatically adapts to changing demand-a critical pattern in modern cloud architecture.
 
 ---
 
@@ -12,7 +12,7 @@ Day 29 extends the previous project by adding automatic scaling capabilities. Th
 ✅ Create custom AMIs for consistent deployments  
 ✅ Configure scaling policies based on metrics  
 ✅ Implement health checks and instance replacement  
-✅ Build truly elastic infrastructure  
+✅ Build truly elastic infrastructure
 
 ---
 
@@ -48,7 +48,7 @@ This project advances infrastructure automation to enable scalability without ma
 ✨ Auto Scaling enables cost optimization by matching capacity to demand  
 ✨ Well-designed scaling policies prevent both under and over-provisioning  
 ✨ Stateless application design is essential for effective auto-scaling  
-✨ Proper health checks ensure that only healthy instances handle traffic  
+✨ Proper health checks ensure that only healthy instances handle traffic
 
 ---
 

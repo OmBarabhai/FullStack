@@ -1,4 +1,5 @@
 # 🐧 Linux Day 2 Notes
+
 > DevOps + RHCSA + Linux Beginner Journey 🚀  
 > Practical + Interview Revision Notes
 
@@ -20,25 +21,25 @@
 
 ## 📷 Types of Operating System
 
-![Types Of OS](./Notes/TypesOs.png)
+![Types Of OS](./Images/TypesOs.png)
 
 ---
 
 ## 📷 Client Server Architecture
 
-![Client Server](./Notes/clientServer.png)
+![Client Server](./Images/clientServer.png)
 
 ---
 
 ## 📷 Linux Architecture
 
-![Linux Architecture](./Notes/Architecture_UNIX.png)
+![Linux Architecture](./Images/Architecture_UNIX.png)
 
 ---
 
 ## 📷 Server vs Client Difference
 
-![Server vs Client](./Notes/DifferenceSerClie.png)
+![Server vs Client](./Images/DifferenceSerClie.png)
 
 ---
 
@@ -46,27 +47,34 @@
 
 ---
 
-## 🖥️ Single User — Single Tasking
+## 🖥️ Single User - Single Tasking
 
 ### 📌 Example
+
 - MS-DOS
 
 ### 📖 Meaning
+
 One user can perform:
+
 - One task at a time
 
 ---
 
-## 🖥️ Single User — Multi Tasking
+## 🖥️ Single User - Multi Tasking
 
 ### 📌 Example
+
 - Windows
 
 ### 📖 Meaning
+
 One user can perform:
+
 - Multiple tasks simultaneously
 
 ### 📌 Example Tasks
+
 - Browser
 - VS Code
 - Music
@@ -75,14 +83,17 @@ running together.
 
 ---
 
-## 🖥️ Multi User — Multi Tasking
+## 🖥️ Multi User - Multi Tasking
 
 ### 📌 Example
+
 - UNIX
 - Linux
 
 ### 📖 Meaning
+
 Multiple users can:
+
 - Access system
 - Run multiple tasks
 
@@ -97,7 +108,7 @@ Linux supports:
 ✅ Multi User  
 ✅ Multi Tasking  
 ✅ Remote Access  
-✅ Server Environment  
+✅ Server Environment
 
 ---
 
@@ -110,6 +121,7 @@ Linux supports:
 Client requests services.
 
 ### 📌 Examples
+
 - Laptop
 - Mobile
 - Browser
@@ -121,6 +133,7 @@ Client requests services.
 Server provides services/resources.
 
 ### 📌 Examples
+
 - Web Server
 - Mail Server
 - Database Server
@@ -132,7 +145,7 @@ Server provides services/resources.
 ```text
 Client → Request → Server
 Server → Response → Client
-````
+```
 
 ---
 
@@ -149,14 +162,14 @@ Server → Response → Client
 
 ### 📌 Examples
 
-* Windows XP
-* Windows 7
-* Windows 10
+- Windows XP
+- Windows 7
+- Windows 10
 
 ### 📌 Used For
 
-* Personal systems
-* Desktop usage
+- Personal systems
+- Desktop usage
 
 ---
 
@@ -164,15 +177,15 @@ Server → Response → Client
 
 ### 📌 Examples
 
-* RHEL 7.0
-* Windows Server 2008 R2
-* Windows Server 2012
+- RHEL 7.0
+- Windows Server 2008 R2
+- Windows Server 2012
 
 ### 📌 Used For
 
-* Hosting
-* Networking
-* Enterprise systems
+- Hosting
+- Networking
+- Enterprise systems
 
 ---
 
@@ -193,8 +206,8 @@ Server → Response → Client
 
 Used for:
 
-* Websites
-* Web Applications
+- Websites
+- Web Applications
 
 ### 📌 Example
 
@@ -210,7 +223,7 @@ FTP = File Transfer Protocol
 
 Used to:
 
-* Transfer files between systems
+- Transfer files between systems
 
 ---
 
@@ -228,8 +241,8 @@ google.com → IP Address
 
 DHCP automatically provides:
 
-* IP Address
-* Network details
+- IP Address
+- Network details
 
 ---
 
@@ -237,7 +250,7 @@ DHCP automatically provides:
 
 SMTP is used to:
 
-* Send emails
+- Send emails
 
 ---
 
@@ -245,7 +258,7 @@ SMTP is used to:
 
 IMAP is used to:
 
-* Receive emails
+- Receive emails
 
 ---
 
@@ -285,8 +298,8 @@ cat
 
 Shell acts as interface between:
 
-* User
-* Kernel
+- User
+- Kernel
 
 ---
 
@@ -307,8 +320,8 @@ Most commonly used Linux shell.
 
 Used for:
 
-* Running commands
-* Shell scripting
+- Running commands
+- Shell scripting
 
 ---
 
@@ -318,10 +331,10 @@ Kernel is the core part of Operating System.
 
 ### 📌 Responsibilities
 
-* Memory Management
-* Process Management
-* Device Management
-* File System Management
+- Memory Management
+- Process Management
+- Device Management
+- File System Management
 
 ---
 
@@ -329,10 +342,10 @@ Kernel is the core part of Operating System.
 
 Includes:
 
-* CPU
-* RAM
-* Hard Disk
-* Devices
+- CPU
+- RAM
+- Hard Disk
+- Devices
 
 ---
 
@@ -382,10 +395,10 @@ cat file.txt
 
 Because:
 
-* AWS servers use Linux
-* Docker runs on Linux
-* Kubernetes uses Linux
-* CI/CD tools mostly run on Linux
+- AWS servers use Linux
+- Docker runs on Linux
+- Kubernetes uses Linux
+- CI/CD tools mostly run on Linux
 
 ---
 
@@ -458,13 +471,13 @@ Today I learned:
 
 Tomorrow Learn:
 
-* pwd
-* cd
-* mkdir
-* touch
-* rm
-* Linux File System
-* Hidden Files
+- pwd
+- cd
+- mkdir
+- touch
+- rm
+- Linux File System
+- Hidden Files
 
 ---
 
@@ -479,4 +492,5 @@ Strong Linux basics = Strong DevOps foundation 🚀
 ---
 
 ```
+
 ```

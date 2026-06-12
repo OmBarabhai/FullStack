@@ -12,7 +12,7 @@ Day 40, the final day of the DevOps learning path, covers AWS FSx for managed fi
 ✅ Configure FSx for Windows File Server  
 ✅ Implement Active Directory integration  
 ✅ Design multi-user file sharing architectures  
-✅ Integrate AWS Directory Service with on-premises AD  
+✅ Integrate AWS Directory Service with on-premises AD
 
 ---
 
@@ -55,7 +55,7 @@ Directory Service provides managed directory services for identity and access:
 ✨ FSx provides managed file systems eliminating infrastructure management overhead  
 ✨ Active Directory integration enables seamless user authentication for Windows environments  
 ✨ AWS Directory Service bridges on-premises and cloud identities in hybrid deployments  
-✨ Enterprise features like snapshots and versioning protect critical data  
+✨ Enterprise features like snapshots and versioning protect critical data
 
 ---
 
@@ -97,7 +97,7 @@ You have progressed through 40 days of comprehensive DevOps and AWS learning:
 1. **AWS Solutions Architect Associate Exam**: You're well-prepared for SAA certification
 2. **Advanced Specializations**: Deep-dive into security, cost optimization, or database specialties
 3. **Real-World Projects**: Apply this knowledge to actual infrastructure projects
-4. **Continuous Learning**: AWS releases new services regularly—stay current
+4. **Continuous Learning**: AWS releases new services regularly-stay current
 5. **Community Engagement**: Share knowledge and learn from others in the DevOps community
 
 ---

@@ -2,7 +2,7 @@
 
 ## 📖 Overview
 
-Today you'll learn the **foundation of CSS**—how to select elements and apply styles to them. Mastering selectors is critical for effective styling.
+Today you'll learn the **foundation of CSS**-how to select elements and apply styles to them. Mastering selectors is critical for effective styling.
 
 ---
 
@@ -145,4 +145,4 @@ li:first-child {
 
 ## 🔗 Next: [Day 2 - FlexBox & Grid](../Day_2/README.md)
 
-_Selectors are the foundation—master them!_
+_Selectors are the foundation-master them!_

@@ -2,7 +2,7 @@
 
 ## 📖 Overview
 
-Today you'll learn **responsive design principles** that make your website work perfectly on all devices—from mobile to desktop.
+Today you'll learn **responsive design principles** that make your website work perfectly on all devices-from mobile to desktop.
 
 ---
 
@@ -155,4 +155,4 @@ h1 {
 
 ## 🔗 Next: [Day 4 - Advanced Selectors & Best Practices](../Day_4/README.md)
 
-_Responsive design is no longer optional—it's essential!_
+_Responsive design is no longer optional-it's essential!_

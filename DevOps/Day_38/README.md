@@ -12,7 +12,7 @@ Day 38 focuses on large-scale data transfer solutions for moving data between on
 ✅ Configure DataSync for NFS and SMB transfers  
 ✅ Design Direct Connect solutions for dedicated connectivity  
 ✅ Implement data transfer validation and monitoring  
-✅ Optimize transfer performance and costs  
+✅ Optimize transfer performance and costs
 
 ---
 
@@ -54,7 +54,7 @@ Direct Connect provides dedicated network connections between on-premises and AW
 ✨ DataSync automates large-scale data transfers with built-in optimization  
 ✨ Direct Connect provides the dedicated connectivity enterprise transfers require  
 ✨ Data validation ensures integrity throughout the transfer process  
-✨ Proper cost analysis is critical—transfer methods have different cost profiles  
+✨ Proper cost analysis is critical-transfer methods have different cost profiles
 
 ---
 

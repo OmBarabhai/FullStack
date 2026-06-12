@@ -12,9 +12,9 @@
 
 In synchronous programming:
 
-* Tasks execute one after another
-* JavaScript waits for the current task to finish
-* Next task starts only after previous task completes
+- Tasks execute one after another
+- JavaScript waits for the current task to finish
+- Next task starts only after previous task completes
 
 ### Real-Life Example 🍽️
 
@@ -36,9 +36,9 @@ Everyone else waits.
 
 In asynchronous programming:
 
-* JavaScript does NOT wait for slow tasks
-* Long operations run in background
-* Other tasks continue executing
+- JavaScript does NOT wait for slow tasks
+- Long operations run in background
+- Other tasks continue executing
 
 ### Real-Life Example 🍽️😂
 
@@ -72,8 +72,8 @@ One task executes at a time
 
 JavaScript has:
 
-* One Call Stack
-* One Main Thread
+- One Call Stack
+- One Main Thread
 
 ---
 
@@ -160,7 +160,7 @@ Each line waits for the previous line.
 ```js id="y7m2x4"
 console.log("Start");
 
-for(let i = 0; i < 1000000000; i++) {}
+for (let i = 0; i < 1000000000; i++) {}
 
 console.log("End");
 ```
@@ -173,9 +173,9 @@ The loop takes time to finish.
 
 During this time:
 
-* JavaScript cannot execute other code
-* UI may freeze
-* Application becomes slow
+- JavaScript cannot execute other code
+- UI may freeze
+- Application becomes slow
 
 This is called:
 
@@ -215,15 +215,15 @@ LIFO → Last In First Out
 
 ```js id="z8m1x5"
 function one() {
-   two();
+  two();
 }
 
 function two() {
-   three();
+  three();
 }
 
 function three() {
-   console.log("Hello");
+  console.log("Hello");
 }
 
 one();
@@ -273,7 +273,7 @@ for slow operations.
 console.log("Start");
 
 setTimeout(() => {
-   console.log("Pizza Ready");
+  console.log("Pizza Ready");
 }, 3000);
 
 console.log("Serve Water");
@@ -301,7 +301,7 @@ Start
 
 ```js id="q7m2x5"
 setTimeout(() => {
-   console.log("Pizza Ready");
+  console.log("Pizza Ready");
 }, 3000);
 ```
 
@@ -367,16 +367,16 @@ Pizza Ready
 
 JavaScript uses:
 
-* Call Stack
-* Web APIs
-* Callback Queue
-* Event Loop
+- Call Stack
+- Web APIs
+- Callback Queue
+- Event Loop
 
 ---
 
 # Async Flow Explanation
 
-## Step 1 — Call Stack
+## Step 1 - Call Stack
 
 Functions execute inside:
 
@@ -386,13 +386,13 @@ Call Stack
 
 ---
 
-## Step 2 — Web APIs
+## Step 2 - Web APIs
 
 Async operations like:
 
-* `setTimeout`
-* `fetch`
-* DOM Events
+- `setTimeout`
+- `fetch`
+- DOM Events
 
 move to:
 
@@ -402,7 +402,7 @@ Web APIs
 
 ---
 
-## Step 3 — Callback Queue
+## Step 3 - Callback Queue
 
 After completion:
 
@@ -412,7 +412,7 @@ Callbacks move into Callback Queue
 
 ---
 
-## Step 4 — Event Loop
+## Step 4 - Event Loop
 
 The Event Loop continuously checks:
 
@@ -434,7 +434,7 @@ Callbacks move into the stack.
 console.log("A");
 
 setTimeout(() => {
-   console.log("B");
+  console.log("B");
 }, 0);
 
 console.log("C");
@@ -470,13 +470,9 @@ The callback still waits until the Call Stack becomes empty.
 
 ```js id="w2m8x5"
 function greet() {
-
-   return function() {
-
-      console.log("Welcome to Grandline");
-
-   }
-
+  return function () {
+    console.log("Welcome to Grandline");
+  };
 }
 
 const result = greet();
@@ -505,7 +501,7 @@ It returns another function.
 Returned function is stored in:
 
 ```js id="q5m8x1"
-result
+result;
 ```
 
 ---
@@ -534,20 +530,16 @@ Welcome to Grandline
 
 ```js id="p8m2x5"
 const promise = new Promise((resolve, reject) => {
+  let success = true;
 
-   let success = true;
-
-   if(success) {
-      resolve("Data Loaded");
-   } else {
-      reject("Error");
-   }
-
+  if (success) {
+    resolve("Data Loaded");
+  } else {
+    reject("Error");
+  }
 });
 
-promise
-   .then((data) => console.log(data))
-   .catch((err) => console.log(err));
+promise.then((data) => console.log(data)).catch((err) => console.log(err));
 ```
 
 ---
@@ -568,9 +560,9 @@ promise
 
 ```js id="m4x8q1"
 fetch("https://jsonplaceholder.typicode.com/users")
-   .then((response) => response.json())
-   .then((data) => console.log(data))
-   .catch((error) => console.log(error));
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => console.log(error));
 ```
 
 ---
@@ -587,15 +579,11 @@ fetch("https://jsonplaceholder.typicode.com/users")
 
 ```js id="k7m2x5"
 async function getUsers() {
+  const response = await fetch("https://jsonplaceholder.typicode.com/users");
 
-   const response = await fetch(
-      "https://jsonplaceholder.typicode.com/users"
-   );
+  const data = await response.json();
 
-   const data = await response.json();
-
-   console.log(data);
-
+  console.log(data);
 }
 
 getUsers();
@@ -652,9 +640,9 @@ BUT asynchronous
 
 because browsers provide:
 
-* Web APIs
-* Callback Queue
-* Event Loop
+- Web APIs
+- Callback Queue
+- Event Loop
 
 ---
 
@@ -668,18 +656,18 @@ because browsers provide:
 
 Understanding asynchronous JavaScript is essential for:
 
-* Frontend Development
-* Backend Development
-* React
-* Node.js
-* APIs
-* Real-time applications
+- Frontend Development
+- Backend Development
+- React
+- Node.js
+- APIs
+- Real-time applications
 
 Mastering:
 
-* Call Stack
-* Event Loop
-* Promises
-* Async/Await
+- Call Stack
+- Event Loop
+- Promises
+- Async/Await
 
 will make you a much better JavaScript developer.

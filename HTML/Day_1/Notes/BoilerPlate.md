@@ -1,6 +1,6 @@
 # 🌐 HTML Boilerplate Guide
 
-> A complete beginner-friendly guide to understanding the **HTML Boilerplate Code** — the foundation of every web page.
+> A complete beginner-friendly guide to understanding the **HTML Boilerplate Code** - the foundation of every web page.
 
 ---
 
@@ -9,14 +9,14 @@
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Page</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Hello World 🚀</h1>
-</body>
+  </body>
 </html>
 ```
 
@@ -28,9 +28,9 @@ Boilerplate code is the **standard structure** required to start any HTML docume
 
 👉 It ensures:
 
-* Proper rendering in browsers
-* Mobile responsiveness
-* Correct character encoding
+- Proper rendering in browsers
+- Mobile responsiveness
+- Correct character encoding
 
 ---
 
@@ -38,50 +38,50 @@ Boilerplate code is the **standard structure** required to start any HTML docume
 
 ### 🔹 `<!DOCTYPE html>`
 
-* Defines HTML5 document type
-* Must always be the first line
+- Defines HTML5 document type
+- Must always be the first line
 
 ---
 
 ### 🔹 `<html lang="en">`
 
-* Root element of the page
-* `lang` improves SEO & accessibility
+- Root element of the page
+- `lang` improves SEO & accessibility
 
 ---
 
 ### 🔹 `<head>`
 
-* Contains metadata (not visible to users)
-* Includes title, meta tags, styles, scripts
+- Contains metadata (not visible to users)
+- Includes title, meta tags, styles, scripts
 
 ---
 
 ### 🔹 `<meta charset="UTF-8">`
 
-* Supports all characters & symbols
-* Prevents encoding issues
+- Supports all characters & symbols
+- Prevents encoding issues
 
 ---
 
 ### 🔹 `<meta name="viewport">`
 
-* Makes your website responsive
-* Essential for mobile devices 📱
+- Makes your website responsive
+- Essential for mobile devices 📱
 
 ---
 
 ### 🔹 `<title>`
 
-* Appears in browser tab
-* Important for SEO
+- Appears in browser tab
+- Important for SEO
 
 ---
 
 ### 🔹 `<body>`
 
-* Contains all visible content
-* Text, images, buttons, etc.
+- Contains all visible content
+- Text, images, buttons, etc.
 
 ---
 
@@ -90,49 +90,47 @@ Boilerplate code is the **standard structure** required to start any HTML docume
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <meta name="description" content="My website description">
-    <meta name="author" content="Your Name">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="description" content="My website description" />
+    <meta name="author" content="Your Name" />
 
     <title>My Website</title>
 
     <!-- External CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 
     <!-- Internal CSS -->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
+      body {
+        font-family: Arial, sans-serif;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
+    <header>
+      <h1>Welcome 🚀</h1>
+    </header>
 
-<header>
-    <h1>Welcome 🚀</h1>
-</header>
+    <main>
+      <p>This is a sample HTML page.</p>
+    </main>
 
-<main>
-    <p>This is a sample HTML page.</p>
-</main>
+    <footer>
+      <p>© 2026 My Website</p>
+    </footer>
 
-<footer>
-    <p>© 2026 My Website</p>
-</footer>
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
 
-<!-- External JavaScript -->
-<script src="script.js"></script>
-
-<!-- Internal JavaScript -->
-<script>
-    console.log("Page Loaded");
-</script>
-
-</body>
+    <!-- Internal JavaScript -->
+    <script>
+      console.log("Page Loaded");
+    </script>
+  </body>
 </html>
 ```
 
@@ -140,11 +138,11 @@ Boilerplate code is the **standard structure** required to start any HTML docume
 
 ## ✅ Best Practices
 
-* ✅ Use lowercase tags
-* ✅ Maintain proper indentation
-* ✅ Always close tags
-* ✅ Use semantic HTML (`header`, `main`, `footer`)
-* ✅ Keep code clean and readable
+- ✅ Use lowercase tags
+- ✅ Maintain proper indentation
+- ✅ Always close tags
+- ✅ Use semantic HTML (`header`, `main`, `footer`)
+- ✅ Keep code clean and readable
 
 ---
 
@@ -171,9 +169,9 @@ Every website you build will start from this structure.
 
 ## 📌 Future Improvements
 
-* Add CSS layouts 🎨
-* Add JavaScript interactivity ⚡
-* Learn semantic HTML 🧩
+- Add CSS layouts 🎨
+- Add JavaScript interactivity ⚡
+- Learn semantic HTML 🧩
 
 ---
 
@@ -181,9 +179,9 @@ Every website you build will start from this structure.
 
 If you found this helpful:
 
-* ⭐ Star the repo
-* 📘 Add to your notes
-* 🔁 Share with friends
+- ⭐ Star the repo
+- 📘 Add to your notes
+- 🔁 Share with friends
 
 ---
 
@@ -193,4 +191,4 @@ If you found this helpful:
 
 ---
 
-> 💡 *“Small foundations build big systems.”*
+> 💡 _“Small foundations build big systems.”_
