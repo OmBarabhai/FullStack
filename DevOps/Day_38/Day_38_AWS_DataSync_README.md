@@ -1,380 +1,192 @@
-# ☁️ Day 38: AWS DataSync Practical - S3 to EFS Transfer
+# ☁️ Day 38: AWS DataSync Practical — S3 to EFS Transfer
 
-## 🎯 Project Goal
+## 📌 Goal
 
 Transfer files from Amazon S3 to Amazon EFS using AWS DataSync and verify the transferred files from an EC2 instance mounted to EFS.
 
 ---
 
-# 🧠 Why AWS DataSync?
-
-Without DataSync:
+## 🧭 Architecture Flow
 
 ```text
-S3
- ↓
-Manual Scripts
- ↓
-Copy Files
- ↓
-EFS
-```
-
-Problems:
-
-* Manual effort
-* Scheduling complexity
-* Error handling
-* Slow large-scale transfers
-
-With DataSync:
-
-```text
-S3
- ↓
-AWS DataSync
- ↓
-EFS
-```
-
-Benefits:
-
-* Managed service
-* Automated transfers
-* Faster migration
-* Monitoring and reporting
-* Secure data movement
-
----
-
-# 🏗️ Architecture
-
-## High-Level Flow
-
-```text
-Amazon S3
-    ↓
-DataSync Agent (EC2)
-    ↓
-AWS DataSync Service
-    ↓
+S3 Bucket
+   ↓
+DataSync Agent on EC2
+   ↓
+AWS DataSync Task
+   ↓
 Amazon EFS
     ↓
 EC2 Verification Instance
 ```
 
-## Architecture Diagram
+### Visual Architecture
 
 ![AWS DataSync Architecture](./Images/02-aws-datasync-architecture.png)
 
-## Transfer Workflow
+### Transfer Workflow
 
-![S3 to EFS Transfer Workflow](./Images/03-s3-to-efs-transfer-workflow.png)
-
----
-
-# 🔩 Architecture Components
-
-| Component                 | Purpose                  |
-| ------------------------- | ------------------------ |
-| Amazon S3                 | Source storage           |
-| DataSync Agent            | Reads and transfers data |
-| AWS DataSync              | Managed transfer service |
-| Amazon EFS                | Destination storage      |
-| EC2 Verification Instance | Verify transferred files |
-| Security Group            | Controls NFS traffic     |
-| EFS Mount Target          | Network endpoint for EFS |
+![S3 to EFS Transfer Workflow] (./Images/03-s3-to-efs-transfer-workflow.png)
 
 ---
 
-# 🌐 Network Flow
+## 🧠 What I Practiced
 
-```text
-S3 Bucket
-    ↓
-DataSync Agent
-    ↓
-TCP 2049 (NFS)
-    ↓
-EFS Mount Target
-    ↓
-Amazon EFS
-```
+* Created a private S3 bucket
+* Retrieved the latest DataSync Agent AMI
+* Launched the DataSync Agent on EC2
+* Fixed EFS security group access for NFS
+* Created the EFS file system
+* Configured source and destination locations
+* Created and started the DataSync task
+* Verified transferred files on an EC2 instance
 
 ---
 
-# 🔐 Security Requirements
+## 🔩 Main Concepts
 
-| Resource         | Requirement     |
-| ---------------- | --------------- |
-| EFS              | TCP 2049        |
-| DataSync Agent   | Outbound Access |
-| S3 Bucket        | IAM Access      |
-| EFS Mount Target | Available State |
-| Security Group   | NFS Allowed     |
-
----
-
-# ⚙️ Commands Used
-
-## Get Latest DataSync Agent AMI
-
-```bash
-aws ssm get-parameter \
---name /aws/service/datasync/ami \
---region ap-south-1 \
---query "Parameter.Value" \
---output text
-```
-
-Example Output:
-
-```text
-ami-0e617743295a316a7
-```
+| Concept              | Meaning                             |
+| -------------------- | ----------------------------------- |
+| Source Location      | Storage where data comes from       |
+| Destination Location | Storage where data goes to          |
+| DataSync Agent       | EC2-based VM used for transfer      |
+| Task                 | Transfer job created in DataSync    |
+| EFS Mount Target     | Network endpoint used to access EFS |
+| Security Group       | Firewall rule allowing NFS traffic  |
 
 ---
 
-# 📋 Practical Workflow
+## 🧪 Practical Steps
 
-## Step 1 - Create Private S3 Bucket
+### 1) Create Private S3 Bucket
 
 Created a private S3 bucket and uploaded sample files.
 
-![Private S3 Bucket](./Demo/01-s3-private-bucket-created.png)
+"Private S3 Bucket" (./Demo/01-s3-private-bucket-created.png)
 
----
-
-## Step 2 - Retrieve DataSync Agent AMI
+### 2) Get DataSync Agent AMI
 
 Retrieved the latest AWS-managed DataSync Agent AMI.
 
-![DataSync Agent AMI](./Demo/02-datasync-agent-ami-generated.png)
+"DataSync Agent AMI" (./Demo/02-datasync-agent-ami-generated.png)
 
----
+```bash
+aws ssm get-parameter --name /aws/service/datasync/ami --region ap-south-1 --query "Parameter.Value" --output text
+```
 
-## Step 3 - Security Group Issue
+### 3) Fix Security Group Access
 
 Initial transfer failed because EFS blocked NFS traffic.
 
-![Security Group Error](./Demo/03-security-group-initial-error.png)
+"Security Group Error" (./Demo/03-security-group-initial-error.png)
 
----
+The fix was to allow **TCP 2049**.
 
-## Step 4 - Fix Security Group
+"Security Group Fixed" (./Demo/04-security-group-fixed.png)
 
-Allowed TCP 2049 for NFS communication.
-
-![Security Group Fixed](./Demo/04-security-group-fixed.png)
-
----
-
-## Step 5 - Create DataSync Agent
+### 4) Create DataSync Agent
 
 Created and activated the DataSync Agent on EC2.
 
-![DataSync Agent Created](./Demo/05-datasync-agent-created.png)
+"DataSync Agent Created" (./Demo/05-datasync-agent-created.png)
 
----
-
-## Step 6 - Register Activation Key
+### 5) Register Activation Key
 
 Connected the EC2 Agent to AWS DataSync.
 
-![Activation Key Generated](./Demo/06-agent-activation-key-generated.png)
+"Activation Key Generated" (./Demo/06-agent-activation-key-generated.png)
 
----
-
-## Step 7 - Create EFS
+### 6) Create EFS File System
 
 Created Amazon EFS as the destination.
 
-![EFS Created](./Demo/07-efs-file-system-created.png)
+"EFS Created" (./Demo/07-efs-file-system-created.png)
 
----
-
-## Step 8 - Configure Source Location
+### 7) Configure Source Location
 
 Configured Amazon S3 as source.
 
-![Source Location](./Demo/08-datasync-source-location-s3.png)
+"Source Location" (./Demo/08-datasync-source-location-s3.png)
 
----
-
-## Step 9 - Configure Destination Location
+### 8) Configure Destination Location
 
 Configured Amazon EFS as destination.
 
-![Destination Location](./Demo/09-datasync-destination-efs.png)
+"Destination Location" (./Demo/09-datasync-destination-efs.png)
 
----
-
-## Step 10 - Configure Transfer Task
+### 9) Configure Task
 
 Configured task settings.
 
-![Task Configuration](./Demo/10-datasync-task-configuration.png)
+"Task Configuration" (./Demo/10-datasync-task-configuration.png)
 
----
+### 10) Review Task Options
 
-## Step 11 - Review Advanced Settings
-
-Validated task options before execution.
+Checked task mode and advanced settings before execution.
 
 ![Advanced Task Settings](./Demo/11-datasync-task-advanced-settings.png)
 
----
-
-## Step 12 - Create Task
+### 11) Create Task
 
 Created the DataSync task.
 
-![Task Created](./Demo/12-datasync-task-created.png)
+"Task Created" (./Demo/12-datasync-task-created.png)
 
----
-
-## Step 13 - Execute Task
+### 12) Start Task
 
 Started the task with default options.
 
-![Task Started](./Demo/13-datasync-task-started.png)
+"Task Started" (./Demo/13-datasync-task-started.png)
 
----
+### 13) Transfer Completed
 
-## Step 14 - Transfer Completed Successfully
-
-Files transferred successfully.
+The transfer completed successfully.
 
 ![Transfer Successful](./Demo/14-datasync-transfer-successful.png)
 
----
+### 14) Launch EC2 for Verification
 
-## Step 15 - Launch Verification EC2
+Launched a separate EC2 instance to verify the transferred files.
 
-Created EC2 instance to verify EFS content.
+![EC2 Instance for Verification](./Demo/15-ec2-instance-for-verification.png)
 
-![EC2 Instance](./Demo/15-ec2-instance-for-verification.png)
+### 15) Login to EC2
 
----
+Logged in to the EC2 instance and mounted EFS.
 
-## Step 16 - Mount EFS
+![Login to EC2](./Demo/16-login-to-ec2-instance.png)
 
-Connected to EC2 and mounted EFS.
+### 16) Verify Files on EFS
 
-![Login EC2](./Demo/16-login-to-ec2-instance.png)
+Verified the transferred files on the EFS mount.
 
----
-
-## Step 17 - Verify Files
-
-Confirmed transferred files inside EFS.
-
-![Files Verified](./Demo/17-files-verified-on-efs.png)
+![Files Verified on EFS](./Demo/17-files-verified-on-efs.png)
 
 ---
 
-# 🧪 Verification Commands
+## ⚠️ Troubleshooting I Faced
 
-Install EFS Utilities:
-
-```bash
-yum install -y nfs-utils
-```
-
-Create Mount Directory:
-
-```bash
-mkdir DataSync_Test
-```
-
-Mount EFS:
-
-```bash
-mount -t nfs4 <efs-dns-name>:/ DataSync_Test
-```
-
-Verify Files:
-
-```bash
-cd DataSync_Test
-ls
-```
-
----
-
-# ⚠️ Troubleshooting
-
-## Error Faced
+### Error
 
 ```text
 Failed to connect to EFS mount target
 ```
 
-## Root Cause
+### Root Cause
 
-```text
-TCP 2049 blocked by EFS Security Group
-```
+EFS security group did not allow **TCP 2049** from the DataSync Agent.
 
-## Fix
+### Fix
 
-```text
-Allow NFS (TCP 2049) in the EFS Security Group
-```
+Allowed NFS traffic on port **2049** in the EFS security group.
 
 ---
 
-# 🎤 Interview Questions
-
-### What is AWS DataSync?
-
-A managed service used for secure and automated data transfer between storage systems.
-
-### What is a DataSync Agent?
-
-A virtual machine that performs data transfers between source and destination locations.
-
-### Why is EFS used?
-
-EFS provides shared file storage that can be mounted on multiple EC2 instances.
-
-### Which port is required for EFS?
-
-```text
-TCP 2049
-```
-
-### Why did the transfer fail initially?
-
-The EFS Security Group blocked NFS traffic.
-
-### Difference Between S3 and EFS?
-
-| Amazon S3      | Amazon EFS         |
-| -------------- | ------------------ |
-| Object Storage | File Storage       |
-| Bucket Based   | NFS Based          |
-| Not Mountable  | Mountable          |
-| Infinite Scale | Shared File System |
-
----
-
-# 📚 Lessons Learned
-
-* DataSync requires network connectivity to EFS.
-* EFS communication uses NFS protocol.
-* NFS requires TCP 2049.
-* Security Groups are the most common source of failures.
-* DataSync Agent must be activated before task creation.
-* EFS can be verified by mounting it on an EC2 instance.
-
----
-
-# ☁️ AWS Services Used
+## ☁️ AWS Services Used
 
 * Amazon S3
-* AWS DataSync
 * Amazon EFS
+* AWS DataSync
 * Amazon EC2
 * IAM
 * Security Groups
@@ -382,16 +194,52 @@ The EFS Security Group blocked NFS traffic.
 
 ---
 
-# 🚀 Resume Project
+## 🎤 Interview Points
 
-### AWS DataSync - S3 to EFS Migration
+### What is AWS DataSync?
 
-Implemented an end-to-end AWS DataSync workflow to migrate files from Amazon S3 to Amazon EFS using an EC2-based DataSync Agent. Configured source and destination locations, resolved NFS connectivity issues, executed migration tasks, and verified successful synchronization through an EC2-mounted EFS instance.
+A managed service used to transfer data between storage systems quickly and securely.
 
-**Technologies:** AWS DataSync, Amazon S3, Amazon EFS, Amazon EC2, IAM, Security Groups, NFS
+### Why use DataSync here?
+
+To move data from S3 to EFS without manual copy scripts.
+
+### Why is EFS used?
+
+EFS provides shared file storage that can be mounted on EC2 instances.
+
+### What port is required for EFS?
+
+**TCP 2049** for NFS.
+
+### What does the DataSync Agent do?
+
+It connects source and destination locations and performs the transfer.
+
+### Why did the task fail first?
+
+Because the EFS security group blocked the DataSync Agent.
 
 ---
 
-# 🏁 Final Summary
+## 📌 Key Takeaways
 
-Successfully designed and implemented a complete S3-to-EFS migration workflow using AWS DataSync, including agent deployment, storage configuration, security troubleshooting, task execution, and file verification.
+* DataSync simplifies storage migration and synchronization
+* S3 works as the source location
+* EFS works as the destination location
+* Security groups must allow NFS access
+* EC2 is used to host and verify the workflow
+* Troubleshooting network rules is a big part of this practical
+
+---
+
+## 🚀 Resume-Ready Summary
+
+**AWS DataSync: S3 to EFS File Transfer**
+Implemented an end-to-end AWS DataSync workflow to transfer files from Amazon S3 to Amazon EFS using an EC2-based DataSync Agent. Configured source and destination locations, fixed security group issues, and verified successful file synchronization on a mounted EC2 instance.
+
+---
+
+## 🏁 Final Summary
+
+This practical is a strong DevOps and AWS SAA portfolio project because it shows real AWS storage migration, EC2-based agent setup, NFS security, EFS verification, and troubleshooting in one complete workflow.
