@@ -20,6 +20,171 @@ Day 38 focuses on large-scale data transfer solutions for moving data between on
 
 ### **1. AWS DataSync**
 
+AWS DataSync is a managed data transfer service used to move data between on-premises storage and AWS storage services.
+
+### Supported Destinations
+
+* Amazon S3
+* Amazon EFS
+* Amazon FSx
+
+### Supported Sources
+
+* NFS
+* SMB
+* HDFS
+* Object Storage
+* Amazon S3
+* Amazon EFS
+* Amazon FSx
+
+### Key Features
+
+* Automated Data Transfer
+* Incremental Synchronization
+* Data Validation
+* Bandwidth Control
+* Scheduling Support
+* Transfer Monitoring
+* Encryption in Transit
+
+---
+
+### DataSync Architecture
+
+```text
+Source Storage
+      ↓
+DataSync Agent
+      ↓
+AWS DataSync Service
+      ↓
+Destination Storage
+```
+
+### Practical Architecture Implemented
+
+```text
+Amazon S3
+      ↓
+DataSync Agent (EC2)
+      ↓
+AWS DataSync Task
+      ↓
+Amazon EFS
+      ↓
+EC2 Verification Instance
+```
+
+---
+
+### Visual References
+
+## Architecture Diagram
+
+![AWS DataSync Architecture](./Images/02-aws-datasync-architecture.png)
+
+## Transfer Workflow
+
+![S3 to EFS Transfer Workflow](./Images/03-s3-to-efs-transfer-workflow.png)
+
+---
+
+### Practical Performed
+
+During this practical:
+
+1. Created a private S3 bucket
+2. Uploaded sample files
+3. Retrieved latest DataSync Agent AMI
+4. Launched DataSync Agent on EC2
+5. Activated the DataSync Agent
+6. Created Amazon EFS
+7. Configured S3 as Source Location
+8. Configured EFS as Destination Location
+9. Created DataSync Task
+10. Executed DataSync Task
+11. Mounted EFS on EC2
+12. Verified transferred files
+
+---
+
+### Important Command Used
+
+Retrieve latest DataSync Agent AMI:
+
+```bash
+aws ssm get-parameter \
+--name /aws/service/datasync/ami \
+--region ap-south-1 \
+--query "Parameter.Value" \
+--output text
+```
+
+---
+
+### Common Issue Faced
+
+#### Error
+
+```text
+Failed to connect to EFS mount target
+```
+
+#### Root Cause
+
+```text
+TCP 2049 blocked by Security Group
+```
+
+#### Fix
+
+Allow:
+
+```text
+NFS (TCP 2049)
+```
+
+in the EFS Security Group.
+
+---
+
+### Interview Questions
+
+#### What is AWS DataSync?
+
+A managed service used for secure and automated data transfer between storage systems.
+
+#### What is a DataSync Agent?
+
+A virtual machine that performs data transfers between source and destination locations.
+
+#### Why was a DataSync Agent required?
+
+The practical used an EC2-based DataSync Agent to connect and transfer data between S3 and EFS.
+
+#### Which port is required for EFS communication?
+
+```text
+TCP 2049
+```
+
+#### What was the biggest troubleshooting issue?
+
+Security Group configuration blocking NFS traffic.
+
+---
+
+### Key Takeaways
+
+* DataSync simplifies large-scale storage migration.
+* DataSync Agents can run on EC2.
+* EFS communication requires TCP 2049.
+* Security Groups are the most common failure point.
+* DataSync supports automated and incremental transfers.
+* Successful transfers should always be verified after execution.
+
+
 AWS DataSync automates and accelerates data transfer to AWS. Key features include:
 
 - **Automated Transfers**: Schedule or on-demand data synchronization
