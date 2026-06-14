@@ -1,0 +1,1 @@
+{"name":"Local: strRep","url":"c:\\Users\\LOQ\\Desktop\\FullStack\\CP\\strRep.java","tests":[{"id":1781421251726,"input":"\"XYZAXYZBXYZC\"\n\"LIELIEILIEAMLIECOOL\"","output":"A B C\nI AM COOL"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\LOQ\\Desktop\\FullStack\\CP\\strRep.java","group":"local","local":true}
