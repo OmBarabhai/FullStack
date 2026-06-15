@@ -349,3 +349,128 @@ Then focus on:
 * Job Applications
 
 Consistency > More Courses.
+That's a compelling mission, and the open-source angle makes it quite different from most ed-tech platforms.
+
+Your core idea seems to be:
+
+> **Students learn by teaching.**
+>
+> Anyone can contribute lessons, notes, explanations, projects, and learning paths. The platform is open source, community-driven, and rewards contributors based on the value they create for learners.
+
+This is backed by a real learning principle: teaching a concept often exposes gaps in understanding and helps people retain knowledge better.
+
+### A stronger vision
+
+Instead of positioning it as "another course platform," position it as:
+
+> **The GitHub of learning.**
+
+Where:
+
+* Students create courses.
+* Students improve other students' courses.
+* Lessons are versioned.
+* Content can be forked and improved.
+* The best explanations rise to the top through community feedback.
+
+### What contributors could add
+
+Not just videos:
+
+* Written explanations
+* Visual diagrams
+* Flashcards
+* Quizzes
+* Practice problems
+* Project walkthroughs
+* Interview preparation guides
+* Learning roadmaps
+
+Many students can explain concepts well without being comfortable recording videos.
+
+### Reputation system
+
+Rather than paying people immediately, start with reputation.
+
+For example:
+
+* Course completions → points
+* High ratings → points
+* Accepted edits → points
+* Quiz contributions → points
+* Community mentoring → points
+
+Similar to how GitHub and Stack Overflow built contributor ecosystems.
+
+### Quality control
+
+This is the hardest part.
+
+You need:
+
+* Community review
+* Peer verification
+* Upvotes/downvotes
+* Contributor reputation
+* Expert moderators for advanced topics
+
+Otherwise low-quality AI-generated content will overwhelm the platform.
+
+### Open-source architecture idea
+
+You could model content like:
+
+```
+Course
+ ├── Module
+ │    ├── Lesson
+ │    ├── Quiz
+ │    └── Resources
+ └── Contributors
+```
+
+Each lesson has:
+
+* Author
+* Revision history
+* Community ratings
+* Completion analytics
+
+Just like code has commits and pull requests.
+
+### First MVP
+
+Build only:
+
+1. User profiles
+2. Course creation
+3. Markdown lessons
+4. Video embedding
+5. Ratings
+6. Course completion tracking
+7. Contributor leaderboard
+
+Skip:
+
+* Certificates
+* Payments
+* Complex AI features
+* Gamification
+
+### Potential long-term impact
+
+If executed well, the platform could become a place where:
+
+* Students document what they learn.
+* Others improve those explanations.
+* Knowledge becomes community-owned.
+* Contributors build teaching and communication skills.
+* Recruiters can discover strong communicators and educators.
+
+The most important question is not "Can I build it?"
+
+It's:
+
+> "Why would a student contribute instead of posting the same content on YouTube, GitHub, or their blog?"
+
+If you can create a strong answer to that—through reputation, collaboration, discoverability, and learning-focused incentives—you may have something genuinely differentiated.
