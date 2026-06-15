@@ -1,4 +1,5 @@
 import Counter from "./components/Counter.jsx";
+import User from "./components/User.jsx";
 import { useState } from "react";
 function App() {
     const [user, setUser] = useState({
@@ -16,7 +17,8 @@ function App() {
       <h1>Counter</h1>
       <Counter initialValue={90} />
       <br/>
-      
+      <User />
+      <br />
       <h1>User </h1>
       <input
         type="text"
