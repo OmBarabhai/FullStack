@@ -1,7 +1,10 @@
 # 🐧 Linux Day 06 - grep, less & more
 
+<<<<<<< HEAD
+=======
 ![Grep Less More](./Images/GrepLessMore.png)
 
+>>>>>>> b37fb03a446b0fa85f20401d260501addacb53ad
 ---
 
 # 🎯 Goal

@@ -1,0 +1,183 @@
+00:06:20.868896 exec-cmd.c:266          trace: resolved executable dir: C:/Program Files/Git/mingw64/bin
+00:06:20.879971 git.c:502               trace: built-in: git push --force-with-lease origin main
+00:06:20.884973 run-command.c:674       trace: run_command: GIT_DIR=.git git remote-https origin https://github.com/OmBarabhai/FullStack.git
+00:06:20.884973 run-command.c:935       trace: start_command: git remote-https origin https://github.com/OmBarabhai/FullStack.git
+00:06:20.909968 exec-cmd.c:266          trace: resolved executable dir: C:/Program Files/Git/mingw64/libexec/git-core
+00:06:20.919049 git.c:809               trace: exec: git-remote-https origin https://github.com/OmBarabhai/FullStack.git
+00:06:20.919049 run-command.c:674       trace: run_command: git-remote-https origin https://github.com/OmBarabhai/FullStack.git
+00:06:20.919049 run-command.c:935       trace: start_command: git-remote-https origin https://github.com/OmBarabhai/FullStack.git
+00:06:20.946967 exec-cmd.c:266          trace: resolved executable dir: C:/Program Files/Git/mingw64/libexec/git-core
+00:06:20.963976 http.c:915              == Info: Couldn't find host github.com in the .netrc file; using defaults
+00:06:20.978038 http.c:915              == Info: Host github.com:443 was resolved.
+00:06:20.978038 http.c:915              == Info: IPv6: (none)
+00:06:20.978038 http.c:915              == Info: IPv4: 20.207.73.82
+00:06:20.979037 http.c:915              == Info:   Trying 20.207.73.82:443...
+00:06:21.055044 http.c:915              == Info: ALPN: curl offers http/1.1
+00:06:21.056044 http.c:915              == Info: TLSv1.3 (OUT), TLS handshake, Client hello (1):
+00:06:21.057043 http.c:915              == Info: SSL Trust Anchors:
+00:06:21.075051 http.c:915              == Info:   CAfile: C:/Program Files/Git/mingw64/etc/ssl/certs/ca-bundle.crt
+00:06:21.110548 http.c:915              == Info: TLSv1.3 (IN), TLS handshake, Server hello (2):
+00:06:21.110548 http.c:915              == Info: TLSv1.3 (IN), TLS change cipher, Change cipher spec (1):
+00:06:21.110548 http.c:915              == Info: TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+00:06:21.110548 http.c:915              == Info: TLSv1.3 (IN), TLS handshake, Certificate (11):
+00:06:21.111557 http.c:915              == Info: TLSv1.3 (IN), TLS handshake, CERT verify (15):
+00:06:21.111557 http.c:915              == Info: TLSv1.3 (IN), TLS handshake, Finished (20):
+00:06:21.111557 http.c:915              == Info: TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+00:06:21.111557 http.c:915              == Info: TLSv1.3 (OUT), TLS handshake, Finished (20):
+00:06:21.111557 http.c:915              == Info: SSL connection using TLSv1.3 / TLS_AES_128_GCM_SHA256 / x25519 / id-ecPublicKey
+00:06:21.111557 http.c:915              == Info: ALPN: server accepted http/1.1
+00:06:21.111557 http.c:915              == Info: Server certificate:
+00:06:21.112551 http.c:915              == Info:   subject: CN=github.com
+00:06:21.112551 http.c:915              == Info:   start date: May  5 00:00:00 2026 GMT
+00:06:21.112551 http.c:915              == Info:   expire date: Aug  2 23:59:59 2026 GMT
+00:06:21.112551 http.c:915              == Info:   issuer: C=GB; O=Sectigo Limited; CN=Sectigo Public Server Authentication CA DV E36
+00:06:21.112551 http.c:915              == Info:   Certificate level 0: Public key type EC/prime256v1 (256/128 Bits/secBits), signed using ecdsa-with-SHA256
+00:06:21.112551 http.c:915              == Info:   Certificate level 1: Public key type EC/prime256v1 (256/128 Bits/secBits), signed using ecdsa-with-SHA384
+00:06:21.112551 http.c:915              == Info:   Certificate level 2: Public key type EC/secp384r1 (384/192 Bits/secBits), signed using ecdsa-with-SHA384
+00:06:21.112551 http.c:915              == Info:   subjectAltName: "github.com" matches cert's "github.com"
+00:06:21.112551 http.c:915              == Info: SSL certificate verified via OpenSSL.
+00:06:21.112551 http.c:915              == Info: Established connection to github.com (20.207.73.82 port 443) from 192.168.1.37 port 58791 
+00:06:21.112551 http.c:915              == Info: using HTTP/1.x
+00:06:21.112551 http.c:862              => Send header, 0000000202 bytes (0x000000ca)
+00:06:21.112551 http.c:874              => Send header: GET /OmBarabhai/FullStack.git/info/refs?service=git-receive-pack HTTP/1.1
+00:06:21.112551 http.c:874              => Send header: Host: github.com
+00:06:21.112551 http.c:874              => Send header: User-Agent: git/2.52.0.windows.1
+00:06:21.112551 http.c:874              => Send header: Accept: */*
+00:06:21.112551 http.c:874              => Send header: Accept-Encoding: deflate, gzip, br, zstd
+00:06:21.112551 http.c:874              => Send header: Pragma: no-cache
+00:06:21.112551 http.c:874              => Send header:
+00:06:21.112551 http.c:915              == Info: Request completely sent off
+00:06:21.163026 http.c:915              == Info: TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+00:06:21.163026 http.c:915              == Info: TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+00:06:21.371125 http.c:862              <= Recv header, 0000000027 bytes (0x0000001b)
+00:06:21.371125 http.c:874              <= Recv header: HTTP/1.1 401 Unauthorized
+00:06:21.371125 http.c:862              <= Recv header, 0000000026 bytes (0x0000001a)
+00:06:21.371125 http.c:874              <= Recv header: Server: GitHub-Babel/3.0
+00:06:21.371125 http.c:862              <= Recv header, 0000000054 bytes (0x00000036)
+00:06:21.371125 http.c:874              <= Recv header: Content-Security-Policy: default-src 'none'; sandbox
+00:06:21.371125 http.c:862              <= Recv header, 0000000041 bytes (0x00000029)
+00:06:21.371125 http.c:874              <= Recv header: Content-Type: text/plain; charset=UTF-8
+00:06:21.371125 http.c:862              <= Recv header, 0000000040 bytes (0x00000028)
+00:06:21.371125 http.c:874              <= Recv header: www-authenticate: Basic realm="GitHub"
+00:06:21.371125 http.c:862              <= Recv header, 0000000020 bytes (0x00000014)
+00:06:21.371125 http.c:874              <= Recv header: Content-Length: 26
+00:06:21.371125 http.c:862              <= Recv header, 0000000037 bytes (0x00000025)
+00:06:21.371125 http.c:874              <= Recv header: Date: Thu, 18 Jun 2026 18:36:22 GMT
+00:06:21.371125 http.c:862              <= Recv header, 0000000023 bytes (0x00000017)
+00:06:21.371125 http.c:874              <= Recv header: X-Frame-Options: DENY
+00:06:21.371125 http.c:862              <= Recv header, 0000000073 bytes (0x00000049)
+00:06:21.371125 http.c:874              <= Recv header: Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+00:06:21.371125 http.c:862              <= Recv header, 0000000059 bytes (0x0000003b)
+00:06:21.371125 http.c:874              <= Recv header: X-GitHub-Request-Id: 35A5:28EADC:1A91E3B:1DBAF81:6A343AA6
+00:06:21.371125 http.c:862              <= Recv header, 0000000002 bytes (0x00000002)
+00:06:21.371125 http.c:874              <= Recv header:
+00:06:21.371125 http.c:915              == Info: Connection #0 to host github.com:443 left intact
+00:06:21.372129 run-command.c:674       trace: run_command: 'git credential-manager get'
+00:06:21.372129 run-command.c:935       trace: start_command: 'C:/Program Files/Git/usr/bin/sh.exe' -c 'git credential-manager get' 'git credential-manager get'
+00:06:21.457295 exec-cmd.c:266          trace: resolved executable dir: C:/Program Files/Git/mingw64/libexec/git-core
+00:06:21.465312 git.c:809               trace: exec: git-credential-manager get
+00:06:21.465312 run-command.c:674       trace: run_command: git-credential-manager get
+00:06:21.465312 run-command.c:935       trace: start_command: git-credential-manager get
+00:06:21.728344 exec-cmd.c:266          trace: resolved executable dir: C:/Program Files/Git/mingw64/libexec/git-core
+00:06:21.740563 git.c:502               trace: built-in: git config --null --list
+00:06:21.918815 http.c:915              == Info: Reusing existing https: connection with host github.com
+00:06:21.919768 http.c:915              == Info: Server auth using Basic with user 'OmBarabhai'
+00:06:21.919768 http.c:862              => Send header, 0000000293 bytes (0x00000125)
+00:06:21.919768 http.c:874              => Send header: GET /OmBarabhai/FullStack.git/info/refs?service=git-receive-pack HTTP/1.1
+00:06:21.919768 http.c:874              => Send header: Host: github.com
+00:06:21.919768 http.c:874              => Send header: Authorization: Basic <redacted>
+00:06:21.919768 http.c:874              => Send header: User-Agent: git/2.52.0.windows.1
+00:06:21.919768 http.c:874              => Send header: Accept: */*
+00:06:21.919768 http.c:874              => Send header: Accept-Encoding: deflate, gzip, br, zstd
+00:06:21.919768 http.c:874              => Send header: Pragma: no-cache
+00:06:21.919768 http.c:874              => Send header:
+00:06:21.919768 http.c:915              == Info: Request completely sent off
+00:06:22.338248 http.c:862              <= Recv header, 0000000017 bytes (0x00000011)
+00:06:22.338248 http.c:874              <= Recv header: HTTP/1.1 200 OK
+00:06:22.338248 http.c:862              <= Recv header, 0000000026 bytes (0x0000001a)
+00:06:22.338248 http.c:874              <= Recv header: Server: GitHub-Babel/3.0
+00:06:22.338248 http.c:862              <= Recv header, 0000000060 bytes (0x0000003c)
+00:06:22.338248 http.c:874              <= Recv header: Content-Type: application/x-git-receive-pack-advertisement
+00:06:22.338248 http.c:862              <= Recv header, 0000000054 bytes (0x00000036)
+00:06:22.338248 http.c:874              <= Recv header: Content-Security-Policy: default-src 'none'; sandbox
+00:06:22.338248 http.c:862              <= Recv header, 0000000040 bytes (0x00000028)
+00:06:22.338248 http.c:874              <= Recv header: expires: Fri, 01 Jan 1980 00:00:00 GMT
+00:06:22.338248 http.c:862              <= Recv header, 0000000018 bytes (0x00000012)
+00:06:22.338248 http.c:874              <= Recv header: pragma: no-cache
+00:06:22.338248 http.c:862              <= Recv header, 0000000053 bytes (0x00000035)
+00:06:22.338248 http.c:874              <= Recv header: Cache-Control: no-cache, max-age=0, must-revalidate
+00:06:22.338248 http.c:862              <= Recv header, 0000000023 bytes (0x00000017)
+00:06:22.338248 http.c:874              <= Recv header: Vary: Accept-Encoding
+00:06:22.338248 http.c:862              <= Recv header, 0000000028 bytes (0x0000001c)
+00:06:22.338248 http.c:874              <= Recv header: Transfer-Encoding: chunked
+00:06:22.338248 http.c:862              <= Recv header, 0000000037 bytes (0x00000025)
+00:06:22.338248 http.c:874              <= Recv header: Date: Thu, 18 Jun 2026 18:36:23 GMT
+00:06:22.338248 http.c:862              <= Recv header, 0000000023 bytes (0x00000017)
+00:06:22.338248 http.c:874              <= Recv header: X-Frame-Options: DENY
+00:06:22.338248 http.c:862              <= Recv header, 0000000073 bytes (0x00000049)
+00:06:22.338248 http.c:874              <= Recv header: Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+00:06:22.338248 http.c:862              <= Recv header, 0000000059 bytes (0x0000003b)
+00:06:22.338248 http.c:874              <= Recv header: X-GitHub-Request-Id: 35A5:28EADC:1A91ED4:1DBB045:6A343AA6
+00:06:22.338248 http.c:862              <= Recv header, 0000000002 bytes (0x00000002)
+00:06:22.338248 http.c:874              <= Recv header:
+00:06:22.338248 http.c:915              == Info: Connection #0 to host github.com:443 left intact
+00:06:22.338248 run-command.c:674       trace: run_command: 'git credential-manager store'
+00:06:22.338248 run-command.c:935       trace: start_command: 'C:/Program Files/Git/usr/bin/sh.exe' -c 'git credential-manager store' 'git credential-manager store'
+00:06:22.427518 exec-cmd.c:266          trace: resolved executable dir: C:/Program Files/Git/mingw64/libexec/git-core
+00:06:22.436536 git.c:809               trace: exec: git-credential-manager store
+00:06:22.436536 run-command.c:674       trace: run_command: git-credential-manager store
+00:06:22.436536 run-command.c:935       trace: start_command: git-credential-manager store
+00:06:22.584757 exec-cmd.c:266          trace: resolved executable dir: C:/Program Files/Git/mingw64/libexec/git-core
+00:06:22.597768 git.c:502               trace: built-in: git config --null --list
+00:06:22.755623 pkt-line.c:85           packet:          git< # service=git-receive-pack
+00:06:22.755623 pkt-line.c:85           packet:          git< 0000
+00:06:22.755623 pkt-line.c:85           packet:          git< b37fb03a446b0fa85f20401d260501addacb53ad refs/heads/main\0report-status report-status-v2 delete-refs side-band-64k ofs-delta atomic object-format=sha1 quiet agent=github/spokes-receive-pack-acac8763c60f636c44baaf5c3887895cf5f55c30 session-id=35A5:28EADC:1A91ED4:1DBB045:6A343AA6 push-options
+00:06:22.755623 pkt-line.c:85           packet:          git< 0e523b525bd82b59ab72f6d93b5bd62c5d11c504 refs/heads/om
+00:06:22.755623 pkt-line.c:85           packet:          git< 0000
+00:06:22.757624 pkt-line.c:85           packet:          git> refs/heads/main:refs/heads/main
+00:06:22.757624 pkt-line.c:85           packet:          git> 0000
+00:06:22.758623 run-command.c:674       trace: run_command: git send-pack --stateless-rpc --helper-status --thin --no-progress --force-with-lease=refs/heads/main:b37fb03a446b0fa85f20401d260501addacb53ad https://github.com/OmBarabhai/FullStack.git/ --stdin
+00:06:22.758623 run-command.c:935       trace: start_command: git send-pack --stateless-rpc --helper-status --thin --no-progress --force-with-lease=refs/heads/main:b37fb03a446b0fa85f20401d260501addacb53ad https://github.com/OmBarabhai/FullStack.git/ --stdin
+00:06:22.779156 exec-cmd.c:266          trace: resolved executable dir: C:/Program Files/Git/mingw64/libexec/git-core
+00:06:22.792152 git.c:502               trace: built-in: git send-pack --stateless-rpc --helper-status --thin --no-progress --force-with-lease=refs/heads/main:b37fb03a446b0fa85f20401d260501addacb53ad https://github.com/OmBarabhai/FullStack.git/ --stdin
+00:06:22.793154 pkt-line.c:85           packet:          git< refs/heads/main:refs/heads/main
+00:06:22.793154 pkt-line.c:85           packet:          git< 0000
+00:06:22.793154 pkt-line.c:85           packet:          git< b37fb03a446b0fa85f20401d260501addacb53ad refs/heads/main\0report-status report-status-v2 delete-refs side-band-64k ofs-delta atomic object-format=sha1 quiet agent=github/spokes-receive-pack-acac8763c60f636c44baaf5c3887895cf5f55c30 session-id=35A5:28EADC:1A91ED4:1DBB045:6A343AA6 push-options
+00:06:22.793154 pkt-line.c:85           packet:          git< 0e523b525bd82b59ab72f6d93b5bd62c5d11c504 refs/heads/om
+00:06:22.793154 pkt-line.c:85           packet:          git< 0000
+00:06:22.799155 pkt-line.c:85           packet:          git> b37fb03a446b0fa85f20401d260501addacb53ad 9239820345df0a0067803ebee3f846a8ea47ef6b refs/heads/main\0 report-status-v2 side-band-64k quiet object-format=sha1 agent=git/2.52.0.windows.1-Windows
+00:06:22.799155 pkt-line.c:85           packet:          git> 0000
+00:06:22.799155 pkt-line.c:85           packet:          git< 00c1b37fb03a446b0fa85f20401d260501addacb53ad 9239820345df0a0067803ebee3f846a8ea47ef6b refs/heads/main\0 report-status-v2 side-band-64k quiet object-format=sha1 agent=git/2.52.0.windows.1-Windows0000
+00:06:22.799155 run-command.c:674       trace: run_command: git pack-objects --all-progress-implied --revs --stdout --thin --delta-base-offset -q
+00:06:22.799155 run-command.c:935       trace: start_command: git pack-objects --all-progress-implied --revs --stdout --thin --delta-base-offset -q
+00:06:22.820155 exec-cmd.c:266          trace: resolved executable dir: C:/Program Files/Git/mingw64/libexec/git-core
+00:06:22.831158 git.c:502               trace: built-in: git pack-objects --all-progress-implied --revs --stdout --thin --delta-base-offset -q
+00:06:22.922699 pkt-line.c:85           packet:          git< PACK ...
+00:06:24.480901 pkt-line.c:85           packet:          git> 0000
+00:06:24.481906 http.c:915              == Info: Reusing existing https: connection with host github.com
+00:06:24.481906 http.c:915              == Info: Server auth using Basic with user 'OmBarabhai'
+00:06:24.482909 http.c:862              => Send header, 0000000373 bytes (0x00000175)
+00:06:24.482909 http.c:874              => Send header: POST /OmBarabhai/FullStack.git/git-receive-pack HTTP/1.1
+00:06:24.482909 http.c:874              => Send header: Host: github.com
+00:06:24.482909 http.c:874              => Send header: Authorization: Basic <redacted>
+00:06:24.482909 http.c:874              => Send header: User-Agent: git/2.52.0.windows.1
+00:06:24.482909 http.c:874              => Send header: Accept-Encoding: deflate, gzip, br, zstd
+00:06:24.482909 http.c:874              => Send header: Content-Type: application/x-git-receive-pack-request
+00:06:24.482909 http.c:874              => Send header: Accept: application/x-git-receive-pack-result
+00:06:24.482909 http.c:874              => Send header: Content-Length: 391552987
+00:06:24.482909 http.c:874              => Send header:
+00:41:01.849418 http.c:915              == Info: Recv failure: Connection was reset
+00:41:01.879580 http.c:915              == Info: OpenSSL SSL_read: Connection was reset, errno 10054
+00:41:01.882529 http.c:915              == Info: Connection died, retrying a fresh connect (retry count: 1)
+00:41:01.882529 http.c:915              == Info: Send failure: Connection was reset
+00:41:01.882529 http.c:915              == Info: OpenSSL SSL_write: OpenSSL/3.5.4: error:80002746:system library::Unknown error, errno 10054
+00:41:01.882529 http.c:915              == Info: shutting down connection #0
+00:41:02.022920 http.c:915              == Info: Issue another request to this URL: 'https://github.com/OmBarabhai/FullStack.git/git-receive-pack'
+00:41:02.026197 http.c:915              == Info: NTLM-proxy picked AND auth done set, clear picked
+00:41:02.333203 http.c:915              == Info: Could not resolve host: github.com
+00:41:02.333203 http.c:915              == Info: Store negative name resolve for github.com:443
+00:41:02.333203 http.c:915              == Info: shutting down connection #1
+error: RPC failed; curl 6 Recv failure: Connection was reset
+send-pack: unexpected disconnect while reading sideband packet
+fatal: the remote end hung up unexpectedly
+Everything up-to-date
