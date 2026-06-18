@@ -11,7 +11,7 @@ A curated list of pure Binary Search problems for placements and interview prepa
 | 704    | Binary Search                            |
 | 35     | Search Insert Position                   |
 | 69     | Sqrt(x)                                  |
-| 367    | Vassh-keygen -t ed25519 -C "your-email@example.com"lid Perfect Square                     |
+| 367    | Valid Perfect Square                     |
 | 278    | First Bad Version                        |
 | 374    | Guess Number Higher or Lower             |
 | 852    | Peak Index in Mountain Array             |
