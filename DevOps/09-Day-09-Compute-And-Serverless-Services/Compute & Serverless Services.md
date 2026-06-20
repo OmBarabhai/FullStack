@@ -1,88 +1,195 @@
-# ☁️ Day 09: Compute & Serverless Services
+# ☁️ Day 09 - Compute & Serverless Services
 
-## 📖 Overview
+## 📌 Goal
 
-Compute services are the backbone of AWS.
+Understand the core AWS compute services used to run applications, distribute traffic, scale automatically, deploy code easily, and build serverless systems.
 
-This module covers the most important AWS compute services used to run, deploy, scale, and automate applications.
-
-Topics covered:
+This module covers:
 
 * Amazon EC2
 * Elastic Load Balancer (ELB)
 * Auto Scaling
 * Elastic Beanstalk
 * AWS Lambda
-* Event-Driven Automation
+* Event-Driven Architecture
 
-These services are frequently asked in AWS SAA, DevOps, Cloud Engineer, and Solution Architect interviews.
+These concepts are important for:
 
----
-
-# 🎯 Learning Objectives
-
-After completing this module, you should be able to:
-
-✅ Understand Amazon EC2
-
-✅ Understand Elastic Load Balancing
-
-✅ Understand Auto Scaling
-
-✅ Understand Elastic Beanstalk
-
-✅ Understand AWS Lambda
-
-✅ Understand Event-Driven Architectures
+* AWS SAA
+* DevOps
+* Cloud Engineering
+* System Design
+* Production Deployment
 
 ---
 
-# 🖥️ Amazon EC2 (Elastic Compute Cloud)
+# 🧠 Big Picture First
 
-EC2 is AWS's virtual machine service.
+Imagine your app starts like this:
 
-Think of EC2 as:
-
-```text
-Your Own Server
-Running Inside AWS
+```text id="d9a1"
+1 Server
+ ↓
+100 Users
 ```
 
-Instead of buying physical hardware, AWS provides virtual machines on demand.
+Business grows:
+
+```text id="d9a2"
+10,000 Users
+```
+
+Problems:
+
+* Server overload
+* Downtime
+* Slow response
+* Hard deployment
+* Hard automation
+
+AWS solves using:
+
+```text id="d9a3"
+EC2
+ ↓
+ELB
+ ↓
+Auto Scaling
+ ↓
+Elastic Beanstalk
+ ↓
+Lambda
+```
+
+This is the compute layer of AWS.
 
 ---
 
-## EC2 Benefits
+# 1. Amazon EC2 (Elastic Compute Cloud)
 
-* Launch virtual machines quickly
-* Pay only for usage
-* Multiple instance sizes
-* Easy scaling
-* Secure and highly available
+EC2 is AWS virtual machine service.
+
+Think:
+
+```text id="d9a4"
+Your own server in AWS
+```
+
+Instead of buying physical machines:
+
+AWS gives servers on demand.
+
+Flow:
+
+```text id="d9a5"
+Launch EC2
+ ↓
+Install OS
+ ↓
+Deploy App
+ ↓
+Serve Users
+```
 
 ---
 
-## EC2 Instance Lifecycle
+# Real Example
 
-```text
+Suppose you build:
+
+```text id="d9a6"
+E-commerce App
+```
+
+Need:
+
+* Backend
+* Database connection
+* API handling
+
+You can launch:
+
+```text id="d9a7"
+EC2 instance
+```
+
+Install:
+
+* Linux
+* Node.js
+* Nginx
+
+Run app.
+
+Simple.
+
+---
+
+# EC2 Lifecycle
+
+```text id="d9a8"
 Launch
-   ↓
+ ↓
 Running
-   ↓
-Stop / Start
-   ↓
+ ↓
+Stop
+ ↓
+Start
+ ↓
 Terminate
 ```
 
+Important:
+
+```text id="d9a9"
+Terminate = Delete permanently
+```
+
 ---
 
-# ⚖️ Elastic Load Balancer (ELB)
+# EC2 Types
 
-Load Balancer distributes traffic across multiple EC2 instances.
+General:
 
-Without Load Balancer:
+```text id="d9a10"
+t2, t3
+```
 
-```text
+Compute:
+
+```text id="d9a11"
+c5
+```
+
+Memory:
+
+```text id="d9a12"
+r5
+```
+
+Storage:
+
+```text id="d9a13"
+i3
+```
+
+GPU:
+
+```text id="d9a14"
+p3
+```
+
+Remember this.
+
+---
+
+# 2. Elastic Load Balancer (ELB)
+
+Load Balancer distributes traffic.
+
+Without ELB:
+
+```text id="d9a15"
 User
  ↓
 EC2
@@ -90,16 +197,17 @@ EC2
 
 Problem:
 
-```text
-If EC2 fails
-Application fails
+```text id="d9a16"
+EC2 fails → App down
 ```
+
+Bad.
 
 ---
 
-With Load Balancer:
+With ELB:
 
-```text
+```text id="d9a17"
 User
  ↓
 ELB
@@ -112,85 +220,177 @@ EC2-3
 Benefits:
 
 * High Availability
-* Fault Tolerance
-* Better Performance
 * Traffic Distribution
+* Fault Tolerance
 
 ---
 
-# 📈 Auto Scaling
-
-Auto Scaling automatically adds or removes EC2 instances based on traffic.
+# Types of ELB
 
 ---
 
-## Example
+# ALB (Application Load Balancer)
 
-Normal Traffic
+Works on:
 
-```text
-2 EC2 Instances
+```text id="d9a18"
+Layer 7
 ```
 
-High Traffic
+Handles:
 
-```text
-5 EC2 Instances
-```
+* HTTP
+* HTTPS
 
-Low Traffic
+Best for:
 
-```text
-2 EC2 Instances
-```
+* Web apps
+* APIs
 
 ---
 
-## Benefits
+# NLB (Network Load Balancer)
 
-* Cost Optimization
-* High Availability
-* Elasticity
-* Automatic Scaling
+Works on:
+
+```text id="d9a19"
+Layer 4
+```
+
+Handles:
+
+* TCP
+* UDP
+
+Best for:
+
+* High performance apps
 
 ---
 
-# 🚀 Elastic Beanstalk
+# Real Example
 
-Elastic Beanstalk is a Platform as a Service (PaaS).
+E-commerce app:
 
-You only upload your application.
+```text id="d9a20"
+1000 users
+```
 
-AWS automatically manages:
+ELB distributes:
+
+```text id="d9a21"
+333 → EC2-1
+333 → EC2-2
+334 → EC2-3
+```
+
+Balanced.
+
+---
+
+# 3. Auto Scaling
+
+Auto Scaling adds/removes EC2 automatically.
+
+Traffic:
+
+Normal:
+
+```text id="d9a22"
+2 EC2
+```
+
+High:
+
+```text id="d9a23"
+5 EC2
+```
+
+Low:
+
+```text id="d9a24"
+2 EC2
+```
+
+This is elasticity.
+
+---
+
+# Real Flow
+
+```text id="d9a25"
+Traffic increases
+ ↓
+CloudWatch detects
+ ↓
+ASG launches EC2
+```
+
+Traffic decreases:
+
+```text id="d9a26"
+ASG removes EC2
+```
+
+Cost optimized.
+
+---
+
+Benefits:
+
+* Cost saving
+* Automatic scaling
+* High availability
+
+---
+
+# 4. Elastic Beanstalk
+
+Elastic Beanstalk is PaaS.
+
+You upload code.
+
+AWS manages:
 
 * EC2
-* Load Balancer
-* Deployment
+* ELB
+* Auto Scaling
 * Monitoring
-* Scaling
+* Deployment
 
----
+Flow:
 
-## Developer Focus
-
-```text
+```text id="d9a27"
 Write Code
-      ↓
+ ↓
 Upload Code
-      ↓
-AWS Deploys Application
+ ↓
+AWS Deploys
 ```
 
+Simple.
+
 ---
 
-## Supported Platforms
+# Real Example
 
-* Java
-* Python
-* Node.js
-* .NET
-* Docker
-* PHP
+Instead of:
+
+```text id="d9a28"
+Launch EC2 manually
+Install app manually
+Configure manually
+```
+
+Do:
+
+```text id="d9a29"
+Upload ZIP file
+```
+
+AWS handles everything.
+
+Good for beginners.
 
 ---
 
@@ -200,52 +400,56 @@ AWS Deploys Application
 
 ---
 
-# ⚡ AWS Lambda
+# 5. AWS Lambda
 
-AWS Lambda is a Serverless Compute Service.
+Lambda is serverless compute.
 
-You run code without managing servers.
+Means:
 
----
+```text id="d9a30"
+Run code without managing server
+```
 
-## How Lambda Works
+Flow:
 
-```text
-Event Occurs
-      ↓
-Lambda Triggered
-      ↓
-Code Executes
-      ↓
-Task Completed
+```text id="d9a31"
+Event
+ ↓
+Lambda
+ ↓
+Action
 ```
 
 ---
 
-## Example
+# Real Example
 
-EventBridge Schedule:
+Daily cost saving:
 
-```text
-9 PM
- ↓
-Stop EC2 Instances
-
-6 AM
- ↓
-Start EC2 Instances
+```text id="d9a32"
+9 PM → Stop EC2
+6 AM → Start EC2
 ```
 
-Lambda performs automation without requiring a server.
+Using:
+
+```text id="d9a33"
+EventBridge + Lambda
+```
+
+Automation.
 
 ---
 
-## Benefits
+# Lambda Use Cases
 
-* No Server Management
-* Automatic Scaling
-* Pay Per Request
-* Event Driven
+* File processing
+* Automation
+* Notifications
+* API backend
+* Scheduled tasks
+
+Very important.
 
 ---
 
@@ -255,142 +459,225 @@ Lambda performs automation without requiring a server.
 
 ---
 
-# 🔄 Event-Driven Architecture
+# 6. Event-Driven Architecture
 
-In AWS, services communicate using events.
+Services talk using events.
+
+Flow:
+
+```text id="d9a34"
+S3 Upload
+ ↓
+Event Trigger
+ ↓
+Lambda
+ ↓
+Process File
+```
 
 Example:
 
-```text
+```text id="d9a35"
 EventBridge
-      ↓
+ ↓
 Lambda
-      ↓
-EC2 Action
+ ↓
+EC2 Start/Stop
 ```
 
-Common Use Cases:
-
-* Scheduled Tasks
-* Notifications
-* Resource Cleanup
-* Automation Workflows
+Used everywhere.
 
 ---
 
-# ☁️ AWS Service Classification
+# Service Classification
 
 | Service           | Type       |
 | ----------------- | ---------- |
 | EC2               | IaaS       |
-| Elastic Beanstalk | PaaS       |
-| Lambda            | Serverless |
 | ELB               | Networking |
 | Auto Scaling      | Management |
+| Elastic Beanstalk | PaaS       |
+| Lambda            | Serverless |
 
 ---
 
-# 🎤 Interview Questions
+# System Design Connection
+
+Production architecture:
+
+```text id="d9a36"
+User
+ ↓
+Route53
+ ↓
+CloudFront
+ ↓
+ALB
+ ↓
+EC2 (ASG)
+ ↓
+RDS
+```
+
+Automation:
+
+```text id="d9a37"
+EventBridge
+ ↓
+Lambda
+ ↓
+Backup / Cleanup / Notifications
+```
+
+This is real-world architecture.
+
+---
+
+# Interview Questions
 
 ## What is EC2?
 
-Amazon EC2 is a virtual machine service that allows users to launch and manage servers in AWS.
+AWS virtual machine.
 
 ---
 
-## What is Elastic Beanstalk?
+## What is ELB?
 
-Elastic Beanstalk is a PaaS service that automatically deploys and manages applications.
-
----
-
-## What is AWS Lambda?
-
-AWS Lambda is a serverless compute service that runs code in response to events.
-
----
-
-## Difference Between EC2 and Lambda?
-
-| EC2                       | Lambda                  |
-| ------------------------- | ----------------------- |
-| Manage Server             | No Server Management    |
-| Long Running Applications | Short Event-Based Tasks |
-| Fixed Resources           | Auto Scaling            |
-| Pay for Running Time      | Pay per Execution       |
+Distributes traffic across servers.
 
 ---
 
 ## What is Auto Scaling?
 
-A service that automatically increases or decreases EC2 instances based on demand.
+Automatically adds/removes EC2.
 
 ---
 
-## Why Use Load Balancer?
+## What is Elastic Beanstalk?
 
-To distribute traffic across multiple servers and improve availability.
-
----
-
-# 📝 AWS SAA Notes
-
-### EC2
-
-* Regional Service
-* Virtual Machine
-* Compute Service
-
-### ELB
-
-* Traffic Distribution
-* High Availability
-
-### Auto Scaling
-
-* Elasticity
-* Cost Optimization
-
-### Elastic Beanstalk
-
-* Platform as a Service (PaaS)
-
-### Lambda
-
-* Serverless
-* Event Driven
+PaaS for app deployment.
 
 ---
 
-# 📌 Key Takeaways
+## What is Lambda?
 
-* EC2 provides virtual servers.
-* ELB distributes traffic.
-* Auto Scaling adds and removes servers automatically.
-* Elastic Beanstalk simplifies deployment.
-* Lambda enables serverless automation.
-* Event-driven architecture is heavily used in AWS.
+Serverless compute service.
 
 ---
 
-# 🚀 Next Module
+## EC2 vs Lambda?
 
-## Day 10: AWS Storage Fundamentals
+EC2:
 
-Topics:
+```text id="d9a38"
+Long-running apps
+```
 
-* Amazon S3
-* Amazon EBS
-* Object Storage
-* Block Storage
-* Storage Concepts
+Lambda:
+
+```text id="d9a39"
+Short event-based tasks
+```
 
 ---
 
-# 🏆 Summary
+## ALB vs NLB?
 
-AWS Compute Services help run and scale applications efficiently.
+ALB:
 
-EC2 provides virtual machines, ELB distributes traffic, Auto Scaling manages capacity, Elastic Beanstalk simplifies deployments, and Lambda enables serverless automation.
+```text id="d9a40"
+HTTP/HTTPS
+Layer 7
+```
 
-Together, these services form the foundation of modern AWS application architectures. 🚀
+NLB:
+
+```text id="d9a41"
+TCP/UDP
+Layer 4
+```
+
+---
+
+# AWS SAA Notes
+
+EC2:
+
+```text id="d9a42"
+Virtual machine
+```
+
+ELB:
+
+```text id="d9a43"
+Traffic distribution
+```
+
+Auto Scaling:
+
+```text id="d9a44"
+Elasticity
+```
+
+Beanstalk:
+
+```text id="d9a45"
+PaaS
+```
+
+Lambda:
+
+```text id="d9a46"
+Serverless
+```
+
+Best Practice:
+
+```text id="d9a47"
+ALB + ASG + Multi-AZ
+```
+
+---
+
+# 🎯 Key Takeaways
+
+✅ EC2 gives virtual servers
+✅ ELB distributes traffic
+✅ Auto Scaling handles elasticity
+✅ Elastic Beanstalk simplifies deployment
+✅ Lambda enables serverless automation
+✅ Event-driven architecture powers modern AWS systems
+
+---
+
+# 🧠 Memory Formula
+
+```text id="d9a48"
+Run → Balance → Scale → Deploy → Automate
+```
+
+Mapping:
+
+```text id="d9a49"
+Run = EC2
+Balance = ELB
+Scale = Auto Scaling
+Deploy = Beanstalk
+Automate = Lambda
+```
+
+---
+
+# 🏁 Final Summary
+
+Day 09 builds your AWS compute foundation.
+
+Without this:
+
+* EC2 won’t make sense
+* Load Balancer won’t make sense
+* Auto Scaling won’t make sense
+* Beanstalk won’t make sense
+* Lambda won’t make sense
+
+These are the most important AWS compute services for real-world cloud architecture.
