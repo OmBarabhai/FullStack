@@ -1,195 +1,342 @@
-# 💾 Day 10: AWS Storage Fundamentals
+# 💾 Day 10 - AWS Storage Fundamentals
 
-## 📖 Overview
+## 📌 Goal
 
-Storage is one of the core building blocks of AWS.
+Understand the two core AWS storage services used in almost every architecture.
 
-Applications need storage for:
-
-* Files
-* Images
-* Videos
-* Databases
-* Backups
-* Logs
-
-This module covers the two most important AWS storage services:
+This module covers:
 
 * Amazon S3
 * Amazon EBS
+* Object Storage
+* Block Storage
+* Buckets
+* Objects
+* EBS Volumes
+* Snapshots
 
-These services are frequently used in AWS architectures and are commonly asked in AWS SAA, DevOps, and Cloud interviews.
+These concepts are important for:
 
----
-
-# 🎯 Learning Objectives
-
-After completing this module, you should be able to:
-
-✅ Understand Amazon S3
-
-✅ Understand Amazon EBS
-
-✅ Differentiate Object Storage and Block Storage
-
-✅ Understand Buckets and Objects
-
-✅ Understand EBS Volumes
-
-✅ Choose the correct AWS storage service
+* AWS SAA
+* DevOps
+* Cloud Engineering
+* System Design
+* Production Architecture
 
 ---
 
-# 🪣 Amazon S3 (Simple Storage Service)
+# 🧠 Big Picture First
 
-Amazon S3 is AWS's Object Storage Service.
+Every application needs storage.
 
-Think of S3 as:
+Example:
 
-```text
+```text id="d10a1"
+Instagram
+ ↓
+Images
+Videos
+Profiles
+Logs
+```
+
+Question:
+
+```text id="d10a2"
+Where do we store all this data?
+```
+
+AWS provides:
+
+```text id="d10a3"
+S3 = Store files
+EBS = Store server disk
+```
+
+Simple:
+
+```text id="d10a4"
+S3 = Cloud Storage
+EBS = Hard Disk
+```
+
+This is the base.
+
+---
+
+# 1. Amazon S3 (Simple Storage Service)
+
+S3 is AWS Object Storage.
+
+Think:
+
+```text id="d10a5"
 Google Drive
 Dropbox
 Cloud Storage
 ```
 
-but built for applications and enterprises.
+But for applications.
+
+Used for:
+
+* Images
+* Videos
+* Logs
+* Backups
+* Static websites
 
 ---
 
-## Easy Memory Trick
+# Easy Memory Trick
 
-```text
-Laptop
-   ↓
+Your laptop:
+
+```text id="d10a6"
 Folder
-   ↓
+ ↓
 Files
 ```
 
-AWS S3:
+AWS:
 
-```text
+```text id="d10a7"
 Bucket
-   ↓
+ ↓
 Objects
 ```
 
----
+Remember:
 
-## S3 Terminology
-
-### Bucket
-
-A container that stores objects.
-
-Examples:
-
-```text
-company-backup
-project-data
-employee-documents
+```text id="d10a8"
+Bucket = Folder
+Object = File
 ```
 
 ---
 
-### Object
+# Core S3 Terminology
 
-Any file stored inside a bucket.
+---
+
+# Bucket
+
+Container for storing objects.
 
 Examples:
 
-```text
+```text id="d10a9"
+company-backup
+project-files
+user-images
+```
+
+Important:
+
+Bucket names are globally unique.
+
+Meaning:
+
+```text id="d10a10"
+No duplicate names in AWS
+```
+
+---
+
+# Object
+
+Actual file.
+
+Examples:
+
+```text id="d10a11"
 image.png
 video.mp4
 resume.pdf
 backup.zip
 ```
 
+Everything in S3 is an object.
+
 ---
 
-### Key
+# Key
 
-Unique path/name of an object.
+Unique object path.
 
 Example:
 
-```text
+```text id="d10a12"
 images/profile.png
 ```
 
----
+Think:
 
-# 📦 S3 Features
-
-### Unlimited Storage
-
-Store:
-
-* Documents
-* Images
-* Videos
-* Backups
-* Logs
-
----
-
-### High Availability
-
-AWS automatically manages storage infrastructure.
-
----
-
-### High Durability
-
-Designed for:
-
-```text
-99.999999999%
-(11 Nines)
+```text id="d10a13"
+Full file path
 ```
 
-Durability.
+---
+
+# S3 Architecture
+
+Flow:
+
+```text id="d10a14"
+Bucket
+ ↓
+Objects
+ ↓
+Keys
+```
+
+Simple storage structure.
 
 ---
 
-### Serverless
-
-No server management required.
+# S3 Features
 
 ---
 
-### Regional Service
+# Unlimited Storage
 
-Buckets are created inside a specific AWS Region.
+Store almost unlimited data.
 
 Examples:
 
-```text
-ap-south-1
-us-east-1
-eu-west-1
+* Logs
+* Images
+* Videos
+* Backups
+
+---
+
+# High Durability
+
+S3 durability:
+
+```text id="d10a15"
+99.999999999%
+(11 nines)
+```
+
+Means:
+
+Very low data loss.
+
+Important for interviews.
+
+---
+
+# High Availability
+
+AWS manages storage across multiple systems.
+
+Result:
+
+```text id="d10a16"
+Data remains accessible
 ```
 
 ---
 
-# 💽 Amazon EBS (Elastic Block Store)
+# Serverless
 
-Amazon EBS provides Block Storage for EC2 instances.
+No server to manage.
 
-Think of EBS as:
+Just upload.
 
-```text
-Hard Disk
-For EC2
+Use.
+
+Done.
+
+---
+
+# Regional Service
+
+Bucket created inside region.
+
+Example:
+
+```text id="d10a17"
+Mumbai
+Singapore
+Ohio
+```
+
+Important:
+
+```text id="d10a18"
+Bucket belongs to region
 ```
 
 ---
 
-## Easy Memory Trick
+# Real Example
 
-Physical Computer:
+Instagram:
 
-```text
+Store:
+
+```text id="d10a19"
+Profile Images
+Reels
+Stories
+Backups
+```
+
+All can go in:
+
+```text id="d10a20"
+S3
+```
+
+Perfect fit.
+
+---
+
+# Visual Learning
+
+![Amazon S3](./Images/01-amazon-s3-storage-fundamentals.png)
+
+---
+
+# 2. Amazon EBS (Elastic Block Store)
+
+EBS is block storage for EC2.
+
+Think:
+
+```text id="d10a21"
+Hard Disk for EC2
+```
+
+Used when:
+
+EC2 needs storage.
+
+Flow:
+
+```text id="d10a22"
+EC2
+ ↓
+EBS
+```
+
+Without EBS:
+
+```text id="d10a23"
+No disk
+No OS
+```
+
+---
+
+# Easy Memory Trick
+
+Physical:
+
+```text id="d10a24"
 CPU
 RAM
 Hard Disk
@@ -197,219 +344,366 @@ Hard Disk
 
 AWS:
 
-```text
+```text id="d10a25"
 EC2
  ↓
 EBS Volume
 ```
 
----
-
-# 📦 EBS Features
-
-### Persistent Storage
-
-Data remains even after instance reboot.
+Same concept.
 
 ---
 
-### High Performance
+# EBS Features
 
-Suitable for:
+---
+
+# Persistent Storage
+
+Data remains after reboot.
+
+Example:
+
+```text id="d10a26"
+Restart EC2
+Data still exists
+```
+
+Important.
+
+---
+
+# High Performance
+
+Used for:
 
 * Databases
-* Enterprise Applications
-* Production Workloads
+* Applications
+* Logs
+
+Fast storage.
 
 ---
 
-### Snapshots
+# Snapshots
 
-Create backups of EBS volumes.
+Backup of EBS.
 
-```text
+Flow:
+
+```text id="d10a27"
 EBS Volume
-      ↓
+ ↓
 Snapshot
-      ↓
-S3 Storage
+ ↓
+Stored in S3
 ```
 
+Used for:
+
+* Backup
+* Restore
+* Migration
+
+Important.
+
 ---
 
-### Multiple Volumes
+# Multiple Volumes
 
-One EC2 instance can have:
+One EC2 can have:
 
-```text
+```text id="d10a28"
 Root Volume
 +
-Additional Volume
+Additional Volumes
+```
+
+Example:
+
+```text id="d10a29"
+OS + App Data + Logs
 ```
 
 ---
 
-## Root Volume
+# Root Volume
 
 Contains:
 
-```text
-Operating System
-System Files
-Boot Files
+```text id="d10a30"
+OS
+Boot files
+System files
 ```
 
 Examples:
 
-```text
-Windows C:
-Linux /
+Linux:
+
+```text id="d10a31"
+/ (root)
+```
+
+Windows:
+
+```text id="d10a32"
+C:
 ```
 
 ---
 
-## Additional Volume
+# Additional Volume
 
 Used for:
 
-```text
-Application Data
+```text id="d10a33"
+App files
+Database files
 Logs
-Database Files
+```
+
+Extra storage.
+
+---
+
+# Real Example
+
+Database server:
+
+Need:
+
+```text id="d10a34"
+Fast reads
+Fast writes
+Persistent disk
+```
+
+Best:
+
+```text id="d10a35"
+EBS
 ```
 
 ---
 
-# 🖼️ Visual Learning
-
-## Amazon S3 Storage Fundamentals
-
-This diagram explains how Amazon S3 stores objects inside buckets and provides highly durable object storage.
-
-![Amazon S3](./Images/01-amazon-s3-storage-fundamentals.png)
-
----
-
-## Amazon EBS Block Storage
-
-This diagram explains how Amazon EBS acts as block storage attached to EC2 instances.
+# Visual Learning
 
 ![Amazon EBS](./Images/02-amazon-ebs-block-storage-overview.png)
 
 ---
 
-# ⚖️ S3 vs EBS
+# S3 vs EBS
 
-| Feature       | S3                     | EBS                         |
-| ------------- | ---------------------- | --------------------------- |
-| Storage Type  | Object Storage         | Block Storage               |
-| Used With     | Multiple AWS Services  | EC2                         |
-| Scalability   | Virtually Unlimited    | Volume Based                |
-| Access Method | API Access             | Attached to EC2             |
-| Durability    | Very High              | High                        |
-| Use Case      | Files, Images, Backups | Operating System, Databases |
-
----
-
-# ☁️ AWS Service Classification
-
-| Service  | Category       |
-| -------- | -------------- |
-| S3       | Object Storage |
-| EBS      | Block Storage  |
-| Snapshot | Backup Service |
+| Feature      | S3                  | EBS           |
+| ------------ | ------------------- | ------------- |
+| Storage Type | Object              | Block         |
+| Used With    | Many AWS Services   | EC2 Only      |
+| Storage Size | Unlimited           | Volume Based  |
+| Access       | API                 | Attached Disk |
+| Performance  | Good                | High          |
+| Best For     | Files, Images, Logs | OS, DB, Apps  |
 
 ---
 
-# 🎤 Interview Questions
+# Real World Thinking
 
-## What is Amazon S3?
+If storing:
 
-Amazon S3 is an object storage service used to store files, backups, logs, images, videos, and application data.
+Images:
 
----
+```text id="d10a36"
+Use S3
+```
 
-## What is Amazon EBS?
+Running OS:
 
-Amazon EBS is a block storage service that acts as a virtual hard disk for EC2 instances.
+```text id="d10a37"
+Use EBS
+```
 
----
+Database:
 
-## Difference Between S3 and EBS?
+```text id="d10a38"
+Use EBS
+```
 
-S3 stores objects.
+Backups:
 
-EBS provides block storage attached to EC2 instances.
+```text id="d10a39"
+Use S3
+```
 
----
+Static website:
 
-## Can EBS Be Attached to Multiple EC2 Instances?
-
-Generally No.
-
-One EBS volume is attached to one EC2 instance at a time.
-
----
-
-## Where Are EBS Snapshots Stored?
-
-```text
-Amazon S3
+```text id="d10a40"
+Use S3
 ```
 
 ---
 
-# 📝 AWS SAA Notes
+# System Design Connection
 
-### Amazon S3
+Production architecture:
 
-* Object Storage
-* Regional Service
-* Unlimited Storage
-* Highly Durable
-* Serverless
+```text id="d10a41"
+User
+ ↓
+Route53
+ ↓
+CloudFront
+ ↓
+ALB
+ ↓
+EC2
+ ↓
+EBS (OS + App)
+ ↓
+RDS
+```
 
-### Amazon EBS
+Files:
 
-* Block Storage
-* Attached to EC2
-* AZ Specific
-* Supports Snapshots
+```text id="d10a42"
+EC2 uploads to S3
+```
 
----
+Real example:
 
-# 📌 Key Takeaways
+```text id="d10a43"
+User uploads profile picture
+ ↓
+App saves in S3
+```
 
-* S3 is AWS Object Storage.
-* Buckets contain objects.
-* S3 is highly durable and scalable.
-* EBS acts as a hard disk for EC2.
-* EBS supports snapshots and persistent storage.
-* S3 and EBS solve different storage problems.
-
----
-
-# 🚀 Next Module
-
-## Day 11: AWS Storage & Database Services
-
-Topics:
-
-* Amazon RDS
-* DynamoDB
-* ElastiCache
-* EFS
-* FSx
-* Glacier
-* Snow Family
-* Storage Gateway
+Very common.
 
 ---
 
-# 🏆 Summary
+# Interview Questions
 
-Amazon S3 and Amazon EBS are the two foundational AWS storage services.
+## What is S3?
 
-S3 provides scalable object storage for files, backups, and static websites, while EBS provides block storage for EC2 instances and databases.
+Object storage service.
 
-Understanding the difference between Object Storage and Block Storage is essential for AWS Solution Architect and DevOps interviews. 🚀
+---
+
+## What is EBS?
+
+Block storage attached to EC2.
+
+---
+
+## Difference between S3 and EBS?
+
+S3:
+
+```text id="d10a44"
+Store files
+```
+
+EBS:
+
+```text id="d10a45"
+Store server disk data
+```
+
+---
+
+## Can EBS attach to multiple EC2?
+
+Generally:
+
+```text id="d10a46"
+No
+```
+
+---
+
+## Where are EBS snapshots stored?
+
+```text id="d10a47"
+S3
+```
+
+---
+
+## Is S3 unlimited?
+
+```text id="d10a48"
+Yes (practically)
+```
+
+---
+
+# AWS SAA Notes
+
+S3:
+
+```text id="d10a49"
+Object Storage
+Serverless
+Unlimited
+```
+
+EBS:
+
+```text id="d10a50"
+Block Storage
+EC2 Disk
+AZ Specific
+```
+
+Snapshot:
+
+```text id="d10a51"
+Backup of EBS
+Stored in S3
+```
+
+Rule:
+
+```text id="d10a52"
+Files → S3
+Disk → EBS
+```
+
+---
+
+# 🎯 Key Takeaways
+
+✅ S3 stores files as objects
+✅ Bucket contains objects
+✅ Object has unique key
+✅ EBS acts as EC2 disk
+✅ EBS supports snapshots
+✅ S3 and EBS solve different problems
+✅ Both are core AWS storage services
+
+---
+
+# 🧠 Memory Formula
+
+```text id="d10a53"
+Store Files → S3
+Store Disk → EBS
+Backup Disk → Snapshot
+```
+
+Simple.
+
+---
+
+# 🏁 Final Summary
+
+Day 10 builds your AWS storage foundation.
+
+Without this:
+
+* EC2 storage won’t make sense
+* S3 practicals won’t make sense
+* Backups won’t make sense
+* Snapshots won’t make sense
+* File upload architecture won’t make sense
+
+These are some of the most important storage services in AWS.
