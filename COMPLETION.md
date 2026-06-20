@@ -4,15 +4,15 @@
 
 Become an engineer who can:
 
-* Build Full Stack Applications
-* Design APIs and Databases
-* Solve DSA Problems Efficiently
-* Deploy Applications on AWS
-* Build CI/CD Pipelines
-* Use Docker & Kubernetes
-* Develop Mobile Apps
-* Understand Core CS Fundamentals
-* Work across Software, Cloud, Infrastructure and Product
+- Build Full Stack Applications
+- Design APIs and Databases
+- Solve DSA Problems Efficiently
+- Deploy Applications on AWS
+- Build CI/CD Pipelines
+- Use Docker & Kubernetes
+- Develop Mobile Apps
+- Understand Core CS Fundamentals
+- Work across Software, Cloud, Infrastructure and Product
 
 ---
 
@@ -20,30 +20,30 @@ Become an engineer who can:
 
 ## Full Stack
 
-* HTML
-* CSS
-* JavaScript
-* React
-* React Native
-* Node.js
-* Express.js
-* MongoDB
+- HTML
+- CSS
+- JavaScript
+- React
+- React Native
+- Node.js
+- Express.js
+- MongoDB
 
 ## Cloud & DevOps
 
-* AWS
-* Linux
-* Git & GitHub
-* Jenkins
-* Ansible
-* Docker
-* Kubernetes
-* CloudFormation
+- AWS
+- Linux
+- Git & GitHub
+- Jenkins
+- Ansible
+- Docker
+- Kubernetes
+- CloudFormation
 
 ## Programming
 
-* Java
-* DSA
+- Java
+- DSA
 
 ---
 
@@ -55,15 +55,15 @@ Become an engineer who can:
 
 Daily:
 
-* DSA (2 Problems)
-* React (1-2 Hours)
-* AWS (1 Hour)
+- DSA (2 Problems)
+- React (1-2 Hours)
+- AWS (1 Hour)
 
 Target:
 
-* Finish Love Babbar Java DSA
-* Finish React
-* Reach AWS Kubernetes Module
+- Finish Love Babbar Java DSA
+- Finish React
+- Reach AWS Kubernetes Module
 
 ---
 
@@ -73,24 +73,24 @@ Target:
 
 Learn:
 
-* Node.js
-* Express
-* MongoDB
-* REST APIs
-* Authentication
+- Node.js
+- Express
+- MongoDB
+- REST APIs
+- Authentication
 
 SQL:
 
-* Joins
-* Subqueries
-* CTE
-* Window Functions
-* Indexes
-* Transactions
+- Joins
+- Subqueries
+- CTE
+- Window Functions
+- Indexes
+- Transactions
 
 Target:
 
-* 75 SQL Problems
+- 75 SQL Problems
 
 ---
 
@@ -104,13 +104,13 @@ Target: 30 Questions
 
 Topics:
 
-* Keys
-* Normalization
-* ACID
-* Transactions
-* Indexing
-* Replication
-* Sharding
+- Keys
+- Normalization
+- ACID
+- Transactions
+- Indexing
+- Replication
+- Sharding
 
 #### Computer Networks
 
@@ -118,14 +118,14 @@ Target: 30 Questions
 
 Topics:
 
-* OSI
-* TCP/IP
-* DNS
-* HTTP
-* HTTPS
-* CDN
-* Load Balancers
-* WebSockets
+- OSI
+- TCP/IP
+- DNS
+- HTTP
+- HTTPS
+- CDN
+- Load Balancers
+- WebSockets
 
 #### Operating Systems
 
@@ -133,13 +133,13 @@ Target: 30 Questions
 
 Topics:
 
-* Process
-* Thread
-* Scheduling
-* Deadlock
-* Memory
-* Virtual Memory
-* Synchronization
+- Process
+- Thread
+- Scheduling
+- Deadlock
+- Memory
+- Virtual Memory
+- Synchronization
 
 #### OOP
 
@@ -147,11 +147,11 @@ Target: 25 Questions
 
 Topics:
 
-* Encapsulation
-* Inheritance
-* Polymorphism
-* Abstraction
-* SOLID Principles
+- Encapsulation
+- Inheritance
+- Polymorphism
+- Abstraction
+- SOLID Principles
 
 ---
 
@@ -161,10 +161,10 @@ Topics:
 
 Finish:
 
-* Jenkins
-* Ansible
-* Docker
-* Kubernetes
+- Jenkins
+- Ansible
+- Docker
+- Kubernetes
 
 Target:
 
@@ -178,9 +178,9 @@ Deploy Real Projects
 
 Build:
 
-* Notes App
-* Expense Tracker
-* Full Stack Mobile App
+- Notes App
+- Expense Tracker
+- Full Stack Mobile App
 
 ---
 
@@ -192,16 +192,16 @@ Full Stack MERN
 
 Features:
 
-* Authentication
-* CRUD
-* File Upload
-* Role Based Access
+- Authentication
+- CRUD
+- File Upload
+- Role Based Access
 
 Deployment:
 
-* AWS EC2
-* Nginx
-* MongoDB
+- AWS EC2
+- Nginx
+- MongoDB
 
 ---
 
@@ -222,10 +222,10 @@ GitHub
 React Native + MERN
 
 Mobile Client
-+
-Shared Backend
 
----
+- Shared Backend
+
+  ***
 
 # Core Subject Targets
 
@@ -265,26 +265,26 @@ Total:
 
 AWS:
 
-* IAM
-* EC2
-* S3
-* RDS
-* DynamoDB
-* CloudFront
-* Route53
-* VPC
-* CloudFormation
-* 3-Tier Architecture
+- IAM
+- EC2
+- S3
+- RDS
+- DynamoDB
+- CloudFront
+- Route53
+- VPC
+- CloudFormation
+- 3-Tier Architecture
 
 DevOps:
 
-* Linux
-* Git
-* Jenkins
-* Maven
-* Ansible
-* Docker
-* Kubernetes
+- Linux
+- Git
+- Jenkins
+- Maven
+- Ansible
+- Docker
+- Kubernetes
 
 ---
 
@@ -306,24 +306,28 @@ Total:
 ---
 
 # Before Applying for Jobs
-******************************
-Checklist: 
 
-* [ ] 300 DSA Problems
-* [ ] 75 SQL Problems
-* [ ] React Completed
-* [ ] Backend Completed
-* [ ] AWS Completed
-* [ ] Docker Completed
-* [ ] Kubernetes Completed
-* [ ] Linux Completed
-* [ ] 3 Full Stack Projects
-* [ ] 1 DevOps Project
-* [ ] 1 React Native App
-* [ ] Resume Ready
-* [ ] GitHub Portfolio Ready
-******************************* 
-* [X] → DONE [X]
+---
+
+Checklist:
+
+- [ ] 300 DSA Problems
+- [ ] 75 SQL Problems
+- [ ] React Completed
+- [ ] Backend Completed
+- [ ] AWS Completed
+- [ ] Docker Completed
+- [ ] Kubernetes Completed
+- [ ] Linux Completed
+- [ ] 3 Full Stack Projects
+- [ ] 1 DevOps Project
+- [ ] 1 React Native App
+- [ ] Resume Ready
+- [ ] GitHub Portfolio Ready
+
+---
+
+- [x] → DONE [X]
 
 ---
 
@@ -343,10 +347,10 @@ Finish:
 
 Then focus on:
 
-* Internships
-* Open Source
-* Interview Preparation
-* Job Applications
+- Internships
+- Open Source
+- Interview Preparation
+- Job Applications
 
 Consistency > More Courses.
 That's a compelling mission, and the open-source angle makes it quite different from most ed-tech platforms.
@@ -367,24 +371,24 @@ Instead of positioning it as "another course platform," position it as:
 
 Where:
 
-* Students create courses.
-* Students improve other students' courses.
-* Lessons are versioned.
-* Content can be forked and improved.
-* The best explanations rise to the top through community feedback.
+- Students create courses.
+- Students improve other students' courses.
+- Lessons are versioned.
+- Content can be forked and improved.
+- The best explanations rise to the top through community feedback.
 
 ### What contributors could add
 
 Not just videos:
 
-* Written explanations
-* Visual diagrams
-* Flashcards
-* Quizzes
-* Practice problems
-* Project walkthroughs
-* Interview preparation guides
-* Learning roadmaps
+- Written explanations
+- Visual diagrams
+- Flashcards
+- Quizzes
+- Practice problems
+- Project walkthroughs
+- Interview preparation guides
+- Learning roadmaps
 
 Many students can explain concepts well without being comfortable recording videos.
 
@@ -394,11 +398,11 @@ Rather than paying people immediately, start with reputation.
 
 For example:
 
-* Course completions → points
-* High ratings → points
-* Accepted edits → points
-* Quiz contributions → points
-* Community mentoring → points
+- Course completions → points
+- High ratings → points
+- Accepted edits → points
+- Quiz contributions → points
+- Community mentoring → points
 
 Similar to how GitHub and Stack Overflow built contributor ecosystems.
 
@@ -408,11 +412,11 @@ This is the hardest part.
 
 You need:
 
-* Community review
-* Peer verification
-* Upvotes/downvotes
-* Contributor reputation
-* Expert moderators for advanced topics
+- Community review
+- Peer verification
+- Upvotes/downvotes
+- Contributor reputation
+- Expert moderators for advanced topics
 
 Otherwise low-quality AI-generated content will overwhelm the platform.
 
@@ -431,10 +435,10 @@ Course
 
 Each lesson has:
 
-* Author
-* Revision history
-* Community ratings
-* Completion analytics
+- Author
+- Revision history
+- Community ratings
+- Completion analytics
 
 Just like code has commits and pull requests.
 
@@ -452,20 +456,20 @@ Build only:
 
 Skip:
 
-* Certificates
-* Payments
-* Complex AI features
-* Gamification
+- Certificates
+- Payments
+- Complex AI features
+- Gamification
 
 ### Potential long-term impact
 
 If executed well, the platform could become a place where:
 
-* Students document what they learn.
-* Others improve those explanations.
-* Knowledge becomes community-owned.
-* Contributors build teaching and communication skills.
-* Recruiters can discover strong communicators and educators.
+- Students document what they learn.
+- Others improve those explanations.
+- Knowledge becomes community-owned.
+- Contributors build teaching and communication skills.
+- Recruiters can discover strong communicators and educators.
 
 The most important question is not "Can I build it?"
 
@@ -473,4 +477,4 @@ It's:
 
 > "Why would a student contribute instead of posting the same content on YouTube, GitHub, or their blog?"
 
-If you can create a strong answer to that—through reputation, collaboration, discoverability, and learning-focused incentives—you may have something genuinely differentiated.
+If you can create a strong answer to that-through reputation, collaboration, discoverability, and learning-focused incentives-you may have something genuinely differentiated.
