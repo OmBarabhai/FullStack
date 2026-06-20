@@ -113,6 +113,48 @@ DBMS = smart storage
 
 ---
 
+## Worked Example: File System vs DBMS
+
+Suppose a college stores student data in 3 Excel files:
+
+```text
+students.xlsx
+fees.xlsx
+attendance.xlsx
+```
+
+Student "Om" exists in all files.
+
+Problem:
+
+* same data repeated
+* if phone number changes, update everywhere
+* inconsistency risk
+
+This is redundancy.
+
+Now in DBMS:
+
+```text
+Student Table
+Fee Table
+Attendance Table
+```
+
+Linked using:
+
+```text
+StudentID
+```
+
+Update once.
+
+Everything syncs.
+
+This is why DBMS is better.
+
+---
+
 # 📌 Schema
 
 ## Definition
@@ -129,8 +171,6 @@ It defines:
 ---
 
 ### Example
-
-Student Table:
 
 ```text
 Student(ID, Name, Age)
@@ -173,9 +213,7 @@ Tomorrow:
 
 Schema same.
 
-Data changed.
-
-That changed data = new instance.
+Instance changed.
 
 ---
 
@@ -187,11 +225,11 @@ Instance = current data snapshot.
 
 # 📌 Schema vs Instance
 
-| Schema    | Instance      |
-| --------- | ------------- |
-| Structure | Actual Data   |
-| Fixed     | Changes Often |
-| Blueprint | Snapshot      |
+| Schema         | Instance      |
+| -------------- | ------------- |
+| Structure      | Data          |
+| Rarely Changes | Changes Often |
+| Blueprint      | Snapshot      |
 
 ---
 
@@ -203,11 +241,82 @@ Instance changes frequently.
 
 ---
 
+# 📌 Worked Example
+
+Suppose we create:
+
+```sql
+CREATE TABLE Student (
+    id INT,
+    name VARCHAR(50),
+    age INT
+);
+```
+
+This is:
+
+👉 Schema
+
+Now insert:
+
+```sql
+INSERT INTO Student VALUES (1, 'Om', 22);
+INSERT INTO Student VALUES (2, 'Rahul', 21);
+```
+
+Current table:
+
+| id | name  | age |
+| -- | ----- | --- |
+| 1  | Om    | 22  |
+| 2  | Rahul | 21  |
+
+This is:
+
+👉 Instance
+
+Now:
+
+```sql
+INSERT INTO Student VALUES (3, 'Aman', 20);
+```
+
+New instance:
+
+| id | name  | age |
+| -- | ----- | --- |
+| 1  | Om    | 22  |
+| 2  | Rahul | 21  |
+| 3  | Aman  | 20  |
+
+Observation:
+
+Schema same.
+Instance changed.
+
+---
+
+### Internal Flow
+
+```text
+INSERT Query
+   ↓
+Parser checks syntax
+   ↓
+DBMS checks schema
+   ↓
+Storage manager writes data
+   ↓
+Table instance updates
+```
+
+---
+
 # 📌 Subschema
 
 Subschema = subset of schema.
 
-Used to show only relevant data to specific users.
+Shows only relevant data to a specific user.
 
 ---
 
@@ -215,17 +324,17 @@ Used to show only relevant data to specific users.
 
 Hospital:
 
-Doctor can see:
+Doctor sees:
 
-* Diagnosis
-* Patient history
+* diagnosis
+* history
 
-Receptionist can see:
+Receptionist sees:
 
-* Name
-* Contact
+* name
+* contact
 
-Different views = subschemas.
+Different views = different subschemas.
 
 ---
 
@@ -235,12 +344,11 @@ DBA manages database.
 
 Responsibilities:
 
-* User access
 * Security
 * Backup
 * Recovery
 * Performance tuning
-* Maintenance
+* User management
 
 ---
 
@@ -252,7 +360,7 @@ DBA = database manager.
 
 # 📌 DBMS Architecture
 
-Architecture defines how application communicates with database.
+Architecture defines how app communicates with database.
 
 ---
 
@@ -260,11 +368,11 @@ Architecture defines how application communicates with database.
 
 ```text
 Client
-  ↓
+ ↓
 Database
 ```
 
-Client directly communicates with DB.
+Client directly talks to database.
 
 ---
 
@@ -272,21 +380,21 @@ Client directly communicates with DB.
 
 * Simple
 * Fast
-* Easy to build
+* Easy
 
 ---
 
 ## Disadvantages
 
 * Low security
-* Hard to scale
+* Hard scaling
 * Tight coupling
 
 ---
 
 ### Example
 
-Desktop Application → MySQL
+Desktop App → MySQL
 
 ---
 
@@ -294,21 +402,21 @@ Desktop Application → MySQL
 
 ```text
 Client
-  ↓
-Business Logic Layer
-  ↓
+ ↓
+Business Layer
+ ↓
 Database
 ```
 
-Most modern apps use this.
+Used in most modern systems.
 
 ---
 
 ## Layers
 
-### 1. Client Layer
+### Client Layer
 
-User Interface
+UI
 
 Examples:
 
@@ -318,26 +426,26 @@ Examples:
 
 ---
 
-### 2. Business Layer
+### Business Layer
 
 Contains:
 
-* Validation
-* Authentication
-* Logic
+* validation
+* authentication
 * APIs
+* business logic
 
 Examples:
 
 * Node.js
-* Java Spring
+* Spring Boot
 * Django
 
 ---
 
-### 3. Data Layer
+### Data Layer
 
-Actual database.
+Stores actual data.
 
 Examples:
 
@@ -351,15 +459,23 @@ Examples:
 
 * Better security
 * Better scalability
-* Better maintenance
-* Better modularity
+* Better maintainability
 
 ---
 
 ## Disadvantages
 
 * More complex
-* Slightly slower than 2-tier
+
+---
+
+### Memory Trick
+
+2-Tier = Client directly talks
+
+3-Tier = Client → Brain → Database
+
+Brain = Business Logic
 
 ---
 
@@ -371,13 +487,13 @@ Examples:
 | Security        | Low      | High            |
 | Scalability     | Low      | High            |
 | Maintenance     | Hard     | Easy            |
-| Database Access | Direct   | Through backend |
+| Database Access | Direct   | Through Backend |
 
 ---
 
 # 📌 Real World Example
 
-Your Comsy project:
+Comsy Project:
 
 ```text
 Frontend (Electron / HTML / JS)
@@ -387,15 +503,13 @@ Backend (Node.js / Express)
 MongoDB
 ```
 
-This follows Three-Tier Architecture.
-
 Mapping:
 
 * Client Layer → UI
 * Business Layer → Backend
 * Data Layer → MongoDB
 
-This is how real-world apps work.
+Real-world 3-tier system.
 
 ---
 
@@ -403,141 +517,92 @@ This is how real-world apps work.
 
 ### What is DBMS?
 
-Software used to manage databases.
+Software to manage databases.
 
 ---
 
-### Why use DBMS?
+### Why DBMS over file system?
 
-To reduce redundancy and improve consistency/security.
+Less redundancy, more consistency.
 
 ---
 
-### What is Schema?
+### What is schema?
 
 Structure of database.
 
 ---
 
-### What is Instance?
+### What is instance?
 
-Current data at a specific time.
+Current data in database.
 
 ---
 
-### Difference between Schema and Instance?
+### Schema vs Instance?
 
 Schema = structure
 Instance = data
 
 ---
 
-### What is Subschema?
+### What is subschema?
 
-Partial user-specific database view.
+Partial view of schema.
 
 ---
 
 ### What is DBA?
 
-Person responsible for database management.
+Database administrator.
 
 ---
 
-### What is Two-Tier Architecture?
+### Two-tier vs Three-tier?
 
-Client directly talks to database.
-
----
-
-### What is Three-Tier Architecture?
-
-Client talks to backend, backend talks to database.
+Direct vs backend-mediated database communication.
 
 ---
 
-### Why is Three-Tier preferred?
-
-Better scalability, security, maintainability.
-
----
-
-# 📌 Common Mistakes / Confusions
+# 📌 Common Mistakes
 
 ❌ Database = DBMS
 ✔ Database stores data, DBMS manages it
 
 ❌ Schema = Instance
-✔ Schema is structure, instance is data
+✔ Different concepts
 
 ❌ Backend = Database
-✔ Backend contains logic, database stores data
+✔ Backend has logic
 
 ---
 
 # 📌 Quick Revision
 
-* DBMS = database software
+* DBMS = manages data
 * Schema = structure
-* Instance = data
-* Subschema = partial schema
+* Instance = current data
+* Subschema = partial view
 * DBA = manager
-* Two-tier = client → DB
-* Three-tier = client → backend → DB
-* File system has more redundancy
-* DBMS improves integrity
-
----
-
-# 📌 Interview One-Liners
-
-* DBMS = manages database
-* Schema = database blueprint
-* Instance = live data
-* DBA = database admin
-* Subschema = user view
-* Two-tier = direct DB communication
-* Three-tier = backend layer between client and DB
-
----
-
-# 📌 Practical / Industry Notes
-
-In industry:
-
-* MySQL/Postgres → structured data
-* MongoDB → flexible schema
-* AWS RDS → managed DBMS
-* Redis → fast caching
-
-Modern architectures:
-
-```text
-Frontend → API → Database
-```
-
-Almost always 3-tier.
-
-DBA work in cloud often shifts to:
-
-* DevOps
-* SRE
-* Cloud Engineers
+* File system has redundancy
+* DBMS reduces duplication
+* 2-tier = direct DB
+* 3-tier = backend in between
 
 ---
 
 # 📌 Placement / Career Takeaway
 
-Strong focus areas:
+Focus heavily on:
 
 ✔ DBMS vs File System
 ✔ Schema vs Instance
-✔ Two-tier vs Three-tier
+✔ 2-tier vs 3-tier
 ✔ DBA responsibilities
 
-These are foundation topics.
+These are foundational.
 
-Next topics depend on this:
+Next:
 
 ```text
 ER Model
@@ -548,4 +613,4 @@ ER Model
 → Normalization
 ```
 
-Master this well.
+Master this before moving.

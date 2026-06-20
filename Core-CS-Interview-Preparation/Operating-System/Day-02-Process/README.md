@@ -4,66 +4,124 @@
 
 ---
 
-# 📌 What is a Process?
+# 📌 Why do we need Process?
 
-A Process is a program in execution.
+Programs stored on disk cannot execute directly.
 
-When a program is loaded into memory and starts running, it becomes a process. A process contains program code, current execution state, memory, and system resources.
+They must be loaded into memory and managed by the OS.
 
-### Interview Answer
+That running form is called a **Process**.
 
-A process is an active instance of a program that is currently being executed by the CPU.
+Without process abstraction:
 
-### One-Liner
-
-Program + Execution = Process
-
----
-
-# 📌 Why does it matter?
-
-The Operating System executes processes, not programs.
-
-Without processes:
-
-* Programs cannot run
-* CPU scheduling is impossible
-* Memory allocation cannot be managed
-* Resource sharing becomes difficult
+* OS cannot schedule work
+* CPU cannot execute tasks
+* Memory allocation becomes impossible
+* Resource tracking becomes impossible
 
 ---
 
-# 📌 Core Idea
+# 🏢 Real World Analogy
+
+Think of a restaurant.
 
 ```text
-Program (Disk)
-      ↓ Execute
-Process (Memory)
-      ↓
-CPU + Memory + Resources
+Recipe Book = Program
+Chef Cooking = Process
+Kitchen = CPU
+Ingredients = Memory
 ```
 
-### Real Example
+Recipe exists.
+
+But only when chef starts cooking, work starts.
+
+Same:
+
+Program exists.
+
+Process runs.
+
+---
+
+# 📌 Core Concept
+
+A **Process** is a program in execution.
+
+It contains:
+
+* code
+* data
+* memory
+* registers
+* execution state
+* resources
+
+### Formula
+
+```text
+Program + Execution = Process
+```
+
+---
+
+# 🔄 Worked Example
+
+You open Chrome.
+
+What happens?
 
 ```text
 chrome.exe
-      ↓ Open
-Chrome Process
-      ↓
-CPU + RAM + Files
+    ↓
+Loaded into RAM
+    ↓
+OS creates PCB
+    ↓
+CPU schedules process
+    ↓
+Chrome starts running
 ```
 
-Program is passive.
+Now Chrome becomes a process.
 
-Process is active.
+If you open:
+
+* Chrome
+* VS Code
+* Spotify
+
+then OS manages multiple processes.
+
+---
+
+# ⚙ Internal Working (Step by Step)
+
+When a process starts:
+
+```text
+Program (Disk)
+      ↓
+OS loads program into RAM
+      ↓
+Creates Process Control Block (PCB)
+      ↓
+Allocates resources
+      ↓
+Scheduler assigns CPU
+      ↓
+Execution starts
+```
+
+OS tracks everything through PCB.
 
 ---
 
 # 📌 Process States
 
-A process moves through different states during its lifecycle.
+A process changes states while running.
 
-## Process State Diagram
+## Flow Diagram
 
 ```text
         New
@@ -72,10 +130,8 @@ A process moves through different states during its lifecycle.
          ↓
       Running
       ↙     ↘
-Waiting     Ready
-   ↓
- Ready
-   ↓
+ Waiting    Ready
+    ↓
 Running
    ↓
 Terminated
@@ -83,139 +139,145 @@ Terminated
 
 ---
 
-## 1. New
+## New
 
-Process has just been created.
+Process is created.
 
 Example:
 Opening Chrome.
 
 ---
 
-## 2. Ready
+## Ready
 
-Process is ready to execute but waiting for CPU.
+Waiting for CPU.
 
 Example:
-Chrome is loaded in memory and waiting for CPU time.
+Chrome loaded but waiting.
 
 ---
 
-## 3. Running
+## Running
 
-CPU is executing the process.
+CPU executing.
 
 Example:
-You are actively browsing a website.
+Watching YouTube.
 
 ---
 
-## 4. Waiting / Blocked
+## Waiting / Blocked
 
-Process is waiting for I/O or some event.
+Waiting for I/O.
 
 Example:
-Chrome waiting for internet data.
+Chrome waiting for network response.
 
 ---
 
-## 5. Terminated
+## Terminated
 
-Process execution has completed.
+Process finished.
 
 Example:
-You closed Chrome.
+Closed Chrome.
 
 ---
 
 # 📌 Process Control Block (PCB)
 
-PCB is a data structure maintained by the Operating System to store all information related to a process. Every process has its own PCB.
+PCB stores all process information.
 
-### Interview Answer
+Think of PCB as:
 
-PCB is a data structure used by the OS to manage and track a process.
+```text
+Identity Card of Process
+```
 
----
-
-## PCB Structure
+Contains:
 
 ```text
 PCB
 │
-├── Process ID (PID)
-├── Process State
+├── PID
+├── State
 ├── Program Counter
 ├── CPU Registers
-├── Scheduling Information
-├── Memory Information
-├── I/O Information
-└── Accounting Information
-```
-
-### Easy Memory Trick
-
-```text
-PID
-State
-PC
-Registers
-Memory
-Scheduling
-I/O
+├── Scheduling Info
+├── Memory Info
+├── I/O Info
 ```
 
 ---
 
-## Why PCB is Important?
+## Why PCB?
 
 Without PCB:
 
-* OS cannot manage processes
-* Context switching cannot happen
-* Scheduling becomes impossible
+* OS loses track of process
+* Scheduling impossible
+* Context switching impossible
 
-### One-Liner
+---
 
-PCB is the identity card of a process.
+# 📌 Program vs Process
+
+| Program        | Process       |
+| -------------- | ------------- |
+| Passive        | Active        |
+| Stored on Disk | Loaded in RAM |
+| Static         | Dynamic       |
+| No execution   | Running       |
+
+---
+
+Example:
+
+```text
+node server.js = Program
+Running API Server = Process
+```
+
+Backend interviews ask this often.
 
 ---
 
 # 📌 Process Memory Layout
 
-Every process generally contains four sections.
+Each process contains:
 
 ```text
-Code (Text)
-      ↓
+Code
+ ↓
 Data
-      ↓
+ ↓
 Heap
-      ↓
+ ↓
 Stack
 ```
 
+---
+
 ## Code Section
 
-Stores program instructions.
+Stores instructions.
 
 ---
 
 ## Data Section
 
-Stores global and static variables.
+Stores global/static variables.
 
 ---
 
 ## Heap
 
-Stores dynamically allocated memory.
+Dynamic memory.
 
 Examples:
 
 * malloc()
-* calloc()
-* realloc()
+* new
 
 ---
 
@@ -223,267 +285,210 @@ Examples:
 
 Stores:
 
-* Local variables
-* Function calls
-* Return addresses
-
-### Interview Question
-
-What are the sections of a process?
-
-Answer:
-Code, Data, Heap, and Stack.
+* function calls
+* local variables
+* return addresses
 
 ---
 
-# 📌 Program vs Process
+# 📌 CPU Bound vs I/O Bound
 
-| Feature        | Program | Process   |
-| -------------- | ------- | --------- |
-| Nature         | Passive | Active    |
-| Stored In      | Disk    | Memory    |
-| Resource Usage | No      | Yes       |
-| Lifetime       | Longer  | Temporary |
-| Type           | Static  | Dynamic   |
+## CPU Bound
 
-### Example
+Uses CPU most.
 
-```text
-VSCode.exe
-      ↓ Open
-VS Code Process
-```
+Examples:
 
-### One-Liner
-
-Program is passive; Process is active.
+* Video rendering
+* AI model training
 
 ---
 
-# 📌 Types of Processes
+## I/O Bound
 
-## CPU Bound Process
+Waits for input/output.
 
-Spends most of its time using CPU.
+Examples:
 
-### Examples
-
-* Video Rendering
-* Matrix Calculations
-* AI Training
-
-### Interview Point
-
-Needs more CPU power than I/O.
+* Database query
+* File reading
+* API call
 
 ---
 
-## I/O Bound Process
+# 📌 Message Passing
 
-Spends most of its time waiting for I/O operations.
-
-### Examples
-
-* File Reading
-* Database Queries
-* Network Requests
-
-### Interview Point
-
-Needs more I/O than CPU.
-
----
-
-# 📌 Multiprogramming
-
-Multiple programs stay in memory simultaneously.
-
-When one process waits for I/O, CPU executes another process.
-
-```text
-Process A Waiting
-        ↓
-CPU Switches
-        ↓
-Process B Runs
-```
-
-### Goal
-
-Increase CPU utilization.
-
----
-
-# 📌 Multitasking
-
-CPU rapidly switches between multiple tasks.
-
-```text
-Chrome
-   ↓
-VS Code
-   ↓
-Spotify
-   ↓
-CPU Switching
-```
-
-### Goal
-
-Improve responsiveness.
-
----
-
-# 📌 Multiprocessing
-
-System contains multiple CPUs.
-
-```text
-CPU 1 → Chrome
-CPU 2 → VS Code
-```
-
-### Goal
-
-Improve performance and throughput.
-
----
-
-# 📌 Message Passing System
-
-Message Passing allows processes to communicate without sharing the same address space.
-
-### Flow
+Processes communicate without shared memory.
 
 ```text
 Process A
-    ↓ Message
-Operating System
-    ↓ Message
+   ↓
+OS
+   ↓
 Process B
 ```
 
-### Interview Answer
+Used in:
 
-Message Passing is an IPC mechanism where processes exchange messages through the OS. It allows communication without shared memory.
+* distributed systems
+* microservices
+* containers
+
+Important in system design.
 
 ---
 
 # 📌 Zombie Process
 
-A Zombie Process is a process that has finished execution but still has an entry in the process table because the parent process has not collected its exit status.
+Process finished.
 
-### Flow
+But parent didn’t collect result.
+
+So process stays in table.
 
 ```text
-Process Finishes
-        ↓
-Terminated
-        ↓
-Entry Still Exists
-        ↓
-Zombie Process
+Finished
+   ↓
+Not cleaned
+   ↓
+Zombie
 ```
 
-### One-Liner
+---
 
-Zombie = Dead process with a living entry.
+# 🐧 Linux Connection
+
+Check processes:
+
+```bash
+ps
+top
+htop
+```
+
+Kill process:
+
+```bash
+kill PID
+```
+
+Background process:
+
+```bash
+jobs
+```
+
+Find process:
+
+```bash
+ps aux | grep chrome
+```
+
+Very important for DevOps.
 
 ---
 
-# 📌 Modern Operating Systems
+# ☁ AWS / Cloud Connection
 
-### Interview Question
+Inside EC2:
 
-Modern Operating Systems are?
+```text
+Node Server = Process
+Nginx = Process
+MySQL = Process
+Docker = Process
+```
 
-### Answer
+CloudWatch monitors these processes.
 
-Interrupt Driven Operating Systems.
+If process crashes:
 
-### Why?
-
-CPU responds whenever an interrupt occurs instead of continuously checking devices.
-
----
-
-# 📌 Thread File Sharing
-
-### Interview Question
-
-If one thread opens a file with read permission, can another thread read it?
-
-### Answer
-
-Yes.
-
-Threads in the same process share resources, so other threads in that process can access the file.
+* app goes down
+* server unhealthy
+* auto scaling may trigger
 
 ---
 
-# 📌 Comparison
+# 🌐 Backend Connection
 
-## Multiprogramming vs Multitasking vs Multiprocessing
+Backend servers create processes.
 
-| Feature   | Multiprogramming | Multitasking        | Multiprocessing    |
-| --------- | ---------------- | ------------------- | ------------------ |
-| CPU       | Single           | Single              | Multiple           |
-| Goal      | CPU Utilization  | User Responsiveness | Performance        |
-| Switching | On Waiting       | Frequent            | Parallel Execution |
+Examples:
 
-### One-Liner
+```text
+Node.js API server
+Java Spring server
+Python Flask server
+PostgreSQL server
+Redis server
+```
 
-Multiprogramming keeps CPU busy, multitasking improves responsiveness, and multiprocessing improves performance.
+Understanding process helps in:
+
+* concurrency
+* worker queues
+* scaling
+* load balancing
 
 ---
 
-# 🎯 Most Asked Interview Questions
+# 🎯 Interview Questions
 
-### Q1. What is a Process?
+### What is a Process?
 
 A process is a program in execution.
 
 ---
 
-### Q2. What are the states of a process?
+### Process vs Program?
 
-New, Ready, Running, Waiting, and Terminated.
+Program is passive.
 
----
-
-### Q3. What is PCB?
-
-PCB is a data structure used by the OS to store process information.
+Process is active.
 
 ---
 
-### Q4. Why is PCB required?
+### What is PCB?
 
-PCB helps the OS manage, schedule, and switch processes.
-
----
-
-### Q5. What is the difference between Program and Process?
-
-Program is passive; Process is active.
+Data structure storing process info.
 
 ---
 
-### Q6. What is Zombie Process?
+### Why PCB?
 
-A terminated process whose entry still exists in the process table.
-
----
-
-### Q7. What are CPU Bound and I/O Bound processes?
-
-CPU Bound spends more time using CPU, while I/O Bound spends more time waiting for I/O.
+To manage process and context switching.
 
 ---
 
-### Q8. What is Message Passing?
+### Process States?
 
-An IPC mechanism where processes communicate through messages.
+New, Ready, Running, Waiting, Terminated.
+
+---
+
+### Zombie Process?
+
+Finished process whose entry still exists.
+
+---
+
+### CPU Bound vs I/O Bound?
+
+CPU Bound uses CPU more.
+
+I/O Bound waits for I/O more.
+
+---
+
+# ⚠ Common Mistakes
+
+Process ≠ Program
+
+PCB ≠ Process
+
+Zombie ≠ Running Process
+
+CPU Bound ≠ I/O Bound
 
 ---
 
@@ -492,78 +497,57 @@ An IPC mechanism where processes communicate through messages.
 * Process = Program in execution
 * Program = Passive
 * Process = Active
-* PCB = Process information
+* PCB = Process data
 * New → Ready → Running → Waiting → Terminated
-* Stack = Local variables
+* Stack = Function calls
 * Heap = Dynamic memory
 * CPU Bound = More CPU
-* I/O Bound = More I/O
-* Multiprogramming = CPU utilization
-* Multitasking = Responsiveness
-* Multiprocessing = Multiple CPUs
-* Zombie = Dead process with PCB entry
+* I/O Bound = More waiting
+* Zombie = Finished but not cleaned
 
 ---
 
-# 🎤 Interview One-Liners
+# 🧠 Memory Trick
 
-### What is a Process?
+```text
+Program = Recipe
+Process = Cooking
+PCB = Order Slip
+CPU = Chef
+```
 
-A running program.
-
-### What is PCB?
-
-Identity card of a process.
-
-### What is Zombie Process?
-
-A terminated process whose entry still exists.
-
-### What is Message Passing?
-
-Communication between processes without shared memory.
-
-### What is CPU Bound Process?
-
-Process that spends most time using CPU.
-
-### What is I/O Bound Process?
-
-Process that spends most time waiting for I/O.
-
----
-
-# 📌 Practical / Industry Notes
-
-Every application creates processes:
-
-* Chrome
-* VS Code
-* Docker
-* Spotify
-
-Operating systems manage thousands of processes using PCBs, scheduling algorithms, and process states.
+Easy to remember.
 
 ---
 
 # 🎯 Career Takeaway
 
-Master these topics:
+This chapter is one of the most important in OS.
+
+Master:
 
 ✅ Process
-
 ✅ Process States
-
 ✅ PCB
-
 ✅ Program vs Process
-
+✅ Process Memory Layout
+✅ Zombie Process
 ✅ CPU Bound vs I/O Bound
 
-✅ Message Passing
+These are heavily asked in:
 
-✅ Zombie Process
+* OS interviews
+* backend interviews
+* Linux interviews
+* DevOps interviews
+* system design discussions
 
-✅ Multiprogramming vs Multitasking vs Multiprocessing
+---
 
-These concepts are heavily used in Threads, Scheduling, Synchronization, Deadlocks, and System Design discussions.
+# 📈 Progress
+
+* [x] Day 01 - Introduction to OS
+* [x] Day 02 - Process
+* [ ] Day 03 - Threads
+
+Next Topic: **Threads**
