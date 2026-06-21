@@ -52,15 +52,15 @@ function App() {
         <Link to={"/products"} className="underline  text-blue-480">
           Go To Products
         </Link>
-        <Link to={"/products/mobile"} className="underline  text-blue-480">
+        {/* <Link to={"/products/mobile"} className="underline  text-blue-480">
           Go To mobile
         </Link>
         <Link to={"/products/laptop"} className="underline  text-blue-480">
           Go To laptop
         </Link>
         <Link to={"/products/tvs"} className="underline  text-blue-480">
-          Go To tvs
-        </Link>
+          Go To tvs */}
+        {/* </Link> */}
       </h1>
     </>
   );
