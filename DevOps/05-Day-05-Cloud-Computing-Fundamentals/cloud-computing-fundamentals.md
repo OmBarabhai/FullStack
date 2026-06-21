@@ -1,18 +1,3 @@
-This is good, but I’d improve it the same way as previous days:
-
-Main missing things:
-
-1. **Real-world business problem first**
-2. **Why cloud was invented**
-3. **Better AWS global infra explanation**
-4. **Better IaaS/PaaS/SaaS memory**
-5. **System design relation**
-6. **Stronger revision structure**
-
-Here’s the improved final Day 05:
-
----
-
 # ☁️ Day 05 - Cloud Computing Fundamentals
 
 ## 📌 Goal
