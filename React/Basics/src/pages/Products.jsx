@@ -14,13 +14,13 @@ function Products() {
         <br />
       </h1>
 
-      {/* <Link to="/products/mobile">Mobile</Link>
+      <Link to="/products/mobile">Mobile</Link>
       <br />
 
       <Link to="/products/laptop">Laptop</Link>
       <br />
 
-      <Link to="/products/tvs">TVs</Link> */}
+      <Link to="/products/tvs">TVs</Link>
     </>
   );
 }
