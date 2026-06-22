@@ -1,188 +1,208 @@
-# 🚀 Day 05 - Facebook ER Diagram Case Study
+# 🚀 Day 06 - Facebook ER Diagram Case Study
 
-> Real-world ER Design Practice
+> Real-world ER design using Facebook System
 
 ---
 
 # 📌 Problem Statement
 
-Design the database for Facebook.
+Design Facebook database.
 
 Features:
 
-* User profile
-* Friend system
-* Posts
-* Likes
-* Comments
-
-This is how real companies start.
-
-Not by tables.
-
-By features.
+- User Profile
+- Add Friends
+- Create Posts
+- Like Posts
+- Comment on Posts
 
 ---
 
-# Step 1: Identify Features
+# 📌 Lecture Reference
 
-System should support:
+![Lecture Intro](../Images/Chapter_4/fb.png)
 
-* User creates profile
-* User adds friends
-* User creates posts
-* User likes posts
-* User comments on posts
+---
 
-Stored:
+# Step 1 - Identify Features
 
+Before designing ER:
+
+Understand what system does.
+
+Questions:
+
+- What can user do?
+- What data gets stored?
+
+Features:
+
+- Profile creation
+- Add friends
+- Create posts
+- Like posts
+- Comment on posts
+
+---
 
 ![Features](../Images/Chapter_4/fb_Feature.png)
 
 ---
 
-# Step 2: Identify Entities
-
-From features:
-
-```text
-User_Profile
-User_Post
-Post_Comment
-Post_Like
-```
+# Step 2 - Identify Entity Sets + Attributes
 
 Rule:
 
 ```text
 Nouns = Entities
-```
+Properties = Attributes
+````
 
-Stored:
+Entities:
 
-
-![Entities](../Images/Chapter_4/fb_EntitySets.png)
-
----
-
-# Step 3: Identify Attributes
+* User_Profile
+* User_Post
+* Post_Comment
+* Post_Like
 
 ---
 
 ## User_Profile
 
-```text
-User_ID
-Name
-Username
-Email
-Password
-Contact_No
-DOB
-Age
-```
+* User_ID
+* Name
+* Username
+* Email
+* Password
+* Contact_No
+* DOB
+* Age (derived)
 
 ---
 
 ## User_Post
 
-```text
-Post_ID
-Text_Content
-Image
-Video
-Created_At
-Modified_At
-```
+* Post_ID
+* Text_Content
+* Image
+* Video
+* Created_At
+* Modified_At
 
 ---
 
 ## Post_Comment
 
-```text
-Comment_ID
-Text_Content
-Timestamp
-```
+* Comment_ID
+* Text_Content
+* Timestamp
 
 ---
 
 ## Post_Like
 
-```text
-Like_ID
-Timestamp
-```
-
-Stored:
-
-
-![Attributes](../Images/Chapter_4/fb_ER.png)
+* Like_ID
+* Timestamp
 
 ---
 
-# Step 4: Identify Relationships
+![Entity Sets + Attributes](../Images/Chapter_4/fb_EntitySets.png)
+
+---
+
+# Step 3 - Identify Relationships & Constraints
+
+Rule:
+
+```text
+Actions = Relationships
+```
 
 ---
 
 ## Friendship
 
-```text
 User ↔ User
-M:N
-```
+
+(M:N)
 
 ---
 
 ## Posts
 
-```text
 User → Post
-1:N
-```
+
+(1:N)
 
 ---
 
 ## Comments
 
-```text
-User → Comment
-1:N
-Post → Comment
-1:N
-```
+User → Comment (1:N)
+
+Post → Comment (1:N)
 
 ---
 
 ## Likes
 
-```text
-User → Like
-1:N
-Post → Like
-1:N
-```
+User → Like (1:N)
 
-Stored:
+Post → Like (1:N)
+
+---
 
 ![Relationships](../Images/Chapter_4/fb_RelConst.png)
 
 ---
 
-# Step 5: Final ER Diagram
+# Step 4 - Final ER Diagram
 
-Final combined diagram:
-
-Stored:
-
+Complete ERD:
 
 ![Final ER Diagram](../Images/Chapter_4/fb_ERDig.png)
 
 ---
 
-# 📌 Learning Formula
+# 📌 System Design Connection
 
-Always solve like:
+This becomes:
+
+Services:
+
+* User Service
+* Post Service
+* Comment Service
+* Like Service
+* Friendship Service
+
+Tables:
+
+```text
+users
+posts
+comments
+likes
+friendships
+```
+
+LLD:
+
+```java
+class User {}
+class Post {}
+class Comment {}
+class Like {}
+class Friendship {}
+```
+
+ER → Tables → Classes → APIs
+
+---
+
+# 📌 Core Learning
+
+Think like this:
 
 ```text
 Features
@@ -193,98 +213,17 @@ Attributes
 ↓
 Relationships
 ↓
-Cardinality
-↓
-Participation
+Constraints
 ↓
 ER Diagram
+↓
+Database
+↓
+Backend
+↓
+System Design
 ```
 
-This is the permanent process.
+This is the real engineering flow.
 
----
-
-# 📌 System Design Connection
-
-Facebook HLD:
-
-```text
-User Service
-Post Service
-Comment Service
-Like Service
-Friend Service
 ```
-
-Entities become services.
-
----
-
-Database tables:
-
-```text
-users
-posts
-comments
-likes
-friendships
-```
-
-Entities become tables.
-
----
-
-LLD:
-
-```java
-class User
-class Post
-class Comment
-class Like
-```
-
-Entities become classes.
-
----
-
-# 📌 Interview Questions
-
-### How do you start ER design?
-
-Start with features.
-
----
-
-### How do you identify entities?
-
-Find nouns.
-
----
-
-### How do you identify relationships?
-
-Find actions.
-
----
-
-### How do you identify cardinality?
-
-Ask:
-
-How many?
-
----
-
-# 📌 Quick Revision
-
-```text
-Nouns = Entities
-Properties = Attributes
-Actions = Relationships
-Numbers = Cardinality
-Rules = Constraints
-```
-
-This is how engineers think.
-
----
