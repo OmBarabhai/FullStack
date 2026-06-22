@@ -1,68 +1,71 @@
-// import Counter from "./components/Counter.jsx";
-// import User from "./components/User.jsx";
 // import { useState } from "react";
 
 // function App() {
-//     const [user, setUser] = useState({
-//     name: "",
+//   const [userData, setUserData] = useState({
+//     fname: "",
 //     email: "",
+//     phone: "",
 //   });
-
-//   function submit() {
-//   alert(`Name:${user.name}; \nEmail:${user.email}`);
+//   const onSubmit = (e) => {
+//     e.preventDefault();
+//     console.log(userData);
 // }
 //   return (
-
-//     <>
-//       <h1>Counter</h1>
-//       <Counter initialValue={90} />
-//       <br/>
-//       <User />
-//       <br />
-//       <h1>User </h1>
-//       <input
-//         type="text"
-//         placeholder="Enter Your Name"
-//         value={user.name}
-//         onChange={(event) =>
-//           setUser({ ...user, name: event.target.value })
-//         }
-//       />
-//       <input
-//         type="email"
-//         placeholder="Enter Your Email"
-//         value={user.email}
-//         onChange={(event) =>
-//           setUser({ ...user, email: event.target.value })
-//         }
-//       />
-//       <button onClick={submit}>Submit</button>
-//     </>
+//     <div>
+//       <form action="" onSubmit={onSubmit}>
+//         <div>
+//           <label htmlFor="fname">Name: </label>
+//           <input
+//             type="text"
+//             name="fname"
+//             id="fname"
+//             value={userData.fname}
+//             onChange={(e) => {
+//               setUserData({ ...userData, fname: e.target.value });
+//             }}
+//           />
+//         </div>
+//         <div>
+//           <label htmlFor="email">Email: </label>
+//           <input
+//             type="email"
+//             name="email"
+//             id="email"
+//             value={userData.email}
+//             onChange={(e) => {
+//               setUserData({ ...userData, email: e.target.value });
+//             }}
+//           />
+//         </div>
+//         <div>
+//           <label htmlFor="phone">Phone: </label>
+//           <input
+//             type="tel"
+//             name="phone"
+//             id="phone"
+//             value={userData.phone}
+//             onChange={(e) => {
+//               setUserData({ ...userData, phone: e.target.value });
+//             }}
+//           />
+//         </div>
+//         <div>
+//           <button className="border border-black px-5 py-2">submit</button>
+//         </div>
+//       </form>
+//     </div>
 //   );
 // }
 // export default App;
-import { Link } from "react-router-dom";
+
+import Login from "./pages/Login";
+import CreateUserId from "./pages/CreateUserId";
 function App() {
-  return (
-    <>
-      <h1>
-        Hello, Welcome To Home
-        <br />
-        <br />
-        <Link to={"/products"} className="underline  text-blue-480">
-          Go To Products
-        </Link>
-        {/* <Link to={"/products/mobile"} className="underline  text-blue-480">
-          Go To mobile
-        </Link>
-        <Link to={"/products/laptop"} className="underline  text-blue-480">
-          Go To laptop
-        </Link>
-        <Link to={"/products/tvs"} className="underline  text-blue-480">
-          Go To tvs */}
-        {/* </Link> */}
-      </h1>
-    </>
+  return(
+    <div>
+      <Login></Login>
+     <CreateUserId> </CreateUserId>
+    </div>
   );
 }
 export default App;
