@@ -1,6 +1,6 @@
-# ⚛️ Day 4 - React API, Axios & React Query
+# ⚛️ Day 4 - Data Fetching & State Management
 
-> Goal: Understand API communication, Axios fetching, and React Query state management.
+> Goal: Understand API communication, Axios fetching, React Query, Context API, and Redux Toolkit.
 
 ---
 
@@ -10,7 +10,7 @@
 1. API Basics
 2. Fetch vs Axios
 3. Axios GET Request
-4. useEffect + useState
+4. useState + useEffect
 5. React Query
 6. QueryClient
 7. QueryClientProvider
@@ -20,6 +20,19 @@
 11. Loading & Error Handling
 12. Caching
 13. Auto Refetch
+14. Prop Drilling
+15. Context API
+16. When Context API is not enough
+17. Redux Toolkit
+18. Server State vs Client State
+```
+
+---
+
+# Learning Order
+
+```text
+API → Fetch → Axios → useEffect → React Query → Context API → Redux Toolkit
 ```
 
 ---
@@ -56,9 +69,7 @@ API = Messenger between frontend and backend
 
 # 2. Fetch vs Axios
 
-Both fetch data from API.
-
----
+Both are used to fetch data.
 
 ## Fetch
 
@@ -85,35 +96,19 @@ console.log(res.data);
 Benefits:
 
 ✅ Auto JSON parsing
-✅ Cleaner
 ✅ Better error handling
-✅ Easier syntax
+✅ Cleaner syntax
+✅ Easy to use
 
 Think:
 
 ```text
-Axios = Better fetch
+Axios = Better Fetch
 ```
 
 ---
 
-# Axios Flow
-
-```text
-App
- ↓
-Axios
- ↓
-API
- ↓
-Response
- ↓
-State update
-```
-
----
-
-# 3. Axios Project (Old Way)
+# Axios Project
 
 Code:
 
@@ -142,26 +137,26 @@ useEffect(() => {
 Purpose:
 
 ```text
-Runs API call on first render
+Runs API on first render
 ```
 
 Flow:
 
 ```text
 Render
- ↓
+↓
 useEffect
- ↓
+↓
 API call
- ↓
+↓
 State update
- ↓
+↓
 Re-render
 ```
 
 ---
 
-# Project Output (Axios)
+# Axios Project Output
 
 ![Project Output](./Images/Project.png)
 
@@ -171,19 +166,19 @@ Re-render
 
 Manual work:
 
-❌ Manage loading
-❌ Manage error
-❌ Manage caching
-❌ Refetch manually
-❌ Duplicate requests
+❌ Loading state
+❌ Error state
+❌ Caching
+❌ Refetching
+❌ Duplicate API calls
 
 This is where React Query comes.
 
 ---
 
-# 4. What is React Query?
+# 3. React Query
 
-React Query manages server data.
+React Query manages server state.
 
 Handles:
 
@@ -191,33 +186,32 @@ Handles:
 Lifecycle
 States
 Caching
-Auto-refetch
-Real-time sync
+Auto Refetch
+Real-time Sync
 ```
 
 Think:
 
 ```text
 Axios fetches data
-
 React Query manages data
 ```
 
 ---
 
-# React Query Diagram
+# React Query Project
 
 ![React Query](./Images/Qproject.png)
 
 ---
 
-# Full Query Architecture
+# Query Flow Architecture
 
 ![Query Flow](./Images/Query.png)
 
 ---
 
-# 5. Installing React Query
+# Install React Query
 
 ```bash
 npm install @tanstack/react-query
@@ -225,7 +219,7 @@ npm install @tanstack/react-query
 
 ---
 
-# 6. QueryClient
+# QueryClient
 
 Creates cache manager.
 
@@ -236,30 +230,30 @@ const queryClient = new QueryClient();
 Purpose:
 
 ```text
-Stores and manages API cache
+Stores API cache
 ```
 
 ---
 
-# 7. QueryClientProvider
+# QueryClientProvider
 
 Wraps app.
 
 ```jsx
 <QueryClientProvider client={queryClient}>
-   <Quote />
+  <Quote />
 </QueryClientProvider>
 ```
 
 Purpose:
 
 ```text
-Provides query system globally
+Provides query access globally
 ```
 
 ---
 
-# 8. useQuery
+# useQuery
 
 Main hook.
 
@@ -270,17 +264,17 @@ const { data, status } = useQuery({
 });
 ```
 
-Purpose:
+Handles:
 
-✅ API call
-✅ Loading state
-✅ Error state
-✅ Cache data
-✅ Auto refetch
+✅ API calls
+✅ Loading
+✅ Errors
+✅ Cache
+✅ Refetch
 
 ---
 
-# 9. queryKey
+# queryKey
 
 Unique cache id.
 
@@ -296,11 +290,9 @@ queryKey = unique storage key
 
 ---
 
-# 10. queryFn
+# queryFn
 
-Actual function to fetch data.
-
-Code:
+Actual function.
 
 ```jsx
 async function fetchQuote() {
@@ -313,31 +305,9 @@ async function fetchQuote() {
 }
 ```
 
-Flow:
-
-```text
-queryFn
- ↓
-Axios
- ↓
-API
- ↓
-Return data
-```
-
 ---
 
-# 11. Status Handling
-
-React Query gives:
-
-```text
-pending
-success
-error
-```
-
-Code:
+# Status Handling
 
 ```jsx
 if (status === "error") return <p>Error</p>;
@@ -350,103 +320,126 @@ if (status === "pending") return <p>Pending</p>;
 
 | Axios          | React Query  |
 | -------------- | ------------ |
-| Fetches data   | Manages data |
-| Manual loading | Automatic    |
-| Manual error   | Automatic    |
-| No caching     | Caching      |
-| No refetch     | Auto refetch |
+| Fetches Data   | Manages Data |
+| Manual Loading | Automatic    |
+| Manual Error   | Automatic    |
+| No Cache       | Cache        |
+| No Refetch     | Auto Refetch |
 
 Think:
 
 ```text
 Axios = Engine
-
 React Query = Driver
 ```
 
 ---
 
-# Final Project (React Query)
+# 4. State Management
 
-Features:
+Problems:
 
-✅ Random quote fetch
-✅ Author fetch
-✅ Loading state
-✅ Error state
-✅ Caching
-✅ Auto refetch
-✅ Cleaner than useEffect
+* Prop drilling
+* Passing state deeply
 
 ---
 
-# Full Flow
+# State Management Overview
+
+![State Management](./Images/State_MgMt.png)
+
+---
+
+# Prop Drilling Problem
+
+Passing data through multiple components.
+
+Problem:
 
 ```text
-App
- ↓
-Provider
- ↓
-useQuery
- ↓
-queryFn
- ↓
-axios
- ↓
-API
- ↓
-cache
- ↓
-UI render
+App → Header → Icon → Cart
+```
+
+Hard to maintain.
+
+---
+
+# Context API
+
+Solves prop drilling.
+
+Steps:
+
+```text
+1. createContext()
+2. Provide values
+3. Subscribe and use
 ```
 
 ---
 
-# Interview Questions
+# Context API Diagram
 
-## What is API?
-
-Communication layer between frontend and backend.
+![Context API](./Images/State_MgMt_Context.png)
 
 ---
 
-## What is Axios?
+# When Context API is not enough?
 
-Library for making API requests.
+Use Redux Toolkit when:
+
+* Large app
+* Complex state
+* Many components
+* Multiple actions
 
 ---
 
-## Difference between fetch and axios?
+# React Query vs Redux Toolkit
+
+| React Query  | Redux Toolkit  |
+| ------------ | -------------- |
+| Server State | Client State   |
+| API Data     | UI Data        |
+| Cache        | Global State   |
+| Auto Refetch | Manual Updates |
+
+Think:
 
 ```text
-Fetch → manual JSON
-
-Axios → auto JSON
+React Query = Backend Data
+Redux Toolkit = Frontend Data
 ```
 
 ---
 
-## What is React Query?
+# Redux Architecture
 
-Library for fetching and managing server state.
+![Redux Architecture](./Images/Redux.png)
+
+Flow:
+
+```text
+UI Event
+↓
+Dispatch Action
+↓
+Redux Store
+↓
+Reducer
+↓
+State Update
+↓
+UI Re-render
+```
 
 ---
 
-## What is QueryClient?
+# Install Redux Toolkit
 
-Manages cache and queries.
-
----
-
-## What is queryKey?
-
-Unique identifier for caching.
-
----
-
-## What is queryFn?
-
-Function used for API call.
+```bash
+npm install @reduxjs/toolkit react-redux
+```
 
 ---
 
@@ -457,23 +450,15 @@ API = communication
 
 Fetch = manual API call
 
-Axios = cleaner API call
+Axios = better fetch
 
 useEffect = trigger API
 
-useState = store API data
+React Query = server state manager
 
-React Query = manage server data
+Context API = solves prop drilling
 
-QueryClient = cache manager
-
-Provider = global access
-
-useQuery = API + cache + loading + error
-
-queryKey = cache ID
-
-queryFn = fetch function
+Redux Toolkit = client/global state manager
 ```
 
 ---
@@ -481,40 +466,34 @@ queryFn = fetch function
 # What You Finished Today
 
 ✅ API Basics
-✅ Fetch
-✅ Axios
+✅ Fetch vs Axios
 ✅ useEffect
-✅ useState
 ✅ React Query
 ✅ QueryClient
 ✅ QueryClientProvider
 ✅ useQuery
 ✅ queryKey
 ✅ queryFn
-✅ Loading State
-✅ Error State
+✅ Loading & Error Handling
 ✅ Caching
 ✅ Auto Refetch
+✅ Prop Drilling
+✅ Context API
+✅ Redux Toolkit
 
-Next:
+---
+
+# Next
 
 ```text
+Redux Toolkit Practical
+createSlice
+configureStore
+useSelector
+useDispatch
 Mutations
 POST API
-DELETE API
 PUT API
+DELETE API
 Pagination
-Infinite Scroll
-Optimistic Updates
-```
-
-Folder:
-
-```text
-Day_4_React_API_AXIOS/
-└── Images/
-    ├── API.png
-    ├── Project.png
-    ├── Qproject.png
-    └── Query.png
 ```
