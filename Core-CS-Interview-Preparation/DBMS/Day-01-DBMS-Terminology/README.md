@@ -22,35 +22,13 @@ A DBMS is software that allows users and applications to efficiently store, retr
 
 ### One-Liner
 
-DBMS = software that manages databases.
+```text
+DBMS = software that manages databases
+```
 
 ---
 
-# 📌 Why does it matter?
-
-Without DBMS:
-
-* Data duplication increases
-* Data inconsistency occurs
-* Security becomes weak
-* Backup becomes difficult
-* Multi-user access becomes messy
-
-DBMS solves these problems.
-
-Why companies use it:
-
-* customer data
-* transactions
-* inventory
-* logs
-* analytics
-
-Everything depends on structured data.
-
----
-
-# 📌 Core Idea
+# 📌 Core Flow
 
 ```text
 User
@@ -60,141 +38,81 @@ DBMS
 Database
 ```
 
-DBMS controls:
+Image:
 
-* Storage
-* Retrieval
-* Update
-* Delete
-* Security
-* Backup
-* Recovery
-
-Main goal:
-
-Centralized data management.
+![DBMS Architecture](../Images/Chapter_1/DBMS_VS_FLAT_FILE_Sys.png)
 
 ---
 
-# 📌 Key Concepts
+# 📌 Why DBMS?
 
----
+Without DBMS:
 
-# Benefits of DBMS
+❌ Data redundancy
+❌ Data inconsistency
+❌ Poor security
+❌ Hard backup
+❌ Difficult multi-user handling
 
-* Reduced redundancy
-* Better consistency
-* Better security
-* Easy backup
-* Multi-user support
-* Data sharing
-* Fast querying
-* Integrity constraints
+With DBMS:
+
+✅ Centralized storage
+✅ Better security
+✅ Consistency
+✅ Easy backup
+✅ Easy querying
 
 ---
 
 # 📌 DBMS vs File System
 
-| Feature      | DBMS   | File System |
-| ------------ | ------ | ----------- |
-| Redundancy   | Low    | High        |
-| Security     | High   | Low         |
-| Data Sharing | Easy   | Hard        |
-| Consistency  | Strong | Weak        |
-| Backup       | Easy   | Hard        |
-| Scalability  | High   | Low         |
+| Feature     | DBMS   | File System |
+| ----------- | ------ | ----------- |
+| Redundancy  | Low    | High        |
+| Security    | High   | Low         |
+| Backup      | Easy   | Hard        |
+| Consistency | Strong | Weak        |
+| Querying    | Easy   | Hard        |
 
----
+Memory:
 
-### Memory Trick
-
+```text
 File System = raw storage
 DBMS = smart storage
-
----
-
-## Worked Example: File System vs DBMS
-
-Suppose a college stores student data in 3 Excel files:
-
-```text
-students.xlsx
-fees.xlsx
-attendance.xlsx
 ```
-
-Student "Om" exists in all files.
-
-Problem:
-
-* same data repeated
-* if phone number changes, update everywhere
-* inconsistency risk
-
-This is redundancy.
-
-Now in DBMS:
-
-```text
-Student Table
-Fee Table
-Attendance Table
-```
-
-Linked using:
-
-```text
-StudentID
-```
-
-Update once.
-
-Everything syncs.
-
-This is why DBMS is better.
 
 ---
 
 # 📌 Schema
 
-## Definition
+Schema is the structure/blueprint of the database.
 
-Schema is the blueprint of the database.
-
-It defines:
+Defines:
 
 * tables
 * columns
 * relationships
 * constraints
 
----
-
-### Example
+Example:
 
 ```text
 Student(ID, Name, Age)
 ```
 
-This structure = Schema
+One-liner:
 
----
-
-### One-Liner
-
-Schema = structure of database.
+```text
+Schema = database structure
+```
 
 ---
 
 # 📌 Instance
 
-## Definition
+Instance is actual data stored at a given time.
 
-Actual data stored at a specific time.
-
----
-
-### Example
+Example:
 
 Today:
 
@@ -211,45 +129,40 @@ Tomorrow:
 3 Aman
 ```
 
-Schema same.
+One-liner:
 
-Instance changed.
-
----
-
-### One-Liner
-
-Instance = current data snapshot.
+```text
+Instance = current data snapshot
+```
 
 ---
 
 # 📌 Schema vs Instance
 
-| Schema         | Instance      |
-| -------------- | ------------- |
-| Structure      | Data          |
-| Rarely Changes | Changes Often |
-| Blueprint      | Snapshot      |
+| Schema         | Instance           |
+| -------------- | ------------------ |
+| Structure      | Actual Data        |
+| Rarely Changes | Frequently Changes |
+| Blueprint      | Snapshot           |
 
----
+Memory:
 
-### Interview Shortcut
-
-Schema changes rarely.
-
-Instance changes frequently.
+```text
+Schema = Design
+Instance = Live Data
+```
 
 ---
 
 # 📌 Worked Example
 
-Suppose we create:
+Schema:
 
 ```sql
-CREATE TABLE Student (
-    id INT,
-    name VARCHAR(50),
-    age INT
+CREATE TABLE Student(
+ id INT,
+ name VARCHAR(50),
+ age INT
 );
 ```
 
@@ -257,58 +170,16 @@ This is:
 
 👉 Schema
 
-Now insert:
+Insert:
 
 ```sql
-INSERT INTO Student VALUES (1, 'Om', 22);
-INSERT INTO Student VALUES (2, 'Rahul', 21);
+INSERT INTO Student VALUES (1,'Om',22);
+INSERT INTO Student VALUES (2,'Rahul',21);
 ```
 
-Current table:
-
-| id | name  | age |
-| -- | ----- | --- |
-| 1  | Om    | 22  |
-| 2  | Rahul | 21  |
-
-This is:
+This becomes:
 
 👉 Instance
-
-Now:
-
-```sql
-INSERT INTO Student VALUES (3, 'Aman', 20);
-```
-
-New instance:
-
-| id | name  | age |
-| -- | ----- | --- |
-| 1  | Om    | 22  |
-| 2  | Rahul | 21  |
-| 3  | Aman  | 20  |
-
-Observation:
-
-Schema same.
-Instance changed.
-
----
-
-### Internal Flow
-
-```text
-INSERT Query
-   ↓
-Parser checks syntax
-   ↓
-DBMS checks schema
-   ↓
-Storage manager writes data
-   ↓
-Table instance updates
-```
 
 ---
 
@@ -316,11 +187,9 @@ Table instance updates
 
 Subschema = subset of schema.
 
-Shows only relevant data to a specific user.
+Different users see different data.
 
----
-
-### Example
+Example:
 
 Hospital:
 
@@ -331,40 +200,42 @@ Doctor sees:
 
 Receptionist sees:
 
-* name
 * contact
+* billing
 
-Different views = different subschemas.
+Memory:
+
+```text
+Subschema = personalized view
+```
 
 ---
 
 # 📌 DBA (Database Administrator)
 
-DBA manages database.
-
-Responsibilities:
+Responsible for:
 
 * Security
 * Backup
 * Recovery
-* Performance tuning
-* User management
+* User control
+* Performance optimization
 
----
+One-liner:
 
-### One-Liner
-
-DBA = database manager.
+```text
+DBA = manager of database
+```
 
 ---
 
 # 📌 DBMS Architecture
 
-Architecture defines how app communicates with database.
-
 ---
 
 # Two-Tier Architecture
+
+Direct communication.
 
 ```text
 Client
@@ -372,33 +243,31 @@ Client
 Database
 ```
 
-Client directly talks to database.
+Image:
 
----
+![Two Tier](../Images/Chapter_1/TWO_TIER_ARCHITECTURE.png)
 
-## Advantages
+Advantages:
 
-* Simple
-* Fast
-* Easy
+✅ Fast
+✅ Simple
 
----
+Disadvantages:
 
-## Disadvantages
+❌ Less secure
+❌ Hard to scale
 
-* Low security
-* Hard scaling
-* Tight coupling
+Example:
 
----
-
-### Example
-
+```text
 Desktop App → MySQL
+```
 
 ---
 
 # Three-Tier Architecture
+
+Modern architecture.
 
 ```text
 Client
@@ -408,7 +277,9 @@ Business Layer
 Database
 ```
 
-Used in most modern systems.
+Image:
+
+![Three Tier](../Images/Chapter_1/THREE_TIER_ARCHITECTURE.png)
 
 ---
 
@@ -416,13 +287,13 @@ Used in most modern systems.
 
 ### Client Layer
 
-UI
+UI Layer
 
 Examples:
 
 * React
 * Angular
-* Mobile App
+* Mobile Apps
 
 ---
 
@@ -430,10 +301,10 @@ Examples:
 
 Contains:
 
+* APIs
 * validation
 * authentication
-* APIs
-* business logic
+* logic
 
 Examples:
 
@@ -445,7 +316,7 @@ Examples:
 
 ### Data Layer
 
-Stores actual data.
+Stores data.
 
 Examples:
 
@@ -455,43 +326,33 @@ Examples:
 
 ---
 
-## Advantages
+Advantages:
 
-* Better security
-* Better scalability
-* Better maintainability
-
----
-
-## Disadvantages
-
-* More complex
-
----
-
-### Memory Trick
-
-2-Tier = Client directly talks
-
-3-Tier = Client → Brain → Database
-
-Brain = Business Logic
+✅ Better security
+✅ Better scalability
+✅ Better maintainability
 
 ---
 
 # Two-Tier vs Three-Tier
 
-| Feature         | Two-Tier | Three-Tier      |
-| --------------- | -------- | --------------- |
-| Layers          | 2        | 3               |
-| Security        | Low      | High            |
-| Scalability     | Low      | High            |
-| Maintenance     | Hard     | Easy            |
-| Database Access | Direct   | Through Backend |
+| Feature  | Two-Tier | Three-Tier      |
+| -------- | -------- | --------------- |
+| Layers   | 2        | 3               |
+| Security | Low      | High            |
+| Scaling  | Hard     | Easy            |
+| Access   | Direct   | Through backend |
+
+Memory:
+
+```text
+2-Tier = Direct DB
+3-Tier = Through Backend
+```
 
 ---
 
-# 📌 Real World Example
+# 📌 Real World Mapping
 
 Comsy Project:
 
@@ -505,11 +366,11 @@ MongoDB
 
 Mapping:
 
-* Client Layer → UI
-* Business Layer → Backend
-* Data Layer → MongoDB
+Frontend = Client Layer
+Backend = Business Layer
+MongoDB = Data Layer
 
-Real-world 3-tier system.
+This is a real 3-tier architecture.
 
 ---
 
@@ -521,96 +382,68 @@ Software to manage databases.
 
 ---
 
-### Why DBMS over file system?
+### DBMS vs File System?
 
-Less redundancy, more consistency.
+DBMS reduces redundancy and improves consistency.
 
 ---
 
-### What is schema?
+### What is Schema?
 
 Structure of database.
 
 ---
 
-### What is instance?
+### What is Instance?
 
-Current data in database.
-
----
-
-### Schema vs Instance?
-
-Schema = structure
-Instance = data
+Current data snapshot.
 
 ---
 
-### What is subschema?
+### What is Subschema?
 
-Partial view of schema.
+Subset of schema.
 
 ---
 
 ### What is DBA?
 
-Database administrator.
+Person who manages database.
 
 ---
 
 ### Two-tier vs Three-tier?
 
-Direct vs backend-mediated database communication.
-
----
-
-# 📌 Common Mistakes
-
-❌ Database = DBMS
-✔ Database stores data, DBMS manages it
-
-❌ Schema = Instance
-✔ Different concepts
-
-❌ Backend = Database
-✔ Backend has logic
+Direct database communication vs backend-mediated communication.
 
 ---
 
 # 📌 Quick Revision
 
-* DBMS = manages data
-* Schema = structure
-* Instance = current data
-* Subschema = partial view
-* DBA = manager
-* File system has redundancy
-* DBMS reduces duplication
-* 2-tier = direct DB
-* 3-tier = backend in between
+```text
+DBMS = manages database
+Schema = structure
+Instance = current data
+Subschema = partial view
+DBA = manager
+
+2-Tier = Client → DB
+3-Tier = Client → Backend → DB
+```
 
 ---
 
-# 📌 Placement / Career Takeaway
+# 🎯 Placement Focus
 
-Focus heavily on:
+Must know:
 
-✔ DBMS vs File System
-✔ Schema vs Instance
-✔ 2-tier vs 3-tier
-✔ DBA responsibilities
-
-These are foundational.
+⭐ DBMS vs File System
+⭐ Schema vs Instance
+⭐ DBA
+⭐ 2-tier vs 3-tier
 
 Next:
 
 ```text
-ER Model
-→ Relational Model
-→ Keys
-→ Constraints
-→ SQL
-→ Normalization
+Day-02 → ER Model
 ```
-
-Master this before moving.

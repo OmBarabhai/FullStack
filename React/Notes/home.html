@@ -1,0 +1,45 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="text/babel">
+      var userName = prompt("Enter Name: ");
+      var designation = prompt("Enter Designation: ");
+      var productName = prompt("Enter Product Name: ");
+
+      class Product {
+        _productName;
+
+        get ProductName() {
+          return this._productName;
+        }
+
+        set ProductName(newName) {
+          if (designation === "admin") {
+            this._productName = newName;
+          } else {
+            document.write(
+              `Unauthorized: Hello ${userName} you are not authorized`,
+            );
+          }
+        }
+      }
+
+      let obj = new Product();
+
+      obj.ProductName = productName; // setter
+
+      if (obj.ProductName) {
+        document.write("Product Name: " + obj.ProductName); // getter
+      }
+    </script>
+  </body>
+</html>

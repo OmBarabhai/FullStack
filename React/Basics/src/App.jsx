@@ -61,49 +61,58 @@
 // import Login from "./pages/Login";
 // import CreateUserId from "./pages/CreateUserId";
 // import { useEffect, useState } from "react";
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
-const queryClient = new QueryClient();
+// import {
+//   QueryClient,
+//   QueryClientProvider,
+//   useQuery,
+// } from "@tanstack/react-query";
+// const queryClient = new QueryClient();
 
-import axios from "axios";
+// import axios from "axios";
 
-function Quote() {
-  async function fetchQuote() {
-    try {
-      const res = await axios({
-        method: "GET",
-        url: "https://dummyjson.com/quotes/random",
-      });
-      const quotes = res.data.quote;
-      const author = res.data.author;
+// function Quote() {
+//   async function fetchQuote() {
+//     try {
+//       const res = await axios({
+//         method: "GET",
+//         url: "https://dummyjson.com/quotes/random",
+//       });
+//       const quotes = res.data.quote;
+//       const author = res.data.author;
 
-      return quotes +" - "+author;
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  const { data, status } = useQuery({
-    queryKey: ["quote"],
-    queryFn: fetchQuote,
-  });
-  console.log(data, status);
+//       return quotes +" - "+author;
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   }
+//   const { data, status } = useQuery({
+//     queryKey: ["quote"],
+//     queryFn: fetchQuote,
+//   });
+//   console.log(data, status);
 
-  if (status === "error") return <p>Error</p>;
-  if (status === "pending") return <p>pending</p>;
+//   if (status === "error") return <p>Error</p>;
+//   if (status === "pending") return <p>pending</p>;
 
-  return <p>{data}</p>;
-}
+//   return <p>{data}</p>;
+// }
+
+// function App() {
+//   return (
+//     <div className="py-5 text-center">
+//       <QueryClientProvider client={queryClient}>
+//         <Quote />
+//       </QueryClientProvider>
+//     </div>
+//   );
+// }
+// export default App;
 
 function App() {
   return (
-    <div className="py-5 text-center">
-      <QueryClientProvider client={queryClient}>
-        <Quote />
-      </QueryClientProvider>
-    </div>
-  );
-}
+    <>
+      
+    </>
+)
+ }
 export default App;

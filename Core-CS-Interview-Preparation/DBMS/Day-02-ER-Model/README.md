@@ -10,9 +10,9 @@ ER Model (Entity Relationship Model) is a conceptual database design model.
 
 It represents:
 
-- Entities
-- Attributes
-- Relationships
+* Entities
+* Attributes
+* Relationships
 
 before converting them into tables.
 
@@ -26,7 +26,9 @@ ER model is used to design the structure of a database at a high level. It helps
 
 ### One-Liner
 
+```text
 ER Model = blueprint of database design.
+```
 
 ---
 
@@ -34,15 +36,15 @@ ER Model = blueprint of database design.
 
 Before writing SQL tables, we need to understand:
 
-- what data exists
-- how data connects
-- what relationships exist
+* what data exists
+* how data connects
+* what relationships exist
 
 Without ER model:
 
-- schema becomes messy
-- redundancy increases
-- relationships become hard to manage
+* schema becomes messy
+* redundancy increases
+* relationships become hard to manage
 
 ER modeling solves this.
 
@@ -67,83 +69,22 @@ Steps:
 
 ---
 
-# 📌 Worked Example 1 - Building a College Database
+# 📌 Full ER Model Diagram
 
-Suppose we want to build a college management system.
-
-Step 1: Identify entities
-
-```text
-Student
-Teacher
-Course
-Department
-```
+![ER Model](../Images/Chapter_2/ER_MODEL.png)
 
 ---
 
-Step 2: Add attributes
-
-Student:
-
-```text
-Student(ID, Name, Age)
-```
-
-Teacher:
-
-```text
-Teacher(ID, Name, Subject)
-```
-
-Course:
-
-```text
-Course(CourseID, Title, Credits)
-```
-
-Department:
-
-```text
-Department(DeptID, DeptName)
-```
-
----
-
-Step 3: Define relationships
-
-```text
-Student ENROLLS Course
-Teacher TEACHES Course
-Teacher BELONGS Department
-```
-
-Final ER:
-
-```text
-Student ---- Enrolls ---- Course
-Teacher ---- Teaches ---- Course
-Teacher ---- Belongs ---- Department
-```
-
-This is how real systems start.
-
----
-
-# 📌 Key Concepts
-
----
-
-# 1. Entity
+# 📌 1. Entity
 
 An entity is a real-world object that can be uniquely identified.
 
 Examples:
 
-- Student
-- Employee
-- Order
-- Product
+* Student
+* Employee
+* Order
+* Product
 
 ---
 
@@ -155,6 +96,18 @@ Has its own primary key.
 
 ![Strong Entity](../Images/Chapter_2/StrongEntity.png)
 
+Example:
+
+```text
+Student(StudentID, Name)
+```
+
+Memory:
+
+```text
+Strong = Parent
+```
+
 ---
 
 ## Weak Entity
@@ -165,38 +118,17 @@ Cannot exist alone.
 
 ![Weak Entity](../Images/Chapter_2/WeakEntity.png)
 
----
-
-# 📌 Worked Example 2 - Strong vs Weak Entity
-
-Banking system:
-
-Strong Entity:
-
-```text
-Account(AccountID, Balance)
-```
-
-Weak Entity:
+Example:
 
 ```text
 Transaction(TransactionID, Amount)
 ```
 
-Why weak?
-
-Because transaction must belong to an account.
-
-Flow:
-
-```text
-Account ---- Has ---- Transaction
-```
-
 Memory:
 
-Strong = Parent
+```text
 Weak = Child
+```
 
 ---
 
@@ -206,7 +138,9 @@ Entity related to itself.
 
 Example:
 
-Employee manages Employee.
+```text
+Employee manages Employee
+```
 
 ![Recursive Entity](../Images/Chapter_2/RecursiveEntity.png)
 
@@ -218,27 +152,37 @@ Used to break many-to-many relationships.
 
 Acts like bridge entity.
 
+Example:
+
+```text
+Enrollment(StudentID, CourseID)
+```
+
 ![Composite Entity](../Images/Chapter_2/CompositeEntity.png)
 
 ---
 
-# 2. Entity Set
+# 📌 2. Entity Set
 
 Collection of similar entities.
 
 Example:
 
+```text
 All students = Student entity set
+```
 
 ---
 
-# 3. Attribute
+# 📌 3. Attribute
 
 Properties of entities.
 
 Example:
 
+```text
 Student → Name, Age, Address
+```
 
 ---
 
@@ -248,7 +192,9 @@ Cannot be divided.
 
 Example:
 
+```text
 Age
+```
 
 ![Attribute](../Images/Chapter_2/Attribute.png)
 
@@ -260,7 +206,9 @@ Can be divided.
 
 Example:
 
+```text
 Name → First + Middle + Last
+```
 
 ![Composite Attribute](../Images/Chapter_2/Compositeattribute.png)
 
@@ -272,7 +220,9 @@ Calculated from another attribute.
 
 Example:
 
+```text
 Age from DOB
+```
 
 ![Derived Attribute](../Images/Chapter_2/Derivedattribute.png)
 
@@ -284,59 +234,30 @@ Can have multiple values.
 
 Example:
 
+```text
 Phone Numbers
+```
 
 ![Multi-Valued Attribute](../Images/Chapter_2/Multi-valuedattribute.png)
 
 ---
 
-# 4. Relationship
+# 📌 4. Relationship
 
 Shows connection between entities.
 
 Example:
 
-Writer writes Novel
-
-Consumer buys Novel
-
----
-
-## ER Model Diagram
-
-![ER Model](../Images/Chapter_2/ER_MODEL.png)
-
----
-
-# 📌 Worked Example 3 - Relationship & Cardinality
-
-Example:
-
-Students and Courses
-
-One student can join many courses.
-
-One course can have many students.
-
-So:
-
 ```text
-Student ↔ Course = Many-to-Many
+Student ENROLLS Course
+Teacher TEACHES Course
 ```
 
-To store this:
-
-```text
-Enrollment(StudentID, CourseID)
-```
-
-This bridge table converts many-to-many into relational tables.
-
-Very important for joins.
+![Relationships](../Images/Chapter_2/Relationships.png)
 
 ---
 
-# 5. Cardinality
+# 📌 5. Cardinality
 
 Defines how many entities participate.
 
@@ -344,11 +265,11 @@ Defines how many entities participate.
 
 ## One-to-One (1:1)
 
-One entity connects to one entity.
-
 Example:
 
+```text
 Person ↔ Passport
+```
 
 ![One To One](../Images/Chapter_2/Relationships/1to1.png)
 
@@ -356,11 +277,11 @@ Person ↔ Passport
 
 ## One-to-Many (1:N)
 
-One entity connects to many.
-
 Example:
 
+```text
 Department → Employees
+```
 
 ![One To Many](../Images/Chapter_2/Relationships/1toMany.png)
 
@@ -368,11 +289,11 @@ Department → Employees
 
 ## Many-to-One (N:1)
 
-Many entities connect to one.
-
 Example:
 
+```text
 Employees → Department
+```
 
 ![Many To One](../Images/Chapter_2/Relationships/Manyto1.png)
 
@@ -380,17 +301,27 @@ Employees → Department
 
 ## Many-to-Many (M:N)
 
-Many entities connect to many.
+Example:
+
+```text
+Students ↔ Courses
+```
+
+![Many To Many](../Images/Chapter_2/Relationships/ManytoMany.png)
+
+Important:
+
+M:N usually creates bridge table.
 
 Example:
 
-Students ↔ Courses
-
-![Many To Many](../Images/Chapter_2/Relationships/ManyToMany.png)
+```text
+Enrollment(StudentID, CourseID)
+```
 
 ---
 
-# 6. Participation
+# 📌 6. Participation
 
 Defines mandatory or optional involvement.
 
@@ -408,33 +339,11 @@ Participation is optional.
 
 ![Participation](../Images/Chapter_2/Relationships/TotAndPartPartition.png)
 
----
-
-### Memory Trick
-
-Total Participation = must participate
-Partial Participation = may participate
-
----
-
-# 📌 Flow
+Memory:
 
 ```text
-Real World Problem
-        ↓
-Identify Entities
-        ↓
-Find Attributes
-        ↓
-Find Relationships
-        ↓
-Define Cardinality
-        ↓
-Define Participation
-        ↓
-Draw ER Diagram
-        ↓
-Convert to Tables
+Total Participation = Must participate
+Partial Participation = Optional
 ```
 
 ---
@@ -445,35 +354,26 @@ College Database:
 
 Entities:
 
-- Student
-- Teacher
-- Course
+* Student
+* Teacher
+* Course
+* Department
 
 Relationships:
 
-- Student enrolls in Course
-- Teacher teaches Course
+```text
+Student ENROLLS Course
+Teacher TEACHES Course
+Teacher BELONGS Department
+```
 
-Attributes:
+Flow:
 
-Student:
-
-- RollNo
-- Name
-- Age
-
-Teacher:
-
-- ID
-- Name
-- Subject
-
-Course:
-
-- Code
-- Title
-
-This is how actual database design starts.
+```text
+Student ---- Enrolls ---- Course
+Teacher ---- Teaches ---- Course
+Teacher ---- Belongs ---- Department
+```
 
 ---
 
@@ -485,22 +385,18 @@ Conceptual design of database.
 
 ---
 
-### What is entity?
-
-A uniquely identifiable object.
-
----
-
 ### Strong vs Weak entity?
 
+```text
 Strong = independent
 Weak = dependent
+```
 
 ---
 
 ### What is attribute?
 
-Property of an entity.
+Property of entity.
 
 ---
 
@@ -512,7 +408,7 @@ Connection between entities.
 
 ### What is cardinality?
 
-Defines maximum relationship count.
+Defines relationship count.
 
 ---
 
@@ -542,81 +438,43 @@ Bridge entity for many-to-many.
 ❌ Cardinality = Participation
 ✔ Different concepts
 
-❌ Composite Attribute = Multi-valued Attribute
-✔ Different
-
 ❌ Weak Entity = Strong Entity
-✔ Weak depends on another
+✔ Weak depends on strong
 
 ---
 
 # 📌 Quick Revision
 
-- ER Model = conceptual DB design
-- Entity = object
-- Entity Set = collection
-- Attribute = property
-- Strong Entity = independent
-- Weak Entity = dependent
-- Recursive Entity = self relation
-- Composite Entity = bridge entity
-- Relationship = connection
-- Cardinality = max count
-- Participation = mandatory/optional
+```text
+ER Model = DB Blueprint
+Entity = Object
+Entity Set = Collection
+Attribute = Property
+Strong Entity = Independent
+Weak Entity = Dependent
+Recursive Entity = Self relation
+Composite Entity = Bridge entity
+Relationship = Connection
+Cardinality = Count
+Participation = Mandatory / Optional
+```
 
 ---
 
-# 📌 Interview One-Liners
+# 🎯 Placement Focus
 
-- ER Model = DB blueprint
-- Entity = real-world object
-- Attribute = property
-- Relationship = connection
-- Weak entity = dependent
-- Strong entity = independent
-- Cardinality = max relationship count
-- Participation = required or optional
+Must know:
 
----
-
-# 📌 Practical / Industry Notes
-
-ER model is used before:
-
-- database creation
-- backend development
-- API design
-- system design
-
-Used heavily in:
-
-- banking
-- e-commerce
-- HRMS
-- ERP
-
-Helps reduce design mistakes.
-
----
-
-# 📌 Placement / Career Takeaway
-
-Focus heavily on:
-
-✔ Entity
-✔ Attributes
-✔ Relationships
-✔ Cardinality
-✔ Participation
-✔ Weak Entity
-✔ Many-to-Many conversion
+⭐ Strong vs Weak Entity
+⭐ Attribute Types
+⭐ Relationship Types
+⭐ Cardinality
+⭐ Participation
+⭐ Recursive Entity
+⭐ Many-to-Many conversion
 
 Next:
 
 ```text
-Extended ER Model
-→ Relational Model
-→ Keys
-→ Constraints
-→ SQL
+Day-03 → Extended ER Model
 ```

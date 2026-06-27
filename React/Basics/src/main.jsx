@@ -5,23 +5,18 @@ import ReactDOM from "react-dom/client";
 // import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import Home from "./pages/Home";
 // import Products from "./pages/Products";
-import App from "./App";
+// import App from "./App";
 import "./index.css";
+import '../node_modules/bootstrap/dist/css/bootstrap.css';
+import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
+import NetflixIndexComponent  from './components/NetflixIndexComponent.jsx' 
+
+// import { NetflixRegisterComponent } from "./components/NetflixRegisterComponent";
 ReactDOM.createRoot(document.getElementById("root")).render(
   
   <React.StrictMode>
-    <App></App>
-    {/* <BrowserRouter>
-      <Routes>
-      <Route path="/" element={<Home />}></Route>
-
-        <Route path="/products" element={<Products />}></Route>
-      <Route path="/products/:category" element={<Products />}></Route> 
-      <Route path="/products/laptop" element={<Products />}></Route>
-       <Route path="/products/tvs" element={<Products />}></Route>
-        
-      </Routes>
-      </BrowserRouter> */}
+    {/* <App /> */}
+    <NetflixIndexComponent/>
     </React.StrictMode>
   
 );
