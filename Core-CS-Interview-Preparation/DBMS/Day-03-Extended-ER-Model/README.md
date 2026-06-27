@@ -1,6 +1,6 @@
-# 🚀 Day 04 - Extended ER Model
+# 🚀 Day 03 - Extended ER Model
 
-> Permanent DBMS Notes for Interviews, Revision, and Career Use
+> Advanced ER concepts used in real-world system modeling
 
 ---
 
@@ -8,69 +8,37 @@
 
 Extended ER Model (EER) is the advanced version of the ER model.
 
-It adds extra abstraction to model complex systems.
+It introduces:
+
+* hierarchy
+* inheritance
+* abstraction
+* complex relationships
 
 ```text
 ER → Basic Modeling
 EER → Advanced Modeling
 ```
 
-Used when:
-
-- hierarchy exists
-- inheritance exists
-- complex relationships exist
+Used when systems become complex.
 
 ---
 
 ### Interview Answer
 
-EER extends the ER model by adding concepts like inheritance, generalization, specialization, and aggregation to model real-world systems more effectively.
-
----
-
-### One-Liner
-
-EER = ER + advanced abstraction.
-
----
-
-# 📌 Why does it matter?
-
-Real-world systems are not flat.
-
-Example:
-
-A user can be:
-
-- Customer
-- Seller
-- Admin
-
-Using only ER:
-
-- data duplication increases
-- design becomes messy
-
-EER solves this by introducing hierarchy.
-
-Helps in:
-
-- abstraction
-- scalability
-- cleaner schema design
+EER extends the ER model by adding inheritance, generalization, specialization, and aggregation for complex system modeling.
 
 ---
 
 # 📌 Core Concepts
 
-EER introduces:
+EER includes:
 
-- Generalization
-- Specialization
-- Aggregation
-- Relationship Degree
-- Advanced Key Understanding
+* Generalization
+* Specialization
+* Aggregation
+* Relationship Degree
+* Advanced Key Hierarchy
 
 ---
 
@@ -83,53 +51,18 @@ Combines similar lower-level entities into one higher-level entity.
 Example:
 
 ```text
-Savings Account + Current Account → Account
+SavingsAccount + CurrentAccount → Account
 ```
 
----
+Diagram:
 
-## Diagram
+![Generalization](../Images/Chapter_2/Generalization.png)
 
-![Generalization](../Images/Chapter_2/ER_diagram/Generalization.png)
-
----
-
-### Quick Definition
-
-Generalization = combining similar entities.
-
----
-
-# 📌 Worked Example - Generalization
-
-Bank System:
-
-Before:
+Memory:
 
 ```text
-SavingsAccount(AccountNo, Balance, InterestRate)
-CurrentAccount(AccountNo, Balance, OverdraftLimit)
+Generalization = Merge
 ```
-
-Common fields:
-
-- AccountNo
-- Balance
-
-After generalization:
-
-```text
-Account(AccountNo, Balance)
-```
-
-Subtypes:
-
-```text
-SavingsAccount
-CurrentAccount
-```
-
-This removes duplication.
 
 ---
 
@@ -137,7 +70,7 @@ This removes duplication.
 
 Top-down approach.
 
-Break one general entity into multiple specialized entities.
+Break one parent entity into multiple child entities.
 
 Example:
 
@@ -145,42 +78,15 @@ Example:
 Person → Student + Teacher
 ```
 
----
+Diagram:
 
-## Diagram
+![Specialization](../Images/Chapter_2/Specialization.png)
 
-![Specialization](../Images/Chapter_2/ER_diagram/Specialization.png)
-
----
-
-### Quick Definition
-
-Specialization = dividing one general entity.
-
----
-
-# 📌 Worked Example - Specialization
-
-University System:
-
-General entity:
+Memory:
 
 ```text
-Person(ID, Name, Phone)
+Specialization = Split
 ```
-
-Subtypes:
-
-```text
-Student(RollNo, Course)
-Teacher(EmployeeID, Subject)
-```
-
-Common data stays in Person.
-
-Specific data moves to subtypes.
-
-Cleaner design.
 
 ---
 
@@ -189,287 +95,191 @@ Cleaner design.
 | Generalization | Specialization |
 | -------------- | -------------- |
 | Bottom-up      | Top-down       |
-| Merge entities | Split entity   |
-| Creates parent | Creates child  |
-
-Memory:
-
-```text
-Generalization = Merge
-Specialization = Split
-```
+| Merge          | Split          |
+| Creates Parent | Creates Child  |
 
 ---
 
 # 📌 Aggregation
 
-Treats a relationship as an entity.
+Treat relationship as an entity.
 
 Used when relationship itself has meaning.
 
 Example:
 
-Employee works on Project
-Manager manages that assignment.
-
----
-
-## Diagram
-
-![Aggregation](../Images/Chapter_2/ER_diagram/Aggregation.png)
-
----
-
-### Quick Definition
-
-Aggregation = abstraction over relationship.
-
----
-
-# 📌 Worked Example - Aggregation
-
-Company System:
-
-Normal relation:
-
 ```text
-Employee ---- WorksOn ---- Project
+Employee works_on Project
+Manager manages that relation
 ```
 
-Now Manager supervises this relation.
+Diagram:
 
-So:
+![Aggregation](../Images/Chapter_2/Aggregation.png)
 
-```text
-Manager ---- Manages ---- (Employee WorksOn Project)
-```
+Important:
 
-Here:
-
-WorksOn becomes an aggregated entity.
-
-Used in complex workflows.
+Aggregation helps model complex workflows.
 
 ---
 
-# 📌 Degree of Relationship
+# 📌 Relationship Degree
 
-Degree = number of participating entities.
+Defines number of participating entities.
 
 ---
 
-# Unary Relationship (Degree 1)
+## Unary Relationship
 
 Entity related to itself.
 
 Example:
 
+```text
 Employee manages Employee
+```
 
----
-
-## Diagram
+Diagram:
 
 ![Unary](../Images/Chapter_3/UnaryRel.png)
 
 ---
 
-# Binary Relationship (Degree 2)
+## Binary Relationship
 
 Two entities.
 
 Example:
 
+```text
 Teacher teaches Subject
+```
 
----
-
-## Diagram
+Diagram:
 
 ![Binary](../Images/Chapter_3/BinRel.png)
 
 ---
 
-# Ternary Relationship (Degree 3)
+## Ternary Relationship
 
 Three entities.
 
 Example:
 
-Employee works in Department at Location
+```text
+Doctor treats Patient in Hospital
+```
 
----
-
-## Diagram
+Diagram:
 
 ![Ternary](../Images/Chapter_3/TernaryRel.png)
 
 ---
 
-# 📌 Worked Example - Degree
-
-Unary:
-
-```text
-Employee supervises Employee
-```
-
-Binary:
-
-```text
-Student enrolls Course
-```
-
-Ternary:
-
-```text
-Doctor treats Patient in Hospital
-```
-
-Memory:
-
-```text
-Degree = number of entities involved
-```
-
----
-
-# 📌 Keys Revision
+# 📌 Key Revision
 
 Important before relational model.
 
 ---
 
-# Super Key
+## Super Key
 
 Any attribute(s) that uniquely identify rows.
 
 Can contain extra attributes.
 
+Diagram:
+
+![SuperKey](../Images/Chapter_3/SuperKeyTable.png)
+
 Example:
 
 ```text
 EmpID
-EmpID + Name
+EmpID + Email
 ```
 
 ---
 
-## Diagram
-
-![SuperKey](../Images/Chapter_3/SuperKeyTable.png)
-
----
-
-# Candidate Key
+## Candidate Key
 
 Minimal super key.
 
-No unnecessary attributes.
-
----
-
-## Diagram
+Diagram:
 
 ![CandidateKey](../Images/Chapter_3/CandidateKeyTable.png)
 
+Example:
+
+```text
+EmpID
+Email
+```
+
 ---
 
-# Primary Key
+## Primary Key
 
 Chosen candidate key.
 
 Rules:
 
-- unique
-- not null
+* Unique
+* Not Null
+
+Example:
+
+```text
+EmpID
+```
 
 ---
 
-# Foreign Key
+## Foreign Key
 
 Connects tables.
 
 Maintains referential integrity.
 
----
-
-## Diagram
+Diagram:
 
 ![ForeignKey](../Images/Chapter_3/FK.png)
 
----
-
-# 📌 Worked Example - Keys
-
-Employee Table:
-
-| EmpID | Email                               | Name |
-| ----- | ----------------------------------- | ---- |
-| 101   | [om@gmail.com](mailto:om@gmail.com) | Om   |
-
-Possible unique identifiers:
+Example:
 
 ```text
-EmpID
-Email
-EmpID + Email
+Orders(CustomerID) → Customers(CustomerID)
 ```
-
-Super Keys:
-
-- EmpID
-- Email
-- EmpID + Email
-
-Candidate Keys:
-
-- EmpID
-- Email
-
-Primary Key:
-
-- EmpID
 
 ---
 
 # 📌 Interview Questions
 
-## What is generalization?
+### What is Generalization?
 
-Combining similar entities into one generalized entity.
-
----
-
-## What is specialization?
-
-Breaking one entity into multiple specific entities.
+Combining similar entities into one parent.
 
 ---
 
-## Generalization vs Specialization?
+### What is Specialization?
 
-Generalization = bottom-up
-Specialization = top-down
+Breaking one parent into child entities.
 
 ---
 
-## What is aggregation?
+### What is Aggregation?
 
 Treating a relationship as an entity.
 
 ---
 
-## What is unary relationship?
+### Degree vs Cardinality?
 
-Entity related to itself.
-
----
-
-## Super key vs Candidate key?
-
-Super key may contain extra attributes.
-Candidate key is minimal.
+```text
+Degree = Number of participating entities
+Cardinality = Number of relationship instances
+```
 
 ---
 
@@ -478,82 +288,47 @@ Candidate key is minimal.
 ❌ Generalization = Specialization
 ✔ Opposite concepts
 
-❌ Candidate key = Primary key
-✔ Primary key is selected candidate key
+❌ Super Key = Candidate Key
+✔ Candidate key is minimal
 
-❌ Aggregation = normal relation
-✔ Aggregation is higher abstraction
-
-❌ Degree = Cardinality
-✔ Completely different
+❌ Aggregation = Normal relation
+✔ Higher abstraction
 
 ---
 
 # 📌 Quick Revision
 
-- EER extends ER
-- Generalization = bottom-up
-- Specialization = top-down
-- Aggregation = relation abstraction
-- Unary = self relation
-- Binary = 2 entities
-- Ternary = 3 entities
-- Super key may have extra fields
-- Candidate key is minimal
-- Primary key is selected candidate key
-- Foreign key connects tables
+```text
+EER = ER + Advanced abstraction
+
+Generalization = Merge
+Specialization = Split
+Aggregation = Relationship as entity
+
+Unary = 1 Entity
+Binary = 2 Entities
+Ternary = 3 Entities
+
+Super Key > Candidate Key > Primary Key
+Foreign Key connects tables
+```
 
 ---
 
-# 📌 Practical / Industry Notes
+# 🎯 Placement Focus
 
-Used heavily in:
+Must know:
 
-- banking
-- HRMS
-- e-commerce
-- ERP
-- CRM systems
-
-Helps in:
-
-- schema optimization
-- ORM modeling
-- backend architecture
-- microservice data design
-
-Important in:
-
-- system design interviews
-- production database modeling
-
----
-
-# 📌 Placement / Career Takeaway
-
-Focus heavily on:
-
-✔ Generalization vs Specialization
-✔ Aggregation
-✔ Relationship Degree
-✔ Key hierarchy
-
-These are asked often in:
-
-- placements
-- product companies
-- backend interviews
+⭐ Generalization vs Specialization
+⭐ Aggregation
+⭐ Unary/Binary/Ternary
+⭐ Super Key
+⭐ Candidate Key
+⭐ Primary Key
+⭐ Foreign Key
 
 Next:
 
 ```text
-Day-05 → Relational Model
+Day-04 → Relational Model
 ```
-
-Important because:
-
-```text
-ER → Table conversion starts there
-```
-
-This is where SQL becomes easier.
