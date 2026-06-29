@@ -10,35 +10,93 @@
   </head>
   <body>
     <script type="text/babel">
-      var userName = prompt("Enter Name: ");
-      var designation = prompt("Enter Designation: ");
-      var productName = prompt("Enter Product Name: ");
+      // var userName = prompt("Enter Name: ");
+      // var designation = prompt("Enter Designation: ");
+      // var productName = prompt("Enter Product Name: ");
 
-      class Product {
-        _productName;
+      // class Product {
+      //   _productName;
 
-        get ProductName() {
-          return this._productName;
-        }
+      //   get ProductName() {
+      //     return this._productName;
+      //   }
 
-        set ProductName(newName) {
-          if (designation === "admin") {
-            this._productName = newName;
-          } else {
-            document.write(
-              `Unauthorized: Hello ${userName} you are not authorized`,
-            );
-          }
-        }
+      //   set ProductName(newName) {
+      //     if (designation === "admin") {
+      //       this._productName = newName;
+      //     } else {
+      //       document.write(
+      //         `Unauthorized: Hello ${userName} you are not authorized`,
+      //       );
+      //     }
+      //   }
+      // }
+
+      // let obj = new Product();
+
+      // obj.ProductName = productName; // setter
+
+      // if (obj.ProductName) {
+      //   document.write("Product Name: " + obj.ProductName); // getter
+      // }
+
+      //=============================================================
+
+      //Accessors
+      // class Register {
+      //   Name = "Apple";
+      //   Rating = {
+      //     Rate: {
+      //       Count: 113000,
+      //       Value: 9.1,
+      //     },
+      //   };
+      //   get RateValue(){
+      //     return this.Rating.Rate.Value;
+      //   }
+      // }
+      // let obj = new Register();
+      // document.write("Rate Value: "+ obj.RateValue);
+
+      //=================================================================
+      /* Constructor 
+      - Rule Is Every Derived Class Constructor Must Have A { Super Call }
+      */
+      // class BaseClass {
+      //   constructor(msg) {
+      //     document.write("Base Class Constructor <br>" + msg + "<br>");
+      //   }
+      // }
+      // class DerivedClass extends BaseClass {
+      //   constructor() {
+      //     super("Hello !"); //must have super mandotory
+      //     document.write("Derived Class");
+      //   }
+      // }
+      // let obj = new DerivedClass();
+
+      //====================================================================
+      /*
+      React Class Component Extends "React.Component" base.
+
+      class Home extends React.Component{
       }
 
-      let obj = new Product();
+      - It is A Member Of "React" Core Laborary
 
-      obj.ProductName = productName; // setter
-
-      if (obj.ProductName) {
-        document.write("Product Name: " + obj.ProductName); // getter
+      namespace React { // React.
+      class Component{} //.Component
+      class Service {} 
       }
+
+     - It is a member of "React" core library.
+
+      React: Namespace
+      Component : Class
+
+      */
+
+    
     </script>
   </body>
 </html>
