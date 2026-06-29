@@ -18,13 +18,23 @@ public class Recur {
     }
 
     static int fib(int n) {
+        System.out.println("Enter: " + n);
+
         if (n == 1) {
+            System.out.println("Return 1");
             return 1;
         }
-        if(n ==0){
+
+        if (n == 0) {
+            System.out.println("Return 0");
             return 0;
         }
-        return fib(n - 1) + fib(n - 2);
+
+        int ans = fib(n - 1) + fib(n - 2);
+
+        System.out.println("fib(" + n + ") = " + ans);
+
+        return ans;
     }
 
     public static void main(String[] args) {
@@ -39,6 +49,7 @@ public class Recur {
 
         System.out.println(pow);
         int fib = fib(n);
+
         System.out.println(fib);
 
     }
