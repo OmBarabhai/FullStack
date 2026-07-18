@@ -147,3 +147,52 @@
 // console.log(title) // iPhone
 // console.log(price) // 5999
 // console.log(description) // The iPhone is a smartphone developed by Apple
+
+// 12. Create an object book with properties title, author, and pages. Create a function getBookDetails that takes a book object as a parameter and returns if the book has more than 100 pages.
+
+// const book = {
+//   title: "a",
+//   author: "abc",
+//   pages: "280",
+// };
+// function getBookDetails({pages}) {
+//   if (pages > 100) {
+//     return book;
+//   }
+// }
+// console.log(getBookDetails(book)); // logs 'true' if the pages are above 100
+// console.log(getBookDetails(book)); // logs 'false' if the pages are 100 or below
+
+// 13. Create a function changeOccupation that takes an object person and a string newOccupation as parameters, and changes the occupation property of the person object to the newOccupation.Log the person object to the console before and after calling the function
+
+// const person = {
+//   name:'Amit',age: 25, occupation: 'Software Engineer'
+// }
+// function changeOccupation(person,newOccupation) {
+//   person.occupation = newOccupation;
+// }
+// console.log(person)
+// console.log(person) // logs { name: 'Amit', age: 25, occupation: 'Software Engineer' } to Product Manager
+// changeOccupation(person, 'Product Manager')
+// console.log(person) // logs { name: 'Amit', age: 25, occupation: 'Product Manager' } to
+
+// 14. Given an array numbers containing the numbers 1, 2, and 3. Use array destructuring to log each number to the console.
+
+// const numbers = [1, 2, 3];
+// const [a, b, c] = numbers;
+// console.log(a); // logs 1 to the console
+// console.log(b); // logs 2 to the console
+// console.log(c); // logs 3 to the console
+
+// 15. Convert the given function into ES6 with least amount of characters.
+
+// function defaultParamsFunc(a, b, c) {
+//   if (c === undefined) {
+//     c = 4
+//   }
+//   return a * b * c
+// }
+
+// const defaultParamsFunc = (a, b, c) => { (c === undefined) ? c = 4 : null; return a * b * c };
+// console.log(defaultParamsFunc(3, 1)) // 12
+// console.log(defaultParamsFunc(3, 10)) // 120
