@@ -1,3 +1,4 @@
+package A_Deutche;
 import java.util.Scanner;
 
 public class FIB_01_10 {
