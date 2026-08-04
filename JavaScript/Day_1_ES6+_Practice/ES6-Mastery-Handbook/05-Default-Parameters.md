@@ -1635,14 +1635,14 @@ Actual Argument
 
 ### Comparison Table
 
-| Value Passed | `||` | Default Parameter |
-|--------------|------|-------------------|
-| `undefined` | Default | Default |
-| Missing | Default | Default |
-| `null` | Default | `null` |
-| `0` | Default | `0` |
-| `false` | Default | `false` |
-| `""` | Default | `""` |
+| Feature        | 'OR'  | `??`               |
+|----------------|-------|--------------------|
+| `undefined`    | Default | Default            |
+| Missing        | Default | Default            |
+| `null`         | Default | `null`             |
+| `0`            | Default | `0`                |
+| `false`        | Default | `false`            |
+| `""`           | Default | `""`               |
 
 ---
 
@@ -2122,8 +2122,7 @@ In **Part 3**, you'll learn:
 - `arguments` Object
 - Scope of Default Parameters
 - TDZ with Default Parameters
-```
-
+---
 
 # 19. Function Calls as Default Values
 
