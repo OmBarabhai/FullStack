@@ -88,12 +88,73 @@
 // var a = 10;
 // console.log(a);
 
-console.log(age);
+// console.log(age);
 
-let a = 10;
+// let a = 10;
 
-console.log(age);
-var a1 = 10;
+// console.log(age);
+// var a1 = 10;
 
-console.log(a);
-var age = 10;
+// console.log(a);
+// var age = 10;
+// function greet(name) {
+//   return "Hello" + name;
+// }
+// console.log(greet(" Om"));
+
+// const greet = function (name) {
+//   return "Hello " + name;
+// }
+// console.log(greet(" Om"));
+
+
+// const greet = (name) => "Hello " + name;
+
+// console.log(greet(" Om"));
+
+
+// const Square = (x) => x * x;
+// console.log(Square(7));
+
+// const add = (a, b) => a + b;
+// console.log(add(21,32));
+
+// const cube = n => n * n * n;
+// console.log((cube((BigInt)(84234321231234454145443244334342343434433224324232422342342334823847923889485723427838937194983429392342344234234123423432123123445414544))));
+
+// const greet = (name = "guest") => `Hello ${name}`;
+
+// console.log(greet());
+
+// const sum = (...n) => {
+//   let total = 0;
+//   for (const num of n) {
+//     total += num;
+//   }
+//   return total;
+// };
+// console.log(sum(1,2,3,4));
+
+// const substact = (a, b) =>  a - b;
+
+// console.log(substact(10,3));
+
+const createUser = (name, age) => ({
+  name,
+  age
+});
+console.log(createUser("Om", 22));
+
+const num = [1, 2, 3,47,3,2,1,2,9,2];
+const doubled = num.map(
+  function (num) {
+  return num * 2;
+});
+console.log(doubled);
+
+const triple = num.map(num => num * 3);
+console.log(triple);
+
+const even = num.filter(num => (num & 1) === 0);
+console.log(even);
+
