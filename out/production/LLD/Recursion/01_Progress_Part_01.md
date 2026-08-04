@@ -225,14 +225,8 @@ Condition + Count
 
 Skip indices using a fixed jump.
 ---
-Instead of
-```
-idx + 1
-```
-Jump to using
-```
-idx + K
-```
+Instead of > idx + 1 > Jump to using > idx + K
+---
 
 |  # | Problem                  | Platform | Difficulty | Interview | Status |  R1 |  R2 |  R3 |  R4 |  R5 | Notes                    |
 | -: | ------------------------ | -------- | ---------- | --------- | :----: | :-: | :-: | :-: | :-: | :-: | ------------------------ |

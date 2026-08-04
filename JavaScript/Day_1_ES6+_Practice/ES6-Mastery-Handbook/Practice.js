@@ -139,22 +139,39 @@
 
 // console.log(substact(10,3));
 
-const createUser = (name, age) => ({
-  name,
-  age
-});
-console.log(createUser("Om", 22));
+//const createUser = (name, age) => ({
+//  name,
+//  age
+//});
+//console.log(createUser("Om", 22));
+//
+////const num = [1, 2, 3,47,3,2,1,2,9,2];
+//const doubled = num.map(
+//  function (num) {
+//  return num * 2;
+//});
+//console.log(doubled);
+//
+//const triple = num.map(num => num * 3);
+//console.log(triple);
+//
+//const even = num.filter(num => (num & 1) === 0);
+//
+//console.log(even);
+//
+//console.log(`${10>29}`);
+//const  age = 22;
+//
+//console.log(`${age >= 19}`);
+//
+//console.log(`${age >= 19 ? "Adult" : "Minor"}`);
+//
+//
+//const lang = "javascript";
+//console.log(`${lang.toUpperCase()}`);
 
-const num = [1, 2, 3,47,3,2,1,2,9,2];
-const doubled = num.map(
-  function (num) {
-  return num * 2;
-});
-console.log(doubled);
+const num = [12, 3, 4, 3, 2];
 
-const triple = num.map(num => num * 3);
-console.log(triple);
-
-const even = num.filter(num => (num & 1) === 0);
-console.log(even);
-
+console.log(`${(function(arr) {
+    return arr.map(n => n * 3);
+})(num)}`);
