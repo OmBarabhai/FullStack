@@ -169,9 +169,108 @@
 //
 //const lang = "javascript";
 //console.log(`${lang.toUpperCase()}`);
+//
+//const num = [12, 3, 4, 3, 2];
+//
+//console.log(`${(function(arr) {
+//    return arr.map(n => n * 3);
+//})(num)}`);
+//
+//function sum(...val){
+////console.log(arguments);
+//console.log(val);
+//}
+//sum(12,21,"b");
+//sum("A","B","C");
+//
+//function greet(...age,...names){
+//console.log(`${names,age}`);
+////console.log(`${names[],age}`);
+//
+//}
+//greet("Om","Sahil","Pavan");
+//greet(21,22, {Om:"Hello"},{Sahil:"Hii"});
 
-const num = [12, 3, 4, 3, 2];
+//function test(...val){
+//console.log(val);
+//}
+//test(12,22,21);
+//function logger(...msg){
+//console.log(msg);
+//}
+//const messages = `${"Hello"} ${"Hii, How"} `
+//logger(messages);
+//
+//function multiply(mul, ...num){
+//return num.map(num => num * mul);
+//}
+//console.log(multiply(2,1,2,3));
 
-console.log(`${(function(arr) {
-    return arr.map(n => n * 3);
-})(num)}`);
+//const sum = (...num) => num.reduce((tot,num) => tot + num,0);
+//console.log(sum(10,20,30));
+//
+//
+////const num =[10,21,12,33,12];
+////const [first,...rem] = num;
+////console.log(first);
+////console.log(rem);
+////
+////
+////
+////
+////const user = {
+////name:"om",
+////age: 22,
+////city: "pune"
+////}
+////const {name,...details} = user;
+////console.log(name);
+////console.log(details);
+//
+//
+//const fruits = ["Mango","Apple","Strawberry","Banana"];
+//const [first,...rem] = fruits;
+//console.log(first);
+//console.log(rem);
+//
+//const emp = {
+//name:"Sahil",
+//age:21,
+//city:"Mum",
+//id:27,
+//sal:  22000.0078,
+//}
+//const {id,...remDetail} = emp;
+//console.log(id);
+//console.log(remDetail);
+//
+//function max(...nums){
+//return Math.max(...nums);
+//}
+//console.log(max(10,23,21,21231,2));
+//
+//function avg(...nums){
+//const tot = nums.reduce((sum,nums) => sum+nums,0);
+//  return tot / nums.length;
+//}
+//
+//console.log(avg(12,21,93,21));
+//
+//
+//function stud(...names){
+//names.map(name => console.log(name))
+//};
+////stud("Om","Sahil","Pavan");
+//
+//const {name,...details} = {
+//name:"Om",
+//age:22,
+//city:"Pune",
+//};
+//console.log(name);
+//
+//console.log(details);
+
+
+
+
