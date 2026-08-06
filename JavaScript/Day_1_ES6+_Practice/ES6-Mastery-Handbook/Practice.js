@@ -271,6 +271,62 @@
 //
 //console.log(details);
 
+const num = [10,23,12];
+console.log(...num);
+
+const arr1 = [1,2,3];
+const arr2 = [4,5,6];
+const res = arr1.concat(arr2);
+console.log(res);
+
+const copy = [...num];
+const updatedAddLast = [...num,40];
+console.log(updatedAddLast);
+const updatedAddFirstAndLast = [00,...num,40];
+console.log(updatedAddFirstAndLast);
+
+const spread = [...arr1,...updatedAddFirstAndLast,...arr2,];
 
 
 
+console.log(spread);
+
+
+const lang = "JavaScript";
+const ch = [...lang];
+console.log(ch);
+
+
+
+
+//const user = {name:"Om",age: 22};
+//const copy = {...user};
+//console.log(copy);
+
+const org = {
+name: "Om",age:22, address:{city:"Pune"}
+};
+
+const copy2 = {
+...org
+};
+copy2.name = "sahil";
+console.log(org.name);
+console.log(copy2.name);
+copy2.address.city = "Mumbai";
+console.log(org.address.city);
+console.log(copy2.address.city);
+console.log(Math.max(...spread));
+
+function reverse(input) {
+  return input.split(" ")
+    .map(word => [...word]
+    .reverse().join(""))
+    .join(" ");
+}
+console.log(reverse("Always indent your code"));
+
+const marks = [90,32,70];
+const updated = [...marks];
+updated[1] =97;
+console.log(updated);
