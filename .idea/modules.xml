@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Core-CS-Interview-Preparation/Core-CS-Interview-Preparation.iml" filepath="$PROJECT_DIR$/Core-CS-Interview-Preparation/Core-CS-Interview-Preparation.iml" />
       <module fileurl="file://$PROJECT_DIR$/FullStack.iml" filepath="$PROJECT_DIR$/FullStack.iml" />
-      <module fileurl="file://$PROJECT_DIR$/LLD/LLD.iml" filepath="$PROJECT_DIR$/LLD/LLD.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LLD_And_DSA/LLD_And_DSA.iml" filepath="$PROJECT_DIR$/LLD_And_DSA/LLD_And_DSA.iml" />
     </modules>
   </component>
 </project>
