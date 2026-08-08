@@ -936,6 +936,191 @@ Destructuring only extracts values.
 
 ---
 
+## Destructuring with Primitive Values
+
+Consider this example:
+
+```js
+const person = {
+    name: "Om",
+    age: 22
+};
+
+let { name } = person;
+
+name = "Sahil";
+
+console.log(name);        // Sahil
+console.log(person.name); // Om
+```
+
+Output
+
+```text
+Sahil
+Om
+```
+
+### Why doesn't `person.name` change?
+
+When JavaScript executes
+
+```js
+let { name } = person;
+```
+
+it is internally similar to
+
+```js
+let name = person.name;
+```
+
+The value of `person.name` is copied into a new variable named `name`.
+
+After destructuring
+
+```
+person
+
+┌────────────────────┐
+│ name → "Om"        │
+│ age  → 22          │
+└────────────────────┘
+
+        │
+
+        ▼
+
+Variable
+
+name → "Om"
+```
+
+Now changing the variable
+
+```js
+name = "Sahil";
+```
+
+only changes the variable.
+
+```
+person.name → "Om"
+
+name → "Sahil"
+```
+
+The original object remains unchanged.
+
+---
+
+### Using `const`
+
+```js
+const { name } = person;
+
+name = "Sahil";
+```
+
+Output
+
+```text
+TypeError:
+Assignment to constant variable.
+```
+
+Reason
+
+`const` makes the variable immutable.
+
+It does **not** make the object immutable.
+
+---
+
+### Modifying the Object
+
+If you want to change the object's property, modify the object itself.
+
+```js
+person.name = "Sahil";
+
+console.log(person.name);
+```
+
+Output
+
+```text
+Sahil
+```
+
+Memory
+
+```
+Before
+
+person.name
+
+↓
+
+"Om"
+
+Variable
+
+name
+
+↓
+
+"Om"
+
+----------------------
+
+After
+
+person.name
+
+↓
+
+"Om"
+
+Variable
+
+name
+
+↓
+
+"Sahil"
+```
+
+---
+
+### Interview Rule
+
+```
+Destructuring
+
+↓
+
+Creates New Variables
+
+↓
+
+Copies Primitive Values
+
+↓
+
+Does NOT Create Alias
+
+↓
+
+Changing Variable
+
+≠
+
+Changing Object
+```
+
+> **Note:** This behavior applies to **primitive values** (string, number, boolean, `null`, `undefined`, `bigint`, `symbol`). If the extracted value is an **object or array**, the variable receives the same reference, so modifying that object or array through the variable will affect the original object.
+
 # 3. Primitive vs Reference Types
 
 ## Primitive Example
