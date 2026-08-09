@@ -64,9 +64,7 @@ public class G62MultiplyTwoNumbersRecursively {
      * RECURSIVE MULTIPLICATION
      * =====================================================
      */
-    public static long multiplyTwoNumbersRecursively(
-            long first,
-            long second) {
+    public static long multiplyTwoNumbersRecursively(long first, long second) {
 
         // -------------------------------------------------
         // BASE CASE
@@ -94,10 +92,7 @@ public class G62MultiplyTwoNumbersRecursively {
         // = -(5 × 3)
         //
         if (second < 0) {
-            return -multiplyTwoNumbersRecursively(
-                    first,
-                    -second
-            );
+            return -multiplyTwoNumbersRecursively(first, -second);
         }
 
 
@@ -167,10 +162,7 @@ public class G62MultiplyTwoNumbersRecursively {
         //
         if ((second & 1) == 0) {
 
-            return multiplyTwoNumbersRecursively(
-                    doubleFirst,
-                    half
-            ) % MOD;
+            return multiplyTwoNumbersRecursively(doubleFirst, half) % MOD;
         }
 
 
@@ -197,13 +189,7 @@ public class G62MultiplyTwoNumbersRecursively {
         // 5 × 7
         // = 5 + 10 × 3
         //
-        return (
-                first
-                        + multiplyTwoNumbersRecursively(
-                        doubleFirst,
-                        half
-                )
-        ) % MOD;
+        return (first + multiplyTwoNumbersRecursively(doubleFirst, half)) % MOD;
     }
 
 
@@ -214,8 +200,7 @@ public class G62MultiplyTwoNumbersRecursively {
      */
     public static int recursiveProduct(int m, int n) {
 
-        long result =
-                multiplyTwoNumbersRecursively(m, n);
+        long result = multiplyTwoNumbersRecursively(m, n);
 
         // Keep result positive.
         //
@@ -241,11 +226,7 @@ public class G62MultiplyTwoNumbersRecursively {
         long first = 5;
         long second = 7;
 
-        long result =
-                multiplyTwoNumbersRecursively(
-                        first,
-                        second
-                );
+        long result = multiplyTwoNumbersRecursively(first, second);
 
         System.out.println("Answer = " + result);
     }

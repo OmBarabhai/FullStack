@@ -128,8 +128,7 @@ public class G66PascalTriangleRowRecursively {
         //             /     \
         //        TOP-LEFT    TOP
         //
-        return pascal(row - 1, col - 1)
-                + pascal(row - 1, col);
+        return pascal(row - 1, col - 1) + pascal(row - 1, col);
     }
 
 
@@ -186,12 +185,10 @@ public class G66PascalTriangleRowRecursively {
         int numRows = 5;
 
         // Create Solution object.
-        G66PascalTriangleRowRecursively solution =
-                new G66PascalTriangleRowRecursively();
+        G66PascalTriangleRowRecursively solution = new G66PascalTriangleRowRecursively();
 
         // Generate Pascal's Triangle.
-        List<List<Integer>> result =
-                solution.generate(numRows);
+        List<List<Integer>> result = solution.generate(numRows);
 
         // Print result.
         System.out.println("Pascal's Triangle:");

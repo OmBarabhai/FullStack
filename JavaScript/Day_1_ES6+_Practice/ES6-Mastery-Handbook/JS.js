@@ -493,55 +493,77 @@
 
 
 
+//
+//const key = "Lang";
+//const key2= "Lang2";
+//
+//const cours ={
+//[key] :"JS",
+//[key2] :"JS2",
+//};
+//const {k,k2} = cours;
+//console.log(cours);
+//
+//
+//const p ={
+//greet : function(){
+//console.log("Hi")
+//
+//}
+//}
+//p.greet();
+//
+//const p1 = {
+//greet(){
+//console.log("Hwll")
+//
+//}
+//}
+//
+//p1.greet();
+//
+//
+//const cal = {
+//add(a,b){
+//return a+ b;
+//}
+//}
+//console.log(cal.add(3,2))
+//
+//
+//
+//const id = 101;
+//const st = {
+//["st_"+id] : "Om"
+//}
+//console.log(st)
+//
+//function crCourse(name,field,val){
+//return {
+//name,[field] : val
+//};
+//}
+//const cr = crCourse("Js","Lang","Java")
+//console.log(cr)
+//
+//
+//
+//
+//const user =[{
+//             name:"Om"
+//             }];
+//
+//console.log(user[0].name)
+//console.log(user[1]?.name ?? "Unknown")
+//
+//console.log(user?.login?.());
+//
+//function getUserCity(city){
+// return "Pune";
+//}
+//
+//console.log(getUserCity?.() ?? "City Not Found");
+//
+//
 
-const key = "Lang";
-const key2= "Lang2";
 
-const cours ={
-[key] :"JS",
-[key2] :"JS2",
-};
-const {k,k2} = cours;
-console.log(cours);
-
-
-const p ={
-greet : function(){
-console.log("Hi")
-
-}
-}
-p.greet();
-
-const p1 = {
-greet(){
-console.log("Hwll")
-
-}
-}
-
-p1.greet();
-
-
-const cal = {
-add(a,b){
-return a+ b;
-}
-}
-console.log(cal.add(3,2))
-
-
-
-const id = 101;
-const st = {
-["st_"+id] : "Om"
-}
-console.log(st)
-
-function crCourse(name,field,val){
-return {
-name,[field] : val
-};
-}
-const cr = crCourse("Js","Lang","Java")
-console.log(cr)
