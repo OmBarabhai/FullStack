@@ -1,6 +1,8 @@
 # Nullish Coalescing Operator (`??`)
 
-> **"The Nullish Coalescing Operator (`??`) provides a default value only when the left-hand side is `null` or `undefined`. Unlike the OR (`||`) operator, it does not treat valid falsy values like `0`, `false`, or `''` as missing."**
+# Part 1 – Introduction & Fundamentals
+
+> **"The Nullish Coalescing Operator (`??`) provides a default value only when the left-hand value is `null` or `undefined`. Unlike `||`, it does not replace valid values such as `0`, `false`, or `""`."**
 
 ---
 
@@ -8,35 +10,39 @@
 
 1. What is Nullish Coalescing?
 2. Why Was It Introduced?
-3. Syntax
-4. How `??` Works
-5. Difference Between `||` and `??`
-6. Working with Different Data Types
-7. Combining Optional Chaining with `??`
-8. Real-world Examples
-9. React Examples
-10. Node.js Examples
-11. Best Practices
-12. Common Mistakes
-13. Interview Questions
-14. Coding Exercises
-15. Summary
+3. Basic Syntax
+4. The Core Mental Model
+5. `null` with `??`
+6. `undefined` with `??`
+7. Normal Values with `??`
+8. Falsy Values with `??`
+9. `??` vs `||`
+10. `??` with Different Data Types
+11. `??` with Optional Chaining
+12. What `??` Does Not Do
+13. Common Beginner Mistakes
+14. Summary
+15. Hands-on Practice
 
 ---
 
 # 1. What is Nullish Coalescing?
 
-The Nullish Coalescing Operator (`??`) returns the **right-hand value only when the left-hand value is `null` or `undefined`.**
+Nullish Coalescing (`??`) is an ES2020 operator used to provide a **fallback value**.
 
-Syntax
+It uses the right-hand value only when the left-hand value is:
 
-```js
-value ?? defaultValue
+```text
+null
 ```
 
----
+or:
 
-Example
+```text
+undefined
+```
+
+Basic example:
 
 ```js
 const name = null;
@@ -44,35 +50,47 @@ const name = null;
 console.log(name ?? "Guest");
 ```
 
-Output
+Output:
 
-```
+```text
 Guest
+```
+
+Because:
+
+```text
+name
+ ↓
+null
+ ↓
+use "Guest"
 ```
 
 ---
 
-Another Example
+If the value exists:
 
 ```js
-const age = 22;
+const name = "Om";
 
-console.log(age ?? 18);
+console.log(name ?? "Guest");
 ```
 
-Output
+Output:
 
+```text
+Om
 ```
-22
-```
+
+Because `"Om"` is not `null` or `undefined`.
 
 ---
 
 # 2. Why Was It Introduced?
 
-Before ES2020 developers mostly used OR (`||`).
+Before `??`, developers commonly used `||` for default values.
 
-Example
+Example:
 
 ```js
 const count = 0;
@@ -80,21 +98,25 @@ const count = 0;
 console.log(count || 10);
 ```
 
-Output
+Output:
 
+```text
+10
 ```
-10 ❌
+
+But `0` may be a perfectly valid value.
+
+For example:
+
+```text
+cart quantity = 0
+score = 0
+price = 0
 ```
 
-Problem
+We may want to keep `0`.
 
-`0` is a valid value.
-
-But `||` treats it as false.
-
----
-
-Using Nullish Coalescing
+With `??`:
 
 ```js
 const count = 0;
@@ -102,244 +124,143 @@ const count = 0;
 console.log(count ?? 10);
 ```
 
-Output
+Output:
 
-```
-0 ✅
+```text
+0
 ```
 
-Much better.
+This is the main reason `??` is useful.
 
 ---
 
-# 3. Syntax
+# 3. Basic Syntax
 
 ```js
 leftValue ?? rightValue
 ```
 
-Meaning
+Think:
 
-```
-If
-
+```text
 leftValue
+    ↓
+Is it null?
+    OR
+Is it undefined?
+    ↓
+YES
+ ↓
+use rightValue
 
-is
+NO
+ ↓
+use leftValue
+```
+
+Example:
+
+```js
+const age = null;
+
+const result = age ?? 18;
+
+console.log(result);
+```
+
+Output:
+
+```text
+18
+```
+
+---
+
+# 4. The Core Mental Model
+
+The easiest way to remember `??`:
+
+```text
+?? means:
+
+"Use the value on the right
+ONLY if the value on the left
+is missing."
+
+Missing means:
 
 null
-
-or
-
+OR
 undefined
-
-↓
-
-Return rightValue
-
-Otherwise
-
-↓
-
-Return leftValue
 ```
 
----
-
-# 4. How `??` Works
-
-Example
+So:
 
 ```js
-console.log(null ?? "Hello");
+value ?? defaultValue
 ```
 
-Output
+means:
 
-```
-Hello
+```text
+value exists?
+      ↓
+   YES → use value
+      ↓
+    NO
+      ↓
+null / undefined
+      ↓
+use defaultValue
 ```
 
 ---
+
+# 5. `null` with `??`
+
+Example:
 
 ```js
-console.log(undefined ?? "Hello");
+const name = null;
+
+console.log(name ?? "Guest");
 ```
 
-Output
+Output:
 
-```
-Hello
+```text
+Guest
 ```
 
----
+Another example:
 
 ```js
-console.log("Om" ?? "Guest");
+const city = null;
+
+const result = city ?? "Pune";
+
+console.log(result);
 ```
 
-Output
+Output:
 
-```
-Om
-```
-
----
-
-```js
-console.log(100 ?? 0);
+```text
+Pune
 ```
 
-Output
+Rule:
 
-```
-100
-```
-
----
-
-# 5. Difference Between `||` and `??`
-
-## Using OR (`||`)
-
-```js
-console.log("" || "Default");
-```
-
-Output
-
-```
-Default
+```text
+null ?? value
+       ↓
+    value
 ```
 
 ---
 
-```js
-console.log(0 || 10);
-```
+# 6. `undefined` with `??`
 
-Output
-
-```
-10
-```
-
----
-
-```js
-console.log(false || true);
-```
-
-Output
-
-```
-true
-```
-
----
-
-## Using Nullish (`??`)
-
-```js
-console.log("" ?? "Default");
-```
-
-Output
-
-```
-""
-```
-
----
-
-```js
-console.log(0 ?? 10);
-```
-
-Output
-
-```
-0
-```
-
----
-
-```js
-console.log(false ?? true);
-```
-
-Output
-
-```
-false
-```
-
----
-
-Comparison Table
-
-| Value | `value || "Default"` | `value ?? "Default"` |
-|---------|----------------------|----------------------|
-| `null` | Default | Default |
-| `undefined` | Default | Default |
-| `0` | Default ❌ | 0 ✅ |
-| `false` | Default ❌ | false ✅ |
-| `""` | Default ❌ | "" ✅ |
-| `"Om"` | Om | Om |
-
----
-
-# 6. Working with Different Data Types
-
-Number
-
-```js
-const score = 0;
-
-console.log(score ?? 100);
-```
-
-Output
-
-```
-0
-```
-
----
-
-Boolean
-
-```js
-const isAdmin = false;
-
-console.log(isAdmin ?? true);
-```
-
-Output
-
-```
-false
-```
-
----
-
-String
-
-```js
-const username = "";
-
-console.log(username ?? "Guest");
-```
-
-Output
-
-```
-""
-```
-
----
-
-Undefined
+Example:
 
 ```js
 let city;
@@ -347,15 +268,351 @@ let city;
 console.log(city ?? "Pune");
 ```
 
-Output
+Output:
 
+```text
+Pune
 ```
+
+Because:
+
+```js
+city
+```
+
+is:
+
+```text
+undefined
+```
+
+Another example:
+
+```js
+const email = undefined;
+
+console.log(email ?? "No Email");
+```
+
+Output:
+
+```text
+No Email
+```
+
+Rule:
+
+```text
+undefined ?? value
+             ↓
+          value
+```
+
+---
+
+# 7. Normal Values with `??`
+
+If the left-hand value is valid, JavaScript keeps it.
+
+## String
+
+```js
+const name = "Om";
+
+console.log(name ?? "Guest");
+```
+
+Output:
+
+```text
+Om
+```
+
+---
+
+## Number
+
+```js
+const age = 22;
+
+console.log(age ?? 18);
+```
+
+Output:
+
+```text
+22
+```
+
+---
+
+## Array
+
+```js
+const users = [];
+
+console.log(users ?? ["Om"]);
+```
+
+Output:
+
+```js
+[]
+```
+
+An empty array is still a value.
+
+---
+
+## Object
+
+```js
+const user = {};
+
+console.log(user ?? { name: "Guest" });
+```
+
+Output:
+
+```js
+{}
+```
+
+---
+
+# 8. Falsy Values with `??`
+
+This is one of the most important concepts.
+
+JavaScript has several falsy values:
+
+```text
+false
+0
+""
+null
+undefined
+NaN
+```
+
+But `??` only treats these two as nullish:
+
+```text
+null
+undefined
+```
+
+So:
+
+### `0`
+
+```js
+console.log(0 ?? 10);
+```
+
+Output:
+
+```text
+0
+```
+
+---
+
+### `false`
+
+```js
+console.log(false ?? true);
+```
+
+Output:
+
+```text
+false
+```
+
+---
+
+### Empty String
+
+```js
+console.log("" ?? "Guest");
+```
+
+Output:
+
+```text
+""
+```
+
+---
+
+### `null`
+
+```js
+console.log(null ?? "Default");
+```
+
+Output:
+
+```text
+Default
+```
+
+---
+
+### `undefined`
+
+```js
+console.log(undefined ?? "Default");
+```
+
+Output:
+
+```text
+Default
+```
+
+---
+
+# 9. `??` vs `||`
+
+This is the most important comparison.
+
+## `||`
+
+`||` uses the right-hand value when the left-hand value is **falsy**.
+
+```js
+console.log(0 || 10);
+```
+
+Output:
+
+```text
+10
+```
+
+---
+
+## `??`
+
+`??` uses the right-hand value only when the left-hand value is:
+
+```text
+null
+```
+
+or:
+
+```text
+undefined
+```
+
+```js
+console.log(0 ?? 10);
+```
+
+Output:
+
+```text
+0
+```
+
+---
+
+## Comparison
+
+| Value | `value || "Default"` | `value ?? "Default"` |
+|---|---|---|
+| `null` | `"Default"` | `"Default"` |
+| `undefined` | `"Default"` | `"Default"` |
+| `0` | `"Default"` | `0` |
+| `false` | `"Default"` | `false` |
+| `""` | `"Default"` | `""` |
+| `"Om"` | `"Om"` | `"Om"` |
+
+### Remember
+
+```text
+|| 
+↓
+Falsy check
+
+??
+
+↓
+Nullish check
+```
+
+---
+
+# 10. `??` with Different Data Types
+
+## Number
+
+```js
+const score = 0;
+
+console.log(score ?? 100);
+```
+
+Output:
+
+```text
+0
+```
+
+---
+
+## Boolean
+
+```js
+const isAdmin = false;
+
+console.log(isAdmin ?? true);
+```
+
+Output:
+
+```text
+false
+```
+
+---
+
+## String
+
+```js
+const username = "";
+
+console.log(username ?? "Guest");
+```
+
+Output:
+
+```text
+""
+```
+
+---
+
+## Undefined
+
+```js
+let city;
+
+console.log(city ?? "Pune");
+```
+
+Output:
+
+```text
 Pune
 ```
 
 ---
 
-Null
+## Null
 
 ```js
 const data = null;
@@ -363,251 +620,279 @@ const data = null;
 console.log(data ?? []);
 ```
 
-Output
+Output:
 
-```
+```js
 []
 ```
 
 ---
 
-# 7. Combining Optional Chaining with `??`
+# 11. `??` with Optional Chaining
 
-This is one of the most common interview patterns.
+This is one of the most important JavaScript patterns.
+
+Optional Chaining:
 
 ```js
-const user = {
-  name: "Om",
-};
+?.
+```
 
-const city = user.address?.city ?? "Unknown";
+safely accesses a value.
+
+Nullish Coalescing:
+
+```js
+??
+```
+
+provides a fallback.
+
+Together:
+
+```js
+const user = {};
+
+const city =
+    user?.address?.city ?? "Unknown";
 
 console.log(city);
 ```
 
-Output
+Output:
 
-```
+```text
 Unknown
 ```
 
+Think:
+
+```text
+user
+ ↓
+?. address
+ ↓
+?. city
+ ↓
+undefined
+ ↓
+??
+ ↓
+"Unknown"
+```
+
 ---
 
-Another Example
+Another example:
 
 ```js
-const student = {
-  address: {
-    city: "Pune",
-  },
+const user = {
+    address: {
+        city: "Pune"
+    }
 };
 
-const city = student.address?.city ?? "Mumbai";
+const city =
+    user?.address?.city ?? "Unknown";
 
 console.log(city);
 ```
 
-Output
+Output:
 
-```
+```text
 Pune
 ```
 
----
-
-Visualization
-
-```
-student
-
-↓
-
-address
-
-↓
-
-city
-
-↓
-
-Pune
-
-↓
-
-Not null
-
-↓
-
-Return Pune
-```
+Because the city exists.
 
 ---
 
-# 8. Real-world Examples
+# 12. What `??` Does Not Do
 
-API Response
+## It Does Not Check All Falsy Values
+
+This is wrong:
+
+```text
+?? checks:
+
+0
+false
+""
+null
+undefined
+```
+
+Correct:
+
+```text
+?? checks:
+
+null
+undefined
+```
+
+Only.
+
+---
+
+## It Does Not Validate Data
+
+Example:
 
 ```js
-const response = {};
-
-const username =
-response.user?.name ?? "Guest";
+const age = user?.age ?? 18;
 ```
+
+This only says:
+
+```text
+If age is null/undefined → use 18
+```
+
+It does not check whether:
+
+```text
+age is positive
+age is a number
+age is greater than 18
+```
+
+Validation is a separate concept.
 
 ---
 
-Shopping Cart
+## It Does Not Convert Values
+
+Example:
+
+```js
+const value = 0;
+
+console.log(value ?? 10);
+```
+
+The result remains:
+
+```text
+0
+```
+
+`??` does not convert `0` into another value.
+
+---
+
+# 13. Common Beginner Mistakes
+
+## Mistake 1 — Using `||` when `0` is valid
+
+Wrong:
 
 ```js
 const quantity = 0;
 
-console.log(quantity ?? 1);
+const result = quantity || 1;
 ```
 
-Output
+Result:
 
+```text
+1
 ```
+
+If `0` is meaningful, use:
+
+```js
+const result = quantity ?? 1;
+```
+
+Result:
+
+```text
 0
 ```
 
 ---
 
-Configuration
+## Mistake 2 — Thinking `??` checks falsy values
+
+Wrong mental model:
+
+```text
+?? = falsy check
+```
+
+Correct:
+
+```text
+?? = null/undefined check
+```
+
+---
+
+## Mistake 3 — Expecting `??` to replace an empty string
 
 ```js
-const PORT =
-process.env.PORT ?? 3000;
+const name = "";
+
+console.log(name ?? "Guest");
 ```
+
+Output:
+
+```text
+""
+```
+
+Because an empty string is not nullish.
 
 ---
 
-# 9. React Examples
-
-Props
-
-```jsx
-function User({ name }) {
-  return (
-    <h1>{name ?? "Guest"}</h1>
-  );
-}
-```
-
----
-
-API Data
-
-```jsx
-<h2>
-{user?.profile?.name ?? "Loading..."}
-</h2>
-```
-
----
-
-State
-
-```jsx
-const age =
-user.age ?? 18;
-```
-
----
-
-# 10. Node.js Examples
-
-Environment Variables
+## Mistake 4 — Confusing `?.` and `??`
 
 ```js
-const PORT =
-process.env.PORT ?? 5000;
+user?.name
 ```
 
----
+means:
 
-Express
+```text
+Safely access name.
+```
+
+While:
 
 ```js
-const city =
-req.body.city ?? "Unknown";
+user?.name ?? "Guest"
+```
+
+means:
+
+```text
+Safely access name.
+If missing, use "Guest".
 ```
 
 ---
 
-MongoDB
+## Mistake 5 — Mixing `||` and `??` Without Parentheses
 
-```js
-const email =
-user.email ?? "Not Available";
-```
-
----
-
-# 11. Best Practices
-
-✅ Use `??` instead of `||` when `0`, `false`, or `""` are valid values.
-
-✅ Combine with Optional Chaining.
-
-✅ Use for configuration defaults.
-
-✅ Use for API responses.
-
----
-
-# 12. Common Mistakes
-
-### Confusing `||` with `??`
-
-Wrong
-
-```js
-const score = 0;
-
-console.log(score || 100);
-```
-
-Output
-
-```
-100 ❌
-```
-
-Correct
-
-```js
-console.log(score ?? 100);
-```
-
-Output
-
-```
-0 ✅
-```
-
----
-
-### Mixing `||` and `??`
-
-Wrong
+This is invalid:
 
 ```js
 a || b ?? c
 ```
 
-Produces
+JavaScript throws a syntax error.
 
-```
-SyntaxError
-```
-
-Correct
+Use parentheses:
 
 ```js
 (a || b) ?? c
 ```
 
-or
+or:
 
 ```js
 a || (b ?? c)
@@ -615,158 +900,353 @@ a || (b ?? c)
 
 ---
 
-### Thinking `??` Checks All Falsy Values
+# 14. Summary
 
-Wrong.
+The Nullish Coalescing Operator:
 
-It only checks
-
+```js
+??
 ```
-null
 
+provides a fallback only when the left side is:
+
+```text
+null
+```
+
+or:
+
+```text
 undefined
 ```
 
----
+The most important comparison:
 
-# 13. Interview Questions
+```text
+||  → checks falsy values
 
-## What is Nullish Coalescing?
+??  → checks null/undefined
+```
 
-It returns the right-hand value only if the left-hand value is `null` or `undefined`.
-
----
-
-## Difference between `||` and `??`?
-
-`||` checks **all falsy values**.
-
-`??` checks only
-
-- `null`
-- `undefined`
-
----
-
-## Why is `??` better for default values?
-
-Because it preserves valid values like
-
-- `0`
-- `false`
-- `""`
-
----
-
-## Can Optional Chaining and `??` be used together?
-
-Yes.
-
-Very common.
+Therefore:
 
 ```js
-user.address?.city ?? "Unknown"
+0 ?? 10
 ```
 
----
+returns:
 
-## Is `??` supported in modern JavaScript?
+```text
+0
+```
 
-Yes.
-
-It is supported in all modern browsers and modern Node.js versions.
-
----
-
-# 14. Coding Exercises
-
-### Exercise 1
-
-Predict Output
+while:
 
 ```js
-console.log(0 ?? 10);
+0 || 10
 ```
 
----
+returns:
 
-### Exercise 2
+```text
+10
+```
 
-Predict Output
+And:
 
 ```js
-console.log(0 || 10);
+false ?? true
+```
+
+returns:
+
+```text
+false
 ```
 
 ---
 
-### Exercise 3
+# Key Mental Map
 
-Return
-
+```text
+              value ?? default
+                     │
+                     ▼
+            Is value null?
+             OR undefined?
+                /       \
+              YES       NO
+               ↓         ↓
+            default     value
 ```
-"Guest"
+
+Remember:
+
+```text
+?. → Safe Access
+
+?? → Default for null/undefined
+
+?. + ?? → Safe Access + Default
 ```
 
-if
+---
+
+# 15. Hands-on Practice
+
+> **Important: Do not copy the solution immediately. First think, write the code yourself, then run it.**
+
+## Exercise 1 — Easy
+
+Predict:
 
 ```js
-user.name
+console.log(10 ?? 20);
 ```
-
-is `null`.
 
 ---
 
-### Exercise 4
+## Exercise 2 — Easy
 
-Safely print
+Predict:
 
 ```js
-user.address.city
+console.log(null ?? "Guest");
 ```
-
-using
-
-- Optional Chaining
-- Nullish Coalescing
 
 ---
 
-### Exercise 5
+## Exercise 3 — Easy
 
-Predict Output
+Predict:
 
 ```js
-console.log("" ?? "Hello");
-console.log("" || "Hello");
+console.log(undefined ?? "Pune");
 ```
 
 ---
 
-# 15. Summary
+## Exercise 4 — Important
 
-- `??` returns the right value only for `null` or `undefined`.
-- Unlike `||`, it preserves valid falsy values.
-- Works perfectly with Optional Chaining.
-- Commonly used in React, Express, Node.js, MongoDB, and API handling.
-- One of the most frequently asked ES2020 interview topics.
+Predict:
+
+```js
+console.log(0 ?? 100);
+console.log(0 || 100);
+```
 
 ---
 
-# What's Next?
+## Exercise 5 — Important
 
-➡️ **12-Modules.md**
+Predict:
 
-You'll learn:
+```js
+console.log(false ?? true);
+console.log(false || true);
+```
 
-- Why JavaScript Modules were introduced
-- Import and Export
-- Named Exports
-- Default Exports
-- Module Scope
-- ES Modules vs CommonJS
-- Browser vs Node.js Modules
-- Dynamic Imports
-- Interview Questions
-- Coding Exercises
+---
+
+## Exercise 6 — Important
+
+Predict:
+
+```js
+console.log("" ?? "Guest");
+console.log("" || "Guest");
+```
+
+---
+
+## Exercise 7 — Mixed Values
+
+Predict all outputs:
+
+```js
+console.log(null ?? 10);
+console.log(undefined ?? 20);
+console.log(0 ?? 30);
+console.log(false ?? 40);
+console.log("" ?? 50);
+console.log("Om" ?? 60);
+```
+
+---
+
+## Exercise 8 — Real-world Quantity
+
+Write code where:
+
+```js
+const quantity = 0;
+```
+
+should remain:
+
+```text
+0
+```
+
+instead of becoming:
+
+```text
+1
+```
+
+Use `??`.
+
+---
+
+## Exercise 9 — User Name
+
+Given:
+
+```js
+const user = {
+    name: null
+};
+```
+
+Return:
+
+```text
+Guest
+```
+
+using `??`.
+
+---
+
+## Exercise 10 — API Data
+
+Given:
+
+```js
+const response = {};
+```
+
+Safely get:
+
+```text
+Guest
+```
+
+from:
+
+```text
+response.user.name
+```
+
+using both:
+
+```text
+?.
+??
+```
+
+---
+
+## Exercise 11 — Output Prediction
+
+Predict:
+
+```js
+const user = {
+    age: 0,
+    isAdmin: false,
+    name: ""
+};
+
+console.log(user.age ?? 18);
+console.log(user.isAdmin ?? true);
+console.log(user.name ?? "Guest");
+```
+
+---
+
+## Exercise 12 — Challenge
+
+Create:
+
+```js
+function getUserInfo(user) {
+
+}
+```
+
+Given:
+
+```js
+const user = {
+    name: null,
+    age: 0,
+    isAdmin: false
+};
+```
+
+Return:
+
+```js
+{
+    name: "Guest",
+    age: 0,
+    isAdmin: false
+}
+```
+
+Requirements:
+
+- Use `??`
+- Preserve `0`
+- Preserve `false`
+- Replace only `null`/`undefined`
+- Do not use `if`
+
+---
+
+# Mastery Check
+
+Before moving to Part 2, you should be able to explain this without looking at the notes:
+
+```js
+const value =
+    user?.profile?.score ?? 0;
+```
+
+You should understand:
+
+```text
+user
+ ↓
+?.
+ ↓
+profile
+ ↓
+?.
+ ↓
+score
+ ↓
+null/undefined?
+ ↓
+YES → 0
+NO  → score
+```
+
+And you should immediately know:
+
+```js
+0 ?? 10        // 0
+false ?? true  // false
+"" ?? "Guest"  // ""
+null ?? 10     // 10
+undefined ?? 10 // 10
+```
+
+If you can predict these without guessing, you understand the **fundamentals of Nullish Coalescing**.
+
+---
+
+# Next Part
+
+➡️ **Part 2 – Internal Working, Short-Circuiting, Evaluation Order, `??` vs `||`, Operator Precedence & Deep Understanding**

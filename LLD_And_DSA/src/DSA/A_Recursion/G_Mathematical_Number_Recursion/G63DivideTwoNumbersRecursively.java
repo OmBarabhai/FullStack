@@ -64,9 +64,7 @@ public class G63DivideTwoNumbersRecursively {
      * =====================================================
      */
 
-    public static int computeQuotient(
-            int absDividend,
-            int absDivisor) {
+    public static int computeQuotient(int absDividend, int absDivisor) {
 
         // Base Case:
         //
@@ -84,10 +82,7 @@ public class G63DivideTwoNumbersRecursively {
 
         // One successful subtraction
         // means one more count in quotient.
-        return 1 + computeQuotient(
-                absDividend - absDivisor,
-                absDivisor
-        );
+        return 1 + computeQuotient(absDividend - absDivisor, absDivisor);
     }
 
 
@@ -97,15 +92,11 @@ public class G63DivideTwoNumbersRecursively {
      * =====================================================
      */
 
-    public static int divideTwoInteger(
-            int dividend,
-            int divisor) {
+    public static int divideTwoInteger(int dividend, int divisor) {
 
         // Cannot divide by zero.
         if (divisor == 0) {
-            throw new ArithmeticException(
-                    "Cannot divide by zero"
-            );
+            throw new ArithmeticException("Cannot divide by zero");
         }
 
 
@@ -156,8 +147,7 @@ public class G63DivideTwoNumbersRecursively {
          * || means OR.
          */
 
-        if ((dividend < 0 && divisor > 0)
-                || (dividend > 0 && divisor < 0)) {
+        if ((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0)) {
 
             sign = -1;
         }
@@ -184,10 +174,7 @@ public class G63DivideTwoNumbersRecursively {
 
 
         // Calculate positive quotient.
-        int quotient = computeQuotient(
-                absDividend,
-                absDivisor
-        );
+        int quotient = computeQuotient(absDividend, absDivisor);
 
 
         // Apply the original sign.
@@ -206,10 +193,7 @@ public class G63DivideTwoNumbersRecursively {
         int dividend = 17;
         int divisor = 5;
 
-        int result = divideTwoInteger(
-                dividend,
-                divisor
-        );
+        int result = divideTwoInteger(dividend, divisor);
 
         System.out.println("Quotient = " + result);
     }

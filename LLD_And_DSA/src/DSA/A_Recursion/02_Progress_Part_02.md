@@ -18,17 +18,17 @@ And 81–85 begin the Take/Not-Take family with subsequences and sum-K problems.
 
 |   # | Problem                                        | Platform            | Difficulty | OA Value | Status | R1 | R2 | R3 | R4 | R5 |
 |----:|------------------------------------------------|---------------------|:----------:|:--------:|:------:|:--:|:--:|:--:|:--:|:--:|
-| 061 | Fast Exponentiation                            | LeetCode 50 / GFG   |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| 062 | Multiply Two Numbers Recursively               | GFG                 |     🟢     |   ⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| 063 | Divide Two Numbers Recursively                 | GFG                 |     🟡     |   ⭐⭐⭐⭐   |  ️ ☑️  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| 064 | Calculate nCr Recursively                      | GFG                 |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| 065 | Calculate nPr Recursively                      | GFG                 |     🟡     |   ⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| 066 | Pascal Triangle Row Recursively                | LeetCode 119 style  |     🟡     |   ⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| 067 | Tower of Hanoi                                 | GFG                 |     🔴     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| 068 | Josephus Problem                               | GFG / LeetCode 1823 |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| 069 | Recursive Euclidean Algorithm                  | GFG                 |     🟢     |   ⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| 070 | Print All Divisors Recursively                 | GFG                 |     🟢     |   ⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| 071 | Prime Checking Recursively                     | GFG                 |     🟢     |   ⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| 061 | Fast Exponentiation                            | LeetCode 50 / GFG   |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️   | ☑️  | ⬜  | ⬜  | ⬜  | ⬜  |
+| 062 | Multiply Two Numbers Recursively               | GFG                 |     🟢     |   ⭐⭐⭐⭐   |   ☑️   | ☑️  | ⬜  | ⬜  | ⬜  | ⬜  |
+| 063 | Divide Two Numbers Recursively                 | GFG                 |     🟡     |   ⭐⭐⭐⭐   |  ️ ☑️  | ☑️  | ⬜  | ⬜  | ⬜  | ⬜  |
+| 064 | Calculate nCr Recursively                      | GFG                 |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️   | ☑️  | ⬜  | ⬜  | ⬜  | ⬜  |
+| 065 | Calculate nPr Recursively                      | GFG                 |     🟡     |   ⭐⭐⭐⭐   |   ☑️   | ☑️  | ⬜  | ⬜  | ⬜  | ⬜  |
+| 066 | Pascal Triangle Row Recursively                | LeetCode 119 style  |     🟡     |   ⭐⭐⭐⭐   |   ☑️    | ☑️  | ⬜  | ⬜  | ⬜  | ⬜  |
+| 067 | Tower of Hanoi                                 | GFG                 |     🔴     |  ⭐⭐⭐⭐⭐   |   ☑️    | ☑️  | ⬜  | ⬜  | ⬜  | ⬜  |
+| 068 | Josephus Problem                               | GFG / LeetCode 1823 |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️    | ☑️  | ⬜  | ⬜  | ⬜  | ⬜  |
+| 069 | Recursive Euclidean Algorithm                  | GFG                 |     🟢     |   ⭐⭐⭐⭐   |   ☑️    | ☑️  | ⬜  | ⬜  | ⬜  | ⬜  |
+| 070 | Print All Divisors Recursively                 | GFG                 |     🟢     |   ⭐⭐⭐    |   ☑️    | ☑️  | ⬜  | ⬜  | ⬜  | ⬜  |
+| 071 | Prime Checking Recursively                     | GFG                 |     🟢     |   ⭐⭐⭐⭐   |   ☑️    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 | 072 | Sieve-Style Recursion Practice                 | Interview           |     🟡     |   ⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 | 073 | Generate Binary Numbers Recursively            | GFG                 |     🟢     |   ⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 | 074 | Generate Gray Code Recursively                 | LeetCode 89         |     🟡     |   ⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
