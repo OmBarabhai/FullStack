@@ -567,3 +567,30 @@
 //
 
 
+const num = [10,20,30,40,50];
+num.forEach(num =>{
+console.log(num)
+})
+console.log(num)
+const mul = num.forEach(n => {
+return n * 2
+});
+console.log(mul)
+const users = [
+    { name: "Om", age: 22 },
+    { name: "Rahul", age: 24 },
+    { name: "Amit", age: 21 }
+];
+
+const print = users.forEach(({name})=> name);
+console.log(print);
+
+users.forEach(({name}) => console.log(name))
+
+const fru = ["f","M","d"];
+fru.forEach((fruits,idx) =>{
+console.log(idx,fruits);
+})
+
+
+
