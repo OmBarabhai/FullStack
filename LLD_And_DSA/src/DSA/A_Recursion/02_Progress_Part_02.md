@@ -28,12 +28,12 @@ And 81–85 begin the Take/Not-Take family with subsequences and sum-K problems.
 | 068 | Josephus Problem                               | GFG / LeetCode 1823 |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️    | ☑️  | ⬜  | ⬜  | ⬜  | ⬜  |
 | 069 | Recursive Euclidean Algorithm                  | GFG                 |     🟢     |   ⭐⭐⭐⭐   |   ☑️    | ☑️  | ⬜  | ⬜  | ⬜  | ⬜  |
 | 070 | Print All Divisors Recursively                 | GFG                 |     🟢     |   ⭐⭐⭐    |   ☑️    | ☑️  | ⬜  | ⬜  | ⬜  | ⬜  |
-| 071 | Prime Checking Recursively                     | GFG                 |     🟢     |   ⭐⭐⭐⭐   |   ☑️    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| 072 | Sieve-Style Recursion Practice                 | Interview           |     🟡     |   ⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| 073 | Generate Binary Numbers Recursively            | GFG                 |     🟢     |   ⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| 074 | Generate Gray Code Recursively                 | LeetCode 89         |     🟡     |   ⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| 075 | Binary Representation Recursively              | GFG                 |     🟢     |   ⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| 076 | Decimal Representation from Binary Recursively | GFG                 |     🟢     |   ⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| 071 | Prime Checking Recursively                     | GFG                 |     🟢     |   ⭐⭐⭐⭐   |   ☑️    | ☑️    | ⬜  | ⬜  | ⬜  | ⬜  |
+| 072 | Sieve-Style Recursion Practice                 | Interview           |     🟡     |   ⭐⭐⭐    |   ☑️    | ☑️   | ⬜  | ⬜  | ⬜  | ⬜  |
+| 073 | Generate Binary Numbers Recursively            | GFG                 |     🟢     |   ⭐⭐⭐⭐   |   ☑️    | ☑️  | ⬜  | ⬜  | ⬜  | ⬜  |
+| 074 | Generate Gray Code Recursively                 | LeetCode 89         |     🟡     |   ⭐⭐⭐⭐   |   ☑️      | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| 075 | Binary Representation Recursively              | GFG                 |     🟢     |   ⭐⭐⭐⭐   |   ☑️      | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| 076 | Decimal Representation from Binary Recursively | GFG                 |     🟢     |   ⭐⭐⭐    |   ☑️    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 | 077 | Sum of Squares Recursively                     | GFG                 |     🟢     |   ⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 | 078 | Sum of Cubes Recursively                       | GFG                 |     🟢     |   ⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 | 079 | Alternating Sum Recursively                    | GFG                 |     🟢     |   ⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |

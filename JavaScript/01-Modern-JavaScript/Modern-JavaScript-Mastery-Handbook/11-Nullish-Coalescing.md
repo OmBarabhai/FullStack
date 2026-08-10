@@ -522,14 +522,15 @@ Output:
 
 ## Comparison
 
-| Value | `value || "Default"` | `value ?? "Default"` |
-|---|---|---|
-| `null` | `"Default"` | `"Default"` |
-| `undefined` | `"Default"` | `"Default"` |
-| `0` | `"Default"` | `0` |
-| `false` | `"Default"` | `false` |
-| `""` | `"Default"` | `""` |
-| `"Om"` | `"Om"` | `"Om"` |
+
+| `value`     | `"Default"` | `value ?? "Default"` |
+|-------------|-------------|----------------------|
+| `null`      | `"Default"` | `"Default"`          |
+| `undefined` | `"Default"` | `"Default"`          |
+| `0`         | `"Default"` | `0`                  |
+| `false`     | `"Default"` | `false`              |
+| `""`        | `"Default"` | `""`                 |
+| `"Om"`      | `"Om"`      | `"Om"`               |
 
 ### Remember
 
