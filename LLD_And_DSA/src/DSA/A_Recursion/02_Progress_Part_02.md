@@ -34,10 +34,10 @@ And 81–85 begin the Take/Not-Take family with subsequences and sum-K problems.
 | 074 | Generate Gray Code Recursively                 | LeetCode 89         |     🟡     |   ⭐⭐⭐⭐   |   ☑️      | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 | 075 | Binary Representation Recursively              | GFG                 |     🟢     |   ⭐⭐⭐⭐   |   ☑️      | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 | 076 | Decimal Representation from Binary Recursively | GFG                 |     🟢     |   ⭐⭐⭐    |   ☑️    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| 077 | Sum of Squares Recursively                     | GFG                 |     🟢     |   ⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| 078 | Sum of Cubes Recursively                       | GFG                 |     🟢     |   ⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| 079 | Alternating Sum Recursively                    | GFG                 |     🟢     |   ⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| 080 | Alternating Product Recursively                | Interview           |     🟡     |   ⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| 077 | Sum of Squares Recursively                     | GFG                 |     🟢     |   ⭐⭐⭐    |  ☑️  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| 078 | Sum of Cubes Recursively                       | GFG                 |     🟢     |   ⭐⭐⭐    |   ☑️  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| 079 | Alternating Sum Recursively                    | GFG                 |     🟢     |   ⭐⭐⭐    |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| 080 | Alternating Product Recursively                | Interview           |     🟡     |   ⭐⭐⭐    |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 
 These are the exact 61–80 problem identities from the master source.
 
@@ -92,13 +92,13 @@ These aren't just seven random problems. They expose different recursive structu
 
 ## Problems 081–085
 
-|       # | Problem                            | Platform | Pattern       | Status |
-| ------: | ---------------------------------- | -------- | ------------- | :----: |
-| **081** | Print All Subsequences of an Array | GFG      | Take/Not-Take |    ⬜   |
-| **082** | Count Subsequences                 | GFG      | Take/Not-Take |    ⬜   |
-| **083** | Print Subsequence With Sum K       | GFG      | Take/Not-Take |    ⬜   |
-| **084** | Count Subsequences With Sum K      | GFG      | Take/Not-Take |    ⬜   |
-| **085** | Print One Subsequence With Sum K   | GFG      | Take/Not-Take |    ⬜   |
+|       # | Problem                            | Platform | Pattern       | Status | R1 | R2 | R3 | R4 | R5 |
+|--------:|------------------------------------|----------|---------------|:------:|:--:|:--:|:--:|:--:|:--:|
+| **081** | Print All Subsequences of an Array | GFG      | Take/Not-Take |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **082** | Count Subsequences                 | GFG      | Take/Not-Take |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **083** | Print Subsequence With Sum K       | GFG      | Take/Not-Take |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **084** | Count Subsequences With Sum K      | GFG      | Take/Not-Take |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **085** | Print One Subsequence With Sum K   | GFG      | Take/Not-Take |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 
 The master file confirms this exact sequence.
 
@@ -218,18 +218,27 @@ Backtracking
 
 |       # | Problem                                  | Platform             | Difficulty | OA Value | Status |  R1 |  R2 |  R3 |  R4 |  R5 |   |
 | ------: | ---------------------------------------- | -------------------- | :--------: | :------: | :----: | :-: | :-: | :-: | :-: | :-: | - |
-| **086** | Check if a Subsequence With Sum K Exists | GFG                  |     🟡     |   ⭐⭐⭐⭐⭐  |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  |   |
-| **087** | Print All Subsets                        | LeetCode 78          |     🟡     |   ⭐⭐⭐⭐⭐  |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
-| **088** | Count Subsets                            | GFG                  |     🟡     |   ⭐⭐⭐⭐⭐  |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
-| **089** | Subset Sum                               | GFG / LC 416 variant |     🟡     |   ⭐⭐⭐⭐⭐  |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
-| **090** | Partition Into Two Equal Subsets         | LeetCode 416         |     🟡     |   ⭐⭐⭐⭐⭐  |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
-| **091** | Partition With Minimum Difference        | GFG                  |     🟡     |   ⭐⭐⭐⭐⭐  |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
-| **092** | Generate All Binary Strings of Length N  | GFG                  |     🟢     |   ⭐⭐⭐⭐⭐  |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
-| **093** | Binary Strings Without Consecutive 1s    | Interview            |     🟡     |   ⭐⭐⭐⭐⭐  |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
-| **094** | Binary Strings Without Consecutive 0s    | Interview            |     🟡     |   ⭐⭐⭐⭐   |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
-| **095** | Binary Strings With Exactly K Ones       | Interview            |     🟡     |   ⭐⭐⭐⭐⭐  |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
+| **086** | Check if a Subsequence With Sum K Exists | GFG                  |     🟡     |   ⭐⭐⭐⭐⭐  |    ☑️ |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  |   |
+| **087** | Print All Subsets                        | LeetCode 78          |     🟡     |   ⭐⭐⭐⭐⭐  |    ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
+| **088** | Count Subsets                            | GFG                  |     🟡     |   ⭐⭐⭐⭐⭐  |    ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
+| **089** | Subset Sum                               | GFG / LC 416 variant |     🟡     |   ⭐⭐⭐⭐⭐  |    ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
+| **090** | Partition Into Two Equal Subsets         | LeetCode 416         |     🟡     |   ⭐⭐⭐⭐⭐  |    ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
+| **091** | Partition With Minimum Difference        | GFG                  |     🟡     |   ⭐⭐⭐⭐⭐  |    ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
+| **092** | Generate All Binary Strings of Length N  | GFG                  |     🟢     |   ⭐⭐⭐⭐⭐  |    ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
+| **093** | Binary Strings Without Consecutive 1s    | Interview            |     🟡     |   ⭐⭐⭐⭐⭐  |    ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
+| **094** | Binary Strings Without Consecutive 0s    | Interview            |     🟡     |   ⭐⭐⭐⭐   |    ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
+| **095** | Binary Strings With Exactly K Ones       | Interview            |     🟡     |   ⭐⭐⭐⭐⭐  |    ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
 
 These are exactly the source's 86–95 problems.
+
+| Extra #   | Problem                 | Platform           | New Concept                     | Difficulty | OA Value | Status | R1 | R2 | R3 | R4 | R5 |
+|-----------|-------------------------|--------------------|---------------------------------|:----------:|:--------:|:------:|:--:|:--:|:--:|:--:|:--:|
+| **H-E01** | 0/1 Knapsack            | GFG / LeetCode     | Take/Not-Take + Optimization    |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **H-E02** | Target Sum              | LeetCode 494       | `+ / -` Choice + Counting       |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **H-E03** | Subset XOR K            | GFG / Interview    | Take/Not-Take + XOR State       |     🟡     |   ⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  |    |
+| **H-E04** | Coin Change — Recursive | GFG / LeetCode 322 | Take + Reuse                    |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **H-E05** | Minimum Coins           | GFG                | Take/Not-Take + Optimization    |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **H-E06** | Rod Cutting             | GFG                | Unbounded Choice + Optimization |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 
 ---
 
@@ -2685,18 +2694,18 @@ This is extremely important before DP.
 
 Problems **171–180** from the source are explicitly the next advanced set.
 
-|       # | Problem                           | Platform          | Difficulty | OA Value | Status |  R1 |  R2 |  R3 |  R4 |  R5 |   |   |   |
-| ------: | --------------------------------- | ----------------- | :--------: | :------: | :----: | :-: | :-: | :-: | :-: | :-: | - | - | - |
-| **171** | K-th Subset                       | Interview         |     🔴     |   ⭐⭐⭐⭐   |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  |   |   |   |
-| **172** | K-th Permutation                  | LeetCode 60       |     🔴     |   ⭐⭐⭐⭐⭐  |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  |   |   |   |
-| **173** | Pattern → String Mapping          | Interview         |     🔴     |   ⭐⭐⭐⭐   |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ | ⬜ |   |
-| **174** | Word Pattern Matching             | Interview         |     🔴     |   ⭐⭐⭐⭐⭐  |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ | ⬜ |   |
-| **175** | Remove Invalid Parentheses        | LeetCode 301      |     🔴     |   ⭐⭐⭐⭐⭐  |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ | ⬜ |   |
-| **176** | Generate Valid IP Variants        | LeetCode 93 style |     🟡     |   ⭐⭐⭐⭐   |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ | ⬜ |   |
-| **177** | Constraint Placement Problem      | Interview         |     🔴     |   ⭐⭐⭐⭐   |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ | ⬜ | ⬜ |
-| **178** | Partition Array Under Constraints | Interview         |     🔴     |   ⭐⭐⭐⭐⭐  |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ | ⬜ | ⬜ |
-| **179** | Constraint Puzzle                 | Interview         |     🔴     |   ⭐⭐⭐⭐   |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ | ⬜ | ⬜ |
-| **180** | Recursive Search With Pruning     | Interview         |     🔴     |   ⭐⭐⭐⭐⭐  |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ | ⬜ | ⬜ |
+|       # | Problem                           | Platform          | Difficulty | OA Value | Status | R1 | R2 | R3 | R4 | R5 |   |   |   |
+|--------:|-----------------------------------|-------------------|:----------:|:--------:|:------:|:--:|:--:|:--:|:--:|:--:|---|---|---|
+| **171** | K-th Subset                       | Interview         |     🔴     |   ⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |   |   |   |
+| **172** | K-th Permutation                  | LeetCode 60       |     🔴     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |   |   |   |
+| **173** | Pattern → String Mapping          | Interview         |     🔴     |   ⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜ | ⬜ |   |
+| **174** | Word Pattern Matching             | Interview         |     🔴     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜ | ⬜ |   |
+| **175** | Remove Invalid Parentheses        | LeetCode 301      |     🔴     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜ | ⬜ |   |
+| **176** | Generate Valid IP Variants        | LeetCode 93 style |     🟡     |   ⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜ | ⬜ |   |
+| **177** | Constraint Placement Problem      | Interview         |     🔴     |   ⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜ | ⬜ | ⬜ |
+| **178** | Partition Array Under Constraints | Interview         |     🔴     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜ | ⬜ | ⬜ |
+| **179** | Constraint Puzzle                 | Interview         |     🔴     |   ⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜ | ⬜ | ⬜ |
+| **180** | Recursive Search With Pruning     | Interview         |     🔴     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜ | ⬜ | ⬜ |
 
 ---
 

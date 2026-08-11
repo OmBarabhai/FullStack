@@ -1,206 +1,181 @@
-# Higher-Order Functions (HOF)
+# Part 1 — Higher-Order Functions: Fundamentals
 
-> **"A Higher-Order Function (HOF) is a function that either accepts another function as an argument, returns a function, or both. Higher-Order Functions are one of the foundations of modern JavaScript, React, Node.js, and Functional Programming."**
+## 1. What is a Higher-Order Function?
 
----
+A **Higher-Order Function (HOF)** is a function that:
 
-# Table of Contents
+* accepts another function as an argument, **or**
+* returns another function, **or**
+* does both.
 
-1. What is a Higher-Order Function?
-2. Why Higher-Order Functions?
-3. First-Class Functions
-4. Callback Functions
-5. Passing Functions as Arguments
-6. Returning Functions
-7. Built-in Higher-Order Functions
-8. Creating Your Own HOF
-9. Closures with HOFs
-10. Function Composition
-11. Pure vs Impure Functions
-12. Real-world Examples
-13. React Examples
-14. Node.js Examples
-15. Performance Considerations
-16. Best Practices
-17. Common Mistakes
-18. Interview Questions
-19. Coding Exercises
-20. Summary
-
----
-
-# 1. What is a Higher-Order Function?
-
-A Higher-Order Function is a function that:
-
-- Accepts another function as a parameter
-- Returns another function
-- Or does both
-
-Diagram
-
-```
-Function
-
-↓
-
-Receives Function
-
-OR
-
-Returns Function
-
-↓
-
-Higher-Order Function
-```
-
----
-
-Example
+### Example
 
 ```js
-function greet() {
-    console.log("Hello");
-}
-
 function execute(fn) {
     fn();
+}
+
+function greet() {
+    console.log("Hello");
 }
 
 execute(greet);
 ```
 
-Output
+Output:
 
-```
+```text
 Hello
 ```
 
-Here
+Here:
 
-```
+```text
 execute()
-
-↓
-
+   ↓
+receives greet
+   ↓
 Higher-Order Function
+```
 
-greet()
+And:
 
-↓
-
-Callback Function
+```text
+greet
+   ↓
+function passed as argument
+   ↓
+Callback
 ```
 
 ---
 
-# 2. Why Higher-Order Functions?
+## 2. Core Mental Model
 
-Without HOF
+Remember this:
 
-```js
-console.log("Task Started");
-
-console.log("Task Finished");
+```text
+Function
+   │
+   ├── receives another function
+   │
+   └── returns another function
+          ↓
+   Higher-Order Function
 ```
 
-Repeated code everywhere.
-
----
-
-With HOF
+### Example — Receives a Function
 
 ```js
-function logger(task) {
-    console.log("Task Started");
-
+function run(task) {
     task();
-
-    console.log("Task Finished");
 }
-
-logger(() => {
-    console.log("Reading File");
-});
 ```
 
-Output
+`run()` is a HOF because it receives `task`.
 
+### Example — Returns a Function
+
+```js
+function createGreeting() {
+    return function () {
+        console.log("Hello");
+    };
+}
 ```
-Task Started
 
-Reading File
-
-Task Finished
-```
-
-Reusable.
+`createGreeting()` is a HOF because it returns a function.
 
 ---
 
-# 3. First-Class Functions
+## 3. Why HOFs Matter
 
-JavaScript treats functions like variables.
-
-Functions can be
-
-- Stored in variables
-- Passed as arguments
-- Returned from functions
-- Stored in objects
-- Stored inside arrays
-
-Example
+Without HOF:
 
 ```js
-const greet = function () {
-    console.log("Hello");
-};
+function doubleNumbers(numbers) {
+    const result = [];
 
-greet();
-```
-
-Output
-
-```
-Hello
-```
-
----
-
-Function inside Object
-
-```js
-const user = {
-    greet() {
-        console.log("Hi");
+    for (const number of numbers) {
+        result.push(number * 2);
     }
-};
 
-user.greet();
+    return result;
+}
 ```
 
----
-
-Function inside Array
+With a reusable function:
 
 ```js
-const arr = [
-    () => console.log("One"),
-    () => console.log("Two")
-];
+function transform(numbers, operation) {
+    const result = [];
 
-arr[0]();
+    for (const number of numbers) {
+        result.push(operation(number));
+    }
+
+    return result;
+}
 ```
+
+Now we can change the behavior:
+
+```js
+transform([1, 2, 3], number => number * 2);
+```
+
+or:
+
+```js
+transform([1, 2, 3], number => number + 10);
+```
+
+The **loop stays the same**, while the behavior changes.
+
+That is the main power of HOFs:
+
+> **Pass behavior as a value.**
 
 ---
 
-# 4. Callback Functions
+## 4. Important Distinction
 
-A callback is simply a function passed into another function.
+### Callback
 
-Example
+A function **passed into** another function.
+
+```js
+number => number * 2
+```
+
+### Higher-Order Function
+
+The function that **receives or returns** a function.
+
+```js
+transform(numbers, callback)
+```
+
+So:
+
+```text
+transform()
+     ↓
+HOF
+
+number => number * 2
+     ↓
+Callback
+```
+
+### Remember
+
+> **Callback = function being passed.**
+> **HOF = function receiving/returning a function.**
+
+---
+
+## 5. First Example to Remember
 
 ```js
 function calculate(a, b, operation) {
@@ -211,728 +186,878 @@ function add(x, y) {
     return x + y;
 }
 
-console.log(
-calculate(5, 3, add)
-);
+console.log(calculate(10, 20, add));
 ```
 
-Output
+Output:
 
+```text
+30
 ```
-8
+
+Flow:
+
+```text
+calculate(10, 20, add)
+             ↓
+          operation
+             ↓
+            add
+             ↓
+         add(10, 20)
+             ↓
+             30
 ```
 
-Visualization
+This is the fundamental HOF pattern you need to understand before moving forward.
+# Part 2 — First-Class Functions
 
+JavaScript treats **functions as values**.
+
+That means a function can be used like other values such as strings or numbers.
+
+---
+
+## 1. Store a Function in a Variable
+
+```js
+const greet = function () {
+    console.log("Hello");
+};
+
+greet();
 ```
-calculate()
 
-↓
+Output:
 
-Receives
+```text
+Hello
+```
 
-↓
+Here:
 
-add()
+```text
+function
+   ↓
+stored inside
+   ↓
+greet
+```
 
-↓
+You can also use an arrow function:
 
-Executes
+```js
+const add = (a, b) => a + b;
 
-↓
+console.log(add(2, 3));
+```
 
-Returns
+Output:
+
+```text
+5
 ```
 
 ---
 
-Anonymous Callback
+## 2. Pass a Function as an Argument
+
+A function can be passed to another function.
 
 ```js
-calculate(
-5,
-3,
-function(a,b){
-    return a*b;
-}
-);
-```
-
----
-
-Arrow Function Callback
-
-```js
-calculate(
-5,
-3,
-(a,b)=>a*b
-);
-```
-
----
-
-# 5. Passing Functions as Arguments
-
-Example
-
-```js
-function execute(task){
+function execute(task) {
     task();
 }
 
-execute(function(){
-    console.log("Running");
-});
-```
-
-Output
-
-```
-Running
-```
-
----
-
-# 6. Returning Functions
-
-Functions can return other functions.
-
-Example
-
-```js
-function multiply(x){
-
-    return function(y){
-        return x * y;
-    }
-
-}
-
-const double =
-multiply(2);
-
-console.log(
-double(10)
-);
-```
-
-Output
-
-```
-20
-```
-
-Visualization
-
-```
-multiply(2)
-
-↓
-
-Returns Function
-
-↓
-
-double
-
-↓
-
-double(10)
-
-↓
-
-20
-```
-
----
-
-# 7. Built-in Higher-Order Functions
-
-JavaScript already has many HOFs.
-
-```
-map()
-
-filter()
-
-reduce()
-
-find()
-
-findIndex()
-
-some()
-
-every()
-
-forEach()
-
-sort()
-```
-
-Example
-
-```js
-const nums = [1,2,3];
-
-nums.map(num=>num*2);
-```
-
-`map()` is a Higher-Order Function because it accepts a callback.
-
----
-
-# 8. Creating Your Own HOF
-
-Example
-
-```js
-function repeat(times, task){
-
-    for(let i=0;i<times;i++){
-
-        task();
-
-    }
-
-}
-
-repeat(3,()=>{
-
+function greet() {
     console.log("Hello");
-
-});
-```
-
-Output
-
-```
-Hello
-
-Hello
-
-Hello
-```
-
----
-
-Another Example
-
-```js
-function logger(fn){
-
-    console.log("Started");
-
-    fn();
-
-    console.log("Finished");
-
 }
 
-logger(()=>{
-
-    console.log("Learning JS");
-
-});
+execute(greet);
 ```
+
+Output:
+
+```text
+Hello
+```
+
+Here:
+
+```text
+greet
+  ↓
+passed as value
+  ↓
+execute()
+```
+
+This is the foundation of **callbacks and Higher-Order Functions**.
 
 ---
 
-# 9. Closures with HOFs
+## 3. Return a Function
 
-Example
+A function can return another function.
 
 ```js
-function counter(){
-
-    let count = 0;
-
-    return function(){
-
-        count++;
-
-        return count;
-
+function createGreeting() {
+    return function () {
+        console.log("Hello");
     };
-
 }
 
-const increment =
-counter();
+const greet = createGreeting();
 
-console.log(
-increment()
-);
-
-console.log(
-increment()
-);
+greet();
 ```
 
-Output
+Output:
 
-```
-1
-
-2
+```text
+Hello
 ```
 
-Explanation
+Flow:
 
-Returned function remembers
-
-```
-count
-```
-
-Even after
-
-```
-counter()
+```text
+createGreeting()
+       ↓
+returns function
+       ↓
+greet
+       ↓
+greet()
 ```
 
-has finished.
-
-This is a **Closure**.
+This pattern later connects directly to **closures**.
 
 ---
 
-# 10. Function Composition
+## 4. Store Functions in an Object
 
-Combining multiple functions.
-
-Example
+Functions can be object properties.
 
 ```js
-const add =
-x => x + 2;
+const user = {
+    name: "Om",
 
-const multiply =
-x => x * 3;
+    greet() {
+        console.log("Hello");
+    }
+};
 
-const result =
-multiply(
-add(5)
+user.greet();
+```
+
+Output:
+
+```text
+Hello
+```
+
+The function is a **method** of the object.
+
+---
+
+## 5. Store Functions in an Array
+
+Functions can also be stored inside arrays.
+
+```js
+const operations = [
+    x => x + 1,
+    x => x * 2
+];
+
+console.log(operations[0](5));
+console.log(operations[1](5));
+```
+
+Output:
+
+```text
+6
+10
+```
+
+The array contains functions as values.
+
+---
+
+## 6. Why First-Class Functions Matter
+
+Because functions can be treated as values, JavaScript can do this:
+
+```js
+function calculate(a, b, operation) {
+    return operation(a, b);
+}
+
+const add = (a, b) => a + b;
+
+const multiply = (a, b) => a * b;
+
+console.log(calculate(5, 3, add));
+console.log(calculate(5, 3, multiply));
+```
+
+Output:
+
+```text
+8
+15
+```
+
+The same `calculate()` function can perform different operations.
+
+```text
+calculate()
+     │
+     ├── add
+     │
+     └── multiply
+```
+
+This is one of the main reasons Higher-Order Functions are so useful.
+
+---
+
+## Interview Point
+
+### What does "functions are first-class citizens" mean?
+
+It means JavaScript allows functions to be treated as values.
+
+They can be:
+
+```text
+✅ stored in variables
+✅ passed as arguments
+✅ returned from functions
+✅ stored in objects
+✅ stored in arrays
+```
+# Part 3 — Callback Functions
+
+A **callback function** is a function that is **passed as an argument to another function** so that the receiving function can call it.
+
+---
+
+## 1. Basic Example
+
+```js
+function execute(task) {
+    task();
+}
+
+function greet() {
+    console.log("Hello");
+}
+
+execute(greet);
+```
+
+Output:
+
+```text
+Hello
+```
+
+Flow:
+
+```text
+greet
+  ↓
+passed to execute()
+  ↓
+task
+  ↓
+task()
+  ↓
+Hello
+```
+
+Here:
+
+```text
+execute() → Higher-Order Function
+greet     → Callback Function
+```
+
+---
+
+## 2. Callback with Parameters
+
+A callback can receive values from the function that calls it.
+
+```js
+function calculate(a, b, operation) {
+    return operation(a, b);
+}
+
+function add(x, y) {
+    return x + y;
+}
+
+console.log(calculate(10, 20, add));
+```
+
+Output:
+
+```text
+30
+```
+
+The important part is:
+
+```js
+operation(a, b);
+```
+
+The function `add` is passed in and later called with `a` and `b`.
+
+---
+
+## 3. Anonymous Callback
+
+We don't always need to create a separate function.
+
+```js
+function calculate(a, b, operation) {
+    return operation(a, b);
+}
+
+const result = calculate(10, 20, function (x, y) {
+    return x * y;
+});
+
+console.log(result);
+```
+
+Output:
+
+```text
+200
+```
+
+---
+
+## 4. Arrow Function Callback
+
+The same thing can be written more concisely:
+
+```js
+const result = calculate(
+    10,
+    20,
+    (x, y) => x * y
 );
 
 console.log(result);
 ```
 
-Output
+Output:
 
+```text
+200
 ```
-21
-```
 
-Visualization
-
-```
-5
-
-↓
-
-add
-
-↓
-
-7
-
-↓
-
-multiply
-
-↓
-
-21
-```
+This style is extremely common in modern JavaScript.
 
 ---
 
-# 11. Pure vs Impure Functions
+## 5. Callback vs Calling a Function
 
-## Pure Function
+This is an important interview/OA trap.
 
-Same input
-
-↓
-
-Same output
+### Passing the function
 
 ```js
-function square(x){
-
-    return x*x;
-
-}
+execute(greet);
 ```
 
----
+Means:
 
-## Impure Function
+> "Give `greet` to `execute`."
 
-Depends on external state.
+### Calling the function
 
 ```js
-let total = 0;
-
-function add(x){
-
-    total += x;
-
-}
+execute(greet());
 ```
 
-Avoid impure functions whenever possible.
+Means:
 
----
+> "Run `greet` now and give its return value to `execute`."
 
-# 12. Real-world Examples
-
-Button Click
+Compare:
 
 ```js
-button.addEventListener(
-"click",
-handleClick
-);
+setTimeout(greet, 1000);
 ```
 
-`addEventListener()` is a Higher-Order Function.
-
----
-
-setTimeout
+✅ Correct — pass the function.
 
 ```js
-setTimeout(
-()=>{
-console.log("Done");
-},
-1000
-);
+setTimeout(greet(), 1000);
 ```
+
+❌ Usually wrong — `greet()` executes immediately.
 
 ---
 
-Promise
+## 6. Real JavaScript Examples
+
+Callbacks appear everywhere.
+
+### Array Methods
 
 ```js
-fetch(url)
-.then(data=>{
+const numbers = [1, 2, 3];
 
-});
+numbers.map(num => num * 2);
+```
+
+Here:
+
+```text
+map()                  → HOF
+num => num * 2         → callback
 ```
 
 ---
 
-Array Methods
+### setTimeout
 
 ```js
-users.map(
-user=>user.name
-);
+setTimeout(() => {
+    console.log("Done");
+}, 1000);
 ```
+
+The arrow function is passed as a callback.
 
 ---
 
-# 13. React Examples
-
-Rendering List
-
-```jsx
-users.map(user=>(
-<User
-key={user.id}
-user={user}
-/>
-))
-```
-
----
-
-Button
-
-```jsx
-<button
-onClick={handleClick}
->
-Click
-</button>
-```
-
----
-
-Hooks
-
-```jsx
-useEffect(()=>{
-
-},[]);
-```
-
-The callback passed to `useEffect()` is a function.
-
----
-
-# 14. Node.js Examples
-
-Reading Files
+### Event Listener
 
 ```js
-fs.readFile(
-"path",
-(err,data)=>{
-
-}
-);
+button.addEventListener("click", handleClick);
 ```
+
+`handleClick` is the callback.
 
 ---
 
-Express
+## 7. Callback Mental Model
 
-```js
-app.get(
-"/",
-(req,res)=>{
-
-}
-);
+```text
+            FUNCTION
+                ↓
+       passed to another
+            function
+                ↓
+           CALLBACK
+                ↓
+     receiving function
+         calls it
+                ↓
+            RESULT
 ```
 
----
+### Most important distinction
 
-Middleware
-
-```js
-app.use(
-(req,res,next)=>{
-
-}
-);
-```
-
----
-
-# 15. Performance Considerations
-
-Creating unnecessary functions repeatedly may increase memory usage.
-
-Example
-
-```jsx
-<button
-onClick={()=>{
-console.log("Clicked");
-}}
->
-```
-
-In React,
-
-creating new functions every render may affect optimization.
-
----
-
-# 16. Best Practices
-
-✅ Keep callbacks small.
-
-✅ Use arrow functions when appropriate.
-
-✅ Prefer pure functions.
-
-✅ Reuse callback functions.
-
-✅ Use HOFs instead of repetitive loops.
-
----
-
-# 17. Common Mistakes
-
-### Calling Instead of Passing
-
-Wrong
-
-```js
-setTimeout(
-greet(),
-1000
-);
-```
-
-Correct
-
-```js
-setTimeout(
-greet,
-1000
-);
-```
-
----
-
-### Forgetting Return in map()
-
-Wrong
-
-```js
-numbers.map(num=>{
-num*2;
-});
-```
-
-Returns
-
-```
-undefined
-```
-
----
-
-### Confusing Callback with HOF
+```text
+Callback
+    ↓
+Function passed to another function
 
 Higher-Order Function
-
-```
-map()
-```
-
-Callback
-
-```
-num=>num*2
+    ↓
+Function that receives/returns functions
 ```
 
 ---
 
-# 18. Interview Questions
+## Interview Questions
 
-### What is a Higher-Order Function?
+### What is a callback?
 
-A function that accepts another function or returns another function.
+> A callback is a function passed as an argument to another function and invoked by that function.
 
----
+### Is a callback always asynchronous?
 
-### What is a Callback?
+**No.**
 
-A function passed as an argument to another function.
+This is synchronous:
 
----
+```js
+[1, 2, 3].map(x => x * 2);
+```
 
-### Why is `map()` a Higher-Order Function?
+This is asynchronous:
 
-Because it receives a callback.
+```js
+setTimeout(() => {
+    console.log("Done");
+}, 1000);
+```
 
----
+So:
 
-### Is every callback a Higher-Order Function?
+> **Callback ≠ asynchronous.**
 
-No.
+This is an important interview point.
 
-The callback is passed **to** a Higher-Order Function.
-
----
-
-### Can a function return another function?
+### Can a callback receive arguments?
 
 Yes.
 
-Closures are built using this concept.
-
----
-
-### Give examples of Higher-Order Functions.
-
-- map()
-- filter()
-- reduce()
-- find()
-- sort()
-- forEach()
-- setTimeout()
-- addEventListener()
-
----
-
-# 19. Coding Exercises
-
-### Exercise 1
-
-Create a Higher-Order Function
-
 ```js
-repeat(5, callback)
+function execute(callback) {
+    callback("Om");
+}
+
+execute(name => {
+    console.log(name);
+});
+```
+
+Output:
+
+```text
+Om
 ```
 
 ---
 
-### Exercise 2
+### Part 3 takeaway
 
-Create a calculator using callbacks.
+```text
+Callback
+   =
+function passed to another function
+
+Callback can be:
+   ↓
+synchronous
+   OR
+asynchronous
+```
+# Part 4 — HOF: Interview, OA & Practice
+
+This is the **final part** for Higher-Order Functions. We won't add more theory here because closures, functional programming, and array methods are covered elsewhere in your roadmap.
 
 ---
 
-### Exercise 3
+## 1. Interview Questions
 
-Create a function that returns another function.
+### Q1. What is a Higher-Order Function?
+
+A function that **accepts another function as an argument, returns a function, or both**.
 
 ---
 
-### Exercise 4
+### Q2. What is a callback function?
 
-Implement your own version of
+A function passed as an argument to another function.
 
 ```js
-map()
+function execute(callback) {
+    callback();
+}
 ```
 
-using a loop.
+Here:
+
+```text
+execute() → HOF
+callback  → Callback
+```
 
 ---
 
-### Exercise 5
+### Q3. Is every callback asynchronous?
 
-Implement your own
+**No.**
+
+Synchronous:
 
 ```js
-filter()
+[1, 2, 3].map(x => x * 2);
+```
+
+Asynchronous:
+
+```js
+setTimeout(() => {
+    console.log("Done");
+}, 1000);
+```
+
+A callback can be either synchronous or asynchronous.
+
+---
+
+### Q4. Why is `map()` a HOF?
+
+Because `map()` accepts a function:
+
+```js
+numbers.map(num => num * 2);
+```
+
+Here:
+
+```text
+map()              → HOF
+num => num * 2     → Callback
 ```
 
 ---
 
-### Exercise 6
+### Q5. What are First-Class Functions?
 
-Build a simple logger HOF.
+Functions can be treated as values:
 
----
-
-# 20. Summary
-
-- Functions are first-class citizens in JavaScript.
-- Higher-Order Functions accept or return functions.
-- Callbacks are functions passed to HOFs.
-- `map()`, `filter()`, `reduce()`, `setTimeout()`, `addEventListener()`, and Promise methods are Higher-Order Functions.
-- Closures are often created by functions returning functions.
-- Higher-Order Functions make code reusable, modular, and expressive.
-- React, Express, Node.js, and modern JavaScript rely heavily on this concept.
+```text
+Store
+Pass
+Return
+Use in objects
+Use in arrays
+```
 
 ---
 
-# What's Next?
+### Q6. What's the difference between HOF and Callback?
 
-➡️ **16-Functional-Programming.md**
+```text
+Callback
+   ↓
+Function being passed
 
-You'll learn:
+HOF
+   ↓
+Function receiving/returning a function
+```
 
-- What Functional Programming is
-- Pure Functions
-- Immutability
-- Side Effects
-- Function Composition
-- Declarative vs Imperative Programming
-- Currying
-- Memoization
-- Interview Questions
-- Coding Exercises
+---
+
+## 2. Common OA Pitfalls
+
+### Pitfall 1 — Calling Instead of Passing
+
+```js
+function greet() {
+    console.log("Hello");
+}
+
+setTimeout(greet, 1000);
+```
+
+✅ Passes the function.
+
+```js
+setTimeout(greet(), 1000);
+```
+
+❌ Calls `greet()` immediately.
+
+---
+
+### Pitfall 2 — Callback Is Not Automatically Async
+
+```js
+function execute(callback) {
+    console.log("Before");
+    callback();
+    console.log("After");
+}
+
+execute(() => console.log("Callback"));
+```
+
+Output:
+
+```text
+Before
+Callback
+After
+```
+
+The callback executes synchronously.
+
+---
+
+### Pitfall 3 — Confusing Function and Function Call
+
+```js
+greet
+```
+
+means:
+
+> Function itself.
+
+```js
+greet()
+```
+
+means:
+
+> Execute the function.
+
+This distinction is extremely important in JavaScript.
+
+---
+
+# 3. Coding Practice
+
+### Problem 1 — Execute
+
+Implement:
+
+```js
+execute(callback)
+```
+
+Expected:
+
+```js
+execute(() => {
+    console.log("Hello");
+});
+```
+
+Output:
+
+```text
+Hello
+```
+
+---
+
+### Problem 2 — Calculator
+
+Implement:
+
+```js
+calculate(a, b, operation)
+```
+
+Example:
+
+```js
+calculate(10, 5, (a, b) => a + b);
+calculate(10, 5, (a, b) => a * b);
+```
+
+Expected:
+
+```text
+15
+50
+```
+
+---
+
+### Problem 3 — Repeat
+
+Implement:
+
+```js
+repeat(3, callback)
+```
+
+Expected:
+
+```text
+Hello
+Hello
+Hello
+```
+
+---
+
+### Problem 4 — Return a Function
+
+Implement:
+
+```js
+createMultiplier(5)
+```
+
+so that:
+
+```js
+const multiplyByFive = createMultiplier(5);
+
+console.log(multiplyByFive(4));
+```
+
+outputs:
+
+```text
+20
+```
+
+---
+
+### Problem 5 — Simple `myMap()`
+
+Implement a basic version without using `.map()`:
+
+```js
+function myMap(arr, callback) {
+    // implementation
+}
+```
+
+Example:
+
+```js
+const result = myMap(
+    [1, 2, 3],
+    num => num * 2
+);
+
+console.log(result);
+```
+
+Expected:
+
+```text
+[2, 4, 6]
+```
+
+This is the **first step toward polyfills**. Full polyfill edge cases will be handled later during your final JavaScript revision.
+
+---
+
+# 4. Final Revision
+
+Remember these:
+
+```text
+1. Functions are first-class values.
+
+2. A callback is a function passed to another function.
+
+3. A HOF accepts or returns functions.
+
+4. A callback does NOT necessarily mean asynchronous.
+
+5. map/filter/reduce are common HOFs.
+
+6. HOFs allow behavior to be passed as a value.
+
+7. Returning functions can create closures.
+```
+
+### One-minute interview answer
+
+> **A Higher-Order Function is a function that accepts another function as an argument or returns another function. The passed function is commonly called a callback. JavaScript supports this because functions are first-class values. Examples include `map`, `filter`, `reduce`, `setTimeout`, and `addEventListener`.**
+
+**Part 4 complete. HOF is done.**

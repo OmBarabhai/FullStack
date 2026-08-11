@@ -565,32 +565,115 @@
 //console.log(getUserCity?.() ?? "City Not Found");
 //
 //
+//
+//
+//const num = [10,20,30,40,50];
+//num.forEach(num =>{
+//console.log(num)
+//})
+//console.log(num)
+//const mul = num.forEach(n => {
+//return n * 2
+//});
+//console.log(mul)
+//const users = [
+//    { name: "Om", age: 22 },
+//    { name: "Rahul", age: 24 },
+//    { name: "Amit", age: 21 }
+//];
+//
+//const print = users.forEach(({name})=> name);
+//console.log(print);
+//
+//users.forEach(({name}) => console.log(name))
+//
+//const fru = ["f","M","d"];
+//fru.forEach((fruits,idx) =>{
+//console.log(idx,fruits);
+//})
 
+//
+//
+//
+//const num = [1,2,3,4,5];
+//const doub = [];
+//for(let i = 0;i<num.length;i++){
+//doub.push(num[i] * 3);
+//}
+//const even = [];
+//for(let i =0;i<doub.length;i++){
+//if((doub[i] & 1) == 0){
+//even.push(doub[i]);
+//}
+//}
+//console.log(doub);
+//console.log(num);
+//console.log(even);
+//const modEven = doub.filter(n => (n&1) == 0);
+//
+//const ans = num.map(n => n*2);
+//console.log(ans);
+//console.log(modEven);
+//const users = [
+//    { name: "Om", age: 22 },
+//    { name: "Rahul", age: 25 }
+//];
+//
+//const contName = (name ) => users.map(({name}) => name)
+//console.log(contName);
+//const so = doub.sort((a,b) => a - b);
+//console.log(so);
 
-const num = [10,20,30,40,50];
-num.forEach(num =>{
-console.log(num)
-})
-console.log(num)
-const mul = num.forEach(n => {
-return n * 2
+const user = {
+name:"Om",
+age: 22,
+}
+console.log(Object.entries(user));
+
+console.log(Object.keys(user));
+console.log(Object.values(user).length);
+
+for(const[key,val] of Object.entries(user)){
+console.log(key,val);
+}
+const product = {
+    name: "Laptop",
+    price: 70000,
+    brand: "Lenovo"
+};
+
+Object.entries(product).forEach(([key, val]) => {console.log(`${key} is ${val}`);
 });
-console.log(mul)
-const users = [
-    { name: "Om", age: 22 },
-    { name: "Rahul", age: 24 },
-    { name: "Amit", age: 21 }
+const student = {
+    name: "Om",
+    age: 22,
+    branch: "Computer Science",
+    city: "Pune"
+};
+console.log(Object.keys(student));
+console.log(Object.values(student));
+console.log(Object.entries(student).length);
+
+
+
+
+Object.entries(student).forEach(([key,val]) => console.log(`${key} → ${val}`));
+
+console.log(Object.values(student).includes("Pune"));
+
+
+const entries = [
+    ["name", "Om"],
+    ["age", 22]
 ];
 
-const print = users.forEach(({name})=> name);
-console.log(print);
+console.log(Object.fromEntries(entries));
 
-users.forEach(({name}) => console.log(name))
 
-const fru = ["f","M","d"];
-fru.forEach((fruits,idx) =>{
-console.log(idx,fruits);
-})
+
+
+
+
 
 
 
