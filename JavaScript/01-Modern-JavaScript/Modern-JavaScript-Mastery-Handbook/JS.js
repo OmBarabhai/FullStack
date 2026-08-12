@@ -600,80 +600,121 @@
 //for(let i = 0;i<num.length;i++){
 //doub.push(num[i] * 3);
 //}
-//const even = [];
-//for(let i =0;i<doub.length;i++){
-//if((doub[i] & 1) == 0){
-//even.push(doub[i]);
-//}
-//}
-//console.log(doub);
-//console.log(num);
-//console.log(even);
-//const modEven = doub.filter(n => (n&1) == 0);
+////const even = [];
+////for(let i =0;i<doub.length;i++){
+////if((doub[i] & 1) == 0){
+////even.push(doub[i]);
+////}
+////}
+////console.log(doub);
+////console.log(num);
+////console.log(even);
+////const modEven = doub.filter(n => (n&1) == 0);
+////
+////const ans = num.map(n => n*2);
+////console.log(ans);
+////console.log(modEven);
+////const users = [
+////    { name: "Om", age: 22 },
+////    { name: "Rahul", age: 25 }
+////];
+////
+////const contName = (name ) => users.map(({name}) => name)
+////console.log(contName);
+////const so = doub.sort((a,b) => a - b);
+////console.log(so);
 //
-//const ans = num.map(n => n*2);
-//console.log(ans);
-//console.log(modEven);
-//const users = [
-//    { name: "Om", age: 22 },
-//    { name: "Rahul", age: 25 }
+//const user = {
+//name:"Om",
+//age: 22,
+//}
+//console.log(Object.entries(user));
+//
+//console.log(Object.keys(user));
+//console.log(Object.values(user).length);
+//
+//for(const[key,val] of Object.entries(user)){
+//console.log(key,val);
+//}
+//const product = {
+//    name: "Laptop",
+//    price: 70000,
+//    brand: "Lenovo"
+//};
+//
+//Object.entries(product).forEach(([key, val]) => {console.log(`${key} is ${val}`);
+//});
+//const student = {
+//    name: "Om",
+//    age: 22,
+//    branch: "Computer Science",
+//    city: "Pune"
+//};
+//console.log(Object.keys(student));
+//console.log(Object.values(student));
+//console.log(Object.entries(student).length);
+//
+//
+//
+//
+//Object.entries(student).forEach(([key,val]) => console.log(`${key} → ${val}`));
+//
+//console.log(Object.values(student).includes("Pune"));
+//
+//
+//const entries = [
+//    ["name", "Om"],
+//    ["age", 22]
 //];
 //
-//const contName = (name ) => users.map(({name}) => name)
-//console.log(contName);
-//const so = doub.sort((a,b) => a - b);
-//console.log(so);
+//console.log(Object.fromEntries(entries));
 
-const user = {
-name:"Om",
-age: 22,
+
+
+function execute(fn){
+fn();
 }
-console.log(Object.entries(user));
-
-console.log(Object.keys(user));
-console.log(Object.values(user).length);
-
-for(const[key,val] of Object.entries(user)){
-console.log(key,val);
+function greet(){
+console.log("Hello")
 }
-const product = {
-    name: "Laptop",
-    price: 70000,
-    brand: "Lenovo"
-};
+execute(greet);
 
-Object.entries(product).forEach(([key, val]) => {console.log(`${key} is ${val}`);
-});
-const student = {
-    name: "Om",
-    age: 22,
-    branch: "Computer Science",
-    city: "Pune"
-};
-console.log(Object.keys(student));
-console.log(Object.values(student));
-console.log(Object.entries(student).length);
+function run(task){//run is hof which receive another fun as parm and return antoor func
+task();
+}
+
+function createGreeting(){
+     return function(){
+        console.log("Hello");
+     };
+}
 
 
 
-
-Object.entries(student).forEach(([key,val]) => console.log(`${key} → ${val}`));
-
-console.log(Object.values(student).includes("Pune"));
-
-
-const entries = [
-    ["name", "Om"],
-    ["age", 22]
-];
-
-console.log(Object.fromEntries(entries));
+function doubleNum(num){
+    const res = [];
+    for(const n of num){
+         res.push(n*2);
+    }
+    return res;
+}
 
 
+function trans(num,op){
+    const res = [];
+    for(const n of num){
+        res.push(op(n));
+    }
+    return res;
+}
+console.log(trans([1,2,3], num => num * 2)); // trans(arr,func){}; trans --> HOF || num => num *2 --> CallBack
+console.log(trans([1,2,3], num => num + 2));
 
+function cal(a,b,op){
+    return op(a,b);
+}
+const add = (a,b) => a + b;
+const mul = (a,b) => a * b;
 
-
-
-
-
-
+console.log(cal(5,3,add));
+console.log(cal(5,3,mul));

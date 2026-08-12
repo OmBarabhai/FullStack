@@ -1,833 +1,567 @@
 # Functional Programming (FP)
 
-> **"Functional Programming is a programming paradigm where programs are built by composing pure functions, avoiding shared state, minimizing side effects, and treating functions as first-class citizens."**
+> **"Functional Programming is a programming style that emphasizes pure functions, immutable data, predictable behavior, and composing small functions."**
 
 ---
 
 # Table of Contents
 
-1. What is Functional Programming?
-2. Why Functional Programming?
-3. Imperative vs Declarative Programming
-4. Pure Functions
-5. Impure Functions
-6. Side Effects
-7. Immutability
-8. First-Class Functions
-9. Higher-Order Functions
-10. Function Composition
-11. Currying
-12. Partial Application
-13. Memoization
-14. Recursion in Functional Programming
-15. Functional Programming in JavaScript
-16. Functional Programming in React
-17. Functional Programming in Node.js
-18. Best Practices
-19. Common Mistakes
-20. Interview Questions
-21. Coding Exercises
-22. Summary
+1. Part 1 — Fundamentals
+2. Part 2 — Core Concepts
+3. Part 3 — Practical Usage
+4. Part 4 — Interview & Revision
+5. Final Summary
 
 ---
 
-# 1. What is Functional Programming?
+# Part 1 — Fundamentals
 
-Functional Programming (FP) is a programming style where:
+## 1. What is Functional Programming?
 
-- Functions are the building blocks.
-- Data is not modified directly.
-- Functions avoid side effects.
-- Same input always produces the same output.
+Functional Programming (FP) is a programming style where we try to build programs using functions and predictable data transformations.
 
-Instead of changing data,
+Main ideas:
 
-we create new data.
+* Pure functions
+* Immutability
+* Fewer unnecessary side effects
+* Small reusable functions
+* Function composition
 
----
+Example:
 
-Example
-
-Imperative
-
-```js
-let numbers = [1, 2, 3];
-
-for (let i = 0; i < numbers.length; i++) {
-  numbers[i] *= 2;
-}
-```
-
-Functional
+### Imperative
 
 ```js
 const numbers = [1, 2, 3];
 
-const doubled = numbers.map(num => num * 2);
-```
+const doubled = [];
 
----
-
-# 2. Why Functional Programming?
-
-Benefits
-
-- Predictable code
-- Easier debugging
-- Easier testing
-- Better reusability
-- Fewer bugs
-- Better React performance
-
-Visualization
-
-```
-Input
-
-↓
-
-Pure Function
-
-↓
-
-Output
-```
-
----
-
-# 3. Imperative vs Declarative Programming
-
-## Imperative
-
-Tell JavaScript **how** to do something.
-
-```js
-let sum = 0;
-
-for (let i = 0; i < 5; i++) {
-  sum += i;
+for (const number of numbers) {
+    doubled.push(number * 2);
 }
 ```
 
----
-
-## Declarative
-
-Tell JavaScript **what** you want.
+### Functional style
 
 ```js
-const numbers = [0,1,2,3,4];
+const numbers = [1, 2, 3];
 
-const sum =
-numbers.reduce(
-(total,num)=>total+num,
-0
-);
+const doubled = numbers.map(number => number * 2);
 ```
+
+The goal is not to avoid every loop or every side effect.
+
+The goal is to make code easier to reason about.
 
 ---
 
-Comparison
+# 2. Imperative vs Declarative
 
-| Imperative | Declarative |
-|------------|-------------|
-| How | What |
-| More code | Less code |
-| Manual loops | Array methods |
-| More errors | Easier to read |
+### Imperative
 
----
-
-# 4. Pure Functions
-
-A Pure Function
-
-- Same input
-- Same output
-- No side effects
-
-Example
-
-```js
-function square(x){
-    return x*x;
-}
-```
-
-Output
-
-```
-square(5)
-
-↓
-
-25
-
-Always
-```
-
----
-
-Another Example
-
-```js
-function add(a,b){
-    return a+b;
-}
-```
-
-Always predictable.
-
----
-
-# 5. Impure Functions
-
-Impure functions depend on external state or modify data.
-
-Example
+Explain **how** to do something.
 
 ```js
 let total = 0;
 
-function add(value){
+for (let i = 1; i <= 5; i++) {
+    total += i;
+}
+```
 
+### Declarative
+
+Describe **what** you want.
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+
+const total = numbers.reduce(
+    (sum, number) => sum + number,
+    0
+);
+```
+
+Remember:
+
+```text
+Imperative → How
+Declarative → What
+```
+
+---
+
+# Part 2 — Core Concepts
+
+# 3. Pure Functions
+
+A pure function:
+
+1. Gives the same output for the same input.
+2. Does not modify external state.
+
+```js
+function add(a, b) {
+    return a + b;
+}
+```
+
+```js
+add(10, 20); // 30
+add(10, 20); // 30
+```
+
+The result is predictable.
+
+---
+
+# 4. Impure Functions
+
+An impure function depends on or changes external state.
+
+```js
+let total = 0;
+
+function add(value) {
     total += value;
-
 }
 ```
 
-Output depends on previous calls.
-
-Not predictable.
+The result depends on the previous state of `total`.
 
 ---
 
-Another Example
+# 5. Side Effects
 
-```js
-let count = 1;
+A side effect is an operation that affects something outside the function's returned value.
 
-function next(){
+Common examples:
 
-    return count++;
-
-}
+```text
+console.log()
+DOM updates
+API requests
+Database operations
+File operations
+Changing external variables
 ```
 
----
-
-# 6. Side Effects
-
-A Side Effect is anything outside returning a value.
-
-Examples
-
-- console.log()
-- DOM Manipulation
-- API Calls
-- Database Queries
-- File Reading
-- Modifying Global Variables
-
-Example
+Example:
 
 ```js
-function greet(){
-
+function greet() {
     console.log("Hello");
-
 }
 ```
 
-Printing is a side effect.
+`console.log()` is a side effect.
+
+A function can still be useful even when it has side effects. The important point is to understand where those effects happen.
 
 ---
 
-Pure Version
+# 6. Immutability
+
+Immutability means avoiding direct modification of existing data.
+
+### Mutation
 
 ```js
-function greet(){
-
-    return "Hello";
-
-}
-```
-
----
-
-# 7. Immutability
-
-Instead of modifying existing data,
-
-create new data.
-
-Wrong
-
-```js
-const numbers = [1,2,3];
+const numbers = [1, 2, 3];
 
 numbers.push(4);
 ```
 
-Original array changes.
+The original array changes.
 
----
-
-Correct
+### Immutable-style update
 
 ```js
-const numbers = [1,2,3];
+const numbers = [1, 2, 3];
 
-const updated = [
-...numbers,
-4
-];
+const updated = [...numbers, 4];
 ```
 
-Output
+Now:
 
+```text
+numbers → [1, 2, 3]
+
+updated → [1, 2, 3, 4]
 ```
-Original
 
-↓
+Objects:
 
-[1,2,3]
+```js
+const user = {
+    name: "Om",
+    age: 22
+};
 
-New
+const updatedUser = {
+    ...user,
+    age: 23
+};
+```
 
-↓
+This idea becomes very important in React.
 
-[1,2,3,4]
+---
+
+# 7. Function Composition
+
+Composition means combining smaller functions.
+
+```js
+const addTwo = x => x + 2;
+
+const multiplyByThree = x => x * 3;
+
+const result = multiplyByThree(addTwo(5));
+
+console.log(result);
+```
+
+Output:
+
+```text
+21
+```
+
+Flow:
+
+```text
+5
+ ↓
+addTwo()
+ ↓
+7
+ ↓
+multiplyByThree()
+ ↓
+21
+```
+
+The main idea:
+
+```text
+Small functions
+      ↓
+Combine
+      ↓
+Larger behavior
 ```
 
 ---
 
-Objects
+# 8. First-Class Functions and HOF
 
-Wrong
+JavaScript allows functions to be treated as values.
+
+You already learned this in:
+
+```text
+15-Higher-Order-Functions.md
+```
+
+So remember only:
+
+```text
+Functions can be:
+- stored
+- passed
+- returned
+```
+
+Common HOFs:
+
+```text
+map()
+filter()
+reduce()
+find()
+some()
+every()
+forEach()
+```
+
+Do not relearn their details here.
+
+---
+
+# 9. Currying — Basic Awareness
+
+Currying transforms:
+
+```text
+f(a, b)
+```
+
+into:
+
+```text
+f(a)(b)
+```
+
+Example:
+
+```js
+const multiply = a => b => a * b;
+
+const double = multiply(2);
+
+console.log(double(10));
+```
+
+Output:
+
+```text
+20
+```
+
+For this folder, understand the idea and syntax only.
+
+---
+
+# 10. Partial Application — Basic Awareness
+
+Partial application means creating a function with some arguments already fixed.
+
+```js
+function multiply(a, b) {
+    return a * b;
+}
+
+const double = number => multiply(2, number);
+
+console.log(double(10));
+```
+
+Output:
+
+```text
+20
+```
+
+You do not need a deep comparison with currying here.
+
+---
+
+# 11. Memoization — Basic Awareness
+
+Memoization means caching previous results.
+
+Simple idea:
+
+```text
+Input
+ ↓
+Already cached?
+ ↓ yes → return cached result
+ ↓ no
+Calculate
+ ↓
+Store result
+ ↓
+Return result
+```
+
+Example:
+
+```js
+const cache = {};
+
+function square(number) {
+    if (cache[number] !== undefined) {
+        return cache[number];
+    }
+
+    const result = number * number;
+
+    cache[number] = result;
+
+    return result;
+}
+```
+
+For now, understand the concept.
+
+---
+
+# Part 3 — Practical Usage
+
+# 12. JavaScript
+
+Functional patterns are common in JavaScript:
+
+```js
+const activeUsers = users
+    .filter(user => user.active)
+    .map(user => user.name);
+```
+
+Flow:
+
+```text
+users
+ ↓
+filter()
+ ↓
+active users
+ ↓
+map()
+ ↓
+names
+```
+
+---
+
+# 13. React
+
+React commonly uses immutable updates.
+
+```jsx
+const updatedUser = {
+    ...user,
+    age: 23
+};
+```
+
+Rendering lists:
+
+```jsx
+users.map(user => (
+    <UserCard
+        key={user.id}
+        user={user}
+    />
+))
+```
+
+The important idea is:
+
+```text
+Data
+ ↓
+Transform
+ ↓
+UI
+```
+
+---
+
+# 14. Node.js
+
+Functional-style transformations are common when processing API/database data.
+
+```js
+const emails = users
+    .filter(user => user.active)
+    .map(user => user.email);
+```
+
+This is useful for transforming data between application layers.
+
+---
+
+# 15. Common Mistakes
+
+### Mistake 1 — Mutating Existing Data
 
 ```js
 user.age = 23;
 ```
 
-Correct
+Prefer an immutable-style update when appropriate:
 
 ```js
-const updated = {
-...user,
-age:23
+const updatedUser = {
+    ...user,
+    age: 23
 };
 ```
 
 ---
 
-# 8. First-Class Functions
+### Mistake 2 — Using `map()` Only for Side Effects
 
-Functions behave like variables.
-
-```js
-const greet = ()=>{
-    console.log("Hello");
-};
-
-greet();
-```
-
----
-
-Pass as Argument
+Avoid:
 
 ```js
-execute(greet);
+numbers.map(number => console.log(number));
 ```
 
----
-
-Return from Function
+When you only want to perform an action, `forEach()` is clearer:
 
 ```js
-return function(){};
-```
-
----
-
-Store in Object
-
-```js
-const user = {
-    greet(){}
-};
-```
-
----
-
-# 9. Higher-Order Functions
-
-Functions that
-
-- Receive functions
-- Return functions
-
-Examples
-
-```
-map()
-
-filter()
-
-reduce()
-
-find()
-
-some()
-
-every()
-
-forEach()
-```
-
-Example
-
-```js
-numbers.map(
-num=>num*2
-);
-```
-
----
-
-# 10. Function Composition
-
-Compose multiple small functions.
-
-Example
-
-```js
-const add =
-x=>x+2;
-
-const multiply =
-x=>x*3;
-
-const result =
-multiply(
-add(5)
-);
-
-console.log(result);
-```
-
-Output
-
-```
-21
-```
-
-Visualization
-
-```
-5
-
-↓
-
-add
-
-↓
-
-7
-
-↓
-
-multiply
-
-↓
-
-21
-```
-
----
-
-# 11. Currying
-
-Currying converts
-
-```
-f(a,b,c)
-```
-
-into
-
-```
-f(a)(b)(c)
-```
-
-Example
-
-```js
-function multiply(a){
-
-    return function(b){
-
-        return a*b;
-
-    }
-
-}
-
-const double =
-multiply(2);
-
-console.log(
-double(10)
-);
-```
-
-Output
-
-```
-20
-```
-
----
-
-Arrow Version
-
-```js
-const multiply =
-a=>b=>a*b;
-```
-
----
-
-# 12. Partial Application
-
-Fix some arguments beforehand.
-
-Example
-
-```js
-function multiply(a,b){
-
-    return a*b;
-
-}
-
-const double =
-num=>multiply(2,num);
-
-console.log(
-double(10)
-);
-```
-
-Output
-
-```
-20
-```
-
-Difference
-
-| Currying | Partial Application |
-|----------|---------------------|
-| One argument at a time | Pre-fills arguments |
-
----
-
-# 13. Memoization
-
-Stores previous results.
-
-Without Memoization
-
-```
-fib(40)
-
-↓
-
-Repeated calculations
-```
-
----
-
-Simple Example
-
-```js
-const cache = {};
-
-function square(num){
-
-    if(cache[num]){
-        return cache[num];
-    }
-
-    cache[num] = num*num;
-
-    return cache[num];
-
-}
-```
-
-Visualization
-
-```
-Input
-
-↓
-
-Cache?
-
-↓
-
-Yes
-
-↓
-
-Return Cached Value
-
-↓
-
-No
-
-↓
-
-Calculate
-
-↓
-
-Store
-
-↓
-
-Return
-```
-
----
-
-# 14. Recursion in Functional Programming
-
-Instead of loops,
-
-FP often uses recursion.
-
-Example
-
-```js
-function factorial(n){
-
-    if(n===1)
-        return 1;
-
-    return n *
-    factorial(n-1);
-
-}
-```
-
----
-
-# 15. Functional Programming in JavaScript
-
-Examples
-
-```js
-map()
-
-filter()
-
-reduce()
-
-find()
-
-every()
-
-some()
-
-flatMap()
-```
-
-Modern JavaScript encourages FP.
-
----
-
-# 16. Functional Programming in React
-
-React heavily follows FP.
-
-Rendering
-
-```jsx
-users.map(user=>
-
-<User
-key={user.id}
-/>
-
-)
-```
-
-Updating State
-
-```jsx
-setUser({
-
-...user,
-
-age:23
-
+numbers.forEach(number => {
+    console.log(number);
 });
 ```
 
-No mutation.
+---
+
+### Mistake 3 — Thinking Functional Programming Means "Never Use Loops"
+
+It does not.
+
+Functional Programming is a **style**, not a rule that bans loops.
 
 ---
 
-# 17. Functional Programming in Node.js
+# Part 4 — Interview & Revision
 
-Example
+# 16. Interview Questions
+
+### What is Functional Programming?
+
+A programming style that emphasizes predictable functions, immutability, and controlled side effects.
+
+---
+
+### What is a pure function?
+
+A function that gives the same output for the same input and does not modify external state.
+
+---
+
+### What is immutability?
+
+Avoiding direct modification of existing data and creating updated values instead.
+
+---
+
+### What is a side effect?
+
+An operation that affects something outside the function's returned value.
+
+---
+
+### Imperative vs Declarative?
+
+```text
+Imperative → how
+Declarative → what
+```
+
+---
+
+### What is function composition?
+
+Combining smaller functions so that the output of one becomes the input of another.
+
+---
+
+### What is currying?
+
+Transforming:
 
 ```js
-const emails =
-users
-.filter(
-u=>u.active
-)
-.map(
-u=>u.email
-);
+f(a, b)
 ```
 
----
-
-Middleware
-
-```js
-app.use(
-(req,res,next)=>{
-
-next();
-
-}
-);
-```
-
----
-
-# 18. Best Practices
-
-✅ Prefer Pure Functions.
-
-✅ Avoid Global Variables.
-
-✅ Don't mutate arrays.
-
-✅ Don't mutate objects.
-
-✅ Prefer map(), filter(), reduce().
-
-✅ Keep functions small.
-
----
-
-# 19. Common Mistakes
-
-### Mutating Original Array
-
-Wrong
-
-```js
-array.push(10);
-```
-
----
-
-Correct
-
-```js
-[
-...array,
-10
-]
-```
-
----
-
-### Using map() for Side Effects
-
-Wrong
-
-```js
-numbers.map(
-num=>console.log(num)
-);
-```
-
-Use
-
-```
-forEach()
-```
-
----
-
-### Impure Function
-
-Wrong
-
-```js
-let count = 0;
-
-function increment(){
-
-count++;
-
-}
-```
-
----
-
-# 20. Interview Questions
-
-## What is Functional Programming?
-
-A programming style focused on pure functions, immutability, and avoiding side effects.
-
----
-
-## What is a Pure Function?
-
-A function that always produces the same output for the same input and has no side effects.
-
----
-
-## What is Immutability?
-
-Never modifying existing data.
-
-Instead,
-
-create new data.
-
----
-
-## Difference between Pure and Impure Functions?
-
-| Pure | Impure |
-|------|---------|
-| Same Output | Different Output |
-| No Side Effects | Has Side Effects |
-
----
-
-## What is Currying?
-
-Converting
-
-```js
-f(a,b)
-```
-
-into
+into:
 
 ```js
 f(a)(b)
@@ -835,87 +569,175 @@ f(a)(b)
 
 ---
 
-## What is Memoization?
+### What is memoization?
 
-Caching previous function results to improve performance.
-
----
-
-## Why does React encourage Functional Programming?
-
-Because immutable updates make rendering predictable and efficient.
+Caching previous results so repeated calculations can be faster.
 
 ---
 
-# 21. Coding Exercises
+# 17. Quick Revision Map
+
+```text
+FUNCTIONAL PROGRAMMING
+        │
+        ├── Pure Functions
+        │      ↓
+        │   Predictable
+        │
+        ├── Immutability
+        │      ↓
+        │   Don't directly mutate
+        │
+        ├── Side Effects
+        │      ↓
+        │   Control external changes
+        │
+        ├── Composition
+        │      ↓
+        │   Combine functions
+        │
+        ├── Currying
+        │      ↓
+        │   f(a)(b)
+        │
+        └── Memoization
+               ↓
+           Cache results
+```
+
+---
+
+# 18. Hands-on Practice
+
+Write these yourself:
 
 ### Exercise 1
 
-Convert an impure function into a pure function.
+Write a pure function:
+
+```js
+calculateArea(width, height)
+```
 
 ---
 
 ### Exercise 2
 
-Use
+Create a new array without modifying:
 
 ```js
-map()
+const numbers = [1, 2, 3];
 ```
 
-instead of a loop.
+Add `4` immutably.
 
 ---
 
 ### Exercise 3
 
-Create a curried multiply function.
+Update:
+
+```js
+const user = {
+    name: "Om",
+    age: 22
+};
+```
+
+to age `23` without modifying the original object.
 
 ---
 
 ### Exercise 4
 
-Write a memoized square function.
+Compose:
+
+```text
+add 5
+then multiply by 2
+```
 
 ---
 
 ### Exercise 5
 
-Update an object without mutation.
+Create a simple curried function:
+
+```js
+multiply(a)(b)
+```
 
 ---
 
 ### Exercise 6
 
-Compose two functions together.
+Explain whether this function is pure:
+
+```js
+let count = 0;
+
+function increment() {
+    count++;
+}
+```
 
 ---
 
-# 22. Summary
+# 19. What You Need to Know Before Moving On
 
-- Functional Programming treats functions as the primary building blocks.
-- Pure Functions are predictable and easy to test.
-- Avoid side effects whenever possible.
-- Use immutable updates with arrays and objects.
-- JavaScript supports Functional Programming through first-class functions and higher-order functions.
-- React relies heavily on immutable data and functional programming concepts.
-- Understanding FP improves code quality, maintainability, and interview performance.
+You should be comfortable with:
+
+```text
+[ ] What Functional Programming means
+[ ] Pure vs impure functions
+[ ] Side effects
+[ ] Immutability
+[ ] Imperative vs declarative
+[ ] Basic function composition
+[ ] Basic currying
+[ ] Basic memoization
+[ ] Why React uses immutable updates
+```
+
+You do **not** need to master Functional Programming theory here.
+
+The deeper array-method patterns and functional problem-solving belong in:
+
+```text
+02-Functional-JavaScript
+```
+
+and deeper function behavior belongs in:
+
+```text
+04-Functions-Scope-Closures
+```
 
 ---
 
-# What's Next?
+# Summary
 
-➡️ **17-ES6-Patterns.md**
+Functional Programming is mainly about writing code that is:
 
-You'll learn:
+```text
+Predictable
+Reusable
+Composable
+Less dependent on shared mutable state
+```
 
-- Common ES6 Coding Patterns
-- Object & Array Transformations
-- Chaining Methods
-- Factory Functions
-- Module Pattern
-- Revealing Module Pattern
-- Builder Pattern
-- Functional Composition
-- Real-world Interview Patterns
-- Coding Exercises
+For this Modern JavaScript folder, remember:
+
+```text
+Pure Functions
++
+Immutability
++
+Controlled Side Effects
++
+Composition
+=
+Functional Programming Foundation
+```
+
+**Next → `17-ES6-Patterns.md`**

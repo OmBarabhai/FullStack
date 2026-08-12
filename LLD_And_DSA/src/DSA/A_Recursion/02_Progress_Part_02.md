@@ -216,29 +216,29 @@ Backtracking
 
 # 📊 Problems 086–095
 
-|       # | Problem                                  | Platform             | Difficulty | OA Value | Status |  R1 |  R2 |  R3 |  R4 |  R5 |   |
-| ------: | ---------------------------------------- | -------------------- | :--------: | :------: | :----: | :-: | :-: | :-: | :-: | :-: | - |
-| **086** | Check if a Subsequence With Sum K Exists | GFG                  |     🟡     |   ⭐⭐⭐⭐⭐  |    ☑️ |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  |   |
-| **087** | Print All Subsets                        | LeetCode 78          |     🟡     |   ⭐⭐⭐⭐⭐  |    ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
-| **088** | Count Subsets                            | GFG                  |     🟡     |   ⭐⭐⭐⭐⭐  |    ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
-| **089** | Subset Sum                               | GFG / LC 416 variant |     🟡     |   ⭐⭐⭐⭐⭐  |    ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
-| **090** | Partition Into Two Equal Subsets         | LeetCode 416         |     🟡     |   ⭐⭐⭐⭐⭐  |    ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
-| **091** | Partition With Minimum Difference        | GFG                  |     🟡     |   ⭐⭐⭐⭐⭐  |    ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
-| **092** | Generate All Binary Strings of Length N  | GFG                  |     🟢     |   ⭐⭐⭐⭐⭐  |    ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
-| **093** | Binary Strings Without Consecutive 1s    | Interview            |     🟡     |   ⭐⭐⭐⭐⭐  |    ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
-| **094** | Binary Strings Without Consecutive 0s    | Interview            |     🟡     |   ⭐⭐⭐⭐   |    ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
-| **095** | Binary Strings With Exactly K Ones       | Interview            |     🟡     |   ⭐⭐⭐⭐⭐  |    ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |
+|       # | Problem                                  | Platform             | Difficulty | OA Value | Status | R1 | R2 | R3 | R4 | R5 |   |
+|--------:|------------------------------------------|----------------------|:----------:|:--------:|:------:|:--:|:--:|:--:|:--:|:--:|---|
+| **086** | Check if a Subsequence With Sum K Exists | GFG                  |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜ |
+| **087** | Print All Subsets                        | LeetCode 78          |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜ |
+| **088** | Count Subsets                            | GFG                  |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜ |
+| **089** | Subset Sum                               | GFG / LC 416 variant |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜ |
+| **090** | Partition Into Two Equal Subsets         | LeetCode 416         |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜ |
+| **091** | Partition With Minimum Difference        | GFG                  |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜ |
+| **092** | Generate All Binary Strings of Length N  | GFG                  |     🟢     |  ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜ |
+| **093** | Binary Strings Without Consecutive 1s    | Interview            |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜ |
+| **094** | Binary Strings Without Consecutive 0s    | Interview            |     🟡     |   ⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜ |
+| **095** | Binary Strings With Exactly K Ones       | Interview            |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜ |
 
 These are exactly the source's 86–95 problems.
 
-| Extra #   | Problem                 | Platform           | New Concept                     | Difficulty | OA Value | Status | R1 | R2 | R3 | R4 | R5 |
-|-----------|-------------------------|--------------------|---------------------------------|:----------:|:--------:|:------:|:--:|:--:|:--:|:--:|:--:|
-| **H-E01** | 0/1 Knapsack            | GFG / LeetCode     | Take/Not-Take + Optimization    |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| **H-E02** | Target Sum              | LeetCode 494       | `+ / -` Choice + Counting       |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| **H-E03** | Subset XOR K            | GFG / Interview    | Take/Not-Take + XOR State       |     🟡     |   ⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  |    |
-| **H-E04** | Coin Change — Recursive | GFG / LeetCode 322 | Take + Reuse                    |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| **H-E05** | Minimum Coins           | GFG                | Take/Not-Take + Optimization    |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| **H-E06** | Rod Cutting             | GFG                | Unbounded Choice + Optimization |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| Extra #   | Problem                      | Platform            | New Concept                     | Difficulty | OA Value | Status | R1 | R2 | R3 | R4 | R5 |
+|-----------|------------------------------|---------------------|---------------------------------|:----------:|:--------:|:------:|:--:|:--:|:--:|:--:|:--:|
+| **H-E01** | 0/1 Knapsack                 | GFG / LeetCode      | Take/Not-Take + Optimization    |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **H-E02** | Target Sum                   | LeetCode 494        | `+ / -` Choice + Counting       |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **H-E03** | Sum of All Subset XOR Totals | LC 1863 / Interview | Take/Not-Take + XOR State       |     🟡     | ⭐⭐⭐⭐     |    ☑️  | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **H-E04** | Coin Change — Recursive      | GFG / LeetCode 322  | Take + Reuse                    |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **H-E05** | Minimum Coins                | GFG                 | Take/Not-Take + Optimization    |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **H-E06** | Rod Cutting                  | GFG                 | Unbounded Choice + Optimization |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 
 ---
 
@@ -430,11 +430,11 @@ The source continues the Take/Not-Take family with increasingly general choice-g
 
 |       # | Problem                                     | Platform  | Difficulty | OA Value | Status |  R1 |  R2 |  R3 |  R4 |  R5 |   |   |
 | ------: | ------------------------------------------- | --------- | :--------: | :------: | :----: | :-: | :-: | :-: | :-: | :-: | - | - |
-| **096** | All Strings From Character Set `{a,b}`      | Interview |     🟢     |   ⭐⭐⭐⭐   |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |   |
-| **097** | All Strings From Digits `0–2`               | Interview |     🟢     |   ⭐⭐⭐⭐   |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ | ⬜ |
-| **098** | Print All Choices From an Array Recursively | Interview |     🟢     |   ⭐⭐⭐⭐   |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ | ⬜ |
-| **099** | Count Ways to Choose K Items                | GFG       |     🟡     |   ⭐⭐⭐⭐⭐  |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |   |
-| **100** | Include/Exclude Subset Framework Practice   | Interview |     🟡     |   ⭐⭐⭐⭐⭐  |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ | ⬜ |
+| **096** | All Strings From Character Set `{a,b}`      | Interview |     🟢     |   ⭐⭐⭐⭐   |    ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |   |
+| **097** | All Strings From Digits `0–2`               | Interview |     🟢     |   ⭐⭐⭐⭐   |    ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ | ⬜ |
+| **098** | Print All Choices From an Array Recursively | Interview |     🟢     |   ⭐⭐⭐⭐   |    ☑️  |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ | ⬜ |
+| **099** | Count Ways to Choose K Items                | GFG       |     🟡     |   ⭐⭐⭐⭐⭐  |    ☑️  |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ |   |
+| **100** | Include/Exclude Subset Framework Practice   | Interview |     🟡     |   ⭐⭐⭐⭐⭐  |   ☑️   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  | ⬜ | ⬜ |
 
 ---
 
@@ -515,18 +515,18 @@ The master source starts this family at 101.
 
 # Problems 101–110
 
-| # | Problem | Platform | Difficulty | OA Value | Status | R1 | R2 | R3 | R4 | R5 |
-|---:|---|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|---|
-| **101** | Generate Permutations | LeetCode 46 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **102** | Generate Unique Permutations | LeetCode 47 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **103** | Permutations of a String | GFG | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **104** | Unique Permutations of a String | GFG | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **105** | Generate Combinations | LeetCode 77 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **106** | Combinations of Size K | LeetCode 77 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **107** | Combination Sum | LeetCode 39 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **108** | Combination Sum II | LeetCode 40 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **109** | Combination Sum III | LeetCode 216 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **110** | Generate Subsets With Duplicates | LeetCode 90 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+|       # | Problem                          | Platform     | Difficulty | OA Value | Status | R1 | R2 | R3 | R4 | R5 |
+|--------:|----------------------------------|--------------|:----------:|:--------:|:------:|:--:|:--:|:--:|:--:|:--:|
+| **101** | Generate Permutations            | LeetCode 46  |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **102** | Generate Unique Permutations     | LeetCode 47  |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **103** | Permutations of a String         | GFG          |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **104** | Unique Permutations of a String  | GFG          |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **105** | Generate Combinations            | LeetCode 77  |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **106** | Combinations of Size K           | LeetCode 77  |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **107** | Combination Sum                  | LeetCode 39  |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **108** | Combination Sum II               | LeetCode 40  |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **109** | Combination Sum III              | LeetCode 216 |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **110** | Generate Subsets With Duplicates | LeetCode 90  |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 
 These are exactly the source's 101–110 problems.
 
