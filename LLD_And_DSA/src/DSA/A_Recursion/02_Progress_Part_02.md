@@ -519,9 +519,9 @@ The master source starts this family at 101.
 |--------:|----------------------------------|--------------|:----------:|:--------:|:------:|:--:|:--:|:--:|:--:|:--:|
 | **101** | Generate Permutations            | LeetCode 46  |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 | **102** | Generate Unique Permutations     | LeetCode 47  |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| **103** | Permutations of a String         | GFG          |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| **104** | Unique Permutations of a String  | GFG          |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| **105** | Generate Combinations            | LeetCode 77  |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **103** | Permutations of a String         | GFG          |     🟡     |  ⭐⭐⭐⭐⭐   |    ☑️    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **104** | Unique Permutations of a String  | GFG          |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **105** | Generate Combinations            | LeetCode 77  |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 | **106** | Combinations of Size K           | LeetCode 77  |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 | **107** | Combination Sum                  | LeetCode 39  |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 | **108** | Combination Sum II               | LeetCode 40  |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
@@ -900,18 +900,18 @@ Therefore **Part 2.3 = 111–135**, with the exact source problems preserved.
 
 These are the **exact problems from the master source**.
 
-|       # | Problem                              | Platform          | Status |  R1 |  R2 |  R3 |  R4 |  R5 |
-| ------: | ------------------------------------ | ----------------- | :----: | :-: | :-: | :-: | :-: | :-: |
-| **111** | Generate All Subsets                 | LeetCode 78       |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  |
-| **112** | Generate All K-Subsets               | Interview-style   |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  |
-| **113** | Subsets of a String                  | Interview-style   |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  |
-| **114** | Letter Case Permutation              | LeetCode 784      |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  |
-| **115** | Phone Keypad Combinations            | GFG / LeetCode 17 |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  |
-| **116** | Generate All Abbreviations           | LeetCode 320      |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  |
-| **117** | Permutation Sequence                 | LeetCode 60       |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  |
-| **118** | K-th Permutation Using Recursion     | LeetCode 60       |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  |
-| **119** | Print All Arrangements of Characters | Interview-style   |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  |
-| **120** | Generate All Possible Passwords      | Interview-style   |    ⬜   |  ⬜  |  ⬜  |  ⬜  |  ⬜  |  ⬜  |
+|       # | Problem                              | Platform          | Status | R1 | R2 | R3 | R4 | R5 |
+|--------:|--------------------------------------|-------------------|:------:|:--:|:--:|:--:|:--:|:--:|
+| **111** | Generate All Subsets                 | LeetCode 78       |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **112** | Generate All K-Subsets               | Interview-style   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **113** | Subsets of a String                  | Interview-style   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **114** | Letter Case Permutation              | LeetCode 784      |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **115** | Phone Keypad Combinations            | GFG / LeetCode 17 |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **116** | Generate All Abbreviations           | LeetCode 320      |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **117** | Permutation Sequence                 | LeetCode 60       |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **118** | K-th Permutation Using Recursion     | LeetCode 60       |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **119** | Print All Arrangements of Characters | Interview-style   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **120** | Generate All Possible Passwords      | Interview-style   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 
 ---
 
