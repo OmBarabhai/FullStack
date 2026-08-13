@@ -1,7 +1,9 @@
 package DSA.A_Recursion.J_Permutation_Combination;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class J101GeneratePermutations {
     public static void swap(int[] nums, int st, int en) {
@@ -19,6 +21,7 @@ public class J101GeneratePermutations {
             return;
         }
         for (int i = idx; i >= 0; i--) {
+
             swap(nums, i, idx);
             solve(nums, ans, idx - 1);
             swap(nums, i, idx);
