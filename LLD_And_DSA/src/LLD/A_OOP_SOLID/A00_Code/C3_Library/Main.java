@@ -4,20 +4,27 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Book b1 = new Book("Atomic Habits","James Clear",550,"Self Help");
-        Book b2 = new Book("Clean Code","Robert C. Martin",699,"Programming");
-        Book b3 = new Book("Effective Java","Joshua Bloch",850,"Programming");
-        Book b4 = new Book("The Alchemist","Paulo Coelho",399,"Fiction");
-        Book b5 = new Book("Rich Dad Poor Dad","Robert Kiyosaki",450,"Finance");
-        Book b6 = new Book();
+        Book b1 = new Book();
+        b1.setBook("Atomic Habits","James Clear",550,"Self Help");
+        System.out.println(b1.getPrice());
+        System.out.println(b1.getAuthor());
+        System.out.println(b1.getTitle());
+        System.out.println(b1.getCategory());
 
-        System.out.println(b1.title + " " + b1.author + " " + b1.price + " " + b1.category);
-        System.out.println(b2.title + " " + b2.author + " " + b2.price + " " + b2.category);
-        System.out.println(b3.title + " " + b3.author + " " + b3.price + " " + b3.category);
-        System.out.println(b4.title + " " + b4.author + " " + b4.price + " " + b4.category);
-        System.out.println(b5.title + " " + b5.author + " " + b5.price + " " + b5.category);
-        System.out.println(b6.title + " " + b6.author + " " + b6.price + " " + b6.category);
 
+//        Book b2 = new Book("Clean Code","Robert C. Martin",699,"Programming");
+//        Book b3 = new Book("Effective Java","Joshua Bloch",850,"Programming");
+//        Book b4 = new Book("The Alchemist","Paulo Coelho",399,"Fiction");
+//        Book b5 = new Book("Rich Dad Poor Dad","Robert Kiyosaki",450,"Finance");
+//        Book b6 = new Book();
+//
+//        System.out.println(b1.title + " " + b1.author + " " + b1.price + " " + b1.category);
+//        System.out.println(b2.title + " " + b2.author + " " + b2.price + " " + b2.category);
+//        System.out.println(b3.title + " " + b3.author + " " + b3.price + " " + b3.category);
+//        System.out.println(b4.title + " " + b4.author + " " + b4.price + " " + b4.category);
+//        System.out.println(b5.title + " " + b5.author + " " + b5.price + " " + b5.category);
+//        System.out.println(b6.title + " " + b6.author + " " + b6.price + " " + b6.category);
+//
 
         /*
         ==================================================

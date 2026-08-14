@@ -3,17 +3,23 @@ package LLD.A_OOP_SOLID.A00_Code.C9_CarRental;
 public class Main {
 
     public static void main(String[] args) {
-        Car c0 = new Car();
-        Car c1 = new Car("Toyota","Fortuner","Black", 12200);
-        Car c2 = new Car("Land Rover","Defender","Violet",50000);
-        Car c3 = new Car("BMW", "M3","Blue",35000);
-        Car c4 = new Car("Mercedes","G-Wagon","White",45000);
-        System.out.println(c0.brand + " " + c0.model + " " + c0.color + " " + c0.rentPerDay);
+        Car c = new Car();
+        c.getCar("Toyota", "Fortuner", "Black", 12200);
+        System.out.println(c.getRentPerDay());
+        System.out.println(c.getColor());
+        System.out.println(c.getModel());
+        System.out.println(c.getBrand());
 
-        System.out.println(c1.brand + " " + c1.model + " " + c1.color + " " + c1.rentPerDay);
-        System.out.println(c2.brand + " " + c2.model + " " + c2.color + " " + c2.rentPerDay);
-        System.out.println(c3.brand + " " + c3.model + " " + c3.color + " " + c3.rentPerDay);
-        System.out.println(c4.brand + " " + c4.model + " " + c4.color + " " + c4.rentPerDay);
+//        Car c1 = new Car("Toyota","Fortuner","Black", 12200);
+//        Car c2 = new Car("Land Rover","Defender","Violet",50000);
+//        Car c3 = new Car("BMW", "M3","Blue",35000);
+//        Car c4 = new Car("Mercedes","G-Wagon","White",45000);
+//        System.out.println(c0.brand + " " + c0.model + " " + c0.color + " " + c0.rentPerDay);
+//
+//        System.out.println(c1.brand + " " + c1.model + " " + c1.color + " " + c1.rentPerDay);
+//        System.out.println(c2.brand + " " + c2.model + " " + c2.color + " " + c2.rentPerDay);
+//        System.out.println(c3.brand + " " + c3.model + " " + c3.color + " " + c3.rentPerDay);
+//        System.out.println(c4.brand + " " + c4.model + " " + c4.color + " " + c4.rentPerDay);
 
         /*
         =========================================================

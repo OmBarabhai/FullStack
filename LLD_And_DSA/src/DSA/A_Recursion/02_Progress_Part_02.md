@@ -522,11 +522,11 @@ The master source starts this family at 101.
 | **103** | Permutations of a String         | GFG          |     🟡     |  ⭐⭐⭐⭐⭐   |    ☑️    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 | **104** | Unique Permutations of a String  | GFG          |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 | **105** | Generate Combinations            | LeetCode 77  |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| **106** | Combinations of Size K           | LeetCode 77  |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| **107** | Combination Sum                  | LeetCode 39  |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| **108** | Combination Sum II               | LeetCode 40  |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| **109** | Combination Sum III              | LeetCode 216 |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
-| **110** | Generate Subsets With Duplicates | LeetCode 90  |     🟡     |  ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **106** | Combinations of Size K           | LeetCode 77  |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️     | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **107** | Combination Sum                  | LeetCode 39  |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **108** | Combination Sum II               | LeetCode 40  |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️     | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **109** | Combination Sum III              | LeetCode 216 |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
+| **110** | Generate Subsets With Duplicates | LeetCode 90  |     🟡     |  ⭐⭐⭐⭐⭐   |   ☑️    | ⬜  | ⬜  | ⬜  | ⬜  | ⬜  |
 
 These are exactly the source's 101–110 problems.
 
@@ -2317,7 +2317,7 @@ Do **not** mark Part 2.4 complete until you can independently explain:
 
 ```text
 PART 1       001–060   ✅ COMPLETED
-PART 2.1     061–085   🔲
+PART 2.1     061–085   ✅
 PART 2.2     086–110   🔲
 PART 2.3     111–135   🔲
 PART 2.4     136–160   🔲  ← CURRENT

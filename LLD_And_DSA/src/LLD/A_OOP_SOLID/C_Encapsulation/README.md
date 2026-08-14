@@ -726,12 +726,46 @@ inside `setAge()`.
 * [ ] I can modify private data using a Setter.
 * [ ] I can add validation inside a Setter.
 
----
-# C_Encapsulation — Part 3: Practice Problems
+---# C_Encapsulation — Part 3: Practice Problems
 
 Now we move from **understanding Getter/Setter → actually coding Encapsulation**.
 
-Part 3 is **problem practice**, separate from the theory/notes. Your goal is to write the code yourself first.
+Part 3 is **coding practice**. Your actual Java solutions remain inside `A00_Code`, while the corresponding problem + solution files remain inside `A00_Problems`.
+
+The same 10 projects are reused:
+
+```text
+P1 Student
+P2 Bank
+P3 Library
+P4 Hospital
+P5 Employee
+P6 Amazon
+P7 College
+P8 Movie Booking
+P9 Car Rental
+P10 Inventory
+```
+
+---
+
+# Practice Rule
+
+For every problem:
+
+```text
+private fields
+      ↓
+Getter
+      ↓
+Setter
+      ↓
+Validation where required
+      ↓
+Controlled access
+```
+
+Do not directly access private fields from `Main`.
 
 ---
 
@@ -739,7 +773,7 @@ Part 3 is **problem practice**, separate from the theory/notes. Your goal is to 
 
 ## Objective
 
-Convert the `Student` class into a properly encapsulated class.
+Convert the existing `Student` class into an encapsulated class.
 
 ### Fields
 
@@ -752,28 +786,24 @@ private String course;
 
 ### Tasks
 
-1. Create all fields as `private`.
-2. Create Getter and Setter for every field.
-3. Use `this` inside every Setter.
-4. Create one `Student` object.
-5. Set values using Setters.
-6. Print values using Getters.
+* Make all fields `private`.
+* Create Getter and Setter for every field.
+* Use `this` inside every Setter.
+* Create a Student object.
+* Set values using Setters.
+* Read values using Getters.
 
 ### Validation
 
-Inside:
+Inside `setAge()`:
 
-```java
-setAge()
-```
-
-allow the age only when:
-
-```java
+```text
 age >= 0
 ```
 
-### Expected usage
+Invalid age should not update the object.
+
+### Example Usage
 
 ```java
 Student s1 = new Student();
@@ -789,15 +819,13 @@ System.out.println(s1.getAge());
 System.out.println(s1.getCourse());
 ```
 
-**Don't copy the class implementation yet. Write it yourself.**
-
 ---
 
 # P2 — Bank Account Encapsulation
 
 ## Objective
 
-Protect the bank account's balance.
+Protect the bank account balance.
 
 ### Fields
 
@@ -821,11 +849,15 @@ setAccountHolder()
 getBalance()
 ```
 
-For `balance`, **do not create a normal Setter**.
+Do **not** create:
+
+```text
+setBalance()
+```
 
 Instead create:
 
-```java
+```text
 deposit()
 withdraw()
 ```
@@ -838,8 +870,6 @@ withdraw()
 amount > 0
 ```
 
-then add it to balance.
-
 `withdraw(amount)`:
 
 ```text
@@ -848,9 +878,7 @@ AND
 amount <= balance
 ```
 
-then subtract it.
-
-Otherwise, don't modify the balance.
+Otherwise, balance should not change.
 
 ### Example
 
@@ -885,11 +913,85 @@ validation
 controlled balance
 ```
 
-This is the important jump from **simple Getter/Setter Encapsulation to real object protection**. The source material uses the same `BankAccount → balance → deposit/withdraw → validation` progression.
+---
+
+# P3 — Library Book Encapsulation
+
+## Objective
+
+Protect book information using Encapsulation.
+
+### Fields
+
+```java
+private String title;
+private String author;
+private int price;
+private String category;
+```
+
+### Tasks
+
+* Make all fields `private`.
+* Create Getters and Setters.
+* Create 5 Book objects.
+* Set values using Setters.
+* Print values using Getters.
+
+### Validation
+
+Price must be:
+
+```text
+price > 0
+```
+
+Invalid price should not update the object.
+
+### Challenge
+
+Why should the `price` field not be directly accessible?
 
 ---
 
-# P3 — Employee Encapsulation
+# P4 — Hospital Patient Encapsulation
+
+## Objective
+
+Protect patient information.
+
+### Fields
+
+```java
+private int patientId;
+private String name;
+private int age;
+private String disease;
+```
+
+### Tasks
+
+* Make all fields `private`.
+* Create Getters and Setters.
+* Create 4 Patient objects.
+* Set values using Setters.
+* Print details using Getters.
+
+### Validation
+
+Age must satisfy:
+
+```text
+age >= 0
+```
+
+### Challenge
+
+Why should age validation be handled inside the Setter?
+
+---
+
+# P5 — Employee Encapsulation
 
 ## Objective
 
@@ -906,17 +1008,18 @@ private double salary;
 
 ### Tasks
 
-Create Getter/Setter for:
+Create:
 
 ```text
-employeeId
-name
-department
-```
+getEmployeeId()
+setEmployeeId()
 
-For salary:
+getName()
+setName()
 
-```text
+getDepartment()
+setDepartment()
+
 getSalary()
 setSalary()
 ```
@@ -929,33 +1032,21 @@ Salary must be:
 salary > 0
 ```
 
-If invalid:
+Example:
 
 ```java
 employee.setSalary(-5000);
 ```
 
-the salary should **not change**.
+The salary should not change.
 
-### Example
+### Challenge
 
-```java
-Employee e1 = new Employee();
-
-e1.setEmployeeId(101);
-e1.setName("Om");
-e1.setDepartment("Engineering");
-e1.setSalary(50000);
-
-System.out.println(e1.getEmployeeId());
-System.out.println(e1.getName());
-System.out.println(e1.getDepartment());
-System.out.println(e1.getSalary());
-```
+Why is validation inside `setSalary()` useful?
 
 ---
 
-# P4 — Product Encapsulation
+# P6 — Amazon Product Encapsulation
 
 ## Objective
 
@@ -967,80 +1058,68 @@ Protect product information.
 private int productId;
 private String productName;
 private double price;
-private int quantity;
+private String category;
 ```
 
 ### Tasks
 
-Create Getter/Setter for all fields.
+* Make all fields `private`.
+* Create Getters and Setters.
+* Create 5 Product objects.
+* Set values using Setters.
+* Print values using Getters.
 
 ### Validation
 
-#### Price
+Price must be:
 
 ```text
 price > 0
 ```
 
-#### Quantity
+### Challenge
 
-```text
-quantity >= 0
-```
-
-Invalid values should not modify the object.
-
-Example:
-
-```java
-product.setPrice(-100);
-product.setQuantity(-20);
-```
-
-should be rejected.
+Which field represents the most important value to protect with validation?
 
 ---
 
-# P5 — Mobile Phone Encapsulation
+# P7 — College Encapsulation
 
 ## Objective
 
-Protect mobile phone information.
+Protect college information.
 
 ### Fields
 
 ```java
-private String brand;
-private String model;
-private double price;
-private int batteryPercentage;
+private int collegeId;
+private String collegeName;
+private String city;
+private int totalStudent;
 ```
+
+### Tasks
+
+* Make all fields `private`.
+* Create Getters and Setters.
+* Create 3 College objects.
+* Set values using Setters.
+* Print details using Getters.
 
 ### Validation
 
-Price:
-
 ```text
-price > 0
+collegeId > 0
+totalStudent >= 0
 ```
 
-Battery:
+### Challenge
 
-```text
-0 <= batteryPercentage <= 100
-```
-
-Example:
-
-```java
-mobile.setBatteryPercentage(120);
-```
-
-must not update the battery.
+Why should `totalStudent` not accept a negative value?
 
 ---
 
-# P6 — Movie Encapsulation
+# P8 — Movie Booking Encapsulation
 
 ## Objective
 
@@ -1050,44 +1129,55 @@ Protect movie information.
 
 ```java
 private String movieName;
+private String duration;
 private String language;
 private double rating;
-private int duration;
 ```
+
+### Tasks
+
+* Make all fields `private`.
+* Create Getters and Setters.
+* Create 5 Movie objects.
+* Set values using Setters.
+* Print details using Getters.
 
 ### Validation
 
-Rating:
+Rating must satisfy:
 
 ```text
 0 <= rating <= 5
 ```
 
-Duration:
+### Challenge
 
-```text
-duration > 0
-```
-
-Example:
-
-```java
-movie.setRating(6.5);
-```
-
-must be rejected.
+What happens if the Setter allows a rating of `8.5`?
 
 ---
 
-# P7 — Car Encapsulation
+# P9 — Car Rental Encapsulation
+
+## Objective
+
+Protect rental car information.
 
 ### Fields
 
 ```java
 private String brand;
 private String model;
+private String color;
 private double rentPerDay;
 ```
+
+### Tasks
+
+* Make all fields `private`.
+* Create Getters and Setters.
+* Create 4 Car objects.
+* Set values using Setters.
+* Print details using Getters.
 
 ### Validation
 
@@ -1095,44 +1185,17 @@ private double rentPerDay;
 rentPerDay > 0
 ```
 
-Create:
+### Challenge
 
-```text
-getBrand()
-setBrand()
-
-getModel()
-setModel()
-
-getRentPerDay()
-setRentPerDay()
-```
+Why should `rentPerDay` be validated before storing it?
 
 ---
 
-# P8 — College Encapsulation
+# P10 — Inventory Encapsulation
 
-### Fields
+## Objective
 
-```java
-private int collegeId;
-private String collegeName;
-private String city;
-private int totalStudents;
-```
-
-### Validation
-
-```text
-collegeId > 0
-totalStudents >= 0
-```
-
-Create Getter/Setter for every field.
-
----
-
-# P9 — Inventory Encapsulation
+Protect inventory information.
 
 ### Fields
 
@@ -1142,6 +1205,14 @@ private String itemName;
 private int quantity;
 private double price;
 ```
+
+### Tasks
+
+* Make all fields `private`.
+* Create Getters and Setters.
+* Create 5 inventory objects.
+* Set values using Setters.
+* Print details using Getters.
 
 ### Validation
 
@@ -1156,677 +1227,592 @@ Example:
 item.setQuantity(-10);
 ```
 
-should not modify the quantity.
-
----
-
-# P10 — ATM Encapsulation
-
-This is the **most important practice problem** in Part 3.
-
-### Fields
-
-```java
-private int pin;
-private double balance;
-```
-
-### Methods
-
-```text
-getBalance()
-setPin()
-
-deposit()
-withdraw()
-changePin()
-```
-
-### Rules
-
-#### Deposit
-
-```text
-amount > 0
-```
-
-#### Withdraw
-
-```text
-amount > 0
-AND
-amount <= balance
-```
-
-#### PIN
-
-PIN must contain exactly 4 digits.
-
-Do **not** create:
-
-```java
-setBalance()
-```
-
-The balance should only change through:
-
-```java
-deposit()
-withdraw()
-```
-
-This reinforces the key idea that encapsulation isn't merely "make everything private and generate setters"; it is about **controlled access and validation**.
+The quantity should not change.
 
 ---
 
 # Practice Order
 
-Don't solve randomly.
+Complete them in this order:
 
 ```text
 P1 Student
    ↓
-P2 Bank Account
+P2 Bank
    ↓
-P3 Employee
+P3 Library
    ↓
-P4 Product
+P4 Hospital
    ↓
-P5 Mobile
+P5 Employee
    ↓
-P6 Movie
+P6 Amazon
    ↓
-P7 Car
+P7 College
    ↓
-P8 College
+P8 Movie Booking
    ↓
-P9 Inventory
+P9 Car Rental
    ↓
-P10 ATM
+P10 Inventory
 ```
 
-### Difficulty progression
-
-| Problems | Focus                          |
-| -------- | ------------------------------ |
-| P1       | private + Getter + Setter      |
-| P2       | Controlled modification        |
-| P3       | Setter validation              |
-| P4       | Multiple validations           |
-| P5       | Range validation               |
-| P6       | Range + validation             |
-| P7       | Basic real-world encapsulation |
-| P8       | Multiple fields                |
-| P9       | Inventory validation           |
-| P10      | **Real encapsulation design**  |
+These correspond directly to your existing `A00_Problems/P1...P10` folders.
 
 ---
 
-## Your rule for Part 3
+# Difficulty Progression
 
-For every problem:
-
-**1. Write `Class`**
-
-**2. Make fields `private`**
-
-**3. Write Getter**
-
-**4. Write Setter**
-
-**5. Add validation where specified**
-
-**6. Create object**
-
-**7. Use Setter**
-
-**8. Use Getter**
-
-**9. Test invalid input**
-
-Don't look at a solution until you have attempted the problem yourself.
-
-### Part 3 Goal
-
-By P10, you should be able to look at:
-
-```java
-private double balance;
-```
-
-and immediately think:
-
-```text
-❌ Don't expose balance directly
-
-        ↓
-
-Getter → read balance
-
-        ↓
-
-deposit/withdraw → controlled modification
-
-        ↓
-
-validation → protect object state
-```
-
-
-# C_Encapsulation — Part 4: Advanced / Interview Practice
-
-Part 4 is **separate from your A00_Problems code**.
-
-You already have:
-
-```text
-Part 1 → Encapsulation Fundamentals
-Part 2 → Getter / Setter / private
-Part 3 → Basic Encapsulation Practice Problems
-Part 4 → Advanced Encapsulation + LLD Thinking
-```
-
-The goal now is to understand **when NOT to provide a Setter** and how to protect an object's state.
+| Problem       | Main Focus                  |
+| ------------- | --------------------------- |
+| P1 Student    | `private` + Getter + Setter |
+| P2 Bank       | Controlled modification     |
+| P3 Library    | Getter/Setter + validation  |
+| P4 Hospital   | Validation                  |
+| P5 Employee   | Setter validation           |
+| P6 Amazon     | Data protection             |
+| P7 College    | Numeric validation          |
+| P8 Movie      | Range validation            |
+| P9 Car Rental | Controlled numeric data     |
+| P10 Inventory | Multiple validations        |
 
 ---
 
-# Part 4 — Advanced Encapsulation
+# Your Rule for Every Problem
 
-## P1 — Bank Account
+Before looking at any solution:
 
-### Goal
-
-Design a properly encapsulated `BankAccount`.
-
-### Fields
-
-```java
-private int accountNumber;
-private String accountHolder;
-private double balance;
+```text
+1. Create the class
+2. Make fields private
+3. Create Getters
+4. Create Setters
+5. Add validation
+6. Create objects
+7. Set values using Setters
+8. Read values using Getters
+9. Test invalid values
 ```
 
-### Rules
+---
 
-❌ No `setBalance()`
+# Part 3 Goal
 
-Balance can change only through:
+By completing P1–P10, you should naturally understand:
+
+```text
+private field
+      ↓
+Getter → READ
+      ↓
+Setter → MODIFY
+      ↓
+Validation
+      ↓
+Controlled Object State
+```
+
+And for fields such as `balance`:
+
+```text
+private balance
+      ↓
+Getter → READ
+      ↓
+deposit()/withdraw()
+      ↓
+Controlled Modification
+```
+
+---
+
+# Part 3 Checklist
+
+* [x] Completed P1 Student.
+* [x] Completed P2 Bank.
+* [x] Completed P3 Library.
+* [x] Completed P4 Hospital.
+* [x] Completed P5 Employee.
+* [x] Completed P6 Amazon.
+* [x] Completed P7 College.
+* [x] Completed P8 Movie Booking.
+* [x] Completed P9 Car Rental.
+* [x] Completed P10 Inventory.
+* [x] Can use `private` fields.
+* [x] Can create Getters.
+* [x] Can create Setters.
+* [x] Can use `this`.
+* [x] Can add validation.
+* [x] Understand controlled access.
+
+---
+
+# Next Part
+# C_Encapsulation — Part 4: Advanced Encapsulation
+
+Part 4 focuses on **designing encapsulated classes properly**.
+
+The main idea is to understand that Encapsulation is not simply:
+
+> **"Make fields private and generate Getters/Setters."**
+
+It is about **controlling how object state is accessed and modified**.
+
+---
+
+# Learning Goals
+
+After this part, you should understand:
+
+* Why every field does not need a Setter.
+* Why some state should only be changed through business methods.
+* How validation protects object state.
+* Read-only access.
+* Controlled state transitions.
+* Why business methods can be better than direct Setters.
+* How Encapsulation protects the validity of an object.
+
+---
+
+# 1. Every Field Does Not Need a Setter
+
+A common beginner approach is:
 
 ```java
+private double balance;
+
+public double getBalance() {
+    return balance;
+}
+
+public void setBalance(double balance) {
+    this.balance = balance;
+}
+```
+
+But this gives outside code complete control over the value.
+
+For example:
+
+```java
+account.setBalance(-50000);
+```
+
+The object can now be placed into an invalid state.
+
+So the important question is:
+
+> **Does every private field need a Setter?**
+
+The answer is:
+
+**No.**
+
+Some fields should only change through controlled operations.
+
+---
+
+# 2. Setter vs Business Method
+
+Compare:
+
+```java
+account.setBalance(50000);
+```
+
+with:
+
+```java
+account.deposit(50000);
+```
+
+A Setter says:
+
+```text
+"Set your internal value to this."
+```
+
+A business method says:
+
+```text
+"Perform this valid operation."
+```
+
+For a bank account:
+
+```text
 deposit()
 withdraw()
 ```
 
-### Methods
-
-```text
-getAccountNumber()
-getAccountHolder()
-getBalance()
-
-setAccountNumber()
-setAccountHolder()
-
-deposit()
-withdraw()
-```
-
-### Validation
-
-```text
-deposit > 0
-withdraw > 0
-withdraw <= balance
-```
-
-### Interview Question
-
-**Why should `balance` not have a public Setter?**
+are meaningful operations that can enforce rules.
 
 ---
 
-# P2 — ATM
+# 3. Controlled Modification
 
-Create:
-
-```java
-class ATM
-```
-
-### Fields
+A better design is:
 
 ```java
 private double balance;
-private int pin;
+
+public void deposit(double amount) {
+
+    if (amount > 0) {
+        balance += amount;
+    }
+}
 ```
 
-### Methods
+And:
+
+```java
+public void withdraw(double amount) {
+
+    if (amount > 0 && amount <= balance) {
+        balance -= amount;
+    }
+}
+```
+
+Now:
 
 ```text
-checkBalance()
-deposit()
-withdraw()
-changePin()
+Outside Code
+      ↓
+Business Method
+      ↓
+Validation
+      ↓
+Internal State
 ```
 
-### Rules
-
-```text
-PIN = exactly 4 digits
-
-deposit > 0
-
-withdraw > 0
-withdraw <= balance
-```
-
-❌ No:
-
-```java
-setBalance()
-```
-
-### Interview Question
-
-Why is:
-
-```java
-withdraw(500)
-```
-
-better than:
-
-```java
-setBalance(4500)
-```
-
-?
+The object controls its own state.
 
 ---
 
-# P3 — Employee Salary
+# 4. Read-Only Access
 
-Create:
-
-```java
-class Employee
-```
-
-### Fields
-
-```java
-private int id;
-private String name;
-private double salary;
-```
-
-### Rules
-
-Salary must always be:
-
-```text
-salary > 0
-```
-
-Create:
-
-```text
-getSalary()
-setSalary()
-increaseSalary()
-```
+A field can have a Getter without a Setter.
 
 Example:
 
 ```java
-employee.increaseSalary(5000);
+class Product {
+
+    private int productId;
+
+    public int getProductId() {
+        return productId;
+    }
+}
 ```
 
-### Interview Question
+Outside code can read:
 
-Why can business methods sometimes be better than direct setters?
+```java
+product.getProductId();
+```
+
+but cannot directly modify the field.
+
+This gives **read-only access from outside the class**.
 
 ---
 
-# P4 — Product Stock
+# 5. Sensitive Data
 
-Create:
+Not every private field should even have a Getter.
 
-```java
-class Product
-```
-
-### Fields
+For example:
 
 ```java
-private int productId;
-private String productName;
-private double price;
-private int stock;
+class User {
+
+    private String password;
+}
 ```
 
-### Methods
-
-```text
-getPrice()
-setPrice()
-
-getStock()
-
-addStock()
-removeStock()
-```
-
-### Rules
-
-```text
-price > 0
-stock >= 0
-removeStock <= stock
-```
-
-❌ No:
-
-```java
-setStock()
-```
-
-The stock should be controlled through:
-
-```java
-addStock()
-removeStock()
-```
-
----
-
-# P5 — User Account
-
-Create:
-
-```java
-class User
-```
-
-### Fields
-
-```java
-private String username;
-private String password;
-private String email;
-```
-
-### Rules
-
-Password should not be directly exposed.
-
-❌ Don't create:
+We should think carefully before exposing:
 
 ```java
 getPassword()
 ```
 
-Create:
+Instead, the object may provide an operation such as:
 
-```text
+```java
 changePassword()
 ```
 
-### Challenge
+The important design question is:
 
-Why is this better?
-
-```java
-user.changePassword("old123", "new123");
-```
-
-than:
-
-```java
-user.setPassword("new123");
-```
+> **What does the outside world actually need to access?**
 
 ---
 
-# P6 — Shopping Cart
+# 6. Validation
 
-Create:
+Encapsulation allows the class to validate data before changing its state.
 
-```java
-class ShoppingCart
-```
-
-### Fields
+Example:
 
 ```java
-private double totalAmount;
-private int itemCount;
+private int age;
+
+public void setAge(int age) {
+
+    if (age >= 0 && age <= 100) {
+        this.age = age;
+    }
+}
 ```
 
-### Methods
-
-```text
-getTotalAmount()
-getItemCount()
-
-addItem(price)
-removeItem(price)
-```
-
-### Rules
-
-```text
-price > 0
-itemCount cannot become negative
-totalAmount cannot become negative
-```
-
-❌ No:
+Now:
 
 ```java
-setTotalAmount()
-setItemCount()
+student.setAge(22);
 ```
+
+is valid.
+
+But:
+
+```java
+student.setAge(-5);
+student.setAge(150);
+```
+
+can be rejected.
+
+The important idea is that validation is kept close to the state it protects.
 
 ---
 
-# P7 — Temperature
+# 7. Object State
 
-Create:
+An object's **state** means the current values stored in its fields.
 
-```java
-class Temperature
-```
-
-### Field
+Example:
 
 ```java
-private double celsius;
+class BankAccount {
+
+    private double balance;
+}
 ```
-
-### Methods
-
-```text
-getCelsius()
-setCelsius()
-
-getFahrenheit()
-```
-
-Formula:
-
-```text
-F = (C × 9/5) + 32
-```
-
-### Challenge
-
-Should `fahrenheit` be stored as another field?
-
-Think about **state vs calculated value**.
-
----
-
-# P8 — Library Book
-
-Create:
-
-```java
-class LibraryBook
-```
-
-### Fields
-
-```java
-private String title;
-private String author;
-private boolean available;
-```
-
-### Methods
-
-```text
-getTitle()
-getAuthor()
-isAvailable()
-
-borrowBook()
-returnBook()
-```
-
-### Rules
 
 If:
 
 ```text
-available = false
+balance = 50000
 ```
 
-then another person cannot borrow the book.
+then `50000` is part of the object's current state.
 
-❌ Don't provide:
-
-```java
-setAvailable()
-```
-
-Instead:
+Encapsulation protects that state from uncontrolled modification.
 
 ```text
-borrowBook()
-returnBook()
-```
-
-control the state.
-
----
-
-# P9 — Vehicle
-
-Create:
-
-```java
-class Vehicle
-```
-
-### Fields
-
-```java
-private String brand;
-private double speed;
-```
-
-### Methods
-
-```text
-getBrand()
-getSpeed()
-
-accelerate(amount)
-brake(amount)
-```
-
-### Rules
-
-```text
-speed >= 0
-```
-
-Speed should never become negative.
-
-❌ No:
-
-```java
-setSpeed()
+Object State
+     ↓
+Controlled Access
+     ↓
+Valid Changes Only
 ```
 
 ---
 
-# P10 — Digital Wallet ⭐
+# 8. State Transition
 
-This is your final Part 4 problem.
+Business methods allow an object to change its state through meaningful operations.
 
-Create:
+Example:
 
 ```java
-class Wallet
+account.deposit(5000);
 ```
 
-### Fields
+Before:
+
+```text
+balance = 10000
+```
+
+After:
+
+```text
+balance = 15000
+```
+
+The outside code did not directly write:
 
 ```java
-private String owner;
+balance = 15000;
+```
+
+Instead, it asked the object to perform a valid operation.
+
+Similarly, a `Door` can expose:
+
+```java
+open();
+close();
+isOpen();
+```
+
+rather than:
+
+```java
+setOpen(true);
+```
+
+This is called **controlled state transition**.
+
+---
+
+# 9. Encapsulation + Constructors
+
+Encapsulation can also work together with Constructors.
+
+Example:
+
+```java
+class Employee {
+
+    private int id;
+    private String name;
+    private double salary;
+
+    Employee(int id, String name, double salary) {
+
+        this.id = id;
+        this.name = name;
+
+        if (salary > 0) {
+            this.salary = salary;
+        }
+    }
+}
+```
+
+The object can therefore begin life with a valid state:
+
+```text
+Object Creation
+      ↓
+Constructor
+      ↓
+Validation
+      ↓
+Valid Initial State
+```
+
+This combines the concepts you already learned:
+
+```text
+Class & Object
+      +
+Constructors
+      +
+Encapsulation
+```
+
+---
+
+# 10. `final` and Encapsulation
+
+Some values should not change after initialization.
+
+Example:
+
+```java
+private final int employeeId;
+```
+
+The value can be initialized during construction:
+
+```java
+Employee(int employeeId) {
+    this.employeeId = employeeId;
+}
+```
+
+After initialization, the field cannot be reassigned.
+
+This is useful for values that represent fixed identity, such as:
+
+```text
+Employee ID
+Account ID
+Product ID
+ISBN
+```
+
+---
+
+# 11. Weak vs Better Design
+
+### Weak
+
+```java
 private double balance;
+
+public void setBalance(double balance) {
+    this.balance = balance;
+}
 ```
 
-### Methods
-
-```text
-getOwner()
-getBalance()
-
-addMoney()
-spendMoney()
-```
-
-### Rules
-
-```text
-addMoney > 0
-
-spendMoney > 0
-
-spendMoney <= balance
-```
-
-❌ No:
+Outside code can do:
 
 ```java
-setBalance()
+account.setBalance(-50000);
 ```
 
-### Example
+### Better
 
 ```java
-Wallet wallet = new Wallet();
+private double balance;
 
-wallet.addMoney(5000);
-wallet.spendMoney(1200);
+public void deposit(double amount) {
 
-System.out.println(wallet.getBalance());
+    if (amount > 0) {
+        balance += amount;
+    }
+}
+
+public void withdraw(double amount) {
+
+    if (amount > 0 && amount <= balance) {
+        balance -= amount;
+    }
+}
 ```
 
-Expected:
-
-```text
-3800.0
-```
+Now the object controls its own state.
 
 ---
 
-# 🔥 Part 4 Core Concept
+# 12. The Main Design Question
 
-The most important progression is:
+When deciding whether to create a Getter or Setter, ask:
+
+> **Who should be allowed to read or change this state, and under what conditions?**
+
+Do not automatically create:
+
+```text
+Getter
++
+Setter
+```
+
+for every field.
+
+Think about the responsibility of the object.
+
+---
+
+# Encapsulation Progression
 
 ```text
 Public Field
@@ -1840,339 +1826,143 @@ Validation
 Controlled Modification
      ↓
 Business Methods
-```
-
-For example:
-
-### Weak design
-
-```java
-private double balance;
-
-public void setBalance(double balance) {
-    this.balance = balance;
-}
-```
-
-Anyone can do:
-
-```java
-account.setBalance(-50000);
+     ↓
+Protected Object State
 ```
 
 ---
 
-### Better design
-
-```java
-private double balance;
-
-public void deposit(double amount) {
-    if (amount > 0) {
-        balance += amount;
-    }
-}
-
-public void withdraw(double amount) {
-    if (amount > 0 && amount <= balance) {
-        balance -= amount;
-    }
-}
-```
-
-Now the object **controls its own state**.
-
----
-
-# Part 4 Interview Checklist
-
-You should be able to answer these without notes:
-
-### 1. Why are fields private?
-
-To prevent direct uncontrolled access to object state.
-
-### 2. Is Encapsulation just Getter + Setter?
-
-**No.**
-
-Encapsulation is about **controlled access to internal state**.
-
-### 3. Should every field have a Setter?
-
-**No.**
-
-Some state should only change through controlled methods.
-
-### 4. Why no `setBalance()` in BankAccount?
-
-Because it allows invalid or unauthorized state changes.
-
-### 5. What is better?
-
-```java
-withdraw(500);
-```
-
-instead of:
-
-```java
-setBalance(balance - 500);
-```
-
-Because `withdraw()` can enforce business rules.
-
-### 6. What is the main idea?
+# Quick Revision
 
 ```text
+private
+   ↓
 Hide Data
-    ↓
-Control Access
-    ↓
-Validate Changes
-    ↓
+
+Getter
+   ↓
+Read Data
+
+Setter
+   ↓
+Modify Data
+
+Validation
+   ↓
+Reject Invalid Data
+
+Business Method
+   ↓
+Perform Valid Operation
+
+Encapsulation
+   ↓
 Protect Object State
 ```
 
 ---
 
-## Part 4 Completion Target
+# Interview Questions
 
-After P1–P10, you should be comfortable designing:
+### Q1. Does every private field need a Setter?
 
-```text
-private fields
-     +
-controlled getters
-     +
-validated setters
-     +
-business methods
-     +
-protected object state
-```
+**No.**
+
+### Q2. Can a field have only a Getter?
+
+**Yes.** This provides read-only access from outside.
+
+### Q3. Why is `deposit()` better than `setBalance()`?
+
+Because `deposit()` represents a meaningful operation and can enforce business rules.
+
+### Q4. Why should sensitive fields not always have Getters?
+
+Because some internal data should not be exposed outside the class.
+
+### Q5. What is the real purpose of Encapsulation?
+
+To **control access to internal state and protect the object from invalid or uncontrolled changes**.
+
+---
+
+# Part 4 Checklist
+
+* [x] Understand that every field does not need a Setter.
+* [x] Understand business methods.
+* [x] Understand read-only access.
+* [x] Understand sensitive data protection.
+* [x] Understand validation.
+* [x] Understand object state.
+* [x] Understand controlled state transitions.
+* [x] Understand Encapsulation + Constructors.
+* [x] Understand `final` for fixed state.
+* [x] Understand how to design controlled access.
+
+---
+
+# Next Part
+
+➡️ **Part 5 — Interview + Design Mastery**
+
 
 # C_Encapsulation — Part 5: Interview + Design Mastery
 
-Part 5 is the **final Encapsulation practice layer**.
-The focus is no longer on writing basic getters/setters. The goal is to decide **how much access an object should expose**.
+Part 5 is the **final Encapsulation revision layer**.
+
+The focus is no longer on writing basic Getters and Setters. The goal is to decide **how an object should expose and protect its internal state**.
 
 ---
 
-# P1 — Getter or No Getter?
+# Learning Goals
 
-Consider:
+After this part, you should be able to:
 
-```java
-class BankAccount {
-
-    private double balance;
-
-    public double getBalance() {
-        return balance;
-    }
-}
-```
-
-### Questions
-
-1. Why is `balance` private?
-2. Why is `getBalance()` public?
-3. Should `setBalance()` exist?
-4. What could go wrong if `setBalance()` is public?
+* Explain Encapsulation in an interview.
+* Explain Data Hiding.
+* Decide when to use a Getter.
+* Decide when to use a Setter.
+* Understand why every field does not need a Setter.
+* Understand read-only access.
+* Understand controlled modification.
+* Explain business methods.
+* Explain validation.
+* Identify poor Encapsulation design.
+* Explain Encapsulation with Constructors.
 
 ---
 
-# P2 — Setter or Business Method?
+# 1. What Is Encapsulation?
 
-Compare:
-
-### Approach A
-
-```java
-account.setBalance(account.getBalance() + 500);
-```
-
-### Approach B
-
-```java
-account.deposit(500);
-```
-
-### Questions
-
-* Which design better represents a Bank Account?
-* Why?
-* Where should validation happen?
-* Who should control the balance?
-
----
-
-# P3 — Password Protection
-
-Design:
-
-```java
-class User {
-
-    private String username;
-    private String password;
-}
-```
-
-### Decide which methods should exist:
+Encapsulation means:
 
 ```text
-getUsername()
-setUsername()
-
-getPassword()
-setPassword()
-
-changePassword()
+Bundle data + methods together
+          ↓
+Hide internal data
+          ↓
+Control access
+          ↓
+Protect object state
 ```
 
-### Challenge
-
-You must decide:
-
-* Should password have a Getter?
-* Should password have a Setter?
-* How should password be changed?
-
----
-
-# P4 — Immutable Field
-
-Create:
-
-```java
-class Employee {
-
-    private final int employeeId;
-    private String name;
-    private double salary;
-}
-```
-
-### Questions
-
-* Why should `employeeId` not have a Setter?
-* When should it be initialized?
-* Can it be changed after initialization?
-* What does `final` add to the design?
-
----
-
-# P5 — Read-Only Property
-
-Create:
-
-```java
-class Product {
-
-    private int productId;
-    private String productName;
-    private double price;
-}
-```
-
-Make `productId` **read-only** after object creation.
-
-You should be able to do:
-
-```java
-System.out.println(product.getProductId());
-```
-
-but not:
-
-```java
-product.setProductId(500);
-```
-
-### Goal
-
-Understand:
+In Java, this is commonly achieved using:
 
 ```text
-private + Getter
+private fields
++
+public methods
++
+validation
 ```
-
-without a Setter.
 
 ---
 
-# P6 — Write-Only Property
+# 2. What Is Data Hiding?
 
-Consider a password:
+Data Hiding means preventing direct access to an object's internal fields.
 
-```java
-private String password;
-```
-
-Design the class so that:
-
-```java
-user.changePassword("old", "new");
-```
-
-is possible, but:
-
-```java
-user.getPassword();
-```
-
-is not available.
-
-### Question
-
-Why can this be safer than exposing the password?
-
----
-
-# P7 — Controlled State Transition
-
-Create:
-
-```java
-class Door {
-
-    private boolean open;
-}
-```
-
-Do **not** create:
-
-```java
-setOpen()
-```
-
-Instead create:
-
-```java
-open()
-close()
-isOpen()
-```
-
-Expected behavior:
-
-```text
-open()  → open = true
-close() → open = false
-isOpen() → returns current state
-```
-
-### Core Lesson
-
-The outside world tells the object **what action to perform**, rather than directly changing its internal state.
-
----
-
-# P8 — Encapsulation With Validation
-
-Create:
+Example:
 
 ```java
 class Student {
@@ -2181,53 +1971,364 @@ class Student {
 }
 ```
 
-Implement:
+Outside code cannot do:
 
 ```java
-setAge()
-getAge()
+student.age = 22;
 ```
 
-Rules:
-
-```text
-0 <= age <= 100
-```
-
-Test:
-
-```java
-student.setAge(22);    // valid
-student.setAge(-5);    // invalid
-student.setAge(150);   // invalid
-```
-
-### Challenge
-
-Where should the validation exist?
-
-```text
-Main?
-Constructor?
-Setter?
-```
-
-Explain your choice.
+Instead, access is provided through methods.
 
 ---
 
-# P9 — Identify the Encapsulation Violation
+# 3. Why Do We Use `private`?
 
-Find the problem:
+`private` prevents direct access to a field from outside its class.
+
+Example:
+
+```java
+private double balance;
+```
+
+This protects the object's internal state.
+
+```text
+Outside Code
+     ↓
+  private field
+     ✕
+Direct Access
+```
+
+---
+
+# 4. Does Every Field Need a Getter?
+
+**No.**
+
+A field should have a Getter only when outside code needs to read that information.
+
+For example:
+
+```java
+private double balance;
+
+public double getBalance() {
+    return balance;
+}
+```
+
+Here, the balance is readable.
+
+But sensitive internal data does not always need to be exposed.
+
+---
+
+# 5. Does Every Field Need a Setter?
+
+**No.**
+
+This is one of the most important Encapsulation concepts.
+
+For example:
+
+```java
+private double balance;
+```
+
+A normal:
+
+```java
+setBalance()
+```
+
+may allow invalid changes.
+
+Instead:
+
+```java
+deposit()
+withdraw()
+```
+
+can control how the balance changes.
+
+---
+
+# 6. Setter vs Business Method
+
+### Setter
+
+```java
+account.setBalance(50000);
+```
+
+This directly tells the object what its internal value should be.
+
+### Business Method
+
+```java
+account.deposit(50000);
+```
+
+This tells the object to perform an operation.
+
+The business method can enforce rules.
+
+```text
+deposit()
+    ↓
+validation
+    ↓
+balance update
+```
+
+---
+
+# 7. Read-Only Property
+
+A field can have:
+
+```text
+Getter ✅
+Setter ❌
+```
+
+Example:
+
+```java
+class Product {
+
+    private int productId;
+
+    public int getProductId() {
+        return productId;
+    }
+}
+```
+
+Outside code can read:
+
+```java
+product.getProductId();
+```
+
+but cannot change the ID through a Setter.
+
+This creates **read-only access** from outside the class.
+
+---
+
+# 8. Sensitive Data
+
+Some internal data should not be exposed.
+
+Example:
+
+```java
+class User {
+
+    private String password;
+}
+```
+
+We should carefully consider whether this should exist:
+
+```java
+getPassword()
+```
+
+Instead, the object may provide an operation such as:
+
+```java
+changePassword()
+```
+
+The important question is:
+
+> **What does the outside world actually need to access?**
+
+---
+
+# 9. Validation
+
+Validation protects object state.
+
+Example:
+
+```java
+private int age;
+
+public void setAge(int age) {
+
+    if (age >= 0 && age <= 100) {
+        this.age = age;
+    }
+}
+```
+
+Valid:
+
+```java
+student.setAge(22);
+```
+
+Invalid:
+
+```java
+student.setAge(-5);
+student.setAge(150);
+```
+
+The class controls what values can enter the object.
+
+---
+
+# 10. Object State
+
+Object state means the current values stored in the object's fields.
+
+Example:
+
+```java
+private double balance;
+```
+
+If:
+
+```text
+balance = 50000
+```
+
+then `50000` is part of the object's state.
+
+Encapsulation protects this state.
+
+```text
+Internal State
+      ↓
+Controlled Access
+      ↓
+Valid Changes
+```
+
+---
+
+# 11. Controlled State Transition
+
+An object should often change its state through meaningful operations.
+
+Example:
+
+```java
+account.deposit(5000);
+```
+
+rather than:
+
+```java
+account.setBalance(55000);
+```
+
+Another example:
+
+```java
+door.open();
+door.close();
+door.isOpen();
+```
+
+rather than:
+
+```java
+door.setOpen(true);
+```
+
+The object controls how its state changes.
+
+---
+
+# 12. Encapsulation + Constructors
+
+Encapsulation can work together with Constructors.
+
+Example:
+
+```java
+class Employee {
+
+    private int id;
+    private String name;
+    private double salary;
+
+    Employee(int id, String name, double salary) {
+
+        this.id = id;
+        this.name = name;
+
+        if (salary > 0) {
+            this.salary = salary;
+        }
+    }
+}
+```
+
+Flow:
+
+```text
+Object Creation
+      ↓
+Constructor
+      ↓
+Validation
+      ↓
+Valid Initial State
+```
+
+---
+
+# 13. `final` and Encapsulation
+
+Some values should not change after initialization.
+
+Example:
+
+```java
+private final int employeeId;
+```
+
+Initialize it in the constructor:
+
+```java
+Employee(int employeeId) {
+    this.employeeId = employeeId;
+}
+```
+
+After initialization, it cannot be reassigned.
+
+Typical examples:
+
+```text
+Employee ID
+Account ID
+Product ID
+ISBN
+```
+
+when they should remain fixed.
+
+---
+
+# 14. Weak Encapsulation Design
+
+Example:
 
 ```java
 class BankAccount {
 
     private double balance;
-
-    public double getBalance() {
-        return balance;
-    }
 
     public void setBalance(double balance) {
         this.balance = balance;
@@ -2235,168 +2336,267 @@ class BankAccount {
 }
 ```
 
-Then redesign it.
-
-Expected direction:
+The problem is:
 
 ```java
-deposit()
-withdraw()
+account.setBalance(-50000);
 ```
 
-instead of unrestricted:
-
-```java
-setBalance()
-```
+The class has allowed an invalid state.
 
 ---
 
-# P10 ⭐ — Mini LLD Encapsulation Challenge
-
-Design a:
-
-## `LibraryBook`
-
-### Private fields
+# 15. Better Encapsulation Design
 
 ```java
-private String isbn;
-private String title;
-private String author;
-private boolean available;
+class BankAccount {
+
+    private double balance;
+
+    public void deposit(double amount) {
+
+        if (amount > 0) {
+            balance += amount;
+        }
+    }
+
+    public void withdraw(double amount) {
+
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+        }
+    }
+}
 ```
 
-### Requirements
+Now the object controls the balance.
 
-A book should:
+---
 
-* expose its ISBN
-* expose title
-* expose author
-* tell whether it is available
-* allow borrowing
-* allow returning
-* prevent borrowing when already borrowed
-* prevent returning when it wasn't borrowed
+# 16. How To Decide Getter vs Setter
 
-### Suggested API
+Ask these questions:
+
+### Getter
+
+> Does outside code need to read this value?
+
+### Setter
+
+> Should outside code be allowed to freely change this value?
+
+### Business Method
+
+> Does this value need to change through a specific operation or business rule?
+
+This is the important design thinking behind Encapsulation.
+
+---
+
+# 17. Common Beginner Mistake
+
+Do not automatically write:
+
+```java
+getX()
+setX()
+```
+
+for every field.
+
+Instead think:
 
 ```text
-getIsbn()
-getTitle()
-getAuthor()
-isAvailable()
-
-borrowBook()
-returnBook()
+Field
+ ↓
+Should it be visible?
+ ↓
+Should it be modifiable?
+ ↓
+If yes, under what rules?
 ```
 
-### Forbidden
+---
+
+# 18. Encapsulation vs Data Hiding
+
+### Data Hiding
+
+Focuses on:
 
 ```text
-setAvailable()
-setIsbn()
+Prevent direct access
+        ↓
+private
 ```
 
----
+### Encapsulation
 
-# 🔥 Part 5 — Decision Practice
+Focuses on:
 
-For each field, decide:
+```text
+Bundle data + behavior
+        ↓
+Control access
+        ↓
+Validate changes
+        ↓
+Protect state
+```
 
-| Field             | Getter? | Setter? | Business Method? |
-| ----------------- | ------- | ------- | ---------------- |
-| Bank balance      | ?       | ?       | ?                |
-| User password     | ?       | ?       | ?                |
-| Employee ID       | ?       | ?       | ?                |
-| Product price     | ?       | ?       | ?                |
-| Product stock     | ?       | ?       | ?                |
-| Door state        | ?       | ?       | ?                |
-| Book availability | ?       | ?       | ?                |
-
-Don't immediately look for a memorized rule.
-
-Think:
-
-> **"Who should be allowed to change this state, and under what conditions?"**
+Data Hiding is an important part of Encapsulation.
 
 ---
 
-# Interview Master Questions
+# 19. Interview Questions
 
-You should now be able to answer these:
+### Q1. What is Encapsulation?
 
-### 1. What is Encapsulation?
+Encapsulation is the concept of bundling data and methods inside a class while controlling access to the object's internal state.
 
-Bundling data and the methods that operate on that data while controlling access to the internal state.
+---
 
-### 2. Why use `private`?
+### Q2. Why are fields made private?
 
-To prevent direct uncontrolled access to internal state.
+To prevent direct uncontrolled access to the object's internal data.
 
-### 3. Does Encapsulation mean every field needs Getter and Setter?
+---
+
+### Q3. What is a Getter?
+
+A method used to read a private field.
+
+---
+
+### Q4. What is a Setter?
+
+A method used to modify a private field.
+
+---
+
+### Q5. Does every field need a Setter?
 
 **No.**
 
-### 4. Why shouldn't every field have a Setter?
+Some fields should only change through controlled methods.
 
-Because unrestricted setters can allow invalid or inappropriate state changes.
+---
 
-### 5. What is better than `setBalance()`?
-
-```java
-deposit()
-withdraw()
-```
-
-because those methods represent valid operations and can enforce rules.
-
-### 6. Can a field have only a Getter?
+### Q6. Can a field have only a Getter?
 
 **Yes.**
 
-That creates a read-only interface from outside the class.
+This provides read-only access from outside.
 
-### 7. Can a field have no Getter?
+---
 
-**Yes.**
+### Q7. Why is `deposit()` better than `setBalance()`?
 
-Sensitive internal data may not need to be exposed.
+Because `deposit()` represents a meaningful operation and can enforce business rules.
 
-### 8. What is the real purpose of Encapsulation?
+---
+
+### Q8. Why is validation important?
+
+Validation prevents invalid values from entering the object's state.
+
+---
+
+### Q9. What is controlled access?
+
+Providing access to internal data through methods that can enforce rules and restrictions.
+
+---
+
+### Q10. What is the real purpose of Encapsulation?
+
+To:
 
 ```text
 Hide internal state
-       ↓
+      ↓
 Control access
-       ↓
+      ↓
 Validate changes
-       ↓
-Protect object
-       ↓
-Maintain valid state
+      ↓
+Protect object state
 ```
 
 ---
 
-# 🏆 Encapsulation Complete
+# Final Revision
 
-Your learning progression is now:
+```text
+private
+   ↓
+Hide Data
+
+Getter
+   ↓
+Read Data
+
+Setter
+   ↓
+Modify Data
+
+Validation
+   ↓
+Protect Data
+
+Business Method
+   ↓
+Controlled Operation
+
+Encapsulation
+   ↓
+Protected Object State
+```
+
+---
+
+# Encapsulation Complete
+
+Your complete learning progression is:
 
 ```text
 Part 1
-Fundamentals
-    ↓
+Encapsulation Fundamentals
+        ↓
 Part 2
 private + Getter + Setter
-    ↓
+        ↓
 Part 3
-Basic Coding Problems
-    ↓
+10 Real-World Practice Problems
+        ↓
 Part 4
-Advanced Encapsulation
-    ↓
+Advanced Encapsulation Concepts
+        ↓
 Part 5
-Interview + Design Decisions
+Interview + Design Mastery
+        ↓
+ENCAPSULATION ✅
 ```
+
+---
+
+# Final Success Checklist
+
+* [x] I can explain Encapsulation.
+* [x] I understand Data Hiding.
+* [x] I understand `private`.
+* [x] I can create Getters.
+* [x] I can create Setters.
+* [x] I know when not to create a Setter.
+* [x] I understand read-only access.
+* [x] I understand validation.
+* [x] I understand business methods.
+* [x] I understand controlled state changes.
+* [x] I understand Encapsulation + Constructors.
+* [x] I understand `final` for fixed state.
+* [x] I can explain Encapsulation in an interview.
+
+---
+
+# Next Topic
+
+➡️ **D_Inheritance**
