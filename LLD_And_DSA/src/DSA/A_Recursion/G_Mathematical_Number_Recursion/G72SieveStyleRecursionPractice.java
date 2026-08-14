@@ -136,7 +136,7 @@ public class G72SieveStyleRecursionPractice {
         boolean[] isPrime = new boolean[n + 1];
 
         // Initially assume every number from 2 to n is prime.
-        // 0 and 1 remain false because they are not prime.
+       // 0 and 1 remain false because they are not prime.
         for (int i = 2; i <= n; i++) {
             isPrime[i] = true;
         }

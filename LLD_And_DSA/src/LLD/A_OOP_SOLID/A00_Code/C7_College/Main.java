@@ -3,37 +3,43 @@ package LLD.A_OOP_SOLID.A00_Code.C7_College;
 public class Main {
 
     public static void main(String[] args) {
-        College c0 = new College();
-        College c1 = new College(832,"GH Raisoni","Pune",321);
-        College c2 = new College(332,"Sanmati","Washim",424);
-        College c3 = new College(233,"HVPM","Amravati",341);
-        System.out.println(
-                c0.collegeId + " " +
-                        c0.collegeName + " " +
-                        c0.city + " " +
-                        c0.totalStudent
-        );
+        College c = new College();
+        c.setCollege(832,"GH Raisoni","Pune",321);
+        System.out.println(c.getCity());
+        System.out.println(c.getCollegeName());
+        System.out.println(c.getCollegeId());
+        System.out.println(c.getTotalStudent());
 
-        System.out.println(
-                c1.collegeId + " " +
-                        c1.collegeName + " " +
-                        c1.city + " " +
-                        c1.totalStudent
-        );
+//        College c1 = new College(832,"GH Raisoni","Pune",321);
+//        College c2 = new College(332,"Sanmati","Washim",424);
+//        College c3 = new College(233,"HVPM","Amravati",341);
+//        System.out.println(
+//                c0.collegeId + " " +
+//                        c0.collegeName + " " +
+//                        c0.city + " " +
+//                        c0.totalStudent
+//        );
 
-        System.out.println(
-                c2.collegeId + " " +
-                        c2.collegeName + " " +
-                        c2.city + " " +
-                        c2.totalStudent
-        );
-
-        System.out.println(
-                c3.collegeId + " " +
-                        c3.collegeName + " " +
-                        c3.city + " " +
-                        c3.totalStudent
-        );
+//        System.out.println(
+//                c1.collegeId + " " +
+//                        c1.collegeName + " " +
+//                        c1.city + " " +
+//                        c1.totalStudent
+//        );
+//
+//        System.out.println(
+//                c2.collegeId + " " +
+//                        c2.collegeName + " " +
+//                        c2.city + " " +
+//                        c2.totalStudent
+//        );
+//
+//        System.out.println(
+//                c3.collegeId + " " +
+//                        c3.collegeName + " " +
+//                        c3.city + " " +
+//                        c3.totalStudent
+//        );
 
         /*
         ==================================================

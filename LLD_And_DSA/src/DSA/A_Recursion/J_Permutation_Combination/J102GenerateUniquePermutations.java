@@ -641,40 +641,91 @@ we get:
 
 Exactly 3 unique permutations.
 
-
 ===========================================================
-RECURSION TREE
+J102 — UNIQUE PERMUTATION
+Input: [1,1,2]
 ===========================================================
 
 
-                         [1,1,2]
-                            |
-                         idx = 2
-                     /      |      \
-                    2       1       1
-                    |       |       X
-                    |       |    duplicate
-                 [1,1,2] [1,2,1]
-                   |         |
-                 idx=1      idx=1
-                 /   \      /   \
-                1     1    2     1
-                |     X    |     |
-             [1,1,2]      [1,2,1]
-                |             |
-              output        continue
-                             |
-                          [2,1,1]
-                             |
-                           output
-
+                           [1,1,2]
+                            idx=2
+                              |
+                  Set at idx=2 = {}
+                              |
+             +----------------+----------------+
+             |                |                |
+          i=2 → 2          i=1 → 1          i=0 → 1
+             |                |                |
+          use {2}          use {2,1}       1 already used
+             |                |                |
+          SWAP(2,2)        SWAP(1,2)          X
+             |                |             SKIP
+             ↓                ↓
+         [1,1,2]          [1,2,1]
+             |                |
+           idx=1            idx=1
+             |                |
+       Set at idx=1 = {}   Set at idx=1 = {}
+             |                |
+          +--+--+          +--+--+
+          |     |           |     |
+       i=1→1 i=0→1       i=1→2 i=0→1
+          |     |           |     |
+       use 1   1 used    use 2   use 1
+          |     X           |      |
+       SWAP(1,1) SKIP    SWAP(1,1) SWAP(0,1)
+          |                 |      |
+          ↓                 ↓      ↓
+      [1,1,2]           [1,2,1] [2,1,1]
+          |                 |      |
+        idx=0             idx=0  idx=0
+          |                 |      |
+       i=0→1             i=0→1  i=0→2
+          |                 |      |
+          ↓                 ↓      ↓
+      [1,1,2]           [1,2,1] [2,1,1]
+          |                 |      |
+        OUTPUT            OUTPUT OUTPUT
 
 The X means:
 
     same VALUE was already chosen
     at that recursion level.
 
-
+                      [1,1,2]
+                        |
+                      idx=2
+                       |
+                    Set = {}
+                 /     |      \
+                /      |       \
+             i=2      i=1      i=0
+              |         |         |
+            value 2   value 1   value 1
+              |         |         |
+            add 2     add 1     1 already
+              |         |       chosen at idx=2
+              |         |         |
+              |         |         X
+              |         |       SKIP
+              |         |
+          [1,1,2]   [1,2,1]
+             |           |
+           idx=1       idx=1
+             |           |
+          Set={}       Set={}
+          /   \        /   \
+       i=1   i=0    i=1    i=0
+        |      |      |      |
+        1      1      2      1
+        |      X      |      |
+        |    duplicate |      |
+        |             |      |
+     [1,1,2]       [1,2,1] [2,1,1]
+        |              |       |
+      idx=0          idx=0   idx=0
+        |              |       |
+      OUTPUT         OUTPUT  OUTPUT
 ===========================================================
 WHY NOT boolean[] used?
 ===========================================================

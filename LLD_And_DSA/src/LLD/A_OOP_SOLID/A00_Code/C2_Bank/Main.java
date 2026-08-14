@@ -3,6 +3,7 @@ package LLD.A_OOP_SOLID.A00_Code.C2_Bank;
 public class Main {
 
     public static void main(String[] args) {
+/*
 
         BankAccount b1 = new BankAccount(3212321,"Om",3212213.12,"Saving");
         System.out.println(STR."""
@@ -26,6 +27,7 @@ Account Number : \{b3.accountNumber}
 Holder Name   : \{b3.holderName}
 Balance       : \{b3.balance}
 Type          : \{b3.accountType}""");
+*/
 
         /*
         ==================================================
@@ -110,5 +112,14 @@ Type          : \{b3.accountType}""");
 
         ==================================================
         */
+        BankAccount b4 = new BankAccount();
+        b4.setAccountNumber(11212);
+        b4.setAccountHolder("Om");
+
+        b4.deposit(5000);
+        b4.withdraw(500);
+        System.out.println(b4.getBalance());
+
+
     }
 }

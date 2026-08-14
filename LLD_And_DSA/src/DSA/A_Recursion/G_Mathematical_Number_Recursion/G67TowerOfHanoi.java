@@ -72,11 +72,7 @@ public class G67TowerOfHanoi {
      * toRod     = destination rod
      * helperRod = helper rod
      */
-    public static int towerOfHanoi(
-            int diskCount,
-            int fromRod,
-            int toRod,
-            int helperRod) {
+    public static int towerOfHanoi(int diskCount, int fromRod, int toRod, int helperRod) {
 
         // =================================================
         // BASE CASE
@@ -104,12 +100,7 @@ public class G67TowerOfHanoi {
         //
         // The code below this call does NOT execute yet.
         //
-        int firstMoves = towerOfHanoi(
-                diskCount - 1,
-                fromRod,
-                helperRod,
-                toRod
-        );
+        int firstMoves = towerOfHanoi(diskCount - 1, fromRod, helperRod, toRod);
 
         // =================================================
         // STEP 2 — CURRENT DISK
@@ -141,12 +132,7 @@ public class G67TowerOfHanoi {
         //
         //     HELPER → TO
         //
-        int secondMoves = towerOfHanoi(
-                diskCount - 1,
-                helperRod,
-                toRod,
-                fromRod
-        );
+        int secondMoves = towerOfHanoi(diskCount - 1, helperRod, toRod, fromRod);
 
         // =================================================
         // TOTAL
@@ -172,12 +158,7 @@ public class G67TowerOfHanoi {
         int toRod = 2;
         int helperRod = 3;
 
-        int totalMoves = towerOfHanoi(
-                diskCount,
-                fromRod,
-                toRod,
-                helperRod
-        );
+        int totalMoves = towerOfHanoi(diskCount, fromRod, toRod, helperRod);
 
         System.out.println("Minimum moves = " + totalMoves);
     }
@@ -699,7 +680,7 @@ public class G67TowerOfHanoi {
  *
  * =========================================================
  */
- /* =========================================================
+/* =========================================================
  * REVISION CARD
  * =========================================================
  *

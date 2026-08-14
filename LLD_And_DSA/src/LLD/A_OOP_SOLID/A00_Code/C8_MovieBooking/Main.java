@@ -4,54 +4,60 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Movie m0 = new Movie();
-        Movie m1 = new Movie("Animal","3 hr","Hindi",4.6);
-        Movie m2 = new Movie("Dhurandhar","3.4 hr","Hindi",4.3);
-        Movie m3 = new Movie("Avengers Endgame","3 hr","English",5.0);
-        Movie m4 = new Movie("Avatar","3.2 hr","Hindi",5.0);
-        Movie m5 = new Movie("Inception","3 hr","English",4.9);
+        Movie m = new Movie();
+        m.setMovie("Animal","3 hr","Hindi",4.6);
+        System.out.println(m.getDuration());
+        System.out.println(m.getMovieName());
+        System.out.println(m.getLanguage());
+        System.out.println(m.getRating());
 
-        System.out.println(
-                m0.movieName + " " +
-                        m0.duration + " " +
-                        m0.language + " " +
-                        m0.rating
-        );
-
-        System.out.println(
-                m1.movieName + " " +
-                        m1.duration + " " +
-                        m1.language + " " +
-                        m1.rating
-        );
-
-        System.out.println(
-                m2.movieName + " " +
-                        m2.duration + " " +
-                        m2.language + " " +
-                        m2.rating
-        );
-
-        System.out.println(
-                m3.movieName + " " +
-                        m3.duration + " " +
-                        m3.language + " " +
-                        m3.rating
-        );
-
-        System.out.println(
-                m4.movieName + " " +
-                        m4.duration + " " +
-                        m4.language + " " +
-                        m4.rating
-        );
-
-        System.out.println(
-                m5.movieName + " " +
-                        m5.duration + " " +
-                        m5.language + " " +
-                        m5.rating
-        );
+//        Movie m1 = new Movie("Animal","3 hr","Hindi",4.6);
+//        Movie m2 = new Movie("Dhurandhar","3.4 hr","Hindi",4.3);
+//        Movie m3 = new Movie("Avengers Endgame","3 hr","English",5.0);
+//        Movie m4 = new Movie("Avatar","3.2 hr","Hindi",5.0);
+//        Movie m5 = new Movie("Inception","3 hr","English",4.9);
+//
+//        System.out.println(
+//                m0.movieName + " " +
+//                        m0.duration + " " +
+//                        m0.language + " " +
+//                        m0.rating
+//        );
+//
+//        System.out.println(
+//                m1.movieName + " " +
+//                        m1.duration + " " +
+//                        m1.language + " " +
+//                        m1.rating
+//        );
+//
+//        System.out.println(
+//                m2.movieName + " " +
+//                        m2.duration + " " +
+//                        m2.language + " " +
+//                        m2.rating
+//        );
+//
+//        System.out.println(
+//                m3.movieName + " " +
+//                        m3.duration + " " +
+//                        m3.language + " " +
+//                        m3.rating
+//        );
+//
+//        System.out.println(
+//                m4.movieName + " " +
+//                        m4.duration + " " +
+//                        m4.language + " " +
+//                        m4.rating
+//        );
+//
+//        System.out.println(
+//                m5.movieName + " " +
+//                        m5.duration + " " +
+//                        m5.language + " " +
+//                        m5.rating
+//        );
 
         /*
         ==================================================
