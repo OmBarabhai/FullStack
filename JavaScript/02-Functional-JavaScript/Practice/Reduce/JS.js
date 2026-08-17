@@ -56,3 +56,17 @@ console.log(freq);
 count = {}
 name = "Om"
 */
+
+
+function myReduce(arr,callBack,initialValue){
+    let accumulator = initialValue;
+
+    for(let i =0;i<arr.length;i++){
+         accumulator = callBack(accumulator,arr[i],i,arr);
+    }
+    return accumulator;
+}
+const res = myReduce(num,
+                (accumulator,num) => accumulator + num ,
+                0);
+console.log("MyReduce: "+res);
