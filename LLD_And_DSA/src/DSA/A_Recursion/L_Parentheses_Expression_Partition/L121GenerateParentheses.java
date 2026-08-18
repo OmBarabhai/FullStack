@@ -3,7 +3,7 @@ package DSA.A_Recursion.L_Parentheses_Expression_Partition;
 import java.util.ArrayList;
 import java.util.List;
 
-public class K121GenerateParentheses {
+public class L121GenerateParentheses {
     public static void solve(int n, int open, int close, List<String> res,StringBuilder sb){
         if(close == n){
             res.add(sb.toString());
