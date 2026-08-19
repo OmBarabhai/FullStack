@@ -213,28 +213,28 @@ More choices, same backtracking core.
 Choose a piece/operator → validate → recurse → undo
 ```
 
-|     # | Problem                                     | Platform             | Status | R1 | R2 | R3 | Strength |
-|------:|---------------------------------------------|----------------------|:------:|:--:|:--:|:--:|:--------:|
-|   121 | Generate Parentheses                        | LeetCode 22          |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-|   122 | Balanced Parentheses Generation             | GeeksforGeeks        |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| ~~123 | Valid Parentheses Generation With K Pairs   | LeetCode 22~~        |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-|   124 | Brace Expansion                             | LeetCode 1087 style  |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-|   125 | Expression Add Operators                    | LeetCode 282         |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-|   126 | Restore Valid IP Addresses                  | LeetCode 93          |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-|   127 | Palindrome Partitioning                     | LeetCode 131         |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-|   128 | All Possible Palindrome Partitions          | LeetCode 131         |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-|   129 | Split String Into Dictionary Words          | Word Break recursion |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-|   130 | Insert Operators to Reach Target            | LeetCode 282         |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-|   131 | Generate All Valid Arithmetic Expressions   | Interview-style      |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-|   132 | Split String Into All Possible Parts        | Interview-style      |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-|   133 | Partition Labels Via Recursion Idea         | Interview-style      |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-|   134 | Generate All Valid Bracket Sequences        | GFG                  |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-|   135 | Generate All Valid Expressions With + and - | Interview-style      |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-|   136 | Expression Evaluation by Recursion          | Interview            |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-|   137 | Different Ways to Add Parentheses           | LeetCode 241         |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-|   138 | Boolean Expression Parenthesization         | GFG                  |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-|   139 | Count Valid Parenthesizations               | GFG                  |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-|   140 | Generate All Sentence Splits                | Interview            |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
+|                  # | Problem                                  | Platform           | Status | R1 | R2 | R3 | Strength |
+|-------------------:|------------------------------------------|--------------------|:------:|:--:|:--:|:--:|:--------:|
+|                121 | Generate Parentheses                     | LeetCode 22        |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+|                122 | Balanced Parentheses Generation          | GeeksforGeeks      |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+|            ~~123~~ | ~~Valid Parentheses Generation With K Pairs~~ | ~~LeetCode 22~~    |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+|                124 | Brace Expansion                          | LeetCode 1087 style |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+|                125 | Expression Add Operators                 | LeetCode 282       |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+|                126 | Restore Valid IP Addresses               | LeetCode 93        |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+|                127 | Palindrome Partitioning                  | LeetCode 131       |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+|                128 | All Possible Palindrome Partitions       | LeetCode 131       |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+|                129 | Split String Into Dictionary Words       | Word Break recursion |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+|            ~~130~~ | ~~Insert Operators to Reach Target~~     | ~~LeetCode 282~~   |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+|                131 | Generate All Valid Arithmetic Expressions | Interview-style    |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+|                132 | Split String Into All Possible Parts     | Interview-style    |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+| **[133 ](GREEDY)** | **Partition Labels Via Recursion Idea**  | **Interview-style** |   🔄   | ⬜  | ⬜  | ⬜  |    —     |
+|                134 | Generate All Valid Bracket Sequences     | GFG                |   ☑️     | ⬜  | ⬜  | ⬜  |    —     |
+|                135 | Generate All Valid Expressions With + and - | Interview-style    |   ☑️    | ⬜  | ⬜  | ⬜  |    —     |
+|                136 |Expression Evaluation by Recursion        | Interview          |    ☑️    | ⬜  | ⬜  | ⬜  |    —     |
+|                137 | Different Ways to Add Parentheses        | LeetCode 241       |   ☑️    | ⬜  | ⬜  | ⬜  |    —     |
+|                138 | Boolean Expression Parenthesization      | GFG                |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
+|                139 | Count Valid Parenthesizations            | GFG                |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
+|                140 | Generate All Sentence Splits             | Interview          |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
 
 ### Pattern memory
 ```text
