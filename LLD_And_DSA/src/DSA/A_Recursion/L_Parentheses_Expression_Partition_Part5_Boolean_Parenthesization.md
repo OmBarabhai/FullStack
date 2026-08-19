@@ -108,13 +108,13 @@ T | T & F ^ T
 every operator can be the final split:
 
 ```text
-T | T&F^T
+T | T & F ^ T
   ↑
 
-T|T & F^T
+T | T & F ^ T
       ↑
 
-T|T&F ^ T
+T | T & F ^ T
           ↑
 ```
 
