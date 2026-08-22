@@ -1,851 +1,1049 @@
-# Chapter 3 — Call Stack
+# 03 — Call Stack
 
-> "The Call Stack is the heart of JavaScript execution. Every line of JavaScript code you write eventually passes through the Call Stack."
+**Folder:** `03-Asynchronous-JavaScript`
 
----
+## 1. What Is the Call Stack?
 
-# Table of Contents
+The **Call Stack** is the stack used by JavaScript execution to keep track of the currently active execution contexts.
 
-1. What is the Call Stack?
-2. Why Do We Need a Call Stack?
-3. Why is it Called a Stack?
-4. Stack Principle (LIFO)
-5. Stack Frame
-6. Push Operation
-7. Pop Operation
-8. Single Threaded Nature
-9. Function Calls
-10. Nested Function Calls
-11. Return Statements
-12. Recursion
-13. Stack Overflow
-14. Complete Execution Walkthrough
-15. Relationship with Execution Context
-16. Relationship with Event Loop
-17. Memory vs Stack
-18. Common Mistakes
-19. Interview Questions
-20. Exercises
-21. Summary
+A useful mental model:
 
----
-
-# 1. What is the Call Stack?
-
-The Call Stack is a data structure used by JavaScript to keep track of **which function is currently executing**.
-
-Think of it as a **to-do list**.
-
-Whenever a function starts, JavaScript places it on the stack.
-
-When the function finishes, JavaScript removes it.
-
----
-
-Example
-
-```js
-console.log("Hello");
-```
-
-Internally
-
-```
+```text
 Call Stack
-
-↓
-
-console.log()
-
-↓
-
-Print
-
-↓
-
-Remove
+    ↓
+Tracks "where JavaScript is currently executing"
 ```
 
----
+When a function is called, its execution context is pushed onto the stack.
 
-# 2. Why Do We Need a Call Stack?
+When the function returns, its context is removed.
 
-Imagine you are reading a book.
-
-You cannot read page 50 before page 10.
-
-You must remember
-
-- where you are
-- which chapter
-- which paragraph
-
-Similarly,
-
-JavaScript must remember
-
-- which function is executing
-- where to return
-- which line comes next
-
-The Call Stack stores this information.
+MDN describes the call stack as the stack of execution contexts used to transfer control flow into and out of functions. citehttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model
 
 ---
 
-# 3. Why is it Called a Stack?
+# 2. Stack = LIFO
 
-Because it follows the **LIFO** rule.
+The Call Stack follows:
 
+```text
+LIFO
 Last In
-
 First Out
-
-Example
-
-Books
-
-```
-Book C
-Book B
-Book A
 ```
 
-Remove order
+Think of a stack of plates:
 
-```
-Book C
-
-↓
-
-Book B
-
-↓
-
-Book A
+```text
+      ┌─────────┐
+TOP → │ Plate 3 │
+      ├─────────┤
+      │ Plate 2 │
+      ├─────────┤
+      │ Plate 1 │
+      └─────────┘
 ```
 
-Exactly how the Call Stack works.
+The last plate placed on top is the first one removed.
+
+The Call Stack works the same way.
 
 ---
 
-# 4. Stack Principle (LIFO)
-
-Suppose
+# 3. Simple Function Example
 
 ```js
-main()
-
-↓
-
-one()
-
-↓
-
-two()
-
-↓
-
-three()
-```
-
-Stack
-
-```
-three()
-
-two()
-
-one()
-
-main()
-```
-
-Who returns first?
-
-```
-three()
-
-↓
-
-two()
-
-↓
-
-one()
-
-↓
-
-main()
-```
-
-Last entered.
-
-First removed.
-
----
-
-# 5. Stack Frame
-
-Each function on the stack is called a **Stack Frame**.
-
-Example
-
-```js
-function greet(){
-
+function greet() {
+    console.log("Hello");
 }
 
 greet();
 ```
 
-Stack
+High-level flow:
 
-```
-+-------------+
-
+```text
+Global
+   ↓
 greet()
-
-+-------------+
-
-Global()
-
-+-------------+
+   ↓
+console.log()
 ```
 
-Every frame contains
-
-- local variables
-- parameters
-- return address
-- execution context
+When `greet()` finishes, its execution context is removed and JavaScript returns to the caller.
 
 ---
 
-# 6. Push Operation
+# 4. Nested Function Calls
 
-Whenever a function starts
-
-JavaScript performs
-
-```
-Push
-```
-
-Example
+Consider:
 
 ```js
-function one(){}
+function first() {
+    second();
+}
 
-one();
+function second() {
+    third();
+}
+
+function third() {
+    console.log("Hello");
+}
+
+first();
 ```
 
-Before
+When `third()` is executing:
 
+```text
+CALL STACK
+
+┌──────────────┐
+│ third()      │ ← top / currently executing
+├──────────────┤
+│ second()     │
+├──────────────┤
+│ first()      │
+├──────────────┤
+│ Global       │
+└──────────────┘
 ```
+
+The stack grows as calls are made.
+
+```text
 Global
+   ↓
+first()
+   ↓
+second()
+   ↓
+third()
 ```
 
-After
+Then it shrinks in reverse order:
 
+```text
+third() returns
+   ↓
+second() returns
+   ↓
+first() returns
+   ↓
+Global continues
 ```
-one()
 
-↓
-
-Global
-```
+MDN uses the same stack-frame model for nested function calls: a new frame is created for each call, and the top frame is popped when the function returns. citehttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model
 
 ---
 
-# 7. Pop Operation
+# 5. Push and Pop
 
-When function finishes
+The easiest way to understand the stack is:
 
-```
-Pop
-```
+```text
+Function call
+    ↓
+PUSH
 
-Example
-
-```
-one()
-
-↓
-
-removed
-
-↓
-
-Global
+Function return
+    ↓
+POP
 ```
 
----
-
-# 8. JavaScript is Single Threaded
-
-There is only **one Call Stack**.
-
-That means
-
-```
-Function A
-
-↓
-
-Function B
-
-↓
-
-Function C
-```
-
-Cannot execute together.
-
-Only one runs at a time.
-
----
-
-# 9. Function Calls
-
-Example
+Example:
 
 ```js
-function hello(){
-
+function a() {
+    b();
 }
 
-hello();
-```
-
-Step 1
-
-```
-Global
-```
-
-Step 2
-
-```
-hello()
-
-Global
-```
-
-Step 3
-
-```
-Global
-```
-
-Done.
-
----
-
-# 10. Nested Function Calls
-
-Example
-
-```js
-function one(){
-
-    two();
-
+function b() {
+    c();
 }
 
-function two(){
-
-    three();
-
+function c() {
+    console.log("Done");
 }
 
-function three(){
-
-}
+a();
 ```
 
-Execution
+Execution:
 
-```
-Global
+```text
+Start:
 
-↓
+[Global]
 
-one()
+a() called:
 
-↓
+[Global]
+[a]
 
-two()
+b() called:
 
-↓
+[Global]
+[a]
+[b]
 
-three()
-```
+c() called:
 
-Stack
-
-```
-+-------------+
-
-three()
-
-+-------------+
-
-two()
-
-+-------------+
-
-one()
-
-+-------------+
-
-Global()
-
-+-------------+
+[Global]
+[a]
+[b]
+[c]
 ```
 
-Now return
+After `c()` returns:
 
+```text
+[Global]
+[a]
+[b]
 ```
-three()
 
-↓
+After `b()` returns:
 
-two()
+```text
+[Global]
+[a]
+```
 
-↓
+After `a()` returns:
 
-one()
-
-↓
-
-Global()
+```text
+[Global]
 ```
 
 ---
 
-# 11. Dry Run
+# 6. Why the Call Stack Matters
 
-```js
-function one(){
+The stack tells JavaScript:
 
-    console.log("One");
-
-}
-
-function two(){
-
-    one();
-
-}
-
-two();
+```text
+Which function is running?
+Where should execution return?
+Which function called the current function?
+What execution context is currently active?
 ```
 
-Initial
-
-```
-Global
-```
-
-Call two
-
-```
-two()
-
-Global
-```
-
-Inside two
-
-```
-one()
-
-two()
-
-Global
-```
-
-After one finishes
-
-```
-two()
-
-Global
-```
-
-After two finishes
-
-```
-Global
-```
+Without this tracking, nested function execution would not work correctly.
 
 ---
 
-# 12. Return Statement
+# 7. Connection to Execution Context
 
-Example
+You just learned:
 
-```js
-function add(){
-
-    return 10;
-
-}
-
-add();
+```text
+Execution Context
 ```
 
-After return
+Now connect it:
 
-Stack frame removed.
+```text
+Execution Context
+        ↓
+individual execution state/frame
+
+Call Stack
+        ↓
+stores/tracks active execution contexts
+```
+
+Think:
+
+```text
+Execution Context = one frame
+Call Stack        = stack of active frames
+```
+
+They are related, but they are not the same thing.
 
 ---
 
-# 13. Recursion
+# 8. Current Stack Frame
 
-Example
+Consider:
 
 ```js
-function count(n){
+function add(a, b) {
+    const result = a + b;
+    return result;
+}
 
-    if(n==0)
+const total = add(10, 20);
+```
+
+When `add()` is executing, its active context tracks information such as:
+
+```text
+a → 10
+b → 20
+result → 30
+```
+
+Conceptually:
+
+```text
+CALL STACK
+
+┌─────────────────────┐
+│ add()               │
+│ a = 10              │
+│ b = 20              │
+│ result = 30         │
+├─────────────────────┤
+│ Global              │
+└─────────────────────┘
+```
+
+The exact internal representation is engine/specification territory. Treat this diagram as a learning model.
+
+---
+
+# 9. Return to the Caller
+
+Consider:
+
+```js
+function calculate() {
+    return 10 + 20;
+}
+
+const result = calculate();
+
+console.log(result);
+```
+
+The flow is:
+
+```text
+Global
+   ↓
+calculate()
+   ↓
+return 30
+   ↓
+calculate() removed
+   ↓
+Global resumes
+   ↓
+result = 30
+   ↓
+console.log(result)
+```
+
+Important:
+
+> Returning from a function removes its active execution frame from the call stack and resumes the caller.
+
+---
+
+# 10. Recursion and the Call Stack
+
+This connects directly to your DSA/recursion experience.
+
+```js
+function count(n) {
+    if (n === 0) {
         return;
+    }
 
-    count(n-1);
-
+    count(n - 1);
 }
 
 count(3);
 ```
 
-Stack
+While `count(0)` is executing:
 
+```text
+CALL STACK
+
+┌───────────────┐
+│ count(0)      │
+├───────────────┤
+│ count(1)      │
+├───────────────┤
+│ count(2)      │
+├───────────────┤
+│ count(3)      │
+├───────────────┤
+│ Global        │
+└───────────────┘
 ```
-count(3)
 
-count(2)
+Each recursive call creates another execution context and therefore another stack frame.
 
-count(1)
+When the base case returns:
 
-count(0)
-
-Global
+```text
+count(0) POP
+count(1) POP
+count(2) POP
+count(3) POP
 ```
 
-Return
-
-```
-count(0)
-
-↓
-
-count(1)
-
-↓
-
-count(2)
-
-↓
-
-count(3)
-```
+MDN specifically notes that recursive calls create additional execution contexts and therefore consume more stack space. citehttps://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide/In_depth
 
 ---
 
-# 14. Stack Overflow
+# 11. Stack Overflow
 
-Example
+The stack has finite capacity.
+
+If a program keeps creating function calls without returning, eventually the stack limit can be exceeded.
+
+Example:
 
 ```js
-function hello(){
-
-    hello();
-
+function infinite() {
+    infinite();
 }
 
-hello();
+infinite();
 ```
 
-What happens?
+Flow:
 
-```
-hello()
-
-↓
-
-hello()
-
-↓
-
-hello()
-
-↓
-
-hello()
-
-↓
-
-hello()
-
-↓
-
+```text
+infinite()
+   ↓
+infinite()
+   ↓
+infinite()
+   ↓
+infinite()
+   ↓
 ...
 ```
 
-Eventually
+The stack keeps growing.
 
+Eventually JavaScript throws a stack-related error such as:
+
+```text
+RangeError: Maximum call stack size exceeded
 ```
-Maximum Call Stack Size Exceeded
-```
 
-Reason
-
-Stack memory becomes full.
+The exact error wording can vary by engine. citehttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Too_much_recursion
 
 ---
 
-# 15. Call Stack and Execution Context
+# 12. Why the Base Case Matters
 
-Every Stack Frame contains an Execution Context.
+Your recursion knowledge directly applies.
 
-```
-Call Stack
+Bad:
 
-↓
-
-Execution Context
-
-↓
-
-Variables
-
-Functions
-
-this
-
-Scope
+```js
+function count(n) {
+    count(n - 1);
+}
 ```
 
-The stack stores execution contexts, not just function names.
+There is no stopping condition.
+
+Better:
+
+```js
+function count(n) {
+    if (n === 0) {
+        return;
+    }
+
+    count(n - 1);
+}
+```
+
+The base case eventually causes the function calls to return.
+
+```text
+More calls
+    ↓
+Base case
+    ↓
+Returns
+    ↓
+Stack starts shrinking
+```
 
 ---
 
-# 16. Call Stack and Event Loop
+# 13. Synchronous Execution and the Call Stack
 
-The Event Loop only pushes callbacks onto the Call Stack when it is empty.
+Consider:
 
-Example
+```js
+console.log("A");
+console.log("B");
+console.log("C");
+```
+
+The current JavaScript execution progresses synchronously.
+
+The stack tracks the currently executing work.
+
+Now:
+
+```js
+function one() {
+    console.log("1");
+}
+
+one();
+
+console.log("2");
+```
+
+Conceptually:
+
+```text
+Global
+   ↓
+one()
+   ↓
+console.log("1")
+   ↓
+one() returns
+   ↓
+Global resumes
+   ↓
+console.log("2")
+```
+
+The next statement does not execute until the current synchronous execution step returns control.
+
+---
+
+# 14. Call Stack + Your Functional JavaScript
+
+Your previous code:
+
+```js
+const total = req
+    .map(({ resTime }) => resTime)
+    .reduce((acc, value) => acc + value, 0);
+```
+
+uses function calls and callbacks.
+
+At a high level:
+
+```text
+Current JS execution
+       ↓
+map()
+       ↓
+map callback executions
+       ↓
+reduce()
+       ↓
+reduce callback executions
+       ↓
+result
+```
+
+The important point:
+
+```text
+Callbacks execute
+        +
+Call Stack tracks active execution
+```
+
+But:
+
+```text
+Callback
+≠
+Asynchronous
+```
+
+Your `map()` / `reduce()` work is useful here because you already know callbacks in a synchronous context.
+
+---
+
+# 15. Call Stack + setTimeout()
+
+Now compare:
 
 ```js
 console.log("A");
 
 setTimeout(() => {
+    console.log("Timer");
+}, 0);
 
 console.log("B");
-
-},0);
-
-console.log("C");
 ```
 
-Stack
+The timer callback does **not** simply get pushed onto the Call Stack immediately when `setTimeout()` is called.
 
-```
-console.log(A)
+The host schedules the timer, and later the callback becomes eligible to run through the runtime's scheduling mechanism.
 
-↓
+For now think:
 
-console.log(C)
-
-↓
-
-empty
-
-↓
-
-setTimeout callback
-
-↓
-
-console.log(B)
-```
-
-Output
-
-```
-A
-
-C
-
-B
-```
-
----
-
-# 17. Memory vs Call Stack
-
-Heap
-
-```
-Objects
-
-Arrays
-
-Functions
-```
-
+```text
+JavaScript
+   ↓
 Call Stack
-
+   ↓
+setTimeout()
+   ↓
+Host timer mechanism
+   ↓
+callback becomes eligible
+   ↓
+queue / event-loop processing
+   ↓
+Call Stack
+   ↓
+callback executes
 ```
-Function Calls
 
-Execution Context
+Do not memorize the full queue details yet.
 
-Local Variables
+They are the next parts.
+
+---
+
+# 16. Stack Is Not the Queue
+
+This distinction is essential.
+
+### Call Stack
+
+```text
+LIFO
 ```
 
-Do not confuse them.
+Tracks currently active execution.
+
+### Job / Task Queues
+
+```text
+Queue
+```
+
+Hold work that is waiting for an execution turn.
+
+Simplified:
+
+```text
+CALL STACK             QUEUE
+
+┌───────────┐          ┌───────────┐
+│ current   │          │ waiting   │
+│ execution │          │ callbacks │
+└───────────┘          └───────────┘
+```
+
+Later:
+
+```text
+Task Queue
+Microtask Queue
+Event Loop
+```
+
+will be studied separately.
 
 ---
 
-# 18. Common Mistakes
+# 17. Call Stack Is Synchronous Work's Center
 
-❌ Thinking all functions execute together.
+A useful learning model:
 
-Wrong.
+```text
+Current JavaScript work
+        ↓
+    Call Stack
+        ↓
+   execute code
+        ↓
+  return / pop
+```
 
-Only one function executes at a time.
+While JavaScript is executing a long synchronous operation, other queued JavaScript callbacks cannot simply interrupt it.
 
----
-
-❌ Thinking Call Stack stores objects.
-
-Wrong.
-
-Heap stores objects.
-
----
-
-❌ Thinking recursion creates one frame.
-
-Wrong.
-
-Every recursive call creates a new stack frame.
+This is why expensive synchronous work can block the main thread.
 
 ---
 
-# 19. Interview Questions
+# 18. Run-to-Completion
 
-## What is the Call Stack?
+A JavaScript job runs to completion before the next job gets its execution turn.
 
-A LIFO data structure that keeps track of function execution.
-
----
-
-## Why is JavaScript single threaded?
-
-Because JavaScript has one Call Stack.
-
----
-
-## What is a Stack Frame?
-
-A Stack Frame is the information stored for one function call.
-
----
-
-## What causes Stack Overflow?
-
-Infinite recursion or too many nested function calls.
-
----
-
-## Does every function call create a new Execution Context?
-
-Yes.
-
----
-
-# 20. Exercises
-
-Predict the Call Stack.
-
-Example 1
+Example:
 
 ```js
-function one(){
+console.log("Start");
 
+function work() {
+    for (let i = 0; i < 1000000000; i++) {}
 }
 
-one();
+work();
+
+console.log("End");
 ```
+
+The runtime does not normally insert another queued JavaScript callback into the middle of this ongoing job.
+
+This principle becomes important for the Event Loop and microtasks.
+
+MDN describes jobs as running to completion before the next job begins. citehttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model
 
 ---
 
-Example 2
+# 19. Debugging With a Stack Trace
+
+When JavaScript throws an error, you may see a stack trace.
+
+For example:
 
 ```js
-function one(){
+function first() {
+    second();
+}
 
+function second() {
+    third();
+}
+
+function third() {
+    throw new Error("Something went wrong");
+}
+
+first();
+```
+
+The stack trace helps show the chain:
+
+```text
+third()
+second()
+first()
+global
+```
+
+This is extremely useful when debugging.
+
+The exact `Error.prototype.stack` format is not standardized, but major JavaScript engines provide stack traces for debugging. citehttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/stack
+
+---
+
+# 20. Common Mistakes
+
+### ❌ "Call Stack stores all functions forever"
+
+No.
+
+It stores active execution frames.
+
+When a function returns, its active frame is removed.
+
+### ❌ "Call Stack is the Event Loop"
+
+No.
+
+```text
+Call Stack → active execution
+Event Loop  → scheduling coordination
+```
+
+### ❌ "A callback is placed directly on the Call Stack whenever it is created"
+
+No.
+
+A callback is only executed when it gets an execution turn.
+
+### ❌ "setTimeout(0) executes immediately"
+
+No.
+
+It does not mean "run this function immediately."
+
+It schedules the callback to be handled later.
+
+### ❌ "Recursion is always bad"
+
+No.
+
+Recursion is valid and useful.
+
+The problem is uncontrolled recursion or excessive depth.
+
+### ❌ "Execution Context and Call Stack are identical"
+
+No.
+
+An execution context is an individual execution frame/state; the call stack tracks active contexts.
+
+---
+
+# 21. Practice
+
+## Practice 1 — Draw the Stack
+
+```js
+function a() {
+    b();
+}
+
+function b() {
+    c();
+}
+
+function c() {
+    console.log("C");
+}
+
+a();
+```
+
+Draw the stack while `c()` is executing.
+
+---
+
+## Practice 2 — Push / Pop
+
+For:
+
+```js
+function one() {
     two();
-
 }
 
-function two(){
-
+function two() {
+    console.log("two");
 }
 
 one();
 ```
 
-Draw the stack after every line.
+Write:
 
----
+```text
+Push:
+...
 
-Example 3
+Push:
+...
 
-```js
-function fact(n){
+Pop:
+...
 
-    if(n==1)
-        return 1;
-
-    return n*fact(n-1);
-
-}
-
-fact(4);
+Pop:
+...
 ```
 
-Draw all stack frames.
+---
+
+## Practice 3 — Recursion
+
+For:
+
+```js
+function count(n) {
+    if (n === 0) return;
+    count(n - 1);
+}
+
+count(3);
+```
+
+Draw the stack while `count(0)` is running.
 
 ---
 
-# 21. Summary
+## Practice 4 — Stack Overflow
 
-- The Call Stack keeps track of executing functions.
-- It follows the LIFO principle.
-- Each function call creates a Stack Frame.
-- Every Stack Frame contains an Execution Context.
-- JavaScript is single-threaded because it has one Call Stack.
-- Recursive functions create multiple stack frames.
-- Infinite recursion causes Stack Overflow.
-- The Event Loop waits until the Call Stack is empty before scheduling asynchronous callbacks.
+Explain why this fails:
+
+```js
+function loop() {
+    loop();
+}
+
+loop();
+```
 
 ---
 
-# Next Chapter
+## Practice 5 — Predict
 
-➡️ **04-Web-APIs.md**
+Before learning the Event Loop in detail, predict:
 
-You'll learn:
+```js
+console.log("Start");
 
-- What Web APIs are
-- Why `setTimeout()` isn't part of JavaScript
-- DOM APIs
-- Fetch API
-- Timers
-- Storage APIs
-- Event listeners
-- Browser architecture
-- Node.js equivalents
+setTimeout(() => {
+    console.log("Timer");
+}, 0);
+
+console.log("End");
+```
+
+Write:
+
+```text
+Expected output:
+1.
+2.
+3.
+
+Reason:
+...
+```
+
+Do not use the answer from another source.
+
+---
+
+# 22. Interview Questions
+
+### What is the Call Stack?
+
+A LIFO stack that tracks active execution contexts and function calls.
+
+### What happens when a function is called?
+
+Its execution context is added to the active execution stack.
+
+### What happens when a function returns?
+
+Its active context is removed and execution resumes in the caller.
+
+### What is LIFO?
+
+Last In, First Out.
+
+### Why does recursion use stack space?
+
+Each recursive invocation creates another execution context/frame.
+
+### What causes stack overflow?
+
+Excessive or unbounded nested function calls that exceed the available stack capacity.
+
+### Is the Call Stack the same as the Event Loop?
+
+No.
+
+### Does `setTimeout(fn, 0)` execute `fn` immediately?
+
+No. The callback must wait for the runtime's scheduling mechanism to make it eligible and for JavaScript to get an execution turn.
+
+---
+
+# 23. Completion Checklist
+
+Before moving forward:
+
+- [ ] I understand LIFO.
+- [ ] I understand push/pop.
+- [ ] I can draw the stack for nested functions.
+- [ ] I can connect execution contexts to stack frames.
+- [ ] I can explain recursion using the stack.
+- [ ] I understand stack overflow.
+- [ ] I understand why `setTimeout(..., 0)` is not immediate execution.
+- [ ] I can distinguish Call Stack from queues.
+- [ ] I understand run-to-completion at a high level.
+- [ ] I know why stack traces are useful.
+- [ ] I can connect my synchronous `map()` / `reduce()` callbacks to the Call Stack.
+
+---
+
+# 24. Quick Revision
+
+```text
+Function call
+      ↓
+Execution Context / Frame
+      ↓
+PUSH onto Call Stack
+      ↓
+Function executes
+      ↓
+RETURN
+      ↓
+POP
+      ↓
+Caller resumes
+```
+
+For recursion:
+
+```text
+call
+ ↓
+call
+ ↓
+call
+ ↓
+base case
+ ↓
+return
+ ↓
+POP
+ ↓
+return
+ ↓
+POP
+```
+
+Remember:
+
+```text
+Call Stack = active execution
+LIFO = Last In, First Out
+
+Execution Context ≠ Call Stack
+
+Callback ≠ asynchronous
+
+Recursion → more stack frames
+
+Too much recursion → stack overflow
+
+Queue ≠ Call Stack
+```
+
+---
+
+# Final Mental Model
+
+```text
+                 JAVASCRIPT EXECUTION
+
+                        Global
+                          │
+                     function call
+                          ▼
+                    Execution
+                     Context
+                          │
+                          ▼
+                     CALL STACK
+                 ┌──────────────────┐
+                 │ current function │
+                 ├──────────────────┤
+                 │ caller           │
+                 ├──────────────────┤
+                 │ caller           │
+                 └──────────────────┘
+                          │
+                     function return
+                          ▼
+                    POP / resume
+```
+
+The next step is to connect this stack to the environment that handles work outside immediate JavaScript execution.
+
+**Next:** `04-Web-APIs.md`

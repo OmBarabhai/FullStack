@@ -1,874 +1,754 @@
-# Chapter 6 — Event Loop
+# 06 — Event Loop
 
-> **"The Event Loop is the traffic police of JavaScript."**
+**Folder:** `03-Asynchronous-JavaScript`
 
-It constantly checks whether JavaScript is free to execute another callback.
-
----
-
-# Table of Contents
-
-1. What is the Event Loop?
-2. Why is the Event Loop Needed?
-3. Event Loop Responsibilities
-4. Complete Execution Cycle
-5. Event Loop Algorithm
-6. Event Loop Visualization
-7. Step-by-Step Dry Run
-8. Multiple Timers
-9. DOM Events
-10. Why JavaScript Never Stops
-11. Event Loop + Task Queue
-12. Event Loop + Microtask Queue
-13. Browser Rendering
-14. Common Misconceptions
-15. Real-Life Analogy
-16. Dry Runs
-17. Interview Questions
-18. Exercises
-19. Summary
+> **Core idea:** The Event Loop coordinates when scheduled work gets an opportunity to execute JavaScript.
 
 ---
 
-# 1. What is the Event Loop?
+## 1. What Is the Event Loop?
 
-The Event Loop is a process inside the JavaScript Runtime.
+The Event Loop is part of the runtime's scheduling/execution model.
 
-It continuously checks
+A useful learning model is:
 
-- Is the Call Stack empty?
-- Are there callbacks waiting?
-- If yes, move one callback into the Call Stack.
-
-It never executes code itself.
-
-It only manages execution.
-
----
-
-# 2. Why is the Event Loop Needed?
-
-Imagine JavaScript without an Event Loop.
-
+```text
+Current JavaScript
+       ↓
+   Call Stack
+       ↓
+current work finishes
+       ↓
+runtime scheduling
+       ↓
+another execution turn
 ```
+
+The Event Loop does not execute JavaScript itself. JavaScript executes when work receives an execution turn.
+
+---
+
+## 2. Why Is It Needed?
+
+Consider:
+
+```js
+setTimeout(() => {
+    console.log("Timer");
+}, 0);
+```
+
+The callback cannot interrupt JavaScript that is already running.
+
+The runtime needs to coordinate:
+
+```text
+currently executing JavaScript
++
+ready tasks
++
+microtasks
++
+host/runtime activity
+```
+
+---
+
+## 3. Event Loop + Task Queue
+
+```text
+Task becomes ready
+      ↓
+Task Queue / scheduling
+      ↓
+Event Loop
+      ↓
 Call Stack
-
-↓
-
-Empty
-
-↓
-
-Nothing happens
+      ↓
+JavaScript executes
 ```
 
-Now imagine
+Keep the responsibilities separate:
 
-```
-setTimeout()
-
-↓
-
-Browser finishes timer
-
-↓
-
-Callback waiting
-```
-
-How does the callback enter the Call Stack?
-
-Answer
-
-The Event Loop moves it.
-
-Without the Event Loop,
-
-callbacks would wait forever.
-
----
-
-# 3. Responsibilities of the Event Loop
-
-The Event Loop
-
-✅ Watches the Call Stack
-
-✅ Watches the Microtask Queue
-
-✅ Watches the Task Queue
-
-✅ Moves callbacks
-
-It NEVER
-
-❌ Executes JavaScript
-
-❌ Runs functions
-
-The Call Stack executes functions.
-
----
-
-# 4. Complete Execution Cycle
-
-```
-JavaScript Code
-
-↓
-
-Call Stack
-
-↓
-
-Web API
-
-↓
-
+```text
 Task Queue
-
-↓
+→ waiting tasks
 
 Event Loop
-
-↓
+→ coordinates execution opportunities
 
 Call Stack
+→ active JavaScript execution
 ```
 
 ---
 
-# 5. Event Loop Algorithm
-
-Imagine the Event Loop repeating forever.
-
-```
-while(true){
-
-    if(Call Stack is empty){
-
-        if(Microtask Queue not empty){
-
-            Move one microtask
-
-        }
-
-        else if(Task Queue not empty){
-
-            Move one task
-
-        }
-
-    }
-
-}
-```
-
-Notice
-
-Microtasks have higher priority.
-
-We'll study that later.
-
----
-
-# 6. Visual Diagram
-
-```
-                 JavaScript Runtime
-
-        +-----------------------------+
-
-        |       Call Stack            |
-
-        +-------------▲---------------+
-
-                      |
-
-               Event Loop
-
-                      |
-
-      +---------------+---------------+
-
-      |                               |
-
-Microtask Queue                 Task Queue
-
-      |                               |
-
- Promise.then()                setTimeout()
-
- queueMicrotask()              click()
-
- catch()                       setInterval()
-
- finally()                     fetch callback
-
-      ▲                               ▲
-
-      |                               |
-
-      +----------- Browser -----------+
-
-```
-
----
-
-# 7. Step-by-Step Example
-
-Example
+## 4. Timer Dry Run
 
 ```js
 console.log("A");
 
-setTimeout(()=>{
+setTimeout(() => {
     console.log("B");
-},2000);
+}, 0);
 
 console.log("C");
 ```
 
----
+Conceptually:
 
-Step 1
-
-Call Stack
-
-```
-console.log("A")
-```
-
-Output
-
-```
+```text
 A
-```
-
----
-
-Step 2
-
-```
-setTimeout()
-```
-
-Browser starts timer.
-
-Call Stack becomes empty.
-
----
-
-Step 3
-
-```
-console.log("C")
-```
-
-Output
-
-```
-A
-C
-```
-
----
-
-Step 4
-
-Two seconds later
-
-Browser pushes callback
-
-```
-Task Queue
-
 ↓
-
-console.log("B")
+timer scheduled
+↓
+C
+↓
+current JavaScript task finishes
+↓
+timer callback becomes eligible
+↓
+callback gets a later execution turn
+↓
+B
 ```
 
----
+Output:
 
-Step 5
-
-Event Loop checks
-
-```
-Call Stack Empty?
-
-YES
-```
-
-Moves callback.
-
----
-
-Step 6
-
-Call Stack
-
-```
-console.log("B")
-```
-
-Output
-
-```
+```text
 A
 C
 B
 ```
 
----
-
-# 8. Multiple Timers
-
-Example
-
-```js
-setTimeout(()=>{
-console.log("One");
-},1000);
-
-setTimeout(()=>{
-console.log("Two");
-},2000);
-
-setTimeout(()=>{
-console.log("Three");
-},3000);
-```
-
-Timeline
-
-```
-1 sec
-
-↓
-
-Queue
-
-↓
-
-One
-
------------
-
-2 sec
-
-↓
-
-Queue
-
-↓
-
-Two
-
------------
-
-3 sec
-
-↓
-
-Queue
-
-↓
-
-Three
-```
-
-Output
-
-```
-One
-
-Two
-
-Three
-```
+`setTimeout(fn, 0)` does not mean "execute immediately."
 
 ---
 
-# 9. DOM Events
+## 5. Event Loop + Microtasks
 
-Example
-
-```js
-button.addEventListener("click",()=>{
-console.log("Clicked");
-});
-```
-
-User clicks.
-
-Browser
-
-↓
-
-```
-Task Queue
-
-↓
-
-click callback
-```
-
-Event Loop
-
-↓
-
-```
-Call Stack
-```
-
-Output
-
-```
-Clicked
-```
-
----
-
-# 10. Why JavaScript Never Stops
-
-The Event Loop runs forever.
-
-Think
-
-```
-while(true){
-
-check stack
-
-check queues
-
-move callback
-
-repeat
-
-}
-```
-
-Even when nothing happens,
-
-the Event Loop keeps waiting.
-
----
-
-# 11. Event Loop + Task Queue
-
-Example
-
-```js
-setTimeout(()=>{
-console.log(1);
-},0);
-
-console.log(2);
-```
-
-Execution
-
-```
-Call Stack
-
-↓
-
-2
-
-↓
-
-Empty
-
-↓
-
-Event Loop
-
-↓
-
-1
-```
-
-Output
-
-```
-2
-
-1
-```
-
----
-
-# 12. Event Loop + Microtask Queue
-
-Suppose
-
-```
-Task Queue
-
-↓
-
-setTimeout
-
----------------
-
-Microtask Queue
-
-↓
-
-Promise.then()
-```
-
-Event Loop chooses
-
-```
-Promise.then()
-
-FIRST
-```
-
-Microtasks always win.
-
----
-
-# 13. Browser Rendering
-
-The browser also paints the screen.
-
-Simplified cycle
-
-```
-Run JS
-
-↓
-
-Run Microtasks
-
-↓
-
-Render Screen
-
-↓
-
-Run Task
-
-↓
-
-Render Again
-```
-
-This is why heavy JavaScript can freeze the UI.
-
----
-
-# 14. Common Misconceptions
-
-### ❌ Event Loop executes JavaScript.
-
-Wrong.
-
-Call Stack executes JavaScript.
-
----
-
-### ❌ Event Loop is inside the Browser only.
-
-Wrong.
-
-Node.js also has an Event Loop.
-
----
-
-### ❌ Event Loop waits for timers.
-
-Wrong.
-
-The Browser waits for timers.
-
-The Event Loop only moves callbacks.
-
----
-
-### ❌ Event Loop checks Task Queue first.
-
-Wrong.
-
-It checks the Microtask Queue first.
-
----
-
-# 15. Real-Life Analogy
-
-Imagine a restaurant.
-
-Chef
-
-↓
-
-```
-Call Stack
-```
-
-Orders
-
-↓
-
-```
-Task Queue
-```
-
-Manager
-
-↓
-
-```
-Event Loop
-```
-
-The manager never cooks.
-
-He simply hands the next order to the chef whenever the chef is free.
-
----
-
-# 16. Dry Runs
-
-## Example 1
+Example:
 
 ```js
 console.log("A");
 
-setTimeout(()=>{
+Promise.resolve().then(() => {
+    console.log("Promise");
+});
+
+setTimeout(() => {
+    console.log("Timer");
+}, 0);
+
 console.log("B");
-},0);
-
-console.log("C");
 ```
 
-Step-by-step
+Output:
 
-```
+```text
 A
-
-↓
-
-Timer Starts
-
-↓
-
-C
-
-↓
-
-Timer completes
-
-↓
-
-Queue
-
-↓
-
-Event Loop
-
-↓
-
 B
+Promise
+Timer
 ```
 
-Output
+High-level flow:
 
-```
+```text
 A
-
-C
-
+↓
+Promise reaction scheduled
+↓
+Timer task scheduled
+↓
 B
+↓
+current task finishes
+↓
+pending microtasks
+↓
+Promise
+↓
+next task
+↓
+Timer
 ```
+
+Important practical rule:
+
+```text
+Current task
+    ↓
+Pending microtasks
+    ↓
+Next task
+```
+
+Avoid the oversimplification that "the Event Loop always checks microtasks first" as a complete algorithm. The actual specification/runtime model has more detail.
 
 ---
 
-## Example 2
+## 6. A Better Mental Model
+
+Do not memorize a fake algorithm such as:
 
 ```js
-console.log(1);
-
-setTimeout(()=>{
-console.log(2);
-},1000);
-
-console.log(3);
+while (true) {
+    if (stack.empty()) {
+        ...
+    }
+}
 ```
 
-Output
+Use:
 
+```text
+JavaScript executes a task
+        ↓
+microtask checkpoint
+        ↓
+another eligible task gets an execution opportunity
+        ↓
+microtask checkpoint
+        ↓
+repeat while runtime is active
 ```
-1
 
-3
-
-2
-```
+Browser rendering can happen at appropriate points between work. Do not treat rendering as one rigid universal step.
 
 ---
 
-# 17. Interview Questions
+## 7. Blocking the Event Loop
 
-### What is the Event Loop?
-
-A process that continuously checks whether the Call Stack is empty and moves callbacks from the queues into it.
-
----
-
-### Does the Event Loop execute code?
-
-No.
-
-The Call Stack executes code.
-
----
-
-### What does the Event Loop monitor?
-
-- Call Stack
-- Microtask Queue
-- Task Queue
-
----
-
-### Why is the Event Loop important?
-
-Without it, asynchronous callbacks would never execute.
-
----
-
-### Which queue has higher priority?
-
-Microtask Queue.
-
----
-
-### Who creates the Task Queue?
-
-The Browser (or Node.js runtime).
-
----
-
-### Does the Event Loop ever stop?
-
-No.
-
-It keeps running as long as the runtime is alive.
-
----
-
-# 18. Exercises
-
-## Exercise 1
-
-Predict the output
+Consider:
 
 ```js
+setTimeout(() => {
+    console.log("Timer");
+}, 0);
+
 console.log("Start");
 
-setTimeout(()=>{
-console.log("Timer");
-},0);
+for (let i = 0; i < 1000000000; i++) {}
 
 console.log("End");
 ```
 
+Expected ordering:
+
+```text
+Start
+End
+Timer
+```
+
+Why?
+
+```text
+Timer becomes eligible
+        ↓
+long synchronous JavaScript continues
+        ↓
+End
+        ↓
+current work finishes
+        ↓
+Timer gets an execution turn
+```
+
+A timer does not interrupt a running synchronous JavaScript job.
+
+This is why heavy synchronous JavaScript can make a browser UI feel blocked.
+
 ---
 
-## Exercise 2
-
-Draw
-
-```
-Call Stack
-
-↓
-
-Browser
-
-↓
-
-Task Queue
-
-↓
-
-Event Loop
-
-↓
-
-Call Stack
-```
-
-for
+## 8. Browser Events
 
 ```js
-setTimeout(()=>{
-console.log("A");
-},1000);
+button.addEventListener("click", () => {
+    console.log("Clicked");
+});
 ```
 
----
+Conceptually:
 
-## Exercise 3
-
-Explain why callbacks cannot enter the Call Stack directly.
-
----
-
-## Exercise 4
-
-Explain the role of the Event Loop using your own words.
-
----
-
-# 19. Summary
-
-- JavaScript is single-threaded.
-- The Event Loop continuously checks the Call Stack.
-- If the Call Stack is empty, it moves callbacks into it.
-- The Event Loop does **not** execute JavaScript.
-- The Call Stack executes JavaScript.
-- Task Queue stores asynchronous callbacks.
-- Microtask Queue has higher priority than the Task Queue.
-- Understanding the Event Loop is the key to mastering asynchronous JavaScript.
-
----
-
-# Memory Trick
-
-Remember this sentence:
-
-> **Browser does the work → Queue stores the callback → Event Loop delivers the callback → Call Stack executes the callback.**
-
+```text
+User action
+    ↓
+Browser event handling
+    ↓
+event work becomes eligible
+    ↓
+JavaScript execution turn
+    ↓
+click callback
 ```
-Browser
-   ↓
-Queue
-   ↓
+
+Do not confuse:
+
+```text
+Browser Event
+```
+
+with:
+
+```text
 Event Loop
-   ↓
-Call Stack
-   ↓
-Execution
+```
+
+The event is an occurrence; the Event Loop is part of scheduling/execution coordination.
+
+---
+
+## 9. Event Loop + Fetch
+
+```js
+fetch("/users")
+    .then(response => response.json())
+    .then(users => {
+        console.log(users);
+    });
+```
+
+High-level model:
+
+```text
+JavaScript
+    ↓
+fetch()
+    ↓
+network work
+    ↓
+response becomes available
+    ↓
+Promise reaction
+    ↓
+microtask processing
+    ↓
+JavaScript callback executes
+```
+
+This connects:
+
+```text
+Web API
++
+Promise
++
+Microtask
++
+Event Loop
 ```
 
 ---
 
-# Next Chapter
+## 10. Multiple Timers
 
-➡️ **07-Microtask-Queue.md**
+```js
+setTimeout(() => {
+    console.log("One");
+}, 1000);
 
-You'll learn:
+setTimeout(() => {
+    console.log("Two");
+}, 2000);
 
-- What is the Microtask Queue?
-- Why Promises run before `setTimeout()`
-- Promise execution order
-- `queueMicrotask()`
-- Advanced Event Loop behavior
-- Interview puzzles and dry runs
-- Visual comparisons between Microtask Queue and Task Queue
+setTimeout(() => {
+    console.log("Three");
+}, 3000);
+```
+
+Basic order, assuming no other delays:
+
+```text
+One
+Two
+Three
+```
+
+But timers are not exact execution timestamps.
+
+A callback may execute later than its requested delay.
+
+---
+
+## 11. Node.js
+
+The Event Loop concept is not browser-only.
+
+Node.js also uses an event-driven asynchronous runtime model.
+
+Node.js has its own runtime architecture and libuv integration, so browser and Node.js event-loop details are not identical.
+
+For now, remember:
+
+```text
+Browser
+→ browser event-loop/runtime model
+
+Node.js
+→ Node.js event-loop/runtime model
+```
+
+Both coordinate asynchronous work, but implementation details differ.
+
+---
+
+## 12. Common Misconceptions
+
+### ❌ Event Loop executes JavaScript
+
+Better:
+
+```text
+Event Loop / scheduling
+→ coordinates execution opportunities
+
+JavaScript execution
+→ happens when work gets its turn
+```
+
+### ❌ `setTimeout(0)` means immediate execution
+
+Wrong.
+
+It schedules work for a later execution opportunity.
+
+### ❌ Event Loop means browser only
+
+Wrong.
+
+Node.js has an event-driven event-loop model too.
+
+### ❌ Microtasks always "win"
+
+Too broad.
+
+The practical rule for this course is:
+
+```text
+After a JavaScript task completes,
+pending microtasks are processed
+before the next task.
+```
+
+### ❌ Long timers block JavaScript
+
+Wrong.
+
+Long-running synchronous JavaScript blocks the current execution thread.
+
+The timer itself does not block it.
+
+---
+
+## 13. Dry Run 1
+
+```js
+console.log("A");
+
+setTimeout(() => {
+    console.log("B");
+}, 0);
+
+console.log("C");
+```
+
+Output:
+
+```text
+A
+C
+B
+```
+
+---
+
+## 14. Dry Run 2
+
+```js
+console.log(1);
+
+Promise.resolve().then(() => {
+    console.log(2);
+});
+
+setTimeout(() => {
+    console.log(3);
+}, 0);
+
+console.log(4);
+```
+
+Output:
+
+```text
+1
+4
+2
+3
+```
+
+Reason:
+
+```text
+Sync
+ ↓
+microtasks
+ ↓
+next task
+```
+
+---
+
+## 15. Dry Run 3
+
+```js
+setTimeout(() => {
+    console.log("Timer");
+}, 0);
+
+Promise.resolve().then(() => {
+    console.log("Promise 1");
+});
+
+Promise.resolve().then(() => {
+    console.log("Promise 2");
+});
+
+console.log("Sync");
+```
+
+Output:
+
+```text
+Sync
+Promise 1
+Promise 2
+Timer
+```
+
+---
+
+## 16. Dry Run 4 — Blocking
+
+```js
+setTimeout(() => {
+    console.log("Timer");
+}, 0);
+
+console.log("Start");
+
+for (let i = 0; i < 1000000000; i++) {}
+
+console.log("End");
+```
+
+Output ordering:
+
+```text
+Start
+End
+Timer
+```
+
+---
+
+## 17. Interview Questions
+
+### What is the Event Loop?
+
+The Event Loop is part of the runtime's scheduling model that coordinates when scheduled work can receive a JavaScript execution opportunity.
+
+### Does the Event Loop execute callbacks?
+
+No. It coordinates scheduling; JavaScript executes when the callback receives an execution turn.
+
+### Why is it important?
+
+It allows JavaScript to coordinate asynchronous work without blocking while waiting for every external operation.
+
+### What happens after a task finishes?
+
+Pending microtasks are processed before moving on to the next task.
+
+### Why does `setTimeout(0)` run after synchronous code?
+
+Because the timer callback is scheduled for a later execution opportunity.
+
+### Why can heavy synchronous code freeze a UI?
+
+Because the current JavaScript execution stays busy and cannot yield an execution opportunity for other JavaScript work and timely rendering.
+
+---
+
+## 18. Exercises
+
+### Exercise 1
+
+Predict:
+
+```js
+console.log("Start");
+
+setTimeout(() => {
+    console.log("Timer");
+}, 0);
+
+console.log("End");
+```
+
+Explain every transition.
+
+### Exercise 2
+
+Predict:
+
+```js
+console.log("A");
+
+Promise.resolve().then(() => {
+    console.log("B");
+});
+
+setTimeout(() => {
+    console.log("C");
+}, 0);
+
+console.log("D");
+```
+
+Explain why `B` and `C` appear in that order.
+
+### Exercise 3
+
+Predict:
+
+```js
+Promise.resolve().then(() => {
+    console.log(1);
+});
+
+Promise.resolve().then(() => {
+    console.log(2);
+});
+
+setTimeout(() => {
+    console.log(3);
+}, 0);
+
+console.log(4);
+```
+
+### Exercise 4
+
+Explain why this can delay a timer callback:
+
+```js
+setTimeout(() => {
+    console.log("Timer");
+}, 0);
+
+for (let i = 0; i < 1000000000; i++) {}
+```
+
+### Exercise 5
+
+Explain the difference between:
+
+```text
+Call Stack
+Task Queue
+Microtask Queue
+Event Loop
+```
+
+Use one complete example.
+
+---
+
+## 19. Completion Checklist
+
+- [ ] I understand the purpose of the Event Loop.
+- [ ] I can connect Event Loop + Call Stack + Task Queue.
+- [ ] I can connect Event Loop + Microtask Queue.
+- [ ] I understand why `setTimeout(0)` is not immediate.
+- [ ] I understand why synchronous code can delay asynchronous callbacks.
+- [ ] I can dry-run a timer example.
+- [ ] I can dry-run a Promise + timer example.
+- [ ] I understand the microtask-before-next-task rule.
+- [ ] I understand Event Loop and Call Stack have different responsibilities.
+- [ ] I know browser and Node.js implementations have differences.
+- [ ] I can explain the Event Loop without memorizing a fake `while(true)` algorithm.
+
+---
+
+## 20. Quick Revision
+
+```text
+Current JavaScript task
+        ↓
+Task finishes
+        ↓
+Pending microtasks
+        ↓
+Next eligible task
+        ↓
+JavaScript executes
+        ↓
+Pending microtasks
+        ↓
+Repeat
+```
+
+Remember:
+
+```text
+Call Stack
+→ current execution
+
+Task Queue
+→ tasks waiting
+
+Microtask Queue
+→ Promise reactions / microtasks
+
+Event Loop
+→ coordinates execution opportunities
+```
+
+Most useful rule:
+
+```text
+Current task
+    ↓
+Microtasks
+    ↓
+Next task
+```
+
+---
+
+# Final Mental Model
+
+```text
+              JAVASCRIPT RUNTIME
+
+             ┌────────────────┐
+             │   Call Stack   │
+             │  current work  │
+             └───────▲────────┘
+                     │
+              execution turn
+                     │
+                Event Loop 
+                 Scheduling
+                ↗       ↖
+              /          \ 
+   ┌──────────────┐ ┌──────────────┐
+   │ Microtasks   │ │    Tasks     │
+   │ Promises     │ │ timers/events│
+   └──────────────┘ └──────────────┘
+```
+
+**Next:** `07-Microtask-Queue.md`

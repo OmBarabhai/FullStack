@@ -1,1885 +1,464 @@
 # JavaScript Runtime
 
-> **"JavaScript is just a programming language. It cannot execute itself. It requires an environment to run. That environment is called the JavaScript Runtime."**
+## 1. What Is the JavaScript Runtime?
 
----
+JavaScript code does not execute in isolation.
 
-# Learning Objectives
+When JavaScript runs, it operates inside a **JavaScript runtime environment**.
 
-After completing this chapter, you will be able to answer:
+A runtime provides the environment and components required to execute JavaScript and, depending on the environment, provides additional APIs.
 
-- What is a JavaScript Runtime?
-- Why does JavaScript need a Runtime?
-- What is the difference between ECMAScript, JavaScript, Engine, and Runtime?
-- What components make up a Runtime?
-- How does JavaScript code travel from source code to execution?
-- What is the difference between Browser Runtime and Node.js Runtime?
+Common JavaScript runtime environments include:
 
-> **Note**
->
-> This chapter introduces every component of the Runtime at a high level.
-> Each component (Execution Context, Call Stack, Web APIs, Event Loop, Promises, etc.) is covered in detail in the following chapters.
+- Browser environments
+- Node.js
 
----
+The important idea:
 
-# Table of Contents
-
-1. Introduction
-2. What is a Runtime?
-3. Why Does JavaScript Need a Runtime?
-4. ECMAScript vs JavaScript vs Runtime
-5. JavaScript Engine vs Runtime
-6. JavaScript Runtime Architecture
-
----
-
-# 1. Introduction
-
-Many beginners think JavaScript itself performs tasks like:
-
-- Creating timers
-- Fetching data from APIs
-- Manipulating HTML
-- Reading files
-- Handling user clicks
-
-This is **not true.**
-
-JavaScript is only a programming language.
-
-It defines things such as:
-
-- Variables
-- Functions
-- Objects
-- Arrays
-- Loops
-- Classes
-- Modules
-- Promises
-
-However, JavaScript alone **cannot**:
-
-- Wait for 5 seconds
-- Access the internet
-- Read your computer's files
-- Create a webpage
-- Access the camera
-- Store data in Local Storage
-
-Someone else provides these capabilities.
-
-That "someone" is the **JavaScript Runtime**.
-
----
-
-## Think About It
-
-Imagine writing this code:
-
-```javascript
-console.log("Hello World");
-```
-
-Question:
-
-Who actually prints this text?
-
-JavaScript?
-
-No.
-
-The Runtime executes the code and provides the `console` object.
-
-Without a Runtime,
-
-this code cannot run.
-
----
-
-# 2. What is a Runtime?
-
-A **Runtime** is the environment responsible for executing JavaScript code.
-
-It provides everything required to run a JavaScript program successfully.
-
-Think of it as the operating environment where JavaScript lives.
-
-Without a Runtime,
-
-JavaScript is simply text stored inside a file.
-
----
-
-## Definition
-
-> A JavaScript Runtime is an execution environment that runs JavaScript code and provides additional features such as memory management, APIs, asynchronous task handling, and communication with the operating system.
-
----
-
-## Real-Life Analogy
-
-Imagine you have a recipe.
-
-A recipe contains instructions.
-
-But can the recipe cook food?
-
-No.
-
-You need
-
-- Kitchen
-- Stove
-- Gas
-- Utensils
-- Ingredients
-
-Only then can cooking begin.
-
-Similarly,
-
-JavaScript is only the recipe.
-
-The Runtime is the complete kitchen.
-
-```
+```text
 JavaScript Code
-
-        │
-
-        ▼
-
-JavaScript Runtime
-
-        │
-
-        ▼
-
-Program Executes
+      ↓
+JavaScript Engine
+      ↓
+Runtime Environment
+      ↓
+Program Execution
 ```
 
 ---
 
-## Another Analogy
+## 2. JavaScript Engine vs JavaScript Runtime
 
-Imagine buying a car engine.
+These are related, but they are not the same thing.
 
-Can you drive using only the engine?
+### JavaScript Engine
 
-No.
+The engine is responsible for executing JavaScript.
 
-You also need
+Examples:
 
-- Wheels
-- Steering
-- Brakes
-- Fuel
-- Battery
+- V8 — used by Chrome and Node.js
+- SpiderMonkey — used by Firefox
+- JavaScriptCore — used by Safari
 
-Similarly,
+The engine handles JavaScript execution.
 
-JavaScript is only one part.
+### Runtime
 
-The Runtime is the complete vehicle.
+The runtime provides the larger environment around the engine.
 
----
+For example, a browser runtime can provide APIs such as:
 
-# 3. Why Does JavaScript Need a Runtime?
+```text
+setTimeout()
+fetch()
+DOM APIs
+Web Storage
+console
+```
 
-JavaScript was originally designed to make web pages interactive.
+Node.js provides its own runtime capabilities and APIs.
 
-The language itself only defines syntax and programming features.
+Therefore:
 
-It does **not** know how to interact with the outside world.
+```text
+Runtime
+├── JavaScript Engine
+├── Runtime APIs
+└── Other environment capabilities
+```
 
-For example,
-
-JavaScript does not know how to:
-
-❌ Create a timer
-
-❌ Download data from an API
-
-❌ Access the DOM
-
-❌ Store information in Local Storage
-
-❌ Read a file
-
-❌ Open a network connection
-
-Those capabilities are provided by the Runtime.
+Do not memorize this as a list. Understand the relationship.
 
 ---
 
-## Example 1
+## 3. Browser Runtime
 
-```javascript
+When JavaScript runs inside a browser, the environment contains more than the JavaScript engine.
+
+A simplified model:
+
+```text
+Browser Runtime
+│
+├── JavaScript Engine
+│
+├── Web APIs
+│   ├── DOM
+│   ├── fetch()
+│   ├── setTimeout()
+│   └── other browser APIs
+│
+├── Task Queues
+└── Event Loop
+```
+
+This is important because JavaScript itself does not directly perform every environment operation.
+
+For example:
+
+```js
 setTimeout(() => {
     console.log("Hello");
 }, 1000);
 ```
 
-Question:
+The timer operation is handled by the runtime environment.
 
-Who created `setTimeout()`?
-
-JavaScript?
-
-❌ No
-
-The Runtime provides it.
+The JavaScript engine executes the callback when the runtime eventually makes it available for execution.
 
 ---
 
-## Example 2
+## 4. Node.js Runtime
 
-```javascript
-fetch("https://api.example.com/users");
-```
+Node.js also uses the V8 JavaScript engine, but it is not a browser.
 
-Question:
+A simplified model:
 
-Who performs the HTTP request?
-
-JavaScript?
-
-❌ No
-
-The Runtime performs the network request.
-
----
-
-## Example 3
-
-```javascript
-document.querySelector("button");
-```
-
-Question:
-
-Who created the `document` object?
-
-JavaScript?
-
-❌ No
-
-The Browser Runtime provides it.
-
----
-
-## Without a Runtime
-
-JavaScript would only understand:
-
-- Variables
-- Functions
-- Objects
-- Arrays
-- Classes
-- Loops
-- Promises
-
-Everything else would be impossible.
-
----
-
-# 4. ECMAScript vs JavaScript vs Runtime
-
-One of the most common interview questions.
-
-Many developers incorrectly think these three terms mean the same thing.
-
-They do not.
-
----
-
-## ECMAScript
-
-ECMAScript is the official specification (rule book).
-
-It defines:
-
-- Syntax
-- Keywords
-- Classes
-- Modules
-- Promises
-- Arrow Functions
-- Async/Await
-
-ECMAScript **does not execute code**.
-
-It only defines the rules.
-
-Think of it as a textbook.
-
----
-
-## JavaScript
-
-JavaScript is an implementation of the ECMAScript specification.
-
-It follows the rules defined by ECMAScript.
-
-When you write
-
-```javascript
-let age = 22;
-```
-
-you are writing JavaScript that follows ECMAScript rules.
-
----
-
-## Runtime
-
-The Runtime actually executes JavaScript code.
-
-It provides:
-
-- JavaScript Engine
-- Memory
-- APIs
-- Event Loop
-- Queues
-
-Without the Runtime,
-
-JavaScript cannot execute.
-
----
-
-## Relationship
-
-```
-ECMAScript
-
-↓
-
-Defines Rules
-
-↓
-
-JavaScript
-
-↓
-
-Implements Those Rules
-
-↓
-
-Runtime
-
-↓
-
-Executes JavaScript
-```
-
----
-
-## Comparison Table
-
-| ECMAScript | JavaScript | Runtime |
-|------------|------------|---------|
-| Specification | Programming Language | Execution Environment |
-| Defines rules | Implements the rules | Executes JavaScript |
-| Cannot run code | Can be written by developers | Runs the code |
-| Maintained by ECMA | Used by developers | Provided by Browser or Node.js |
-
----
-
-# 5. JavaScript Engine vs Runtime
-
-Another very common interview question.
-
-Many people confuse the JavaScript Engine with the Runtime.
-
-They are not the same.
-
----
-
-## JavaScript Engine
-
-The Engine is responsible for reading and executing JavaScript code.
-
-Responsibilities include:
-
-- Parsing source code
-- Compiling code
-- Executing code
-- Optimizing performance
-- Garbage Collection
-
-Popular JavaScript Engines
-
-| Platform | Engine |
-|----------|--------|
-| Chrome | V8 |
-| Edge | V8 |
-| Node.js | V8 |
-| Firefox | SpiderMonkey |
-| Safari | JavaScriptCore |
-
----
-
-## Runtime
-
-The Runtime is much bigger.
-
-It contains the JavaScript Engine and many additional components.
-
-The Runtime provides:
-
-- JavaScript Engine
-- Memory Heap
-- Call Stack
-- Runtime APIs
-- Event Loop
-- Task Queues
-
----
-
-## Engine vs Runtime
-
-```
-JavaScript Runtime
-
-├── JavaScript Engine
-├── Memory Heap
-├── Call Stack
-├── Runtime APIs
-├── Event Loop
-└── Queues
-```
-
-Think of it like this:
-
-```
-Engine = Heart
-
-Runtime = Entire Human Body
-```
-
-The heart is important.
-
-But the body contains much more than just the heart.
-
----
-
-# 6. JavaScript Runtime Architecture
-
-At a high level, every JavaScript Runtime contains the following major components.
-
-```
-                     JavaScript Runtime
-
-┌────────────────────────────────────────────────────┐
-│                                                    │
-│               JavaScript Engine                    │
-│                                                    │
-│     ┌───────────────┐   ┌─────────────────────┐    │
-│     │ Memory Heap   │   │    Call Stack       │    │
-│     └───────────────┘   └─────────────────────┘    │
-│                                                    │
-└────────────────────────────────────────────────────┘
-
-                      │
-                      ▼
-
-┌────────────────────────────────────────────────────┐
-│                  Runtime APIs                      │
-│                                                    │
-│ DOM │ Timers │ Fetch │ Storage │ Events │ Console │
-└────────────────────────────────────────────────────┘
-
-                      │
-                      ▼
-
-┌────────────────────────────────────────────────────┐
-│                  Event Loop                        │
-└────────────────────────────────────────────────────┘
-
-                      │
-                      ▼
-
-┌──────────────────────┬─────────────────────────────┐
-│ Microtask Queue      │ Callback Queue              │
-└──────────────────────┴─────────────────────────────┘
-```
-
----
-
-## Don't Worry Yet
-
-You are **not expected to understand every component right now**.
-
-Each one has its own dedicated chapter in this handbook.
-
-| Component | Covered In |
-|-----------|------------|
-| Execution Context | Chapter 02 |
-| Call Stack | Chapter 03 |
-| Web APIs | Chapter 04 |
-| Task Queue | Chapter 05 |
-| Event Loop | Chapter 06 |
-| Microtask Queue | Chapter 07 |
-| setTimeout | Chapter 08 |
-| fetch | Chapter 10 |
-| Promises | Chapter 11 |
-| Async/Await | Chapter 13 |
-
----
-
-# End of Part 1
-
-In the next part, we'll study:
-
-- Components of the Runtime
-- JavaScript Engine in detail
-- Memory Heap
-- Call Stack (Overview)
-- Runtime Responsibilities
-
-# JavaScript Runtime (Part 2)
-
----
-
-# Table of Contents
-
-7. Components of the JavaScript Runtime
-8. JavaScript Engine
-9. Memory Heap
-10. Call Stack (Overview)
-11. Runtime APIs (Overview)
-12. Runtime Responsibilities
-13. High-Level Execution Flow
-
----
-
-# 7. Components of the JavaScript Runtime
-
-The JavaScript Runtime is not a single program.
-
-It is made up of several components that work together to execute JavaScript efficiently.
-
-Think of a computer.
-
-A computer isn't just a CPU.
-
-It contains
-
-- CPU
-- RAM
-- Storage
-- Keyboard
-- Mouse
-- Display
-
-All of these components work together.
-
-Similarly,
-
-a JavaScript Runtime contains several important components.
-
-```
-JavaScript Runtime
-
+```text
+Node.js Runtime
 │
-
-├── JavaScript Engine
-
-├── Memory Heap
-
-├── Call Stack
-
-├── Runtime APIs
-
+├── V8 JavaScript Engine
+├── Node.js APIs
 ├── Event Loop
-
-├── Microtask Queue
-
-└── Callback Queue
+└── libuv
 ```
 
-Each component has a specific responsibility.
+This is why JavaScript can run outside a browser.
+
+For example, Node.js can provide capabilities for:
+
+```text
+File system
+Networking
+Servers
+Streams
+Timers
+Processes
+```
+
+These are runtime capabilities rather than ordinary JavaScript language syntax.
 
 ---
 
-## Component Overview
+## 5. Important Mental Model
 
-| Component | Responsibility |
-|------------|----------------|
-| JavaScript Engine | Executes JavaScript code |
-| Heap Memory | Stores objects and reference values |
-| Call Stack | Keeps track of function execution |
-| Runtime APIs | Provides timers, networking, DOM, etc. |
-| Event Loop | Coordinates asynchronous execution |
-| Microtask Queue | Stores Promise callbacks |
-| Callback Queue | Stores timer and event callbacks |
+Do not think:
 
-> We will study each component in detail in later chapters.
-
----
-
-# 8. JavaScript Engine
-
-The JavaScript Engine is the heart of the Runtime.
-
-Its primary job is to understand and execute JavaScript code.
-
-Without the engine,
-
-nothing can execute.
-
----
-
-## Responsibilities of the Engine
-
-The engine performs several tasks.
-
-```
-JavaScript Code
-
-↓
-
-Read
-
-↓
-
-Parse
-
-↓
-
-Compile
-
-↓
-
-Execute
-
-↓
-
-Return Result
+```text
+JavaScript = Browser
 ```
 
-Its responsibilities include:
+Instead:
 
-- Reading JavaScript source code
-- Checking syntax
-- Converting code into machine instructions
-- Executing instructions
-- Optimizing execution
-- Managing memory
-- Garbage Collection
-
----
-
-## Popular JavaScript Engines
-
-| Runtime | Engine |
-|----------|--------|
-| Google Chrome | V8 |
-| Microsoft Edge | V8 |
-| Node.js | V8 |
-| Firefox | SpiderMonkey |
-| Safari | JavaScriptCore |
-
----
-
-## How the Engine Works
-
-Consider this code.
-
-```javascript
-let x = 10;
-
-console.log(x);
+```text
+JavaScript Language
+        ↓
+JavaScript Engine
+        ↓
+Runtime Environment
+        ↓
+Environment-specific APIs
 ```
 
-The engine performs the following steps.
+The same JavaScript language can therefore run in different environments.
 
-```
-Source Code
+For example:
 
-↓
+```text
+Browser
+→ JavaScript + Browser APIs
 
-Lexical Analysis
-
-↓
-
-Parsing
-
-↓
-
-Abstract Syntax Tree (AST)
-
-↓
-
-Compilation
-
-↓
-
-Machine Code
-
-↓
-
-CPU Executes
-```
-
-You don't need to memorize every step right now.
-
-We'll study the internal working of the engine later if required.
-
----
-
-## Engine Responsibilities (Simple)
-
-Imagine a teacher checking exam papers.
-
-The teacher
-
-- reads answers
-- checks grammar
-- evaluates answers
-- gives marks
-
-Similarly,
-
-the engine
-
-- reads code
-- checks syntax
-- executes instructions
-- returns output
-
----
-
-# 9. Memory Heap
-
-JavaScript stores data in memory.
-
-There are two major memory areas.
-
-- Heap
-- Call Stack
-
-Let's first understand the Heap.
-
----
-
-## What is Heap Memory?
-
-Heap is a large memory area used to store
-
-- Objects
-- Arrays
-- Functions
-- Reference values
-
-Example
-
-```javascript
-const student = {
-    name: "Om",
-    age: 22
-};
-```
-
-The object is stored inside the Heap.
-
-```
-Heap Memory
-
-+----------------------------+
-
-student
-
-↓
-
-Object
-
-name = Om
-
-age = 22
-
-+----------------------------+
+Node.js
+→ JavaScript + Node.js APIs
 ```
 
 ---
 
-## Why Heap?
+## 6. Connection to Folder 02 — Functional JavaScript
 
-Objects can become very large.
+You already completed `map()`, `filter()`, `find()`, `findIndex()`, `some()`, `every()`, `reduce()`, `sort()`, and chaining. Do **not** relearn them here.
 
-Imagine storing
+The important connection is:
 
-- 10 students
-- 100 students
-- 10,000 students
+> A callback does not automatically mean asynchronous execution.
 
-Heap allows JavaScript to allocate memory dynamically.
+For example:
 
----
-
-## Primitive vs Reference Values
-
-Primitive values
-
-```javascript
-let age = 22;
+```js
+const total = [10, 20, 30].reduce((acc, value) => {
+    return acc + value;
+}, 0);
 ```
 
-Reference values
+The `reduce()` callback normally executes synchronously as part of the current JavaScript execution.
 
-```javascript
-const person = {
-    name: "Om"
-};
+```text
+Current JavaScript execution
+        ↓
+     reduce()
+        ↓
+ callback executes
+        ↓
+      result
 ```
 
-Reference values point to objects stored inside the Heap.
+So:
+
+```text
+callback ≠ asynchronous
+```
+
+A callback can be synchronous or asynchronous depending on the API that uses it. This is an important bridge from Folder 02 to asynchronous JavaScript.
+
+Your DevAPI code is currently mostly synchronous data processing. Later it will evolve toward:
+
+```text
+Static request data
+      ↓
+Functional processing
+      ↓
+Actual asynchronous request
+      ↓
+Promise
+      ↓
+async/await
+      ↓
+Error handling
+```
 
 ---
 
-## Important Note
+## 7. Why This Matters for Asynchronous JavaScript
 
-You don't directly interact with the Heap.
+This topic is the foundation for the rest of this folder.
 
-The JavaScript Engine automatically allocates and frees memory when needed.
+Later we will study:
 
-This process is called
+```text
+Runtime
+   ↓
+Execution Context
+   ↓
+Call Stack
+   ↓
+Web APIs / Runtime APIs
+   ↓
+Task Queue
+   ↓
+Microtask Queue
+   ↓
+Event Loop
+   ↓
+Promises
+   ↓
+async / await
+```
 
-**Garbage Collection**
-
-We'll study Garbage Collection separately.
-
----
-
-# 10. Call Stack (Overview)
-
-One of the most important parts of the Runtime is the Call Stack.
-
-For now,
-
-only remember its purpose.
-
----
-
-## What is the Call Stack?
-
-The Call Stack keeps track of which function is currently executing.
-
-Imagine a stack of books.
-
-You can only place a new book on the top.
-
-You can only remove the top book.
-
-The Call Stack works the same way.
+If you understand the runtime model first, the later topics become much easier to reason about.
 
 ---
 
-Example
+## 8. First Look at Heap and Call Stack
 
-```javascript
-function greet() {
+You will study these in detail later, but know their roles now.
+
+### Heap
+
+The heap is associated with dynamically allocated data such as objects.
+
+```js
+const user = { name: "Om" };
+```
+
+Think of the object as data held in memory, with `user` referring to it. This is a conceptual model, not an exact physical memory diagram.
+
+### Call Stack
+
+The Call Stack tracks active JavaScript execution contexts/function calls.
+
+```js
+function first() {
+    second();
+}
+
+function second() {
     console.log("Hello");
 }
 
-greet();
+first();
 ```
 
-Execution
+Conceptually:
 
-```
-Call Stack
-
-↓
-
-Global()
-
-↓
-
-greet()
-
-↓
-
+```text
 console.log()
-
-↓
-
-Return
-
-↓
-
-Empty
+second()
+first()
 ```
 
-Only one function executes at a time.
+The detailed stack behavior belongs to Part 03.
 
 ---
 
-## Why is JavaScript Single Threaded?
+## 8. Simple Example
 
-JavaScript has only one Call Stack.
+Consider:
 
-Since only one function can execute on the stack at a time,
+```js
+console.log("A");
 
-JavaScript executes code sequentially.
-
-This is why JavaScript is called
-
-**Single-Threaded.**
-
----
-
-## Important
-
-This chapter only introduces the Call Stack.
-
-The complete Call Stack, stack frames, recursion, stack overflow, push/pop operations, and execution flow are covered in **Chapter 03**.
-
----
-
-# 11. Runtime APIs (Overview)
-
-The Runtime provides many useful APIs that JavaScript itself does not include.
-
-Depending on where JavaScript runs,
-
-different APIs are available.
-
----
-
-## Browser Runtime APIs
-
-Examples
-
-```
-DOM
-
-fetch()
-
-setTimeout()
-
-setInterval()
-
-console
-
-localStorage
-
-sessionStorage
-
-navigator
-
-history
-
-location
-
-addEventListener()
-```
-
-These APIs allow JavaScript to interact with the browser.
-
----
-
-## Node.js Runtime APIs
-
-Node.js does not have a DOM.
-
-Instead,
-
-it provides server-side APIs.
-
-Examples
-
-```
-fs
-
-http
-
-https
-
-os
-
-path
-
-crypto
-
-process
-
-stream
-
-child_process
-```
-
-These APIs allow JavaScript to interact with the operating system.
-
----
-
-## Important Interview Question
-
-Is `setTimeout()` part of JavaScript?
-
-Answer
-
-❌ No
-
-It is provided by the Runtime.
-
----
-
-Another Interview Question
-
-Is `fetch()` part of JavaScript?
-
-Answer
-
-❌ No
-
-The Runtime provides it.
-
----
-
-# 12. Runtime Responsibilities
-
-The Runtime performs many responsibilities beyond executing JavaScript.
-
-Its responsibilities include
-
-✓ Running JavaScript code
-
-✓ Managing memory
-
-✓ Creating Execution Contexts
-
-✓ Managing the Call Stack
-
-✓ Providing Runtime APIs
-
-✓ Scheduling asynchronous operations
-
-✓ Managing task queues
-
-✓ Running the Event Loop
-
-✓ Communicating with the operating system
-
-Without these responsibilities,
-
-modern JavaScript applications would not work.
-
----
-
-# 13. High-Level Execution Flow
-
-Let's see how everything works together.
-
-Imagine this code.
-
-```javascript
-console.log("Hello");
-```
-
-High-Level Flow
-
-```
-JavaScript File
-
-↓
-
-JavaScript Engine
-
-↓
-
-Execution Context Created
-
-↓
-
-Call Stack
-
-↓
-
-console.log()
-
-↓
-
-Runtime Console API
-
-↓
-
-Output
-
-↓
-
-Program Ends
-```
-
-Another example
-
-```javascript
 setTimeout(() => {
-    console.log("Done");
-}, 1000);
+    console.log("B");
+}, 0);
+
+console.log("C");
 ```
 
-High-Level Flow
+Do not focus on the answer yet.
 
-```
-JavaScript File
+The important question is:
 
-↓
+> Why does `setTimeout()` involve the runtime instead of simply executing its callback immediately?
 
-Engine
+That question leads directly into:
 
-↓
-
-Call Stack
-
-↓
-
-Runtime Timer API
-
-↓
-
-Wait
-
-↓
-
-Queue
-
-↓
-
-Event Loop
-
-↓
-
-Call Stack
-
-↓
-
-console.log()
-
-↓
-
-Output
-```
-
-> Don't worry if the Event Loop or Queue seems confusing.
->
-> They are introduced here only to show the complete picture.
-> We will study them in detail in Chapters 05, 06, and 07.
-
----
-
-# Key Takeaways
-
-- A Runtime is made up of several components working together.
-- The JavaScript Engine executes JavaScript code.
-- Heap Memory stores objects and reference values.
-- The Call Stack tracks function execution.
-- The Runtime provides APIs such as `fetch()`, `setTimeout()`, and the DOM.
-- The Runtime manages asynchronous operations using the Event Loop and queues.
-- JavaScript itself does not provide browser or operating system APIs.
-
----
-
-# What's Next?
-
-In **Part 3**, we'll cover:
-
-- Browser Runtime
-- Node.js Runtime
-- Browser vs Node.js
-- Real-World Runtime Examples
-- Common Misconceptions
-- Interview Questions
-- Revision Notes
-- Summary
-
-# JavaScript Runtime (Part 3)
-
----
-
-# Table of Contents
-
-14. Browser Runtime
-15. Node.js Runtime
-16. Browser vs Node.js Runtime
-17. Real-World Examples
-18. Common Misconceptions
-19. Interview Questions
-20. Quick Revision
-21. Summary
-22. What's Next?
-
----
-
-# 14. Browser Runtime
-
-When JavaScript runs inside a web browser (Chrome, Firefox, Safari, Edge), it gets access to many additional features that the JavaScript language itself does not provide.
-
-These features are called **Browser APIs** or **Web APIs**.
-
-The browser combines:
-
-- JavaScript Engine
-- Memory
 - Call Stack
-- Web APIs
+- Runtime APIs
+- Task Queue
 - Event Loop
-- Task Queues
 
-to create the Browser Runtime.
-
----
-
-## Browser Runtime Architecture
-
-```
-                  Browser Runtime
-
-        ┌─────────────────────────────┐
-        │ JavaScript Engine (V8 etc.) │
-        └─────────────────────────────┘
-                     │
-                     ▼
-        ┌─────────────────────────────┐
-        │ Heap + Call Stack           │
-        └─────────────────────────────┘
-                     │
-                     ▼
-        ┌─────────────────────────────┐
-        │ Browser APIs                │
-        │                             │
-        │ DOM                         │
-        │ Timers                      │
-        │ Fetch                       │
-        │ Storage                     │
-        │ Events                      │
-        └─────────────────────────────┘
-                     │
-                     ▼
-        ┌─────────────────────────────┐
-        │ Event Loop                  │
-        └─────────────────────────────┘
-                     │
-                     ▼
-        ┌─────────────────────────────┐
-        │ Queues                      │
-        └─────────────────────────────┘
-```
+We will investigate those in the next topics.
 
 ---
 
-## Browser APIs
+## 9. Common Confusions
 
-The browser provides many useful APIs.
+### Confusion 1
 
-Examples
+> "JavaScript is asynchronous."
 
-```
-document
+Not exactly.
 
-window
+JavaScript execution itself is primarily synchronous.
 
-console
-
-fetch
-
-setTimeout
-
-setInterval
-
-localStorage
-
-sessionStorage
-
-navigator
-
-history
-
-location
-
-addEventListener
-
-MutationObserver
-
-IntersectionObserver
-```
-
-Notice that these APIs are **not** part of JavaScript.
+Asynchronous behavior comes from the interaction between JavaScript execution and the surrounding runtime mechanisms.
 
 ---
 
-## Example
+### Confusion 2
 
-```javascript
-document.querySelector("h1");
-```
+> "V8 is Node.js."
 
-Question
+No.
 
-Who created `document`?
+V8 is the JavaScript engine.
 
-Answer
-
-The Browser Runtime.
+Node.js is a runtime environment that uses V8.
 
 ---
 
-Another Example
+### Confusion 3
 
-```javascript
-localStorage.setItem("name", "Om");
-```
+> "setTimeout() is JavaScript language syntax."
 
-Question
+No.
 
-Who provides `localStorage`?
+`setTimeout()` is provided by the environment.
 
-Answer
-
-The Browser Runtime.
+The exact APIs available depend on the runtime.
 
 ---
 
-# 15. Node.js Runtime
+### Confusion 4
 
-JavaScript is no longer limited to browsers.
+> "The event loop is the JavaScript engine."
 
-Node.js allows JavaScript to run outside the browser.
+No.
 
-Unlike browsers,
-
-Node.js does **not** provide
-
-❌ DOM
-
-❌ Window
-
-❌ Document
-
-Instead,
-
-it provides APIs that interact with the operating system.
+The event loop is part of the runtime's mechanism for coordinating asynchronous work with JavaScript execution.
 
 ---
 
-## Node.js Runtime Architecture
+## 10. Interview-Level Understanding
 
-```
-                 Node.js Runtime
+You should be able to answer:
 
-          ┌─────────────────────┐
-          │ V8 Engine           │
-          └─────────────────────┘
-                     │
-                     ▼
-          ┌─────────────────────┐
-          │ Heap + Call Stack   │
-          └─────────────────────┘
-                     │
-                     ▼
-          ┌─────────────────────┐
-          │ Node APIs           │
-          │                     │
-          │ fs                  │
-          │ http                │
-          │ crypto              │
-          │ os                  │
-          │ process             │
-          └─────────────────────┘
-                     │
-                     ▼
-          ┌─────────────────────┐
-          │ libuv               │
-          └─────────────────────┘
-```
+### Q1. What is a JavaScript runtime?
+
+A JavaScript runtime is the environment in which JavaScript executes. It includes the JavaScript engine plus environment-specific capabilities and mechanisms used by the program.
+
+### Q2. What is the difference between an engine and a runtime?
+
+The engine executes JavaScript. The runtime provides the broader environment around that engine, including APIs and mechanisms for interacting with the environment.
+
+### Q3. Is Node.js a JavaScript engine?
+
+No. Node.js is a JavaScript runtime that uses the V8 engine.
+
+### Q4. Why is the runtime important for asynchronous JavaScript?
+
+Because operations such as timers, networking, and other environment tasks are coordinated by runtime mechanisms. Their results/callbacks can later become available for JavaScript execution.
 
 ---
 
-## Common Node APIs
+## 11. Practice
 
-```
-fs
+### Task 1
 
-http
+Explain in your own words:
 
-https
-
-os
-
-crypto
-
-process
-
-stream
-
-path
-
-dns
-
-url
-
-events
-
-timers
+```text
+JavaScript Engine
+vs
+JavaScript Runtime
 ```
 
----
+### Task 2
 
-## Example
+Identify which category each belongs to:
 
-```javascript
-const fs = require("fs");
-
-fs.readFile("data.txt", () => {});
+```text
+V8
+Node.js
+Browser
+setTimeout()
+JavaScript language
 ```
 
-Question
+### Task 3
 
-Who provides `fs`?
+Predict what you think this prints:
 
-Answer
+```js
+console.log("Start");
 
-Node.js Runtime.
-
----
-
-# 16. Browser vs Node.js Runtime
-
-Although both run JavaScript,
-
-they provide different environments.
-
----
-
-## Comparison Table
-
-| Browser Runtime | Node.js Runtime |
-|-----------------|-----------------|
-| Runs inside browsers | Runs outside browsers |
-| Has DOM | No DOM |
-| Has Window object | No Window object |
-| Has Document | No Document |
-| Uses Browser APIs | Uses Node APIs |
-| Used for Frontend | Used for Backend |
-
----
-
-## APIs Comparison
-
-| Browser | Node.js |
-|----------|----------|
-| document | fs |
-| window | process |
-| fetch | http |
-| localStorage | path |
-| navigator | os |
-| history | crypto |
-
----
-
-## Same JavaScript
-
-Both environments still understand
-
-```javascript
-let x = 10;
-
-function greet(){}
-
-class Student{}
-```
-
-because these are JavaScript features.
-
-Only the available APIs change.
-
----
-
-# 17. Real-World Examples
-
----
-
-## Example 1 — React Application
-
-```javascript
-fetch("/users")
-```
-
-Flow
-
-```
-React
-
-↓
-
-JavaScript
-
-↓
-
-Browser Runtime
-
-↓
-
-Network Request
-
-↓
-
-Server
-
-↓
-
-Response
-
-↓
-
-Browser Runtime
-
-↓
-
-JavaScript
-
-↓
-
-React Updates UI
-```
-
----
-
-## Example 2 — Express.js Server
-
-```javascript
-fs.readFile("users.json");
-```
-
-Flow
-
-```
-Express
-
-↓
-
-JavaScript
-
-↓
-
-Node Runtime
-
-↓
-
-Operating System
-
-↓
-
-File Read
-
-↓
-
-Node Runtime
-
-↓
-
-JavaScript
-
-↓
-
-Response
-```
-
----
-
-## Example 3 — Timer
-
-```javascript
 setTimeout(() => {
-    console.log("Done");
-},1000);
+    console.log("Timer");
+}, 0);
+
+console.log("End");
 ```
 
-Flow
+Do not look up the answer first.
 
-```
-JavaScript
-
-↓
-
-Runtime Timer
-
-↓
-
-Wait
-
-↓
-
-Queue
-
-↓
-
-Event Loop
-
-↓
-
-Call Stack
-
-↓
-
-console.log()
-```
-
-We will study this flow in detail later.
+Write your prediction and explain your reasoning.
 
 ---
 
-# 18. Common Misconceptions
+## 12. Completion Criteria
 
----
+Do not mark this topic complete merely because you read it.
 
-## ❌ JavaScript and Runtime are the same
+You should be able to:
 
-Wrong.
+- explain engine vs runtime
+- explain browser vs Node.js runtime at a high level
+- explain why runtime matters for asynchronous behavior
+- identify that V8 is an engine, not Node.js
+- reason about the role of `setTimeout()`
+- attempt the practice tasks independently
 
-JavaScript is the language.
+Next:
 
-The Runtime executes JavaScript.
-
----
-
-## ❌ setTimeout is JavaScript
-
-Wrong.
-
-The Runtime provides it.
-
----
-
-## ❌ fetch is JavaScript
-
-Wrong.
-
-The Runtime provides it.
-
----
-
-## ❌ document is JavaScript
-
-Wrong.
-
-The Browser Runtime provides it.
-
----
-
-## ❌ Promise is a Browser API
-
-Wrong.
-
-Promise is part of JavaScript.
-
-Only Promise callbacks are managed by the Runtime.
-
----
-
-## ❌ Node.js is a programming language
-
-Wrong.
-
-Node.js is a JavaScript Runtime.
-
----
-
-## ❌ Browser and Node.js are identical
-
-Wrong.
-
-Both execute JavaScript,
-
-but they provide different APIs.
-
----
-
-# 19. Interview Questions
-
----
-
-## What is JavaScript Runtime?
-
-A Runtime is the environment that executes JavaScript code and provides additional APIs like timers, networking, storage, and asynchronous task handling.
-
----
-
-## Why does JavaScript need a Runtime?
-
-Because JavaScript alone cannot access the browser, operating system, timers, networking, or files.
-
----
-
-## Difference between Engine and Runtime?
-
-Engine executes JavaScript.
-
-Runtime contains the Engine plus APIs, memory management, queues, and the Event Loop.
-
----
-
-## What is V8?
-
-Google's JavaScript Engine used in Chrome and Node.js.
-
----
-
-## Is setTimeout part of JavaScript?
-
-No.
-
-The Runtime provides it.
-
----
-
-## Is fetch part of JavaScript?
-
-No.
-
-The Runtime provides it.
-
----
-
-## Is Promise a Browser API?
-
-No.
-
-Promise belongs to JavaScript.
-
----
-
-## Is document part of JavaScript?
-
-No.
-
-It belongs to the Browser Runtime.
-
----
-
-## Can Browser JavaScript read local files?
-
-No.
-
-For security reasons.
-
-Node.js can.
-
----
-
-## Why can Node.js access the file system?
-
-Because the Node Runtime provides the File System API.
-
----
-
-# 20. Quick Revision
-
-```
-JavaScript
-
-↓
-
-Programming Language
-
-↓
-
-Needs Runtime
-
-↓
-
-Runtime Contains
-
-Engine
-
-Heap
-
-Call Stack
-
-APIs
-
-Event Loop
-
-Queues
-```
-
----
-
-## Remember
-
-✓ JavaScript ≠ Runtime
-
-✓ Engine ⊂ Runtime
-
-✓ Browser Runtime provides DOM
-
-✓ Node Runtime provides File System
-
-✓ JavaScript cannot execute itself
-
-✓ Runtime executes JavaScript
-
-✓ Browser APIs ≠ JavaScript
-
-✓ Node APIs ≠ JavaScript
-
----
-
-# 21. Summary
-
-In this chapter, you learned that:
-
-- JavaScript is only a programming language.
-- A Runtime is required to execute JavaScript.
-- The Runtime contains the JavaScript Engine and several supporting components.
-- The Engine executes JavaScript code.
-- Heap stores objects and reference values.
-- Call Stack manages function execution.
-- Browser and Node.js provide different runtime APIs.
-- Browser APIs and Node APIs are not part of JavaScript.
-- Understanding the Runtime is the foundation for asynchronous JavaScript.
-
----
-
-# Chapter Revision Checklist
-
-Before moving to the next chapter, make sure you can answer:
-
-- [ ] What is a Runtime?
-- [ ] Why does JavaScript need a Runtime?
-- [ ] Difference between ECMAScript, JavaScript, Engine, and Runtime.
-- [ ] Difference between Engine and Runtime.
-- [ ] Name the main Runtime components.
-- [ ] Difference between Browser Runtime and Node.js Runtime.
-- [ ] Give five Browser APIs.
-- [ ] Give five Node.js APIs.
-- [ ] Explain why `setTimeout()` is not part of JavaScript.
-- [ ] Explain why `fetch()` is not part of JavaScript.
-
-If you can confidently answer all of these without looking at your notes, you are ready for the next chapter.
-
----
-
-# What's Next?
-
-➡️ **02-Execution-Context.md**
-
-In the next chapter, you'll learn:
-
-- What happens before JavaScript executes the first line of code.
-- Global Execution Context (GEC)
-- Function Execution Context (FEC)
-- Creation Phase
-- Execution Phase
-- Memory Allocation
-- Variable Hoisting
-- Function Hoisting
-- `this` Binding (Introduction)
-- Lexical Environment (Introduction)
-
-Execution Context is one of the most important concepts in JavaScript and forms the foundation for understanding the Call Stack and asynchronous behavior.
+# Call Stack

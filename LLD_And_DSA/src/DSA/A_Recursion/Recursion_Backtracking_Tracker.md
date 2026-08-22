@@ -233,8 +233,8 @@ Choose a piece/operator → validate → recurse → undo
 |                136 | Expression Evaluation by Recursion            | Interview            |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 |                137 | Different Ways to Add Parentheses             | LeetCode 241         |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 |                138 | Boolean Expression Parenthesization           | GFG                  |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-|                139 | Count Valid Parenthesizations                 | GFG                  |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-|                140 | Generate All Sentence Splits                  | Interview            |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
+|                139 | Count Valid Parenthesizations                 | GFG                  |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+|                140 | Generate All Sentence Splits                  | Interview            |   🔄   | ⬜  | ⬜  | ⬜  |    —     |
 
 ### Pattern memory
 ```text
@@ -253,14 +253,14 @@ Choose split/operator → validate → recurse → undo
 row,col → try directions → validate → move → recurse → backtrack
 ```
 
-|   # | Problem                   | Platform     | Status | R1 | R2 | R3 | Strength |
-|----:|---------------------------|--------------|:------:|:--:|:--:|:--:|:--------:|
-| 141 | Rat in a Maze             | GFG          |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 142 | Maze Paths                | GFG          |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 143 | Maze Paths with Obstacles | GFG          |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 144 | Count Maze Paths          | GFG          |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 145 | Word Search               | LeetCode 79  |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 146 | Word Search II            | LeetCode 212 |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
+|   # | Problem                   | Platform     |   Status   | R1 | R2 | R3 | Strength |
+|----:|---------------------------|--------------|:----------:|:--:|:--:|:--:|:--------:|
+| 141 | Rat in a Maze             | GFG          |     ☑️     | ⬜  | ⬜  | ⬜  |    —     |
+| 142 | Maze Paths                | GFG          |     ☑️     | ⬜  | ⬜  | ⬜  |    —     |
+| 143 | Maze Paths with Obstacles | GFG          |     ☑️     | ⬜  | ⬜  | ⬜  |    —     |
+| 144 | Count Maze Paths          | GFG          |     ☑️     | ⬜  | ⬜  | ⬜  |    —     |
+| 145 | Word Search               | LeetCode 79  |     ☑️     | ⬜  | ⬜  | ⬜  |    —     |
+| 146 | Word Search II            | LeetCode 212 |     ☑️     | ⬜  | ⬜  | ⬜  |    —     |
 
 ### Pattern memory
 ```text
@@ -281,10 +281,10 @@ Place/choose → check constraint → recurse → undo
 
 |   # | Problem                     | Platform    | Status | R1 | R2 | R3 | Strength |
 |----:|-----------------------------|-------------|:------:|:--:|:--:|:--:|:--------:|
-| 147 | N-Queens                    | LeetCode 51 |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 148 | N-Queens II                 | LeetCode 52 |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 149 | Sudoku Solver               | LeetCode 37 |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 150 | Knight's Tour               | GFG         |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
+| 147 | N-Queens                    | LeetCode 51 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+| 148 | N-Queens II                 | LeetCode 52 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+| 149 | Sudoku Solver               | LeetCode 37 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+| 150 | Knight's Tour               | GFG         |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 | 151 | Crossword Puzzle Solver     | GFG         |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
 | 152 | Graph Coloring Backtracking | GFG         |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
 | 153 | Hamiltonian Path            | Interview   |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |

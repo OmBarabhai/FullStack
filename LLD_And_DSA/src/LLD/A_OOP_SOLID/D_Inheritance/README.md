@@ -1816,4 +1816,2441 @@ initializes Student's own field
 # Next Part
 
 ➡️ **Part 3 — Inheritance Practice Problems**
+# D_Inheritance — Part 3: Inheritance Practice Problems
 
+Part 3 is the **coding practice layer**.
+
+You already learned:
+
+```text
+Part 1 → Inheritance Fundamentals
+Part 2 → extends + super + Constructors
+Part 3 → Inheritance Practice
+```
+
+The goal is to stop only understanding inheritance theoretically and start **designing parent-child classes yourself**.
+
+---
+
+# Learning Goals
+
+After completing Part 3, you should be able to:
+
+* Create a parent class.
+* Create a child class using `extends`.
+* Reuse parent fields and methods.
+* Call parent constructors using `super()`.
+* Call parameterized parent constructors using `super(...)`.
+* Understand constructor execution order.
+* Identify an **IS-A relationship**.
+* Avoid unnecessary duplication between parent and child classes.
+
+---
+
+# P1 — Animal → Dog
+
+## Objective
+
+Understand basic inheritance.
+
+Create:
+
+```java
+class Animal {
+
+    String name;
+
+    void eat() {
+        System.out.println("Animal is eating");
+    }
+}
+```
+
+Create:
+
+```java
+class Dog extends Animal {
+
+    void bark() {
+        System.out.println("Dog is barking");
+    }
+}
+```
+
+### Main
+
+Create:
+
+```java
+Dog d = new Dog();
+```
+
+Set:
+
+```java
+d.name = "Tommy";
+```
+
+Call:
+
+```java
+d.eat();
+d.bark();
+```
+
+### Expected Output
+
+```text
+Animal is eating
+Dog is barking
+```
+
+### Questions
+
+1. Which class is the parent?
+2. Which class is the child?
+3. Where does `eat()` come from?
+4. Where does `bark()` come from?
+5. Is Dog an Animal?
+
+---
+
+# P2 — Person → Student
+
+## Objective
+
+Practice parent fields + child fields.
+
+### Parent
+
+```java
+class Person {
+
+    String name;
+    int age;
+
+    void displayPerson() {
+        System.out.println(name);
+        System.out.println(age);
+    }
+}
+```
+
+### Child
+
+```java
+class Student extends Person {
+
+    int rollNumber;
+    String course;
+
+    void displayStudent() {
+        System.out.println(rollNumber);
+        System.out.println(course);
+    }
+}
+```
+
+### Main
+
+Create:
+
+```java
+Student s = new Student();
+```
+
+Set:
+
+```text
+name = "Om"
+age = 22
+rollNumber = 101
+course = "Computer Science"
+```
+
+Then call:
+
+```java
+s.displayPerson();
+s.displayStudent();
+```
+
+### Core Lesson
+
+The child can reuse the parent's members instead of declaring them again.
+
+```text
+Person
+ ├── name
+ ├── age
+ └── displayPerson()
+
+        ↓ extends
+
+Student
+ ├── rollNumber
+ ├── course
+ └── displayStudent()
+```
+
+---
+
+# P3 — Vehicle → Car
+
+## Objective
+
+Understand inheritance through a real-world IS-A relationship.
+
+### Parent
+
+```java
+class Vehicle {
+
+    String brand;
+    int speed;
+
+    void start() {
+        System.out.println("Vehicle started");
+    }
+}
+```
+
+### Child
+
+```java
+class Car extends Vehicle {
+
+    int numberOfDoors;
+
+    void drive() {
+        System.out.println("Car is driving");
+    }
+}
+```
+
+### Main
+
+Create a `Car`.
+
+Set:
+
+```text
+brand = "Toyota"
+speed = 100
+numberOfDoors = 4
+```
+
+Call:
+
+```java
+start();
+drive();
+```
+
+### Think
+
+Why shouldn't `Car` declare another:
+
+```java
+String brand;
+int speed;
+```
+
+if those properties already belong to `Vehicle`?
+
+---
+
+# P4 — Employee → Manager
+
+## Objective
+
+Practice inheritance with constructors.
+
+### Parent
+
+```java
+class Employee {
+
+    int employeeId;
+    String name;
+
+    Employee(int employeeId, String name) {
+
+        this.employeeId = employeeId;
+        this.name = name;
+    }
+}
+```
+
+### Child
+
+Create:
+
+```java
+class Manager extends Employee
+```
+
+with:
+
+```java
+double bonus;
+```
+
+Create a constructor:
+
+```text
+Manager(employeeId, name, bonus)
+```
+
+Use:
+
+```java
+super(employeeId, name);
+```
+
+to initialize the parent portion.
+
+### Main
+
+Create:
+
+```java
+Manager m = new Manager(101, "Om", 50000);
+```
+
+Print:
+
+```text
+employeeId
+name
+bonus
+```
+
+### Core Lesson
+
+```text
+Manager constructor
+       ↓
+super(employeeId, name)
+       ↓
+Employee constructor
+       ↓
+Manager's own fields
+```
+
+---
+
+# P5 — Animal → Dog Constructor Chain
+
+## Objective
+
+Understand constructor execution order.
+
+Create:
+
+```java
+class Animal {
+
+    Animal() {
+        System.out.println("Animal Constructor");
+    }
+}
+```
+
+Then:
+
+```java
+class Dog extends Animal {
+
+    Dog() {
+        System.out.println("Dog Constructor");
+    }
+}
+```
+
+Create:
+
+```java
+Dog d = new Dog();
+```
+
+### Predict the output before running.
+
+Expected:
+
+```text
+Animal Constructor
+Dog Constructor
+```
+
+### Challenge
+
+Explicitly add:
+
+```java
+super();
+```
+
+inside the `Dog` constructor.
+
+Run again.
+
+Ask yourself:
+
+> Did the output change?
+
+---
+
+# P6 — Person → Student With `super(...)`
+
+## Objective
+
+Practice parameterized parent constructors.
+
+### Parent
+
+```java
+class Person {
+
+    String name;
+
+    Person(String name) {
+        this.name = name;
+    }
+}
+```
+
+### Child
+
+Create:
+
+```java
+class Student extends Person {
+
+    int rollNumber;
+
+    Student(String name, int rollNumber) {
+
+        super(name);
+
+        this.rollNumber = rollNumber;
+    }
+}
+```
+
+### Main
+
+```java
+Student s = new Student("Om", 101);
+```
+
+Print:
+
+```text
+Om
+101
+```
+
+### Important
+
+Understand exactly what this does:
+
+```java
+super(name);
+```
+
+It calls:
+
+```java
+Person(String name)
+```
+
+---
+
+# P7 — Parent Method + Child Method
+
+## Objective
+
+Understand inherited methods.
+
+### Parent
+
+```java
+class Animal {
+
+    void eat() {
+        System.out.println("Animal eating");
+    }
+}
+```
+
+### Child
+
+```java
+class Dog extends Animal {
+
+    void bark() {
+        System.out.println("Dog barking");
+    }
+}
+```
+
+Create:
+
+```java
+Dog d = new Dog();
+```
+
+Call:
+
+```java
+d.eat();
+d.bark();
+```
+
+### Think
+
+`Dog` does not contain its own `eat()` method.
+
+So why does this work?
+
+```java
+d.eat();
+```
+
+---
+
+# P8 — `super` Method Practice
+
+## Objective
+
+Practice explicitly calling a parent method.
+
+### Parent
+
+```java
+class Animal {
+
+    void sound() {
+        System.out.println("Animal sound");
+    }
+}
+```
+
+### Child
+
+Create:
+
+```java
+class Dog extends Animal {
+
+    void sound() {
+
+        super.sound();
+
+        System.out.println("Dog sound");
+    }
+}
+```
+
+Create:
+
+```java
+Dog d = new Dog();
+d.sound();
+```
+
+### Expected
+
+```text
+Animal sound
+Dog sound
+```
+
+### Core Concept
+
+```java
+super.sound();
+```
+
+means:
+
+> Call the parent version of `sound()`.
+
+---
+
+# P9 — Parent Field + `super`
+
+## Objective
+
+Understand `this` vs `super`.
+
+Create:
+
+```java
+class Animal {
+
+    String name = "Animal";
+}
+```
+
+Child:
+
+```java
+class Dog extends Animal {
+
+    String name = "Dog";
+
+    void display() {
+
+        System.out.println(this.name);
+        System.out.println(super.name);
+    }
+}
+```
+
+Create:
+
+```java
+Dog d = new Dog();
+d.display();
+```
+
+### Expected
+
+```text
+Dog
+Animal
+```
+
+### Core Lesson
+
+```text
+this.name
+    ↓
+Dog's name
+
+super.name
+    ↓
+Animal's name
+```
+
+---
+
+# P10 ⭐ — Mini Inheritance Design
+
+## Employee → Developer
+
+This is the final and most important Part 3 problem.
+
+### Parent Class
+
+Create:
+
+```java
+class Employee
+```
+
+Fields:
+
+```java
+private int employeeId;
+private String name;
+private double salary;
+```
+
+Constructor:
+
+```text
+Employee(employeeId, name, salary)
+```
+
+Method:
+
+```java
+displayEmployee()
+```
+
+---
+
+## Child Class
+
+Create:
+
+```java
+class Developer extends Employee
+```
+
+Additional fields:
+
+```java
+private String programmingLanguage;
+private int experience;
+```
+
+Constructor:
+
+```text
+Developer(
+    employeeId,
+    name,
+    salary,
+    programmingLanguage,
+    experience
+)
+```
+
+Use:
+
+```java
+super(employeeId, name, salary);
+```
+
+---
+
+## Methods
+
+Create:
+
+```java
+displayDeveloper()
+```
+
+The output should show:
+
+```text
+Employee ID
+Name
+Salary
+Programming Language
+Experience
+```
+
+---
+
+## Example
+
+```java
+Developer d =
+    new Developer(
+        101,
+        "Om",
+        50000,
+        "Java",
+        2
+    );
+```
+
+Then:
+
+```java
+d.displayEmployee();
+d.displayDeveloper();
+```
+
+---
+
+# Practice Order
+
+Do not solve randomly.
+
+```text
+P1 Animal → Dog
+        ↓
+P2 Person → Student
+        ↓
+P3 Vehicle → Car
+        ↓
+P4 Employee → Manager
+        ↓
+P5 Constructor Chain
+        ↓
+P6 super(...)
+        ↓
+P7 Inherited Methods
+        ↓
+P8 super.method()
+        ↓
+P9 this vs super
+        ↓
+P10 Employee → Developer ⭐
+```
+
+---
+
+# Difficulty Progression
+
+| Problem | Main Focus                      |
+| ------- | ------------------------------- |
+| P1      | Basic `extends`                 |
+| P2      | Parent + child members          |
+| P3      | IS-A relationship               |
+| P4      | Constructors + `super`          |
+| P5      | Constructor chaining            |
+| P6      | `super(...)`                    |
+| P7      | Method inheritance              |
+| P8      | `super.method()`                |
+| P9      | `this` vs `super`               |
+| P10     | **Complete inheritance design** |
+
+---
+
+# Your Rule for Part 3
+
+For every problem:
+
+```text
+1. Identify Parent
+        ↓
+2. Identify Child
+        ↓
+3. Find common properties
+        ↓
+4. Put common properties in Parent
+        ↓
+5. Use extends
+        ↓
+6. Add child-specific properties
+        ↓
+7. Create constructors
+        ↓
+8. Use super(...) where required
+        ↓
+9. Create objects
+        ↓
+10. Test inherited members
+```
+
+---
+
+# Important Design Question
+
+Before creating inheritance, ask:
+
+> **"Is the child actually an IS-A type of the parent?"**
+
+Good:
+
+```text
+Dog IS-A Animal
+Car IS-A Vehicle
+Student IS-A Person
+Manager IS-A Employee
+Developer IS-A Employee
+```
+
+Bad:
+
+```text
+Engine IS-A Car       ❌
+Battery IS-A Phone    ❌
+Department IS-A College ❌
+```
+
+Those represent different relationships and should not automatically use inheritance.
+
+---
+
+# Part 3 Interview Checklist
+
+You should be able to answer:
+
+### 1. What is inheritance?
+
+A mechanism where a child class acquires accessible properties and behavior from a parent class.
+
+### 2. Which keyword creates class inheritance?
+
+```java
+extends
+```
+
+### 3. What is the parent class?
+
+The class whose members are inherited.
+
+### 4. What is the child class?
+
+The class that extends another class.
+
+### 5. Why use inheritance?
+
+To represent an appropriate **IS-A relationship** and reuse common behavior.
+
+### 6. What does `super()` do?
+
+Calls the parent constructor.
+
+### 7. What does `super(...)` do?
+
+Calls a specific parameterized parent constructor.
+
+### 8. Why does the parent constructor execute first?
+
+The parent portion of the object must be initialized before the child portion.
+
+### 9. Can a child use inherited methods?
+
+Yes, when they are accessible.
+
+### 10. What is `super.method()`?
+
+It explicitly calls the parent class's method.
+
+---
+
+# Part 3 Completion Target
+
+After P1–P10, you should be able to see:
+
+```java
+class Developer extends Employee
+```
+
+and immediately think:
+
+```text
+Developer
+    ↓
+IS-A
+    ↓
+Employee
+
+Employee
+ ├── employeeId
+ ├── name
+ └── salary
+
+Developer
+ ├── programmingLanguage
+ └── experience
+```
+
+And when you see:
+
+```java
+super(employeeId, name, salary);
+```
+
+you should immediately understand:
+
+```text
+Developer Constructor
+        ↓
+super(...)
+        ↓
+Employee Constructor
+        ↓
+Initialize Employee state
+        ↓
+Initialize Developer state
+```
+
+---
+
+# Part 3 Goal
+
+By the end of Part 3, the basic inheritance flow should be clear:
+
+```text
+Parent Class
+     ↓
+extends
+     ↓
+Child Class
+     ↓
+Inherited Members
+     ↓
+Child-Specific Members
+     ↓
+super(...)
+     ↓
+Constructor Chaining
+     ↓
+Proper IS-A Design
+```
+
+➡️ **Next: Part 4 — Method Overriding + Runtime Polymorphism**
+
+# D_Inheritance — Part 4: Method Overriding + Runtime Polymorphism
+
+Part 4 focuses on the next major step after inheritance:
+
+```text
+Part 1 → Inheritance Fundamentals
+Part 2 → extends + super + Constructors
+Part 3 → Inheritance Practice
+Part 4 → Method Overriding + Runtime Polymorphism
+```
+
+The goal is to understand that a child class can **provide its own implementation of an inherited method**, and Java can decide which implementation to execute **at runtime**.
+
+---
+
+# Learning Goals
+
+After this part, you should understand:
+
+* Method overriding
+* Why overriding is needed
+* `@Override`
+* Parent reference → Child object
+* Runtime method dispatch
+* Upcasting
+* Parent vs child implementation
+* `super.method()`
+* Overriding rules
+* Inheritance + Polymorphism
+* Dynamic method dispatch
+
+---
+
+# 1. What Is Method Overriding?
+
+Suppose:
+
+```java
+class Animal {
+
+    void sound() {
+        System.out.println("Animal makes sound");
+    }
+}
+```
+
+Now:
+
+```java
+class Dog extends Animal {
+
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+```
+
+The child `Dog` provides its own implementation of the inherited `sound()` method.
+
+This is called:
+
+> **Method Overriding**
+
+---
+
+# 2. Why Override a Method?
+
+The parent can provide a common behavior:
+
+```java
+class Animal {
+
+    void sound() {
+        System.out.println("Animal sound");
+    }
+}
+```
+
+But different animals make different sounds.
+
+```text
+Animal
+   ↓
+sound()
+
+Dog
+   ↓
+barks
+
+Cat
+   ↓
+meows
+
+Cow
+   ↓
+moos
+```
+
+Therefore each child can override the same method.
+
+---
+
+# 3. Basic Example
+
+```java
+class Animal {
+
+    void sound() {
+        System.out.println("Animal sound");
+    }
+}
+```
+
+```java
+class Dog extends Animal {
+
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+```
+
+```java
+class Cat extends Animal {
+
+    @Override
+    void sound() {
+        System.out.println("Cat meows");
+    }
+}
+```
+
+Now:
+
+```java
+Dog d = new Dog();
+Cat c = new Cat();
+
+d.sound();
+c.sound();
+```
+
+Output:
+
+```text
+Dog barks
+Cat meows
+```
+
+---
+
+# 4. `@Override`
+
+Use:
+
+```java
+@Override
+```
+
+above an overriding method.
+
+Example:
+
+```java
+class Dog extends Animal {
+
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+```
+
+`@Override` tells Java:
+
+> "I intend to override a method from the parent class."
+
+It also helps the compiler detect mistakes.
+
+---
+
+# 5. Parent Reference + Child Object ⭐
+
+This is the most important concept of Part 4.
+
+You can write:
+
+```java
+Animal a = new Dog();
+```
+
+Here:
+
+```text
+Reference type → Animal
+Object type    → Dog
+```
+
+Diagram:
+
+```text
+Animal a
+   |
+   ↓
+Dog Object
+```
+
+This is called:
+
+> **Upcasting**
+
+---
+
+# 6. What Happens When We Call the Method?
+
+Consider:
+
+```java
+class Animal {
+
+    void sound() {
+        System.out.println("Animal sound");
+    }
+}
+```
+
+```java
+class Dog extends Animal {
+
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+```
+
+Now:
+
+```java
+Animal a = new Dog();
+
+a.sound();
+```
+
+What will execute?
+
+```text
+Dog barks
+```
+
+Not:
+
+```text
+Animal sound
+```
+
+Why?
+
+Because the **actual object is Dog**.
+
+Java chooses the overridden method based on the object at runtime.
+
+This is called:
+
+> **Runtime Polymorphism**
+
+---
+
+# 7. Runtime Method Dispatch
+
+The important flow is:
+
+```text
+Animal a = new Dog();
+       ↓
+Reference type = Animal
+       ↓
+Actual object = Dog
+       ↓
+a.sound()
+       ↓
+Java checks actual object
+       ↓
+Dog.sound()
+       ↓
+"Dog barks"
+```
+
+This mechanism is called:
+
+> **Dynamic Method Dispatch / Runtime Method Dispatch**
+
+---
+
+# 8. Very Important Example
+
+```java
+Animal a1 = new Dog();
+Animal a2 = new Cat();
+Animal a3 = new Cow();
+```
+
+All three references have the same type:
+
+```text
+Animal
+```
+
+But the objects are different:
+
+```text
+a1 → Dog
+a2 → Cat
+a3 → Cow
+```
+
+Now:
+
+```java
+a1.sound();
+a2.sound();
+a3.sound();
+```
+
+Output:
+
+```text
+Dog barks
+Cat meows
+Cow moos
+```
+
+This is the power of polymorphism.
+
+---
+
+# 9. One Parent Reference, Different Objects
+
+Think:
+
+```text
+             Animal
+                ↑
+       ┌────────┼────────┐
+       │        │        │
+      Dog      Cat      Cow
+```
+
+We can write:
+
+```java
+Animal a;
+```
+
+Then:
+
+```java
+a = new Dog();
+a.sound();
+```
+
+Then:
+
+```java
+a = new Cat();
+a.sound();
+```
+
+Then:
+
+```java
+a = new Cow();
+a.sound();
+```
+
+Same reference type:
+
+```text
+Animal
+```
+
+Different behavior:
+
+```text
+Dog
+Cat
+Cow
+```
+
+---
+
+# 10. `super.method()` With Overriding
+
+Suppose:
+
+```java
+class Animal {
+
+    void sound() {
+        System.out.println("Animal sound");
+    }
+}
+```
+
+Child:
+
+```java
+class Dog extends Animal {
+
+    @Override
+    void sound() {
+
+        super.sound();
+
+        System.out.println("Dog barks");
+    }
+}
+```
+
+Now:
+
+```java
+Dog d = new Dog();
+
+d.sound();
+```
+
+Output:
+
+```text
+Animal sound
+Dog barks
+```
+
+Why?
+
+```java
+super.sound();
+```
+
+explicitly calls the parent implementation.
+
+---
+
+# 11. `super` vs Overriding
+
+Without `super`:
+
+```java
+@Override
+void sound() {
+    System.out.println("Dog barks");
+}
+```
+
+Only the child implementation runs.
+
+With:
+
+```java
+@Override
+void sound() {
+
+    super.sound();
+
+    System.out.println("Dog barks");
+}
+```
+
+Both implementations run.
+
+```text
+Parent method
+     ↓
+Child method
+```
+
+---
+
+# 12. Parent Reference Can Call What?
+
+Consider:
+
+```java
+class Animal {
+
+    void eat() {
+        System.out.println("Eating");
+    }
+}
+```
+
+```java
+class Dog extends Animal {
+
+    @Override
+    void sound() {
+        System.out.println("Bark");
+    }
+
+    void run() {
+        System.out.println("Running");
+    }
+}
+```
+
+Now:
+
+```java
+Animal a = new Dog();
+```
+
+You can call:
+
+```java
+a.eat();
+a.sound();
+```
+
+But:
+
+```java
+a.run(); // ❌
+```
+
+Why?
+
+Because the **reference type** is `Animal`.
+
+The compiler only allows members available through the `Animal` reference.
+
+---
+
+# 13. Important Difference
+
+Remember:
+
+```java
+Animal a = new Dog();
+```
+
+### What can you access?
+
+The reference type controls **what can be called**:
+
+```text
+Animal reference
+      ↓
+Animal-visible methods
+```
+
+### Which overridden implementation runs?
+
+The actual object controls **which overridden implementation executes**:
+
+```text
+Dog object
+    ↓
+Dog's overridden method
+```
+
+This distinction is extremely important.
+
+---
+
+# 14. Overriding Rules
+
+For basic interview understanding, remember:
+
+### Rule 1
+
+The child method must have the same method signature.
+
+Example:
+
+```java
+void sound()
+```
+
+must be overridden as:
+
+```java
+void sound()
+```
+
+---
+
+### Rule 2
+
+Return type must be compatible.
+
+For basic practice, keep the same return type.
+
+---
+
+### Rule 3
+
+The overriding method cannot reduce access visibility.
+
+For example:
+
+```java
+public
+```
+
+cannot become:
+
+```java
+private
+```
+
+---
+
+### Rule 4
+
+`private` methods are not overridden.
+
+---
+
+### Rule 5
+
+`static` methods are not overridden in the same runtime-polymorphic sense; they are hidden.
+
+---
+
+### Rule 6
+
+Use:
+
+```java
+@Override
+```
+
+to make your intention explicit.
+
+---
+
+# 15. Overriding vs Overloading
+
+Do not confuse these.
+
+## Overriding
+
+Parent → Child
+
+Same method signature:
+
+```java
+class Animal {
+
+    void sound() {}
+}
+
+class Dog extends Animal {
+
+    @Override
+    void sound() {}
+}
+```
+
+```text
+Inheritance
++
+Same signature
+```
+
+---
+
+## Overloading
+
+Same class or inheritance hierarchy can have methods with different parameters:
+
+```java
+void add(int a, int b)
+
+void add(int a, int b, int c)
+```
+
+```text
+Different parameters
+```
+
+### Easy Memory Trick
+
+```text
+Overriding
+→ Same method
+→ Child changes behavior
+
+Overloading
+→ Same method name
+→ Different parameters
+```
+
+---
+
+# 16. Real-World Example — Payment
+
+Parent:
+
+```java
+class Payment {
+
+    void pay() {
+        System.out.println("Processing payment");
+    }
+}
+```
+
+Child:
+
+```java
+class CreditCardPayment extends Payment {
+
+    @Override
+    void pay() {
+        System.out.println("Paying using Credit Card");
+    }
+}
+```
+
+Another child:
+
+```java
+class UpiPayment extends Payment {
+
+    @Override
+    void pay() {
+        System.out.println("Paying using UPI");
+    }
+}
+```
+
+Now:
+
+```java
+Payment p1 = new CreditCardPayment();
+Payment p2 = new UpiPayment();
+
+p1.pay();
+p2.pay();
+```
+
+Output:
+
+```text
+Paying using Credit Card
+Paying using UPI
+```
+
+The parent reference provides a common interface, while each child provides its own behavior.
+
+---
+
+# 17. Real-World Example — Employee
+
+Parent:
+
+```java
+class Employee {
+
+    void work() {
+        System.out.println("Employee works");
+    }
+}
+```
+
+Child:
+
+```java
+class Developer extends Employee {
+
+    @Override
+    void work() {
+        System.out.println("Developer writes code");
+    }
+}
+```
+
+Another child:
+
+```java
+class Manager extends Employee {
+
+    @Override
+    void work() {
+        System.out.println("Manager manages team");
+    }
+}
+```
+
+Now:
+
+```java
+Employee e1 = new Developer();
+Employee e2 = new Manager();
+
+e1.work();
+e2.work();
+```
+
+Output:
+
+```text
+Developer writes code
+Manager manages team
+```
+
+---
+
+# 18. Polymorphism Diagram
+
+```text
+                 Employee
+                    |
+              work()
+                    |
+          ┌─────────┴─────────┐
+          ↓                   ↓
+      Developer             Manager
+          |                   |
+     work()              work()
+          |                   |
+    Write Code          Manage Team
+```
+
+From outside:
+
+```java
+Employee e;
+```
+
+But the behavior changes depending on the actual object.
+
+---
+
+# 19. Why Runtime Polymorphism Is Useful
+
+Without polymorphism, you may write:
+
+```java
+Developer d = new Developer();
+Manager m = new Manager();
+Tester t = new Tester();
+```
+
+and handle each separately.
+
+With polymorphism:
+
+```java
+Employee e;
+```
+
+you can work with different employee types through the common parent type.
+
+Example:
+
+```java
+Employee[] employees = {
+    new Developer(),
+    new Manager(),
+    new Tester()
+};
+
+for (Employee e : employees) {
+    e.work();
+}
+```
+
+Each object performs its own overridden implementation.
+
+---
+
+# 20. The Core Flow
+
+This is the most important diagram in Part 4:
+
+```text
+Parent Class
+     ↓
+Common Method
+     ↓
+Child Overrides Method
+     ↓
+Parent Reference
+     ↓
+Child Object
+     ↓
+Method Call
+     ↓
+Runtime Checks Actual Object
+     ↓
+Child Implementation Runs
+```
+
+Example:
+
+```java
+Animal a = new Dog();
+
+a.sound();
+```
+
+Flow:
+
+```text
+Animal reference
+      ↓
+Dog object
+      ↓
+sound()
+      ↓
+Dog.sound()
+```
+
+---
+
+# Practice Problems
+
+Now write these yourself **before looking for solutions**.
+
+---
+
+# P1 — Animal Sound
+
+Create:
+
+```java
+class Animal
+```
+
+with:
+
+```java
+void sound()
+```
+
+Create:
+
+```java
+class Dog extends Animal
+```
+
+Override:
+
+```java
+sound()
+```
+
+Output:
+
+```text
+Dog barks
+```
+
+---
+
+# P2 — Animal → Cat
+
+Create:
+
+```java
+class Cat extends Animal
+```
+
+Override:
+
+```java
+sound()
+```
+
+Output:
+
+```text
+Cat meows
+```
+
+Then:
+
+```java
+Animal a = new Cat();
+
+a.sound();
+```
+
+Predict the output before running.
+
+---
+
+# P3 — Vehicle
+
+Parent:
+
+```java
+class Vehicle {
+
+    void start() {
+        System.out.println("Vehicle starts");
+    }
+}
+```
+
+Create:
+
+```java
+class Car extends Vehicle
+```
+
+Override:
+
+```text
+start()
+```
+
+Output:
+
+```text
+Car starts with key
+```
+
+---
+
+# P4 — Employee
+
+Parent:
+
+```java
+class Employee {
+
+    void work() {
+        System.out.println("Employee works");
+    }
+}
+```
+
+Create:
+
+```java
+Developer
+Manager
+Tester
+```
+
+Each should override:
+
+```java
+work()
+```
+
+with different output.
+
+---
+
+# P5 — Parent Reference
+
+Create:
+
+```java
+Animal a1 = new Dog();
+Animal a2 = new Cat();
+```
+
+Call:
+
+```java
+a1.sound();
+a2.sound();
+```
+
+Understand why two different outputs occur.
+
+---
+
+# P6 — `super.method()`
+
+Create:
+
+```java
+class Animal {
+
+    void sound() {
+        System.out.println("Animal sound");
+    }
+}
+```
+
+Dog should override `sound()` and call:
+
+```java
+super.sound();
+```
+
+Then print:
+
+```text
+Dog sound
+```
+
+Expected:
+
+```text
+Animal sound
+Dog sound
+```
+
+---
+
+# P7 — Payment System
+
+Create:
+
+```text
+Payment
+CreditCardPayment
+UPIPayment
+CashPayment
+```
+
+Parent:
+
+```java
+pay()
+```
+
+Override `pay()` in each child.
+
+Then:
+
+```java
+Payment p1 = new CreditCardPayment();
+Payment p2 = new UPIPayment();
+Payment p3 = new CashPayment();
+```
+
+Call:
+
+```java
+p1.pay();
+p2.pay();
+p3.pay();
+```
+
+---
+
+# P8 — Shape
+
+Create:
+
+```text
+Shape
+Circle
+Rectangle
+```
+
+Parent:
+
+```java
+calculateArea()
+```
+
+Override it in:
+
+```text
+Circle
+Rectangle
+```
+
+Use:
+
+```java
+Shape s1 = new Circle();
+Shape s2 = new Rectangle();
+```
+
+Call:
+
+```java
+s1.calculateArea();
+s2.calculateArea();
+```
+
+---
+
+# P9 — Constructor + Overriding
+
+Create:
+
+```text
+Animal
+Dog
+```
+
+Animal constructor:
+
+```java
+Animal() {
+    System.out.println("Animal Constructor");
+}
+```
+
+Dog constructor:
+
+```java
+Dog() {
+    System.out.println("Dog Constructor");
+}
+```
+
+Dog should also override:
+
+```java
+sound()
+```
+
+Test:
+
+```java
+Animal a = new Dog();
+a.sound();
+```
+
+Understand separately:
+
+```text
+Constructor execution
+        ↓
+Method execution
+```
+
+---
+
+# P10 ⭐ — Mini Polymorphism Challenge
+
+Design:
+
+```text
+Employee
+   ↓
+Developer
+Manager
+Tester
+```
+
+### Parent
+
+```java
+class Employee {
+
+    String name;
+
+    Employee(String name) {
+        this.name = name;
+    }
+
+    void work() {
+        System.out.println("Employee works");
+    }
+}
+```
+
+### Requirements
+
+Each child must override:
+
+```java
+work()
+```
+
+Developer:
+
+```text
+Developer writes code
+```
+
+Manager:
+
+```text
+Manager manages team
+```
+
+Tester:
+
+```text
+Tester tests application
+```
+
+Create:
+
+```java
+Employee e1 = new Developer("Om");
+Employee e2 = new Manager("Rahul");
+Employee e3 = new Tester("Amit");
+```
+
+Call:
+
+```java
+e1.work();
+e2.work();
+e3.work();
+```
+
+Expected:
+
+```text
+Developer writes code
+Manager manages team
+Tester tests application
+```
+
+---
+
+# Practice Order
+
+```text
+P1 Animal → Dog
+       ↓
+P2 Animal → Cat
+       ↓
+P3 Vehicle → Car
+       ↓
+P4 Employee hierarchy
+       ↓
+P5 Parent reference
+       ↓
+P6 super.method()
+       ↓
+P7 Payment
+       ↓
+P8 Shape
+       ↓
+P9 Constructor + Overriding
+       ↓
+P10 Employee Polymorphism ⭐
+```
+
+---
+
+# Difficulty Progression
+
+| Problem | Focus                             |
+| ------- | --------------------------------- |
+| P1      | Basic overriding                  |
+| P2      | Multiple child implementations    |
+| P3      | Real-world overriding             |
+| P4      | Multiple child classes            |
+| P5      | Parent reference + child object   |
+| P6      | `super.method()`                  |
+| P7      | Polymorphism                      |
+| P8      | Polymorphism + calculations       |
+| P9      | Constructors + overriding         |
+| P10     | **Complete runtime polymorphism** |
+
+---
+
+# Interview Checklist
+
+### Q1. What is method overriding?
+
+When a child class provides its own implementation of an inherited parent method with the same signature.
+
+### Q2. Why is `@Override` used?
+
+To indicate that the method is intended to override a parent method and allow the compiler to catch mistakes.
+
+### Q3. What is runtime polymorphism?
+
+When an overridden method is selected based on the actual object at runtime.
+
+### Q4. What does this mean?
+
+```java
+Animal a = new Dog();
+```
+
+```text
+Reference type → Animal
+Object type    → Dog
+```
+
+### Q5. Which `sound()` executes?
+
+```java
+Animal a = new Dog();
+a.sound();
+```
+
+The `Dog` implementation executes if `Dog` overrides `sound()`.
+
+### Q6. What is upcasting?
+
+Treating a child object as a reference of its parent type.
+
+```java
+Animal a = new Dog();
+```
+
+### Q7. What does `super.sound()` do?
+
+Calls the parent implementation of `sound()`.
+
+### Q8. Overriding vs Overloading?
+
+```text
+Overriding
+→ Parent + Child
+→ Same signature
+→ Runtime polymorphism
+
+Overloading
+→ Different parameter list
+→ Compile-time method selection
+```
+
+---
+
+# Part 4 Checklist
+
+* [ ] Understand method overriding.
+* [ ] Understand `@Override`.
+* [ ] Understand parent reference + child object.
+* [ ] Understand upcasting.
+* [ ] Understand runtime polymorphism.
+* [ ] Understand dynamic method dispatch.
+* [ ] Understand `super.method()`.
+* [ ] Understand reference type vs object type.
+* [ ] Understand overriding vs overloading.
+* [ ] Practice polymorphism with multiple child classes.
+* [ ] Understand why polymorphism is useful.
+
+---
+
+# Part 4 Completion Target
+
+You should be able to see:
+
+```java
+Employee e = new Developer();
+```
+
+and immediately understand:
+
+```text
+Employee
+   ↓
+Reference Type
+
+Developer
+   ↓
+Actual Object
+
+e.work()
+   ↓
+Runtime checks actual object
+   ↓
+Developer.work()
+```
+
+The central idea is:
+
+```text
+Inheritance
+      ↓
+Method Overriding
+      ↓
+Parent Reference
+      ↓
+Child Object
+      ↓
+Runtime Method Dispatch
+      ↓
+Runtime Polymorphism
+```
+
+---
+
+# Next Part
+
+➡️ **Part 5 — Inheritance + Polymorphism Advanced Practice / Design Mastery**
