@@ -1,743 +1,870 @@
-# Chapter 7 — Microtask Queue
+# 07 — Microtask Queue
 
-> **"The Microtask Queue has higher priority than the Task Queue."**
+**Folder:** `03-Asynchronous-JavaScript`
 
-This is one of the most frequently asked JavaScript interview topics.
-
----
-
-# Table of Contents
-
-1. What is the Microtask Queue?
-2. Why was it introduced?
-3. Task Queue vs Microtask Queue
-4. Which APIs use the Microtask Queue?
-5. Promise Execution Flow
-6. queueMicrotask()
-7. Event Loop Priority
-8. Step-by-Step Dry Runs
-9. Multiple Promises
-10. Promise vs setTimeout
-11. Promise vs setInterval
-12. Promise Chain Execution
-13. Common Misconceptions
-14. Real-Life Analogy
-15. Interview Questions
-16. Coding Exercises
-17. Summary
+> **Core idea:** Microtasks are short pieces of JavaScript work processed at microtask checkpoints before the runtime proceeds to the next task.
 
 ---
 
-# 1. What is the Microtask Queue?
+## 1. What Is a Microtask?
 
-The Microtask Queue is a special queue used for **high-priority asynchronous callbacks**.
+A **microtask** is deferred JavaScript work that runs after the current JavaScript task completes and before the runtime proceeds to the next task.
 
-Unlike the Task Queue, the Event Loop **always empties the Microtask Queue first**.
+Common examples:
 
-Think of it as a VIP queue.
+```js
+Promise.resolve().then(() => {});
+Promise.resolve().catch(() => {});
+Promise.resolve().finally(() => {});
 
+queueMicrotask(() => {});
 ```
-Call Stack
 
-↓
+Promises use the microtask queue, and `queueMicrotask()` explicitly schedules a microtask.
+
+Reference: https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide
+
+---
+
+## 2. Why Do Microtasks Exist?
+
+Sometimes code needs to run:
+
+```text
+after current JavaScript finishes
+but before the next task is processed
+```
+
+That is the role of a microtask.
+
+A useful model:
+
+```text
+Current JavaScript
+       ↓
+Current task completes
+       ↓
+Microtask checkpoint
+       ↓
+Microtasks
+       ↓
+Next task
+```
+
+---
+
+## 3. Task vs Microtask
+
+| Microtask | Task |
+|---|---|
+| Promise reactions | `setTimeout()` |
+| `catch()` reactions | `setInterval()` |
+| `finally()` reactions | User-event tasks |
+| `queueMicrotask()` | Other host tasks |
+
+Important rule:
+
+```text
+After a task finishes,
+pending microtasks are processed
+before the next task.
+```
+
+Reference: https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide/In_depth
+
+---
+
+## 4. Microtask Queue Is Not the Call Stack
+
+Do not mix these up.
+
+```text
+Call Stack
+→ currently executing JavaScript
 
 Microtask Queue
-
-↓
-
-Task Queue
+→ waiting microtasks
 ```
 
-Priority
-
-```
-1️⃣ Call Stack
-
-2️⃣ Microtask Queue
-
-3️⃣ Task Queue
-```
-
----
-
-# 2. Why was it introduced?
-
-Imagine updating data immediately after an operation.
+Example:
 
 ```js
 Promise.resolve().then(() => {
-    console.log("Updated");
+    console.log("Promise");
 });
 ```
 
-You don't want this waiting behind timers, clicks, or network callbacks.
-
-So JavaScript created a **higher-priority queue**.
+The `.then()` callback is not executing when it is scheduled. It becomes a microtask to be processed later.
 
 ---
 
-# 3. Task Queue vs Microtask Queue
-
-| Microtask Queue | Task Queue |
-|----------------|------------|
-| Promise.then() | setTimeout() |
-| catch() | setInterval() |
-| finally() | DOM Events |
-| queueMicrotask() | Message Events |
-
-Rule:
-
-> **Finish all Microtasks before processing the next Task.**
-
----
-
-# 4. Which APIs use the Microtask Queue?
-
-These create Microtasks:
-
-```js
-Promise.then()
-
-Promise.catch()
-
-Promise.finally()
-
-queueMicrotask()
-```
-
-Not Microtasks
-
-```js
-setTimeout()
-
-setInterval()
-
-click
-
-scroll
-
-keydown
-```
-
----
-
-# 5. Promise Execution Flow
-
-Example
+## 5. Promise Execution
 
 ```js
 console.log("Start");
 
-Promise.resolve().then(()=>{
+Promise.resolve().then(() => {
     console.log("Promise");
 });
 
 console.log("End");
 ```
 
-Execution
+Execution:
 
-Step 1
-
-```
+```text
 Start
-```
-
-Step 2
-
-Promise callback goes to
-
-```
-Microtask Queue
-```
-
-Step 3
-
-```
+    ↓
+Promise reaction scheduled
+    ↓
 End
-```
-
-Step 4
-
-Call Stack empty
-
-↓
-
-Event Loop
-
-↓
-
-Microtask Queue
-
-↓
-
+    ↓
+current task completes
+    ↓
+microtask checkpoint
+    ↓
 Promise callback
-
-Output
-
 ```
+
+Output:
+
+```text
 Start
-
 End
-
 Promise
 ```
 
+A `.then()` callback is not invoked synchronously even when the Promise is already fulfilled.
+
+Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
+
 ---
 
-# 6. queueMicrotask()
-
-JavaScript provides
+## 6. `queueMicrotask()`
 
 ```js
-queueMicrotask(()=>{
+queueMicrotask(() => {
     console.log("Microtask");
 });
 ```
 
-This directly places a callback into the Microtask Queue.
-
-Example
+Example:
 
 ```js
 console.log("A");
 
-queueMicrotask(()=>{
-console.log("B");
+queueMicrotask(() => {
+    console.log("B");
 });
 
 console.log("C");
 ```
 
-Output
+Output:
 
-```
+```text
 A
-
 C
-
 B
 ```
 
+Reference: https://developer.mozilla.org/en-US/docs/Web/API/Window/queueMicrotask
+
 ---
 
-# 7. Event Loop Priority
+## 7. Promise vs `setTimeout()`
 
-Imagine
+```js
+setTimeout(() => {
+    console.log("Timeout");
+}, 0);
 
+Promise.resolve().then(() => {
+    console.log("Promise");
+});
 ```
+
+Typical ordering:
+
+```text
+Promise
+Timeout
+```
+
+Reason:
+
+```text
+Current task finishes
+        ↓
+Promise reaction is a microtask
+        ↓
+Microtask checkpoint
+        ↓
+Promise
+        ↓
+Next task
+        ↓
+Timeout
+```
+
+Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
+
+---
+
+## 8. Event Loop Mental Model
+
+Avoid treating this as three permanent priority levels.
+
+Use:
+
+```text
+JavaScript executes current task
+        ↓
+Microtask checkpoint
+        ↓
+Next eligible task
+        ↓
+Microtask checkpoint
+        ↓
+Repeat while runtime is active
+```
+
+During a microtask checkpoint:
+
+```text
+Run microtask
+    ↓
+Does it add another microtask?
+    ↓
+Yes → process that too
+    ↓
+Continue until queue is empty
+```
+
+Microtasks continue until the microtask queue is empty, even if they add more microtasks.
+
+Reference: https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide
+
+---
+
+## 9. Multiple Microtasks
+
+```js
+Promise.resolve().then(() => {
+    console.log(1);
+});
+
+Promise.resolve().then(() => {
+    console.log(2);
+});
+
+Promise.resolve().then(() => {
+    console.log(3);
+});
+```
+
+They are scheduled in order:
+
+```text
 Microtask Queue
 
-↓
-
-Promise
-
-Promise
-
-Promise
-
-----------------
-
-Task Queue
-
-↓
-
-setTimeout
-
-click
-
-setInterval
+1
+2
+3
 ```
 
-The Event Loop executes
+Output:
 
-```
-Promise
-
-↓
-
-Promise
-
-↓
-
-Promise
-
-↓
-
-setTimeout
-
-↓
-
-click
+```text
+1
+2
+3
 ```
 
-Microtasks always finish first.
+Promise reactions registered in order are invoked in that order.
 
 ---
 
-# 8. Dry Run
+## 10. Promise Chain
 
-Example
+```js
+Promise.resolve()
+    .then(() => {
+        console.log(1);
+    })
+    .then(() => {
+        console.log(2);
+    })
+    .then(() => {
+        console.log(3);
+    });
+```
+
+Output:
+
+```text
+1
+2
+3
+```
+
+Important:
+
+```text
+then(1)
+   ↓
+Promise settles
+   ↓
+next reaction becomes eligible
+   ↓
+then(2)
+   ↓
+then(3)
+```
+
+Do not imagine all chained callbacks as one synchronous block.
+
+---
+
+## 11. Microtasks Can Add Microtasks
+
+```js
+queueMicrotask(() => {
+    console.log("A");
+
+    queueMicrotask(() => {
+        console.log("B");
+    });
+});
+
+queueMicrotask(() => {
+    console.log("C");
+});
+```
+
+Initial queue:
+
+```text
+A
+C
+```
+
+While `A` runs, it schedules `B`.
+
+The queue becomes:
+
+```text
+C
+B
+```
+
+Output:
+
+```text
+A
+C
+B
+```
+
+New microtasks are processed before the next task.
+
+Reference: https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide
+
+---
+
+## 12. Microtask Starvation
+
+Consider:
+
+```js
+function keepGoing() {
+    queueMicrotask(keepGoing);
+}
+
+keepGoing();
+```
+
+Conceptually:
+
+```text
+Microtask
+   ↓
+Microtask
+   ↓
+Microtask
+   ↓
+Microtask
+   ↓
+...
+```
+
+Because microtasks are processed until the queue is empty, an unbounded chain can prevent later tasks from getting a turn.
+
+This is called **microtask starvation**.
+
+Use microtasks carefully.
+
+---
+
+## 13. `queueMicrotask()` vs Promise
+
+Both schedule microtasks:
+
+```js
+queueMicrotask(() => {
+    console.log("A");
+});
+```
+
+and:
+
+```js
+Promise.resolve().then(() => {
+    console.log("B");
+});
+```
+
+But they are not identical APIs.
+
+`queueMicrotask()` directly schedules a microtask without creating a Promise just for scheduling.
+
+Reference: https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide
+
+For normal application code:
+
+```text
+Promises
+→ asynchronous control flow
+
+queueMicrotask()
+→ explicit microtask scheduling when specifically needed
+```
+
+---
+
+## 14. Microtasks Do Not Interrupt Current JavaScript
+
+```js
+console.log("A");
+
+queueMicrotask(() => {
+    console.log("Microtask");
+});
+
+console.log("B");
+```
+
+Output:
+
+```text
+A
+B
+Microtask
+```
+
+The microtask does not jump into the middle of the current execution.
+
+The current task finishes first.
+
+This follows JavaScript's run-to-completion model.
+
+Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model
+
+---
+
+# 15. Dry Run 1 — Promise + Timer
 
 ```js
 console.log("1");
 
-setTimeout(()=>{
-console.log("2");
-},0);
+setTimeout(() => {
+    console.log("2");
+}, 0);
 
-Promise.resolve().then(()=>{
-console.log("3");
+Promise.resolve().then(() => {
+    console.log("3");
 });
 
 console.log("4");
 ```
 
-Step 1
+Reasoning:
 
-```
+```text
 1
-```
-
----
-
-Step 2
-
-Timer starts
-
 ↓
-
-Task Queue
-
----
-
-Step 3
-
-Promise
-
+timer scheduled
 ↓
-
-Microtask Queue
-
----
-
-Step 4
-
-```
+microtask scheduled
+↓
 4
-```
-
-Call Stack empty
-
 ↓
-
-Microtask Queue
-
+current task finishes
 ↓
-
-```
+microtask
+↓
 3
-```
-
 ↓
-
-Task Queue
-
+next task
 ↓
-
-```
 2
 ```
 
-Output
+Output:
 
-```
+```text
 1
-
 4
-
 3
-
 2
 ```
 
 ---
 
-# 9. Multiple Promises
+# 16. Dry Run 2 — Multiple Promises
 
 ```js
-Promise.resolve().then(()=>{
-console.log(1);
+Promise.resolve().then(() => {
+    console.log("A");
 });
 
-Promise.resolve().then(()=>{
-console.log(2);
-});
-
-Promise.resolve().then(()=>{
-console.log(3);
-});
-```
-
-Queue
-
-```
-1
-
-↓
-
-2
-
-↓
-
-3
-```
-
-Output
-
-```
-1
-
-2
-
-3
-```
-
----
-
-# 10. Promise vs setTimeout
-
-```js
-setTimeout(()=>{
-console.log("Timeout");
-},0);
-
-Promise.resolve().then(()=>{
-console.log("Promise");
-});
-```
-
-Output
-
-```
-Promise
-
-Timeout
-```
-
-Why?
-
-Because
-
-```
-Microtask Queue
-
-↓
-
-Task Queue
-```
-
----
-
-# 11. Promise vs setInterval
-
-```js
-setInterval(()=>{
-console.log("Interval");
-},1000);
-
-Promise.resolve().then(()=>{
-console.log("Promise");
-});
-```
-
-Output
-
-```
-Promise
-
-Interval
-```
-
-Promise wins.
-
----
-
-# 12. Promise Chain
-
-```js
-Promise.resolve()
-.then(()=>{
-console.log(1);
-})
-.then(()=>{
-console.log(2);
-})
-.then(()=>{
-console.log(3);
-});
-```
-
-Execution
-
-```
-1
-
-↓
-
-2
-
-↓
-
-3
-```
-
-Each `.then()` schedules the next microtask after the previous one completes.
-
----
-
-# 13. Common Misconceptions
-
-### ❌ Promises are synchronous.
-
-Wrong.
-
-Only the Promise constructor runs immediately.
-
-`.then()` callbacks are asynchronous.
-
----
-
-### ❌ setTimeout(0) executes before Promise.
-
-Wrong.
-
-Promise always wins.
-
----
-
-### ❌ Microtasks interrupt running code.
-
-Wrong.
-
-The current Call Stack must finish first.
-
----
-
-### ❌ Only one Microtask executes.
-
-Wrong.
-
-The Event Loop empties the entire Microtask Queue before moving to the Task Queue.
-
----
-
-# 14. Real-Life Analogy
-
-Imagine an airport.
-
-Normal passengers
-
-```
-Task Queue
-```
-
-VIP passengers
-
-```
-Microtask Queue
-```
-
-Before boarding starts
-
-All VIP passengers enter first.
-
-Only then do regular passengers board.
-
----
-
-# 15. Interview Questions
-
-### What is the Microtask Queue?
-
-A high-priority queue for Promise callbacks and other microtasks.
-
----
-
-### Which executes first?
-
-```js
-Promise.then()
-
-or
-
-setTimeout()
-```
-
-Answer
-
-Promise.
-
----
-
-### Does the Event Loop empty the entire Microtask Queue?
-
-Yes.
-
-Before taking a single Task.
-
----
-
-### Is queueMicrotask() the same as Promise.then()?
-
-Very similar.
-
-Both schedule Microtasks.
-
----
-
-### Why do Promises run before timers?
-
-Because Microtasks have higher priority than Tasks.
-
----
-
-# 16. Coding Exercises
-
-## Exercise 1
-
-Predict
-
-```js
-console.log("A");
-
-Promise.resolve().then(()=>{
-console.log("B");
+Promise.resolve().then(() => {
+    console.log("B");
 });
 
 console.log("C");
 ```
 
----
+Output:
 
-## Exercise 2
-
-Predict
-
-```js
-setTimeout(()=>{
-console.log("A");
-},0);
-
-Promise.resolve().then(()=>{
-console.log("B");
-});
-
-console.log("C");
+```text
+C
+A
+B
 ```
 
 ---
 
-## Exercise 3
-
-Predict
-
-```js
-console.log(1);
-
-queueMicrotask(()=>{
-console.log(2);
-});
-
-console.log(3);
-```
-
----
-
-## Exercise 4
-
-Arrange execution order
-
-```
-Call Stack
-
-Microtask Queue
-
-Task Queue
-```
-
-for
+# 17. Dry Run 3 — `queueMicrotask()`
 
 ```js
 console.log("Start");
 
-Promise.resolve().then(()=>{
-console.log("Promise");
+queueMicrotask(() => {
+    console.log("Microtask");
 });
-
-setTimeout(()=>{
-console.log("Timer");
-},0);
 
 console.log("End");
 ```
 
----
+Output:
 
-# 17. Summary
-
-- The Microtask Queue has higher priority than the Task Queue.
-- Promise callbacks (`then`, `catch`, `finally`) are stored in the Microtask Queue.
-- `queueMicrotask()` also creates a microtask.
-- The Event Loop always empties the Microtask Queue before executing any Task.
-- This is why `Promise.then()` executes before `setTimeout(..., 0)`.
-
----
-
-# Visual Memory Trick
-
-```
-                Event Loop
-
-                    │
-                    ▼
-
-        Is Call Stack Empty?
-
-                    │
-               Yes / No
-
-                    │
-                    ▼
-
-      Check Microtask Queue First
-
-                    │
-
-      ┌─────────────┴─────────────┐
-      │                           │
- Microtasks Exist?             No Microtasks
-      │                           │
-      ▼                           ▼
- Execute All               Check Task Queue
- Microtasks                      │
-      │                           ▼
-      └──────────────► Execute One Task
+```text
+Start
+End
+Microtask
 ```
 
 ---
 
-# Next Chapter
+# 18. Dry Run 4 — Microtask Adds Microtask
 
-➡️ **08-setTimeout.md**
+```js
+queueMicrotask(() => {
+    console.log("A");
 
-In the next chapter, you'll master:
+    queueMicrotask(() => {
+        console.log("B");
+    });
+});
 
-- How `setTimeout()` actually works internally
-- Why `setTimeout(0)` is never truly instant
-- Browser timer internals
-- Timer clamping
-- Nested timers
-- Interview puzzles
-- Visual diagrams and dry runs
+queueMicrotask(() => {
+    console.log("C");
+});
+
+console.log("Start");
 ```
+
+Output:
+
+```text
+Start
+A
+C
+B
+```
+
+---
+
+# 19. Common Misconceptions
+
+### ❌ "Promises are synchronous"
+
+The Promise constructor's executor runs synchronously, but `.then()`, `.catch()`, and `.finally()` reactions are scheduled asynchronously.
+
+### ❌ "setTimeout(0) beats Promise"
+
+In the usual same-turn comparison, Promise reactions are microtasks while timer callbacks are tasks.
+
+### ❌ "Microtasks interrupt the current function"
+
+No. Current JavaScript execution must finish first.
+
+### ❌ "Only one microtask runs before the next task"
+
+No. Microtasks are processed until the queue is empty.
+
+### ❌ "Microtasks are always better because they have priority"
+
+No. Too many microtasks can delay tasks and rendering opportunities.
+
+---
+
+# 20. Interview Questions
+
+### What is a microtask?
+
+A unit of deferred JavaScript work processed at a microtask checkpoint before the runtime proceeds to the next task.
+
+### Which common APIs create microtasks?
+
+```text
+Promise reactions
+queueMicrotask()
+```
+
+### Why does `Promise.then()` run before `setTimeout(..., 0)`?
+
+Promise reactions are processed as microtasks, while timer callbacks are tasks.
+
+### Does a microtask interrupt running JavaScript?
+
+No.
+
+### When are microtasks processed?
+
+After the current task reaches a microtask checkpoint, before the runtime proceeds to the next task.
+
+### Can microtasks create more microtasks?
+
+Yes.
+
+### What happens then?
+
+They are processed before the next task as long as the microtask queue continues to have work.
+
+### Can that cause problems?
+
+Yes. An endless chain can starve later tasks.
+
+### Is `queueMicrotask()` exactly the same as `Promise.then()`?
+
+No. Both schedule microtasks, but they are different APIs.
+
+---
+
+# 21. Exercises
+
+## Exercise 1
+
+Predict:
+
+```js
+console.log("A");
+
+Promise.resolve().then(() => {
+    console.log("B");
+});
+
+console.log("C");
+```
+
+## Exercise 2
+
+Predict:
+
+```js
+setTimeout(() => {
+    console.log("A");
+}, 0);
+
+Promise.resolve().then(() => {
+    console.log("B");
+});
+
+console.log("C");
+```
+
+## Exercise 3
+
+Predict:
+
+```js
+console.log(1);
+
+queueMicrotask(() => {
+    console.log(2);
+});
+
+console.log(3);
+```
+
+## Exercise 4
+
+Predict:
+
+```js
+console.log("Start");
+
+Promise.resolve()
+    .then(() => {
+        console.log("One");
+    })
+    .then(() => {
+        console.log("Two");
+    });
+
+setTimeout(() => {
+    console.log("Timer");
+}, 0);
+
+console.log("End");
+```
+
+## Exercise 5
+
+Predict:
+
+```js
+queueMicrotask(() => {
+    console.log("A");
+
+    queueMicrotask(() => {
+        console.log("B");
+    });
+});
+
+queueMicrotask(() => {
+    console.log("C");
+});
+```
+
+## Exercise 6 — Important
+
+Explain the difference between:
+
+```text
+Task Queue
+Microtask Queue
+```
+
+Do not answer only:
+
+> "Microtasks are faster."
+
+Explain the scheduling relationship.
+
+---
+
+# 22. Completion Checklist
+
+- [ ] I understand what a microtask is.
+- [ ] I understand why Promise reactions are microtasks.
+- [ ] I understand `queueMicrotask()`.
+- [ ] I can distinguish tasks from microtasks.
+- [ ] I understand why Promise reactions usually run before timer tasks.
+- [ ] I understand that microtasks do not interrupt current JavaScript.
+- [ ] I know microtasks are processed until the queue is empty.
+- [ ] I understand microtask starvation.
+- [ ] I can dry-run Promise + timer examples.
+- [ ] I can dry-run multiple Promise reactions.
+- [ ] I understand why Promise chain callbacks are scheduled progressively.
+- [ ] I can explain microtasks without saying only "VIP queue."
+
+---
+
+# 23. Quick Revision
+
+```text
+Current JavaScript task
+        ↓
+Current task finishes
+        ↓
+Microtask checkpoint
+        ↓
+Run pending microtasks
+        ↓
+If microtasks add more microtasks
+        ↓
+Keep processing
+        ↓
+Microtask queue empty
+        ↓
+Next task
+```
+
+Remember:
+
+```text
+Promise reactions
+→ Microtasks
+
+queueMicrotask()
+→ Microtask
+
+setTimeout()
+→ Task
+
+Microtask
+≠
+Call Stack
+
+Microtask
+≠
+Task
+
+Microtasks run after current work
+and before the next task.
+```
+
+---
+
+# Final Mental Model
+
+```text
+                  JAVASCRIPT RUNTIME
+
+              Current JavaScript Task
+                         │
+                         ▼
+                 Task completes
+                         │
+                         ▼
+              Microtask Checkpoint
+                         │
+                ┌────────┴────────┐
+                │                 │
+          Microtasks?          None
+                │                 │
+                ▼                 ▼
+          Run microtask       Next Task
+                │
+                ▼
+         More microtasks?
+                │
+           Yes → repeat
+                │
+                ▼
+          Queue empty
+                │
+                ▼
+             Next Task
+```
+
+**Next:** `08-setTimeout.md`
+
+References:
+- https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide
+- https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide/In_depth
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model

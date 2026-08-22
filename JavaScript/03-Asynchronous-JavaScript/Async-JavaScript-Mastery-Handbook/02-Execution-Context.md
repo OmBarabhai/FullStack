@@ -1,893 +1,951 @@
-# Chapter 2 — Execution Context
+# 02 — Execution Context
 
-> **"Before JavaScript executes even a single line of your code, it creates something called an Execution Context."**
+**Folder:** `03-Asynchronous-JavaScript`
 
-Understanding Execution Context is one of the most important topics in JavaScript. It explains **how JavaScript prepares to run your code**, why **hoisting works**, how **memory is allocated**, and how **functions execute**.
+## 1. What Is an Execution Context?
 
----
+An **execution context** is the environment in which a piece of JavaScript code is evaluated and executed.
 
-# Table of Contents
+A simple mental model:
 
-1. What is an Execution Context?
-2. Why Does JavaScript Need It?
-3. Real-Life Analogy
-4. Types of Execution Context
-5. Global Execution Context
-6. Function Execution Context
-7. Eval Execution Context
-8. Life Cycle of an Execution Context
-9. Creation Phase
-10. Execution Phase
-11. Memory Allocation
-12. Variable Hoisting
-13. Function Hoisting
-14. Function Invocation
-15. Call Stack Relationship
-16. Complete Dry Run
-17. Interview Questions
-18. Common Mistakes
-19. Exercises
-20. Summary
+```text
+Execution Context
+│
+├── Code being executed
+├── Variables / bindings
+├── Current `this`
+├── Scope-related information
+└── Other execution state
+```
+
+Every time JavaScript needs to execute code, it does so inside an execution context.
+
+MDN describes an execution context as the smallest unit of execution and explains that it keeps track of things such as the code being evaluated, its bindings, the current realm, and `this`. citeturn0search0
 
 ---
 
-# 1. What is an Execution Context?
+# 2. Why Do We Need Execution Contexts?
 
-Execution Context is the **environment** in which JavaScript executes code.
-
-Think of it as a **workspace**.
-
-Whenever JavaScript runs code, it first creates a workspace that contains:
-
-- Variables
-- Functions
-- Scope information
-- The value of `this`
-
-Only after creating this workspace does JavaScript begin executing the code.
-
----
-
-Example
+Consider:
 
 ```js
-let x = 10;
+const name = "Om";
 
 function greet() {
-    console.log("Hello");
+    const message = "Hello";
+    console.log(message, name);
 }
 
 greet();
 ```
 
-Before line 1 executes,
+JavaScript needs to know:
 
-JavaScript first creates an Execution Context.
-
----
-
-# 2. Why Does JavaScript Need It?
-
-Imagine writing an exam.
-
-Before writing,
-
-you receive:
-
-- Question paper
-- Answer sheet
-- Roll number
-- Pen
-
-Only then do you start writing.
-
-Execution Context is JavaScript's "answer sheet."
-
-Without it,
-
-JavaScript wouldn't know:
-
-- where variables are stored
-- where functions exist
-- what `this` refers to
-- which scope to use
-
----
-
-# 3. Real-Life Analogy
-
-Imagine opening Microsoft Word.
-
-Before typing,
-
-Word creates:
-
-- a blank page
-- cursor
-- memory
-- formatting settings
-
-Only then can you type.
-
-Execution Context is that blank document.
-
----
-
-# 4. Types of Execution Context
-
-JavaScript has three types.
-
----
-
-## Global Execution Context (GEC)
-
-Created once.
-
-It runs first.
-
-Example
-
-```js
-console.log("Hello");
+```text
+Where is `name`?
+Where is `message`?
+Which function is currently running?
+What should happen after the function returns?
+What is `this` in the current context?
 ```
 
-Entire program starts here.
+Execution contexts provide the conceptual structure needed to keep track of this information.
 
 ---
 
-## Function Execution Context (FEC)
+# 3. Global Execution Context
 
-Created every time a function is called.
+When the main JavaScript code begins executing, a **global execution context** is created.
+
+Example:
 
 ```js
-function add(){
+const name = "Om";
 
+console.log(name);
+```
+
+Conceptually:
+
+```text
+Global Execution Context
+│
+├── name → "Om"
+├── global-level code
+└── other execution state
+```
+
+The global context represents the execution of the main body of the script/module.
+
+It is the starting point of normal JavaScript execution.
+
+---
+
+# 4. Function Execution Context
+
+Every function call creates a new execution context.
+
+Example:
+
+```js
+function greet(name) {
+    const message = "Hello " + name;
+    return message;
+}
+
+greet("Om");
+```
+
+When `greet("Om")` is called:
+
+```text
+Global Context
+      ↓
+greet() Context
+```
+
+The function context needs to track things such as:
+
+```text
+name
+message
+function execution state
+this
+```
+
+When the function finishes, its execution context is no longer the currently active context.
+
+MDN describes each function call as creating a new execution context that is pushed onto the execution-context stack and later removed when the function returns. citeturn0search4
+
+---
+
+# 5. Execution Context vs Call Stack
+
+These two terms are related but **not identical**.
+
+### Execution Context
+
+The environment/state associated with executing a particular piece of code.
+
+### Call Stack
+
+The stack structure that tracks active execution contexts.
+
+Think:
+
+```text
+Execution Context = a frame
+Call Stack        = collection of active frames
+```
+
+Example:
+
+```js
+function first() {
+    second();
+}
+
+function second() {
+    third();
+}
+
+function third() {
+    console.log("Hello");
+}
+
+first();
+```
+
+Conceptually:
+
+```text
+CALL STACK
+┌──────────────┐
+│ third()      │ ← currently running
+├──────────────┤
+│ second()     │
+├──────────────┤
+│ first()      │
+├──────────────┤
+│ Global       │
+└──────────────┘
+```
+
+The detailed stack behavior is the next dedicated topic.
+
+---
+
+# 6. Function Call Step-by-Step
+
+Consider:
+
+```js
+function add(a, b) {
+    const result = a + b;
+    return result;
+}
+
+const total = add(10, 20);
+```
+
+Conceptually:
+
+### Step 1 — Global code starts
+
+```text
+Global Execution Context
+```
+
+### Step 2 — `add()` is called
+
+```text
+Global
+   ↓
+add()
+```
+
+A new function execution context is created.
+
+### Step 3 — Parameters are available
+
+```text
+a → 10
+b → 20
+```
+
+### Step 4 — Local variable is created
+
+```text
+result → 30
+```
+
+### Step 5 — Function returns
+
+```text
+return 30
+```
+
+### Step 6 — Control returns to the caller
+
+```text
+Global
+```
+
+Then:
+
+```js
+total
+```
+
+receives:
+
+```text
+30
+```
+
+---
+
+# 7. Nested Function Calls
+
+This is where execution contexts become especially useful.
+
+```js
+function first() {
+    const a = 10;
+    second();
+}
+
+function second() {
+    const b = 20;
+    third();
+}
+
+function third() {
+    const c = 30;
+    console.log("Done");
+}
+
+first();
+```
+
+Execution flow:
+
+```text
+Global
+  ↓
+first()
+  ↓
+second()
+  ↓
+third()
+```
+
+At the deepest point:
+
+```text
+CALL STACK
+
+┌─────────────┐
+│ third()     │
+├─────────────┤
+│ second()    │
+├─────────────┤
+│ first()     │
+├─────────────┤
+│ Global      │
+└─────────────┘
+```
+
+When `third()` finishes:
+
+```text
+third() removed
+```
+
+Then:
+
+```text
+second()
+```
+
+continues.
+
+Then `second()` finishes:
+
+```text
+second() removed
+```
+
+Then `first()` continues.
+
+This is the bridge to the next topic:
+
+```text
+Execution Context
+        ↓
+Call Stack
+```
+
+---
+
+# 8. What Does an Execution Context Track?
+
+At your current learning level, remember these four important ideas:
+
+```text
+1. Code being executed
+2. Variables / bindings
+3. Scope-related information
+4. `this`
+```
+
+There is more detail in the ECMAScript specification, but you do not need to memorize specification internals yet.
+
+The goal is to understand **why each function call needs its own execution state**.
+
+---
+
+# 9. Variables Are Context-Dependent
+
+Example:
+
+```js
+const x = 10;
+
+function test() {
+    const x = 20;
+    console.log(x);
+}
+
+test();
+
+console.log(x);
+```
+
+Output:
+
+```text
+20
+10
+```
+
+Why?
+
+Because the function has its own execution context and its own local binding:
+
+```text
+Global Context
+└── x → 10
+
+test() Context
+└── x → 20
+```
+
+The two `x` variables are different bindings.
+
+---
+
+# 10. Connection to Scope
+
+Execution context and scope are related, but do not treat them as the same concept.
+
+### Scope
+
+Describes where identifiers can be accessed.
+
+### Execution Context
+
+Describes the execution state/environment for currently running code.
+
+Example:
+
+```js
+const x = 10;
+
+function test() {
+    const y = 20;
+    console.log(x, y);
+}
+
+test();
+```
+
+The function can access:
+
+```text
+y → local
+x → outer scope
+```
+
+The detailed lexical-scope and closure mechanics belong to your later:
+
+```text
+04-Functions-Scope-Closures
+```
+
+For now, understand the connection only.
+
+---
+
+# 11. Execution Context and `this`
+
+An execution context also has information related to the current `this` value.
+
+Example:
+
+```js
+function show() {
+    console.log(this);
+}
+```
+
+The value of `this` depends on how the function is called and the surrounding execution rules.
+
+Do not attempt to master `this` here.
+
+Your dedicated topic later:
+
+```text
+04-Functions-Scope-Closures
+└── 09-this.md
+```
+
+will cover it properly.
+
+For this Part, remember:
+
+```text
+Execution Context
+        ↓
+includes current `this` information
+```
+
+---
+
+# 12. Global vs Function Context
+
+### Global code
+
+```js
+const app = "DevAPI";
+
+console.log(app);
+```
+
+Conceptually:
+
+```text
+Global Execution Context
+```
+
+### Function call
+
+```js
+function start() {
+    const status = "running";
+}
+
+start();
+```
+
+Conceptually:
+
+```text
+Global Execution Context
+        ↓
+Function Execution Context
+```
+
+Every function invocation creates its own execution context.
+
+---
+
+# 13. Execution Contexts and Recursion
+
+This is especially useful because you already have recursion experience.
+
+Consider:
+
+```js
+function count(n) {
+    if (n === 0) {
+        return;
+    }
+
+    count(n - 1);
+}
+
+count(3);
+```
+
+Conceptually:
+
+```text
+Global
+  ↓
+count(3)
+  ↓
+count(2)
+  ↓
+count(1)
+  ↓
+count(0)
+```
+
+Each recursive call creates another execution context.
+
+So:
+
+```text
+count(3) → Context 1
+count(2) → Context 2
+count(1) → Context 3
+count(0) → Context 4
+```
+
+This is one reason recursion uses additional stack space.
+
+The call-stack mechanics will be studied next.
+
+---
+
+# 14. Execution Context and Your Previous Functional JavaScript
+
+Your Folder 02 code:
+
+```js
+const totResTime = req
+    .map(({ resTime }) => resTime)
+    .reduce((acc, currResTime) => {
+        return currResTime + acc;
+    }, 0);
+```
+
+contains function calls and callbacks.
+
+The callbacks execute within execution contexts created for those function invocations.
+
+But remember:
+
+```text
+Execution Context
+≠
+Asynchronous
+```
+
+A function can have an execution context during completely synchronous execution.
+
+This is an important distinction.
+
+---
+
+# 15. Execution Context and Asynchronous JavaScript
+
+Now connect this to the current folder.
+
+Consider:
+
+```js
+setTimeout(() => {
+    console.log("Done");
+}, 0);
+```
+
+The callback does not execute immediately just because it was written.
+
+When it eventually gets a turn to execute, JavaScript creates/uses the execution state required to run that callback.
+
+Conceptually:
+
+```text
+Timer completes
+      ↓
+Callback becomes eligible
+      ↓
+Callback gets execution turn
+      ↓
+Execution Context
+      ↓
+Call Stack
+      ↓
+Callback runs
+```
+
+The detailed queue and event-loop rules come later.
+
+---
+
+# 16. Execution Context vs Scope vs Closure
+
+Keep these three concepts separate:
+
+```text
+Execution Context
+    ↓
+Current execution state
+
+Scope
+    ↓
+Where identifiers are accessible
+
+Closure
+    ↓
+Function retains access to its surrounding lexical environment
+```
+
+Example:
+
+```js
+function outer() {
+    const message = "Hello";
+
+    return function inner() {
+        console.log(message);
+    };
+}
+
+const fn = outer();
+
+fn();
+```
+
+The function `inner` can still access `message`.
+
+This is a closure.
+
+Do not study closure deeply here. It belongs in Folder 04.
+
+---
+
+# 17. Important Correction: "Execution Context Is an Object"
+
+Avoid thinking:
+
+```text
+Execution Context = normal JavaScript object
+```
+
+That is misleading.
+
+Execution context is a **specification/runtime concept** describing the state needed to execute code.
+
+It is not something you normally create manually with:
+
+```js
+new ExecutionContext()
+```
+
+There is no ordinary JavaScript API like that.
+
+---
+
+# 18. Important Correction: "Every Line Creates a New Context"
+
+Wrong.
+
+For example:
+
+```js
+const a = 10;
+const b = 20;
+const c = a + b;
+```
+
+These statements execute within the same current execution context.
+
+A function call creates a new function execution context:
+
+```js
+function add() {
+    // new function execution context when called
 }
 
 add();
 ```
 
-Calling `add()` creates a new Function Execution Context.
+So:
+
+```text
+Statement
+≠
+New execution context
+
+Function call
+→ new execution context
+```
+
+Other language constructs can have additional execution-context behavior, but that detail is not required here.
 
 ---
 
-## Eval Execution Context
+# 19. High-Level Model
 
-Created only when using
+Keep this model:
 
-```js
-eval()
+```text
+JavaScript starts
+       ↓
+Global Execution Context
+       ↓
+Function called
+       ↓
+New Function Execution Context
+       ↓
+Function calls another function
+       ↓
+Another Execution Context
+       ↓
+Function returns
+       ↓
+Context leaves active execution stack
 ```
 
-Rarely used.
-
-Almost never asked in interviews.
-
----
-
-# 5. Global Execution Context
-
-The first thing JavaScript creates.
-
-Example
-
-```js
-let x = 10;
-
-console.log(x);
-```
-
-Flow
-
-```
-Program Starts
-
-↓
-
-Create GEC
-
-↓
-
-Creation Phase
-
-↓
-
-Execution Phase
-
-↓
-
-Program Ends
-```
-
-There is only **one Global Execution Context**.
-
----
-
-# 6. Function Execution Context
-
-Every function call creates a new context.
-
-Example
-
-```js
-function one(){
-
-}
-
-one();
-one();
-```
-
-Execution
-
-```
-GEC
-
-↓
-
-FEC
-
-↓
-
-Destroyed
-
-↓
-
-FEC
-
-↓
-
-Destroyed
-```
-
-Each function call gets a fresh workspace.
-
----
-
-# 7. Eval Execution Context
-
-Example
-
-```js
-eval("console.log('Hello')");
-```
-
-Avoid using `eval`.
-
----
-
-# 8. Life Cycle
-
-Every Execution Context has two phases.
-
-```
-Creation Phase
-
-↓
-
-Execution Phase
-```
-
----
-
-# 9. Creation Phase
-
-This happens **before any code executes.**
-
-JavaScript:
-
-- allocates memory
-- creates variables
-- stores function definitions
-- decides `this`
-
-Nothing has executed yet.
-
----
-
-Example
-
-```js
-console.log(a);
-
-var a = 10;
-```
-
-During Creation Phase
-
-```
-a
-
-↓
-
-undefined
-```
-
-Then execution begins.
-
----
-
-# 10. Execution Phase
-
-Now JavaScript executes line by line.
-
-```
-var a = 10;
-```
-
-updates
-
-```
-undefined
-
-↓
-
-10
-```
-
----
-
-# 11. Memory Allocation
-
-Variables get memory.
-
-Example
-
-```js
-var age = 20;
-
-var name = "Om";
-```
-
-Creation Phase
-
-```
-Memory
-
-age
-
-↓
-
-undefined
-
-name
-
-↓
-
-undefined
-```
-
-Execution Phase
-
-```
-age
-
-↓
-
-20
-
-name
-
-↓
-
-Om
-```
-
----
-
-# 12. Variable Hoisting
-
-Example
-
-```js
-console.log(a);
-
-var a = 5;
-```
-
-Output
-
-```
-undefined
-```
-
-Why?
-
-Because memory was already created.
-
----
-
-Example
-
-```js
-console.log(x);
-
-let x = 10;
-```
-
-Output
-
-```
-ReferenceError
-```
-
-We'll study the Temporal Dead Zone later.
-
----
-
-# 13. Function Hoisting
-
-Functions are stored completely during Creation Phase.
-
-Example
-
-```js
-greet();
-
-function greet(){
-    console.log("Hello");
-}
-```
-
-Works perfectly.
-
----
-
-Why?
-
-Because the entire function is already in memory.
-
----
-
-# 14. Function Invocation
-
-Example
-
-```js
-function one(){
-
-}
-
-one();
-```
-
-Flow
-
-```
-Global Context
-
-↓
-
-Call one()
-
-↓
-
-Create Function Context
-
-↓
-
-Execute
-
-↓
-
-Destroy Context
-
-↓
-
-Return
-```
-
----
-
-# 15. Relation with Call Stack
-
-Every Execution Context sits on the Call Stack.
-
-```
+Combined with the next topic:
+
+```text
+Execution Context
+       ↓
 Call Stack
-
-↓
-
-Global Context
-
-↓
-
-Function Context
-
-↓
-
-Function Context
-
-↓
-
-Return
-
-↓
-
-Empty
 ```
 
 ---
 
-# 16. Dry Run
+# 20. Practice
+
+## Practice 1
+
+How many function execution contexts are created here?
 
 ```js
-var x = 10;
-
-function hello(){
-    var y = 20;
+function one() {
+    two();
 }
 
-hello();
+function two() {
+    three();
+}
+
+function three() {
+    console.log("Done");
+}
+
+one();
 ```
 
-### Creation Phase
-
-```
-Memory
-
-x
-
-↓
-
-undefined
-
-hello
-
-↓
-
-Function
-```
+Do not count the global context unless asked separately.
 
 ---
 
-Execution
+## Practice 2
 
-```
-x = 10
+Draw the active stack at the moment `three()` is executing.
 
-↓
-
-hello()
-
-↓
-
-New Function Context
-
-↓
-
-y = undefined
-
-↓
-
-y = 20
-
-↓
-
-Destroy Context
+```text
+?
+?
+?
+?
 ```
 
 ---
 
-Final
+## Practice 3
 
+Explain why these two values can coexist:
+
+```js
+const x = 10;
+
+function test() {
+    const x = 20;
+    console.log(x);
+}
+
+test();
 ```
-Global
 
-x = 10
+---
 
-hello = Function
+## Practice 4
+
+For this recursive code:
+
+```js
+function count(n) {
+    if (n === 0) return;
+    count(n - 1);
+}
+
+count(3);
 ```
 
----
-
-# 17. Interview Questions
-
-## What is Execution Context?
-
-Execution Context is the environment in which JavaScript executes code. It stores variables, functions, scope information, and the value of `this`.
+Draw the execution-context chain when `count(0)` is executing.
 
 ---
 
-## How many Execution Contexts exist?
+## Practice 5
 
-- Global
-- Function
-- Eval
+Explain the difference:
 
----
+```text
+Execution Context
+Call Stack
+Scope
+Closure
+```
 
-## Which Execution Context is created first?
-
-Global Execution Context.
-
----
-
-## What are the two phases?
-
-- Creation Phase
-- Execution Phase
+Do not memorize definitions. Explain the responsibility of each.
 
 ---
 
-## Why does hoisting happen?
+# 21. Interview Questions
 
-Because memory allocation occurs during the Creation Phase before code execution.
+### Q1. What is an execution context?
 
----
+It is the runtime/specification environment used to execute a piece of JavaScript code and track the state required for that execution.
 
-# 18. Common Mistakes
+### Q2. What is the global execution context?
 
-❌ Thinking Execution Context and Call Stack are the same.
+The execution context used to execute the main/global body of JavaScript code.
+
+### Q3. Does every function call create a new execution context?
+
+Yes, a function invocation creates a function execution context.
+
+### Q4. Is an execution context the same as the call stack?
 
 No.
 
-Execution Context is an object.
+```text
+Execution Context → individual execution frame/state
+Call Stack        → stack tracking active execution contexts
+```
 
-Call Stack stores Execution Contexts.
+### Q5. Why does recursion create multiple execution contexts?
 
----
+Because each recursive function invocation creates a new function execution context.
 
-❌ Thinking JavaScript executes immediately.
+### Q6. Is execution context the same as scope?
 
 No.
 
-Creation Phase happens first.
+Scope describes identifier accessibility; execution context describes the state/environment used while code is executing.
+
+### Q7. Does an execution context make code asynchronous?
+
+No.
+
+Execution contexts exist during synchronous and asynchronous callback execution.
 
 ---
 
-❌ Thinking functions are created during execution.
+# 22. Completion Checklist
 
-Wrong.
+Before moving to the next Part, you should be able to:
 
-Functions are stored during Creation Phase.
+- [ ] Explain what an execution context is
+- [ ] Explain global execution context
+- [ ] Explain function execution context
+- [ ] Explain why function calls create new contexts
+- [ ] Distinguish execution context from call stack
+- [ ] Explain the connection between context and local variables
+- [ ] Explain the basic connection to `this`
+- [ ] Explain why recursion creates multiple contexts
+- [ ] Distinguish execution context from scope
+- [ ] Distinguish execution context from closure
+- [ ] Connect execution context to Folder 02 callbacks
+- [ ] Draw a simple nested-call stack
 
 ---
-Here is a more interview-ready version of your **Exercises** and **Summary**. It fixes the `let` mistake and uses professional wording while remaining easy to understand.
 
----
+# 23. Quick Revision
 
-# 19. Exercises
-
-## Exercise 1
-
-```js
-console.log(a);
-
-var a = 10;
+```text
+Execution Context
+        ↓
+Environment/state required to execute code
+        ↓
+Global code → Global Context
+Function call → Function Context
+        ↓
+Active contexts are tracked by the Call Stack
 ```
 
-### Question
+Remember:
 
-Explain the Creation Phase and Execution Phase.
-
-### Answer
-
-### Step 1: Global Execution Context (GEC) is created
-
-Before executing any code, JavaScript creates the Global Execution Context.
-
-### Creation Phase
-
-Memory Allocation:
-
-```
-a
-↓
-undefined
-```
-
-During this phase:
-
-* Memory is allocated for `a`.
-* Since `a` is declared using `var`, it is initialized with `undefined`.
-
-### Execution Phase
-
-JavaScript executes the code line by line.
-
-```js
-console.log(a);
-```
-
-Output
-
-```
-undefined
-```
-
-because `a` currently contains `undefined`.
-
-Next,
-
-```js
-var a = 10;
-```
-
-updates the memory.
-
-```
-a
-↓
-10
+```text
+Execution Context ≠ Call Stack
+Execution Context ≠ Scope
+Execution Context ≠ Closure
+Callback ≠ Asynchronous
+Function call → new function execution context
+Recursion → multiple function execution contexts
 ```
 
 ---
 
-## Exercise 2
+# Final Mental Model
 
-```js
-hello();
-
-function hello() {
-    console.log("Hi");
-}
+```text
+                JavaScript Execution
+                        │
+                        ▼
+              Global Execution Context
+                        │
+                 function call
+                        ▼
+             Function Execution Context
+                        │
+                 function call
+                        ▼
+             Another Execution Context
+                        │
+                        ▼
+                  Call Stack
+                        │
+                 return / finish
+                        ▼
+              Previous context resumes
 ```
 
-### Question
-
-Why does this work?
-
-### Answer
-
-During the **Creation Phase**, JavaScript stores the **entire function definition** in memory.
-
-Memory after Creation Phase:
-
-```
-hello
-↓
-Function
-```
-
-So when the Execution Phase begins,
-
-```js
-hello();
-```
-
-JavaScript already knows where the function exists and executes it successfully.
-
-Output
-
-```
-Hi
-```
-
-This behavior is called **Function Hoisting**.
-
----
-
-## Exercise 3
-
-```js
-let x = 20;
-
-console.log(x);
-```
-
-### Question
-
-Explain the memory allocation process.
-
-### Answer
-
-### Step 1: Global Execution Context (GEC) is created.
-
-### Creation Phase
-
-Memory is reserved for `x`, but it is **not initialized**.
-
-```
-x
-↓
-Uninitialized
-(TDZ - Temporal Dead Zone)
-```
-
-Unlike `var`, `let` is **not assigned `undefined`** during the Creation Phase.
-
-### Execution Phase
-
-```js
-let x = 20;
-```
-
-Now `x` is initialized.
-
-```
-x
-↓
-20
-```
-
-Next,
-
-```js
-console.log(x);
-```
-
-Output
-
-```
-20
-```
-
-If we tried to access `x` before initialization,
-
-```js
-console.log(x);
-
-let x = 20;
-```
-
-JavaScript would throw:
-
-```
-ReferenceError
-```
-
-because `x` is inside the **Temporal Dead Zone (TDZ)**.
-
----
-
-# 20. Summary
-
-After completing this chapter, you should understand:
-
-* ✅ JavaScript creates an **Execution Context** before executing any code.
-* ✅ An Execution Context is the environment where JavaScript runs code.
-* ✅ There are **three types** of Execution Context:
-
-  * Global Execution Context (GEC)
-  * Function Execution Context (FEC)
-  * Eval Execution Context (rarely used)
-* ✅ Every Execution Context goes through **two phases**:
-
-  * Creation Phase
-  * Execution Phase
-* ✅ During the **Creation Phase**, JavaScript:
-
-  * Allocates memory for variables.
-  * Stores function declarations completely.
-  * Determines the value of `this`.
-* ✅ During the **Execution Phase**, JavaScript executes code line by line.
-* ✅ Variables declared with `var` are initialized with `undefined`.
-* ✅ Variables declared with `let` and `const` remain **uninitialized** until their declaration is executed (Temporal Dead Zone).
-* ✅ Function declarations are fully hoisted and can be called before their definition.
-* ✅ Every function call creates a new **Function Execution Context**.
-* ✅ Execution Contexts are managed using the **Call Stack**.
-* ✅ After a function finishes execution, its Function Execution Context is removed from the Call Stack.
-
----
-
-## Key Interview Takeaways
-
-* ✔️ Execution Context is **not** the Call Stack.
-* ✔️ Hoisting happens during the **Creation Phase**.
-* ✔️ `var` is initialized with `undefined`.
-* ✔️ `let` and `const` stay in the **Temporal Dead Zone (TDZ)** until initialization.
-* ✔️ Every function call creates a **new Execution Context**.
-* ✔️ Function declarations are fully hoisted, while function expressions are not.
-
----
-
-# What's Next?
-
-➡️ **Chapter 3 – Call Stack**
-
-In the next chapter, you'll learn:
-
-* What is the Call Stack?
-* Stack Frames
-* Push & Pop Operations
-* Nested Function Calls
-* Recursion
-* Stack Overflow
-* Relationship between Execution Context and Call Stack
-* Visual Execution Diagrams
-* Dry Runs
-* Common Interview Questions
-* Coding Exercises
-
-This version is technically accurate, interview-focused, and flows naturally from the concepts introduced in the chapter.
+**Next:** `03-Call-Stack.md`
