@@ -1,1006 +1,871 @@
-# Chapter 10 — Fetch API
+# 10 — Fetch API
 
-> **"The Fetch API is the modern way to communicate with servers in JavaScript."**
+**Folder:** `03-Asynchronous-JavaScript`
 
-Every frontend developer uses `fetch()`. It is one of the most important APIs for interviews and real-world development.
-
----
-
-# Table of Contents
-
-1. What is Fetch API?
-2. Why Do We Need Fetch?
-3. Client-Server Architecture
-4. How Fetch Works Internally
-5. Syntax
-6. GET Request
-7. Response Object
-8. Why response.json()?
-9. Fetch Execution Flow
-10. Promise Chain
-11. Async/Await with Fetch
-12. POST Request
-13. Common HTTP Methods
-14. Headers
-15. Error Handling
-16. Fetch vs XMLHttpRequest
-17. Complete Execution Diagram
-18. Real-Life Examples
-19. Common Mistakes
-20. Dry Runs
-21. Interview Questions
-22. Coding Exercises
-23. Summary
+> **Core idea:** `fetch()` lets JavaScript make HTTP requests and returns a Promise for the eventual `Response`.
 
 ---
 
-# 1. What is Fetch API?
+## 1. What Is Fetch?
 
-The Fetch API allows JavaScript to communicate with servers.
-
-Using fetch, we can
-
-- Get Data
-- Send Data
-- Update Data
-- Delete Data
-
-Example
-
-```javascript
-fetch("https://jsonplaceholder.typicode.com/users");
-```
-
----
-
-# 2. Why Do We Need Fetch?
-
-Imagine Instagram.
-
-When you open Instagram,
-
-JavaScript needs
-
-```
-Posts
-
-↓
-
-Comments
-
-↓
-
-Likes
-
-↓
-
-Profile
-
-↓
-
-Stories
-```
-
-Where does this data come from?
-
-A server.
-
-JavaScript requests data using Fetch.
-
----
-
-# 3. Client-Server Architecture
-
-```
-Browser
-
-↓
-
-fetch()
-
-↓
-
-Internet
-
-↓
-
-Server
-
-↓
-
-Database
-
-↓
-
-Server
-
-↓
-
-Browser
-```
-
-Example
-
-```
-Browser
-
-↓
-
-GET /users
-
-↓
-
-Server
-
-↓
-
-Database
-
-↓
-
-JSON Response
-
-↓
-
-Browser
-```
-
----
-
-# 4. How Fetch Works Internally
-
-Suppose
-
-```javascript
-fetch("/users");
-```
-
-Flow
-
-```
-JavaScript
-
-↓
-
-fetch()
-
-↓
-
-Browser Network API
-
-↓
-
-Internet
-
-↓
-
-Server
-
-↓
-
-Server sends Response
-
-↓
-
-Promise Resolved
-
-↓
-
-Microtask Queue
-
-↓
-
-Event Loop
-
-↓
-
-Call Stack
-```
-
-Notice
-
-Fetch uses **Promises**, not callbacks.
-
----
-
-# 5. Syntax
-
-Basic syntax
-
-```javascript
+```js
 fetch(url);
 ```
 
-Example
+Fetch lets browser JavaScript communicate with servers.
 
-```javascript
-fetch("https://jsonplaceholder.typicode.com/posts");
+Typical operations:
+
+```text
+GET
+POST
+PUT
+PATCH
+DELETE
 ```
 
-Since fetch returns a Promise,
+Mental model:
 
-we use
-
-```javascript
-.then()
-
-or
-
-async/await
-```
-
----
-
-# 6. GET Request
-
-Example
-
-```javascript
-fetch("https://jsonplaceholder.typicode.com/users")
-.then(response => response.json())
-.then(data => console.log(data));
-```
-
-Flow
-
-```
-Request
-
-↓
-
-Server
-
-↓
-
-JSON Response
-
-↓
-
-JavaScript Object
-```
-
----
-
-# 7. Response Object
-
-Many beginners think
-
-```javascript
+```text
+JavaScript
+   ↓
 fetch()
-
-↓
-
-Returns Data
-```
-
-Wrong.
-
-It returns
-
-```
-Response Object
-```
-
-Example
-
-```javascript
-fetch(url)
-
-.then(response => {
-
-    console.log(response);
-
-});
-```
-
-You'll see
-
-```
-status
-
-headers
-
-ok
-
-url
-
-body
-
-...
+   ↓
+HTTP Request
+   ↓
+Server
+   ↓
+HTTP Response
 ```
 
 ---
 
-# 8. Why response.json()?
+## 2. Client–Server Model
 
-Server sends
-
-```
-JSON String
-```
-
-JavaScript needs
-
-```
-JavaScript Object
-```
-
-Example
-
-Server sends
-
-```json
-{
-   "name":"John"
-}
-```
-
-After
-
-```javascript
-response.json()
-```
-
-We get
-
-```javascript
-{
-
-name:"John"
-
-}
-```
-
----
-
-# 9. Fetch Execution Flow
-
-```javascript
-fetch(url)
-
-↓
-
-Browser sends request
-
-↓
-
-Server receives
-
-↓
-
-Server processes
-
-↓
-
-Server responds
-
-↓
-
-Promise resolves
-
-↓
-
-Microtask Queue
-
-↓
-
-Event Loop
-
-↓
-
-.then()
-```
-
----
-
-# 10. Promise Chain
-
-```javascript
-fetch(url)
-
-.then(response => response.json())
-
-.then(data => {
-
-console.log(data);
-
-});
-```
-
-Flow
-
-```
+```text
+Browser
+   ↓
 Request
-
-↓
-
+   ↓
+Server
+   ↓
+Database
+   ↓
+Server
+   ↓
 Response
+   ↓
+Browser
+```
 
-↓
+Frontend applications use this pattern for users, products, posts, authentication, and other server data.
 
-JSON Conversion
+---
 
-↓
+## 3. What Does `fetch()` Return?
 
-Actual Data
+This is critical:
+
+```text
+fetch()
+→ Promise<Response>
+```
+
+Not:
+
+```text
+fetch()
+→ final JSON object
+```
+
+Example:
+
+```js
+const result = fetch("https://jsonplaceholder.typicode.com/users");
+
+console.log(result);
+```
+
+`result` is a Promise.
+
+---
+
+## 4. Basic GET
+
+```js
+fetch("https://jsonplaceholder.typicode.com/users")
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    });
+```
+
+Flow:
+
+```text
+fetch()
+   ↓
+Promise<Response>
+   ↓
+response
+   ↓
+response.json()
+   ↓
+Promise<parsed data>
+   ↓
+data
 ```
 
 ---
 
-# 11. Async/Await
+## 5. Response Object
 
-Same example
+The first `.then()` receives a `Response`:
 
-```javascript
-async function getUsers(){
+```js
+fetch(url)
+    .then(response => {
+        console.log(response.status);
+        console.log(response.ok);
+    });
+```
 
-    const response = await fetch(url);
+Useful properties:
+
+```text
+status
+ok
+headers
+url
+body
+```
+
+---
+
+## 6. Why `response.json()`?
+
+The response body needs to be consumed and parsed.
+
+```js
+const response = await fetch(url);
+
+const data = await response.json();
+```
+
+Important:
+
+```text
+fetch()
+→ Promise<Response>
+
+response.json()
+→ Promise<parsed value>
+```
+
+---
+
+## 7. Async/Await
+
+```js
+async function getUsers() {
+    const response = await fetch(
+        "https://jsonplaceholder.typicode.com/users"
+    );
 
     const data = await response.json();
 
     console.log(data);
-
 }
 ```
 
-Much cleaner.
+`await` pauses the progress of this async function; it does not freeze the whole JavaScript runtime.
 
 ---
 
-# 12. POST Request
+## 8. HTTP Errors vs Network Failures
 
-GET
+This is an important interview point.
 
-↓
+A server can return:
 
-Read Data
+```text
+404
+500
+```
 
-POST
+and Fetch can still resolve with a `Response`.
 
-↓
+Check:
 
-Send Data
-
-Example
-
-```javascript
-fetch(url,{
-
-method:"POST",
-
-body:JSON.stringify({
-
-name:"John"
-
-}),
-
-headers:{
-
-"Content-Type":"application/json"
-
+```js
+if (!response.ok) {
+    throw new Error(`HTTP ${response.status}`);
 }
+```
 
+Then handle failures with:
+
+```js
+try {
+    // request
+} catch (error) {
+    console.log(error);
+}
+```
+
+Mental model:
+
+```text
+Network/request failure
+→ Promise may reject
+
+HTTP 404/500
+→ Response can still resolve
+→ check response.ok/status
+```
+
+---
+
+## 9. POST Request
+
+```js
+fetch("https://jsonplaceholder.typicode.com/posts", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        title: "Hello",
+        body: "Learning Fetch",
+        userId: 1
+    })
 });
 ```
 
+Important pieces:
+
+```text
+method
+headers
+body
+```
+
 ---
 
-# 13. Common HTTP Methods
+## 10. Common Methods
 
-| Method | Purpose |
-|---------|----------|
+| Method | Typical use |
+|---|---|
 | GET | Read |
-| POST | Create |
+| POST | Create/send |
 | PUT | Replace |
-| PATCH | Update |
+| PATCH | Partial update |
 | DELETE | Delete |
 
 ---
 
-# 14. Headers
+## 11. JSON.stringify()
 
-Headers give extra information.
+Sending:
 
-Example
-
-```javascript
-headers:{
-
-"Content-Type":"application/json",
-
-Authorization:"Bearer Token"
-
-}
-```
-
----
-
-# 15. Error Handling
-
-Wrong
-
-```javascript
-fetch(url)
-
-.then(...)
-```
-
-Better
-
-```javascript
-fetch(url)
-
-.then(response=>{
-
-if(!response.ok){
-
-throw Error("Network Error");
-
-}
-
-return response.json();
-
-})
-
-.catch(error=>{
-
-console.log(error);
-
+```js
+JSON.stringify({
+    name: "Om"
 });
 ```
 
-Async/Await
+converts a JavaScript value into JSON text.
 
-```javascript
-try{
+Think:
 
-const response=await fetch(url);
+```text
+Object
+ ↓
+JSON.stringify()
+ ↓
+Request body
+```
 
-}catch(error){
+Receiving:
 
-console.log(error);
+```text
+Response body
+ ↓
+response.json()
+ ↓
+JavaScript value
+```
 
+---
+
+## 12. Headers
+
+Example:
+
+```js
+headers: {
+    "Content-Type": "application/json"
 }
 ```
 
----
+Authentication may use:
 
-# 16. Fetch vs XMLHttpRequest
-
-| Fetch | XMLHttpRequest |
-|--------|----------------|
-| Modern | Old |
-| Promise Based | Callback Based |
-| Cleaner | Verbose |
-| Async/Await Support | No |
-| Easier Error Handling | Difficult |
-
----
-
-# 17. Complete Diagram
-
+```js
+headers: {
+    Authorization: "Bearer TOKEN"
+}
 ```
-JavaScript
 
+Headers carry metadata about requests/responses.
+
+---
+
+## 13. Fetch + Functional JavaScript
+
+This connects directly to Folder 02.
+
+```js
+const users = await response.json();
+
+const names = users.map(user => user.name);
+
+const selected = users.filter(user => user.id > 5);
+
+const user = users.find(user => user.id === 5);
+
+const total = users.reduce((sum, user) => {
+    return sum + user.id;
+}, 0);
+```
+
+Your progression is:
+
+```text
+Fetch
+ ↓
+JSON data
+ ↓
+map/filter/find/reduce/sort
+ ↓
+Feature
+```
+
+---
+
+# 14. DevAPI Connection
+
+Earlier:
+
+```text
+Static request objects
+        ↓
+Functional processing
+```
+
+Now:
+
+```text
+Fetch
+   ↓
+HTTP response
+   ↓
+JSON
+   ↓
+Functional processing
+   ↓
+Analytics
+```
+
+This is the next step toward a real DevAPI.
+
+---
+
+# 15. HANDS-ON LAB
+
+Create:
+
+```text
+03-Asynchronous-JavaScript/Code/fetch.js
+```
+
+For each lab:
+
+```text
+Predict
 ↓
+Run
+↓
+Observe
+↓
+Explain
+```
 
+Do not only copy the solution.
+
+### Lab 1 — Basic GET
+
+Fetch:
+
+```text
+https://jsonplaceholder.typicode.com/users
+```
+
+Print the raw `Response`.
+
+Question:
+
+> What properties do you see?
+
+### Lab 2 — Parse JSON
+
+Fetch the same URL and print:
+
+```js
+await response.json();
+```
+
+Explain why this is another asynchronous step.
+
+### Lab 3 — User Names
+
+Fetch users and use:
+
+```text
+map()
+```
+
+to print only names.
+
+### Lab 4 — Find One User
+
+Fetch users and use:
+
+```text
+find()
+```
+
+to find:
+
+```text
+id = 5
+```
+
+### Lab 5 — Filter Users
+
+Fetch users and use:
+
+```text
+filter()
+```
+
+for:
+
+```text
+id > 5
+```
+
+### Lab 6 — Error Handling
+
+Test an invalid URL.
+
+Then test an HTTP error and inspect:
+
+```js
+response.ok
+response.status
+```
+
+Explain the difference.
+
+### Lab 7 — Async/Await
+
+Write:
+
+```text
+GET
+↓
+check response
+↓
+parse JSON
+↓
+print data
+```
+
+using only:
+
+```text
+async/await
+try/catch
+```
+
+### Lab 8 — POST
+
+Create a POST request containing:
+
+```text
+name
+email
+```
+
+Use:
+
+```text
+method
+headers
+body
+JSON.stringify()
+```
+
+Print the returned data.
+
+### Lab 9 — Fetch + Functional Methods
+
+Build:
+
+```text
+GET users
+ ↓
+JSON
+ ↓
+map
+ ↓
+names
+```
+
+Then independently build:
+
+```text
+GET users
+ ↓
+JSON
+ ↓
+find
+ ↓
+one user
+```
+
+and:
+
+```text
+GET users
+ ↓
+JSON
+ ↓
+filter
+ ↓
+selected users
+```
+
+---
+
+# 16. DevAPI Hands-On
+
+Start replacing hard-coded data with fetched data.
+
+Goal:
+
+```text
+GET request
+   ↓
+Response
+   ↓
+JSON
+   ↓
+map/filter/find/reduce
+   ↓
+Analytics
+```
+
+Build it one step at a time.
+
+Do not build the whole feature at once.
+
+---
+
+# 17. Debugging Practice
+
+Find the problem:
+
+```js
+async function getUsers() {
+    const response = fetch(url);
+
+    const data = await response.json();
+
+    console.log(data);
+}
+```
+
+Ask:
+
+```text
+What is response?
+
+Why does response.json() fail?
+```
+
+Key:
+
+```text
 fetch()
+→ Promise
 
-↓
-
-Browser
-
-↓
-
-HTTP Request
-
-↓
-
-Server
-
-↓
-
-Database
-
-↓
-
-Server Response
-
-↓
-
-Promise
-
-↓
-
-Microtask Queue
-
-↓
-
-Event Loop
-
-↓
-
-.then()
-
-↓
-
-response.json()
-
-↓
-
-Actual Data
+await fetch()
+→ Response
 ```
 
 ---
 
-# 18. Real-Life Examples
+# 18. Common Mistakes
 
-### Login
-
-```
-POST /login
-```
-
----
-
-### Register
-
-```
-POST /register
-```
-
----
-
-### Products
-
-```
-GET /products
-```
-
----
-
-### Delete User
-
-```
-DELETE /users/5
-```
-
----
-
-### Update Profile
-
-```
-PATCH /profile
-```
-
----
-
-# 19. Common Mistakes
-
-### Mistake 1
-
-Thinking
-
-```javascript
-fetch()
-
-↓
-
-Returns Data
-```
+### `fetch()` returns JSON
 
 Wrong.
 
-Returns Promise.
+It returns a Promise.
 
----
+### Forgetting `response.json()`
 
-### Mistake 2
+Then you still have a `Response`.
 
-Forgetting
+### Forgetting `await`
 
-```javascript
-response.json()
+```js
+const data = response.json();
 ```
 
-Then
+`data` is a Promise.
 
-```
-You only have Response Object.
-```
+### Assuming 404 rejects Fetch
 
----
+Wrong.
 
-### Mistake 3
+Check:
 
-Ignoring errors.
-
-Always handle
-
-```
-.catch()
-
-or
-
-try...catch
+```js
+response.ok
+response.status
 ```
 
----
+### Sending a plain object as JSON body
 
-### Mistake 4
+Use:
 
-Forgetting
-
-```javascript
-await
+```js
+body: JSON.stringify(data)
 ```
 
-Then
+### Ignoring errors
 
-```
-You get Promise instead of Data.
+Use:
+
+```text
+response.ok
++
+try/catch
 ```
 
 ---
 
-# 20. Dry Runs
+# 19. Dry Runs
 
-Example
+### Example 1
 
-```javascript
+```js
 console.log("Start");
 
 fetch(url)
-
-.then(()=>{
-
-console.log("Fetched");
-
-});
+    .then(() => {
+        console.log("Fetched");
+    });
 
 console.log("End");
 ```
 
-Execution
+High-level order:
 
-```
+```text
 Start
-
-↓
-
-fetch starts
-
-↓
-
 End
-
-↓
-
-Server responds
-
-↓
-
-Promise
-
-↓
-
-Microtask Queue
-
-↓
-
 Fetched
 ```
 
-Output
+### Example 2
 
+```js
+async function load() {
+    console.log("A");
+
+    const response = await fetch(url);
+
+    console.log("B");
+}
+
+console.log("Start");
+
+load();
+
+console.log("End");
 ```
+
+High-level order:
+
+```text
 Start
-
+A
 End
-
-Fetched
+...
+B
 ```
+
+The `load()` function continues after the awaited Promise settles.
 
 ---
 
-# 21. Interview Questions
+# 20. Interview Questions
 
-### What does fetch return?
+### What does `fetch()` return?
 
-A Promise.
+A Promise that resolves to a Response.
 
----
+### What does `response.json()` return?
 
-### Why use response.json()?
+A Promise for the parsed JSON value.
 
-To convert JSON into a JavaScript object.
+### Does Fetch reject on HTTP 404?
 
----
+Not normally. Check `response.ok` and `response.status`.
 
-### Does fetch reject on HTTP 404?
-
-No.
-
-Only network failures reject the Promise.
-
-You must check
-
-```javascript
-response.ok
-```
-
----
-
-### Difference between GET and POST?
-
-GET
-
-```
-Retrieve Data
-```
-
-POST
-
-```
-Send Data
-```
-
----
-
-### Can fetch use async/await?
+### Can Fetch use async/await?
 
 Yes.
 
----
-
-### Is fetch synchronous?
+### Is Fetch synchronous?
 
 No.
 
-It is asynchronous.
+### Why is Fetch Promise-based?
 
----
+Network work finishes later, so the Promise represents its eventual result.
 
-### Why is fetch Promise-based?
+### Why use `JSON.stringify()`?
 
-Because network requests take time.
+To serialize a JavaScript value into JSON text for the request body.
 
-JavaScript shouldn't block.
+### GET vs POST?
 
----
-
-# 22. Coding Exercises
-
-## Exercise 1
-
-Fetch users from
-
-```
-https://jsonplaceholder.typicode.com/users
+```text
+GET  → retrieve
+POST → send/create
 ```
 
 ---
 
-## Exercise 2
+# 21. Completion Checklist
 
-Print only user names.
+- [ ] I understand Fetch.
+- [ ] I know `fetch()` returns a Promise.
+- [ ] I know that Promise resolves to a Response.
+- [ ] I understand `response.json()`.
+- [ ] I know `response.json()` returns a Promise.
+- [ ] I can make a GET request.
+- [ ] I can make a POST request.
+- [ ] I understand headers.
+- [ ] I understand `response.ok` and `response.status`.
+- [ ] I know HTTP errors and network failures differ.
+- [ ] I can use async/await.
+- [ ] I can use try/catch.
+- [ ] I can combine Fetch with map/filter/find/reduce.
+- [ ] I completed the hands-on labs.
+- [ ] I applied Fetch to DevAPI.
 
 ---
 
-## Exercise 3
+# 22. Quick Revision
 
-Create a POST request.
+```text
+fetch()
+    ↓
+Promise<Response>
+    ↓
+Response
+    ↓
+response.json()
+    ↓
+Promise<parsed data>
+    ↓
+JavaScript data
+```
 
----
+Errors:
 
-## Exercise 4
+```text
+Network failure
+→ Promise may reject
 
-Handle network errors using
+HTTP 404/500
+→ Response can still resolve
+→ check ok/status
+```
 
-```javascript
-try...catch
+Sending JSON:
+
+```text
+JavaScript object
+    ↓
+JSON.stringify()
+    ↓
+HTTP body
+```
+
+Processing:
+
+```text
+Fetch
+ ↓
+JSON
+ ↓
+map/filter/find/reduce/sort
+ ↓
+Feature
 ```
 
 ---
 
-## Exercise 5
+# Final Mental Model
 
-Rewrite
-
-```javascript
-.then()
+```text
+                   JavaScript
+                       │
+                       ▼
+                     fetch()
+                       │
+                       ▼
+                Network Request
+                       │
+                       ▼
+                     Server
+                       │
+                       ▼
+                  HTTP Response
+                       │
+                       ▼
+                Promise<Response>
+                       │
+                       ▼
+                response.json()
+                       │
+                       ▼
+               Promise<Parsed Data>
+                       │
+                       ▼
+                 JavaScript Data
+                       │
+                       ▼
+          map / filter / find / reduce
+                       │
+                       ▼
+                   Application
 ```
 
-using
-
-```javascript
-async/await
-```
-
----
-
-# 23. Summary
-
-- Fetch is the modern API for making HTTP requests.
-- Fetch returns a Promise, not actual data.
-- Use `response.json()` to convert JSON into JavaScript objects.
-- Use `.then()` or `async/await` to handle responses.
-- Handle errors using `response.ok`, `.catch()`, or `try...catch`.
-- Fetch is promise-based and integrates with the Event Loop through the Microtask Queue.
-
----
-
-# Visual Memory Trick
-
-```
-JavaScript
-
-      │
-      ▼
-
- fetch()
-
-      │
-      ▼
-
- Browser
-
-      │
-      ▼
-
- HTTP Request
-
-      │
-      ▼
-
- Server
-
-      │
-      ▼
-
- HTTP Response
-
-      │
-      ▼
-
- Promise
-
-      │
-      ▼
-
- Microtask Queue
-
-      │
-      ▼
-
- Event Loop
-
-      │
-      ▼
-
- response.json()
-
-      │
-      ▼
-
- JavaScript Object
-```
-
----
-
-# Next Chapter
-
-➡️ **11-Promises.md**
-
-You'll master:
-
-- What is a Promise?
-- Promise States
-- Promise Lifecycle
-- resolve() vs reject()
-- `.then()`, `.catch()`, `.finally()`
-- Promise Chaining
-- Promise Combinators (`all`, `race`, `any`, `allSettled`)
-- Internal execution diagrams
-- 40+ interview questions
-- Real-world examples and coding exercises
+**Next:** `11-Promises.md`

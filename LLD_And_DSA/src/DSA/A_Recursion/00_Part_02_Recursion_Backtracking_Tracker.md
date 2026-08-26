@@ -4,23 +4,23 @@
 
 ## Revision
 
-| Mark | When | What to do |
-|---|---|---|
-| R0 | Same day | Close notes → explain pattern + dry run |
-| R1 | 2–3 days | Rebuild the recursion skeleton from memory |
-| R2 | ~7 days | Solve/trace without notes |
-| R3 | ~30 days | Quick recall; solve again only if weak |
+| Mark | When     | What to do                                 |
+| ---- | -------- | ------------------------------------------ |
+| R0   | Same day | Close notes → explain pattern + dry run    |
+| R1   | 2–3 days | Rebuild the recursion skeleton from memory |
+| R2   | ~7 days  | Solve/trace without notes                  |
+| R3   | ~30 days | Quick recall; solve again only if weak     |
 
 **Revision rule:** strong problems rest; medium problems get another recall; weak problems repeat. Do not revise every problem the same number of times.
 
 ## Tracker Key
 
-`☑️` completed  ·  `R1/R2/R3` = revision completed  ·  `🟢/🟡/🔴` = strong / medium / weak
+`☑️` completed · `R1/R2/R3` = revision completed · `🟢/🟡/🔴` = strong / medium / weak
 
 ## Roadmap
 
 | Pattern |       Range | Focus                                |
-|---------|------------:|--------------------------------------|
+| ------- | ----------: | ------------------------------------ |
 | **G**   | **061–080** | Mathematical / Number Recursion      |
 | **H**   | **081–095** | Take / Not-Take                      |
 | **I**   | **096–100** | Choice / Generation                  |
@@ -50,28 +50,29 @@ POWER / MATH / NUMBER → reduce the problem → recurse → combine/return
 
 |   # | Problem                                        | Platform            | Status | R1 | R2 | R3 | Strength |
 |----:|------------------------------------------------|---------------------|:------:|:--:|:--:|:--:|:--------:|
-| 061 | Fast Exponentiation                            | LeetCode 50 / GFG   |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| 062 | Multiply Two Numbers Recursively               | GFG                 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| 063 | Divide Two Numbers Recursively                 | GFG                 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| 064 | Calculate nCr Recursively                      | GFG                 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| 065 | Calculate nPr Recursively                      | GFG                 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| 066 | Pascal Triangle Row Recursively                | LeetCode 119 style  |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| 067 | Tower of Hanoi                                 | GFG                 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| 068 | Josephus Problem                               | GFG / LeetCode 1823 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| 069 | Recursive Euclidean Algorithm                  | GFG                 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| 070 | Print All Divisors Recursively                 | GFG                 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| 071 | Prime Checking Recursively                     | GFG                 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| 072 | Sieve-Style Recursion Practice                 | Interview           |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| 073 | Generate Binary Numbers Recursively            | GFG                 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| 074 | Generate Gray Code Recursively                 | LeetCode 89         |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| 075 | Binary Representation Recursively              | GFG                 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| 076 | Decimal Representation from Binary Recursively | GFG                 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| 077 | Sum of Squares Recursively                     | GFG                 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| 078 | Sum of Cubes Recursively                       | GFG                 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| 079 | Alternating Sum Recursively                    | GFG                 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| 080 | Alternating Product Recursively                | Interview           |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+| 061 | Fast Exponentiation                            | LeetCode 50 / GFG   |   ☑️   | ☑️ | ☑️  | ⬜  |    🟢    |
+| 062 | Multiply Two Numbers Recursively               | GFG                 |   ☑️   | ☑️ | ☑️  | ⬜  |  🟡    |
+| 063 | Divide Two Numbers Recursively                 | GFG                 |   ☑️   | ☑️ | ☑️  | ⬜  |  🟡    |
+| 064 | Calculate nCr Recursively                      | GFG                 |   ☑️   | ☑️ | ☑️  | ⬜  |  🟢    |
+| 065 | Calculate nPr Recursively                      | GFG                 |   ☑️   | ☑️ | ☑️  | ⬜  |  🟢    |
+| 066 | Pascal Triangle Row Recursively                | LeetCode 119 style  |   ☑️   | ☑️ | ☑️  | ⬜  |  🟢    |
+| 067 | Tower of Hanoi                                 | GFG                 |   ☑️   | ☑️ | ☑️  | ⬜  |  🟡    |
+| 068 | Josephus Problem                               | GFG / LeetCode 1823 |   ☑️   | ☑️ | ☑️  | ⬜  |  🟡    |
+| 069 | Recursive Euclidean Algorithm                  | GFG                 |   ☑️   | ☑️ | ☑️  | ⬜  |  🟡    |
+| 070 | Print All Divisors Recursively                 | GFG                 |   ☑️   | ☑️ | ☑️  | ⬜  |  🟡    |
+| 071 | Prime Checking Recursively                     | GFG                 |   ☑️   | ☑️ | ☑️  | ⬜  |  🟡    |
+| 072 | Sieve-Style Recursion Practice                 | Interview           |   ☑️   | ☑️ | ☑️  | ⬜  |  🟡    |
+| 073 | Generate Binary Numbers Recursively            | GFG                 |   ☑️   | ☑️ | ☑️  | ⬜  |  🟡    |
+| 074 | Generate Gray Code Recursively                 | LeetCode 89         |   ☑️   | ☑️ | ☑️  | ⬜  |  🟡    |
+| 075 | Binary Representation Recursively              | GFG                 |   ☑️   | ☑️ | ☑️  | ⬜  |  🟡    |
+| 076 | Decimal Representation from Binary Recursively | GFG                 |   ☑️   | ☑️ | ☑️  | ⬜  |  🟡    |
+| 077 | Sum of Squares Recursively                     | GFG                 |   ☑️   | ☑️ | ☑️  | ⬜  |  🟡    |
+| 078 | Sum of Cubes Recursively                       | GFG                 |   ☑️   | ☑️ | ☑️  | ⬜  |  🟡    |
+| 079 | Alternating Sum Recursively                    | GFG                 |   ☑️   | ☑️ | ☑️  | ⬜  |  🟡    |
+| 080 | Alternating Product Recursively                | Interview           |   ☑️   | ☑️ | ☑️  | ⬜  |  🟡    |
 
 ### Pattern memory
+
 ```text
 Power / number / formula → reduce state → recurse → return
 ```
@@ -88,8 +89,8 @@ Power / number / formula → reduce state → recurse → return
 For each element → TAKE → recurse OR SKIP → recurse
 ```
 
-|   # | Problem                                  | Platform             | Status | R1 | R2 | R3 | Strength |
-|----:|------------------------------------------|----------------------|:------:|:--:|:--:|:--:|:--------:|
+|   # | Problem                                  | Platform             | Status | R1  | R2  | R3  | Strength |
+| --: | ---------------------------------------- | -------------------- | :----: | :-: | :-: | :-: | :------: |
 | 081 | Print All Subsequences of an Array       | GFG                  |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 | 082 | Count Subsequences                       | GFG                  |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 | 083 | Print Subsequence With Sum K             | GFG                  |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
@@ -107,6 +108,7 @@ For each element → TAKE → recurse OR SKIP → recurse
 | 095 | Binary Strings With Exactly K Ones       | Interview            |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 
 ### Pattern memory
+
 ```text
 TAKE + recurse
 SKIP + recurse
@@ -124,8 +126,8 @@ SKIP + recurse
 At each position → try every valid choice → recurse
 ```
 
-|   # | Problem                                     | Platform  | Status | R1 | R2 | R3 | Strength |
-|----:|---------------------------------------------|-----------|:------:|:--:|:--:|:--:|:--------:|
+|   # | Problem                                     | Platform  | Status | R1  | R2  | R3  | Strength |
+| --: | ------------------------------------------- | --------- | :----: | :-: | :-: | :-: | :------: |
 | 096 | All Strings From Character Set `{a,b}`      | Interview |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 | 097 | All Strings From Digits `0–2`               | Interview |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 | 098 | Print All Choices From an Array Recursively | Interview |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
@@ -133,6 +135,7 @@ At each position → try every valid choice → recurse
 | 100 | Include/Exclude Subset Framework Practice   | Interview |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 
 ### Pattern memory
+
 ```text
 choice 1 → recurse
 choice 2 → recurse
@@ -151,8 +154,8 @@ choice 3 → recurse
 Permutation: used[] → choose → recurse → undo | Combination: start → choose → recurse → undo
 ```
 
-|   # | Problem                          | Platform     | Status | R1 | R2 | R3 | Strength |
-|----:|----------------------------------|--------------|:------:|:--:|:--:|:--:|:--------:|
+|   # | Problem                          | Platform     | Status | R1  | R2  | R3  | Strength |
+| --: | -------------------------------- | ------------ | :----: | :-: | :-: | :-: | :------: |
 | 101 | Generate Permutations            | LeetCode 46  |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 | 102 | Generate Unique Permutations     | LeetCode 47  |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 | 103 | Permutations of a String         | GFG          |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
@@ -165,6 +168,7 @@ Permutation: used[] → choose → recurse → undo | Combination: start → cho
 | 110 | Generate Subsets With Duplicates | LeetCode 90  |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 
 ### Pattern memory
+
 ```text
 Permutation → used[]
 Combination → start index
@@ -183,8 +187,8 @@ Backtracking → CHOOSE → RECURSE → UNDO
 Expand the choice space → choose → recurse → undo
 ```
 
-|   # | Problem                              | Platform          | Status | R1 | R2 | R3 | Strength |
-|----:|--------------------------------------|-------------------|:------:|:--:|:--:|:--:|:--------:|
+|   # | Problem                              | Platform          | Status | R1  | R2  | R3  | Strength |
+| --: | ------------------------------------ | ----------------- | :----: | :-: | :-: | :-: | :------: |
 | 111 | Generate All Subsets                 | LeetCode 78       |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 | 112 | Generate All K-Subsets               | Interview-style   |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 | 113 | Subsets of a String                  | Interview-style   |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
@@ -197,6 +201,7 @@ Expand the choice space → choose → recurse → undo
 | 120 | Generate All Possible Passwords      | Interview-style   |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 
 ### Pattern memory
+
 ```text
 More choices, same backtracking core.
 ```
@@ -213,8 +218,8 @@ More choices, same backtracking core.
 Choose a piece/operator → validate → recurse → undo
 ```
 
-|                  # | Problem                                       | Platform             | Status | R1 | R2 | R3 | Strength |
-|-------------------:|-----------------------------------------------|----------------------|:------:|:--:|:--:|:--:|:--------:|
+|                  # | Problem                                       | Platform             | Status | R1  | R2  | R3  | Strength |
+| -----------------: | --------------------------------------------- | -------------------- | :----: | :-: | :-: | :-: | :------: |
 |                121 | Generate Parentheses                          | LeetCode 22          |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 |                122 | Balanced Parentheses Generation               | GeeksforGeeks        |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 |            ~~123~~ | ~~Valid Parentheses Generation With K Pairs~~ | ~~LeetCode 22~~      |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
@@ -237,6 +242,7 @@ Choose a piece/operator → validate → recurse → undo
 |                140 | Generate All Sentence Splits                  | Interview            |   🔄   | ⬜  | ⬜  | ⬜  |    —     |
 
 ### Pattern memory
+
 ```text
 Choose split/operator → validate → recurse → undo
 ```
@@ -253,16 +259,17 @@ Choose split/operator → validate → recurse → undo
 row,col → try directions → validate → move → recurse → backtrack
 ```
 
-|   # | Problem                   | Platform     |   Status   | R1 | R2 | R3 | Strength |
-|----:|---------------------------|--------------|:----------:|:--:|:--:|:--:|:--------:|
-| 141 | Rat in a Maze             | GFG          |     ☑️     | ⬜  | ⬜  | ⬜  |    —     |
-| 142 | Maze Paths                | GFG          |     ☑️     | ⬜  | ⬜  | ⬜  |    —     |
-| 143 | Maze Paths with Obstacles | GFG          |     ☑️     | ⬜  | ⬜  | ⬜  |    —     |
-| 144 | Count Maze Paths          | GFG          |     ☑️     | ⬜  | ⬜  | ⬜  |    —     |
-| 145 | Word Search               | LeetCode 79  |     ☑️     | ⬜  | ⬜  | ⬜  |    —     |
-| 146 | Word Search II            | LeetCode 212 |     ☑️     | ⬜  | ⬜  | ⬜  |    —     |
+|   # | Problem                   | Platform     | Status | R1  | R2  | R3  | Strength |
+| --: | ------------------------- | ------------ | :----: | :-: | :-: | :-: | :------: |
+| 141 | Rat in a Maze             | GFG          |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+| 142 | Maze Paths                | GFG          |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+| 143 | Maze Paths with Obstacles | GFG          |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+| 144 | Count Maze Paths          | GFG          |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+| 145 | Word Search               | LeetCode 79  |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
+| 146 | Word Search II            | LeetCode 212 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 
 ### Pattern memory
+
 ```text
 (row,col) → direction → valid? → recurse → undo/mark
 ```
@@ -279,18 +286,19 @@ row,col → try directions → validate → move → recurse → backtrack
 Place/choose → check constraint → recurse → undo
 ```
 
-|   # | Problem                     | Platform    | Status | R1 | R2 | R3 | Strength |
-|----:|-----------------------------|-------------|:------:|:--:|:--:|:--:|:--------:|
+|   # | Problem                     | Platform    | Status | R1  | R2  | R3  | Strength |
+| --: | --------------------------- | ----------- | :----: | :-: | :-: | :-: | :------: |
 | 147 | N-Queens                    | LeetCode 51 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 | 148 | N-Queens II                 | LeetCode 52 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 | 149 | Sudoku Solver               | LeetCode 37 |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
 | 150 | Knight's Tour               | GFG         |   ☑️   | ⬜  | ⬜  | ⬜  |    —     |
-| 151 | Crossword Puzzle Solver     | GFG         |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 152 | Graph Coloring Backtracking | GFG         |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 153 | Hamiltonian Path            | Interview   |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 154 | Hamiltonian Cycle           | Interview   |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
+| 151 | Crossword Puzzle Solver     | GFG         |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 152 | Graph Coloring Backtracking | GFG         |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 153 | Hamiltonian Path            | Interview   |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 154 | Hamiltonian Cycle           | Interview   |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
 
 ### Pattern memory
+
 ```text
 Place → safe? → recurse → remove
 ```
@@ -307,16 +315,17 @@ Place → safe? → recurse → remove
 Visit cell → recurse to neighbours → combine/mark result
 ```
 
-|   # | Problem                           | Platform       | Status | R1 | R2 | R3 | Strength |
-|----:|-----------------------------------|----------------|:------:|:--:|:--:|:--:|:--------:|
-| 155 | Flood Fill Recursive Backtracking | LeetCode 733   |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 156 | All Paths From Source to Target   | LeetCode 797   |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 157 | Unique Paths With Obstacles       | LeetCode 63    |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 158 | Path With Maximum Score           | Grid Recursion |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 159 | Count Islands Using Recursion     | LeetCode 200   |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 160 | Maximum Area of Island            | LeetCode 695   |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
+|   # | Problem                           | Platform       | Status | R1  | R2  | R3  | Strength |
+| --: | --------------------------------- | -------------- | :----: | :-: | :-: | :-: | :------: |
+| 155 | Flood Fill Recursive Backtracking | LeetCode 733   |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 156 | All Paths From Source to Target   | LeetCode 797   |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 157 | Unique Paths With Obstacles       | LeetCode 63    |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 158 | Path With Maximum Score           | Grid Recursion |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 159 | Count Islands Using Recursion     | LeetCode 200   |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 160 | Maximum Area of Island            | LeetCode 695   |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
 
 ### Pattern memory
+
 ```text
 Visit → explore neighbours → combine result
 ```
@@ -333,20 +342,21 @@ Visit → explore neighbours → combine result
 Choose assignment → check constraint → recurse → undo; prune early
 ```
 
-|   # | Problem                               | Platform           | Status | R1 | R2 | R3 | Strength |
-|----:|---------------------------------------|--------------------|:------:|:--:|:--:|:--:|:--------:|
-| 161 | Partition to K Equal Sum Subsets      | LeetCode 698       |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 162 | Matchsticks to Square                 | LeetCode 473       |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 163 | Word Break II                         | LeetCode 140       |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 164 | Scramble String                       | LeetCode 87        |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 165 | Wildcard Matching                     | LeetCode 44        |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 166 | Regular Expression Matching           | LeetCode 10        |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 167 | Cryptarithmetic Puzzle                | GFG / Interview    |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 168 | Boggle Word Search                    | GFG                |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 169 | Sentence Generation                   | Interview          |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 170 | Minimum Cuts for Palindrome Partition | LeetCode 132 / GFG |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
+|   # | Problem                               | Platform           | Status | R1  | R2  | R3  | Strength |
+| --: | ------------------------------------- | ------------------ | :----: | :-: | :-: | :-: | :------: |
+| 161 | Partition to K Equal Sum Subsets      | LeetCode 698       |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 162 | Matchsticks to Square                 | LeetCode 473       |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 163 | Word Break II                         | LeetCode 140       |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 164 | Scramble String                       | LeetCode 87        |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 165 | Wildcard Matching                     | LeetCode 44        |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 166 | Regular Expression Matching           | LeetCode 10        |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 167 | Cryptarithmetic Puzzle                | GFG / Interview    |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 168 | Boggle Word Search                    | GFG                |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 169 | Sentence Generation                   | Interview          |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 170 | Minimum Cuts for Palindrome Partition | LeetCode 132 / GFG |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
 
 ### Pattern memory
+
 ```text
 Choose → constraint check → prune if impossible → recurse → undo
 ```
@@ -363,20 +373,21 @@ Choose → constraint check → prune if impossible → recurse → undo
 Build state → choose → validate/prune → recurse → undo
 ```
 
-|   # | Problem                           | Platform          | Status | R1 | R2 | R3 | Strength |
-|----:|-----------------------------------|-------------------|:------:|:--:|:--:|:--:|:--------:|
-| 171 | K-th Subset                       | Interview         |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 172 | K-th Permutation                  | LeetCode 60       |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 173 | Pattern → String Mapping          | Interview         |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 174 | Word Pattern Matching             | Interview         |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 175 | Remove Invalid Parentheses        | LeetCode 301      |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 176 | Generate Valid IP Variants        | LeetCode 93 style |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 177 | Constraint Placement Problem      | Interview         |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 178 | Partition Array Under Constraints | Interview         |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 179 | Constraint Puzzle                 | Interview         |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 180 | Recursive Search With Pruning     | Interview         |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
+|   # | Problem                           | Platform          | Status | R1  | R2  | R3  | Strength |
+| --: | --------------------------------- | ----------------- | :----: | :-: | :-: | :-: | :------: |
+| 171 | K-th Subset                       | Interview         |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 172 | K-th Permutation                  | LeetCode 60       |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 173 | Pattern → String Mapping          | Interview         |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 174 | Word Pattern Matching             | Interview         |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 175 | Remove Invalid Parentheses        | LeetCode 301      |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 176 | Generate Valid IP Variants        | LeetCode 93 style |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 177 | Constraint Placement Problem      | Interview         |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 178 | Partition Array Under Constraints | Interview         |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 179 | Constraint Puzzle                 | Interview         |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 180 | Recursive Search With Pruning     | Interview         |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
 
 ### Pattern memory
+
 ```text
 Choose → constraint check → prune if impossible → recurse → undo
 ```
@@ -393,20 +404,21 @@ Choose → constraint check → prune if impossible → recurse → undo
 Search state space → choose next state → recurse → reject/backtrack
 ```
 
-|   # | Problem                                             | Platform              | Status | R1 | R2 | R3 | Strength |
-|----:|-----------------------------------------------------|-----------------------|:------:|:--:|:--:|:--:|:--------:|
-| 181 | Longest Path in a Matrix Using Recursion            | Interview             |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 182 | Maximum Score Path via Recursive Search             | Interview             |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 183 | Enumerate All Topological Orders Recursively        | Advanced OA           |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 184 | Generate All Subsets With Constrained Sum           | Advanced Backtracking |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 185 | Generate All Permutations With Adjacency Constraint | Advanced Backtracking |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 186 | Find All Hamiltonian Tours                          | Advanced Backtracking |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 187 | Solve Maze With Multiple Exits                      | Advanced Backtracking |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 188 | Recursive String Decoding                           | LeetCode 394 style    |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 189 | Recursive Path Enumeration in a Tree-Like Grid      | Advanced OA           |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 190 | Minimum Edit-Like Recursive Search                  | Advanced OA           |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
+|   # | Problem                                             | Platform              | Status | R1  | R2  | R3  | Strength |
+| --: | --------------------------------------------------- | --------------------- | :----: | :-: | :-: | :-: | :------: |
+| 181 | Longest Path in a Matrix Using Recursion            | Interview             |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 182 | Maximum Score Path via Recursive Search             | Interview             |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 183 | Enumerate All Topological Orders Recursively        | Advanced OA           |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 184 | Generate All Subsets With Constrained Sum           | Advanced Backtracking |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 185 | Generate All Permutations With Adjacency Constraint | Advanced Backtracking |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 186 | Find All Hamiltonian Tours                          | Advanced Backtracking |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 187 | Solve Maze With Multiple Exits                      | Advanced Backtracking |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 188 | Recursive String Decoding                           | LeetCode 394 style    |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 189 | Recursive Path Enumeration in a Tree-Like Grid      | Advanced OA           |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 190 | Minimum Edit-Like Recursive Search                  | Advanced OA           |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
 
 ### Pattern memory
+
 ```text
 State → choices → recursive search → backtrack
 ```
@@ -423,19 +435,20 @@ State → choices → recursive search → backtrack
 State → choices → constraints → prune → recurse → undo
 ```
 
-|   # | Problem                                      | Platform              | Status | R1 | R2 | R3 | Strength |
-|----:|----------------------------------------------|-----------------------|:------:|:--:|:--:|:--:|:--------:|
-| 191 | All Valid Schedule Arrangements              | Advanced Backtracking |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 192 | Recursive Packing / Bin Selection            | Advanced OA           |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 193 | Recursive Board Filling Problems             | Advanced Backtracking |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 194 | Recursively Count All Valid Arrangements     | Advanced OA           |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 195 | Recursively Generate Constrained Passwords   | Advanced OA           |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 196 | Recursive Subset Partition Under Cost Limit  | Advanced OA           |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 197 | Recursive Combination With Forbidden Pairs   | Advanced OA           |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 198 | Recursive Placement Problem With Rules       | Advanced OA           |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
-| 199 | Recursive Optimization With Choice + Pruning | Advanced OA           |   ⬜    | ⬜  | ⬜  | ⬜  |    —     |
+|   # | Problem                                      | Platform              | Status | R1  | R2  | R3  | Strength |
+| --: | -------------------------------------------- | --------------------- | :----: | :-: | :-: | :-: | :------: |
+| 191 | All Valid Schedule Arrangements              | Advanced Backtracking |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 192 | Recursive Packing / Bin Selection            | Advanced OA           |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 193 | Recursive Board Filling Problems             | Advanced Backtracking |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 194 | Recursively Count All Valid Arrangements     | Advanced OA           |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 195 | Recursively Generate Constrained Passwords   | Advanced OA           |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 196 | Recursive Subset Partition Under Cost Limit  | Advanced OA           |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 197 | Recursive Combination With Forbidden Pairs   | Advanced OA           |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 198 | Recursive Placement Problem With Rules       | Advanced OA           |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
+| 199 | Recursive Optimization With Choice + Pruning | Advanced OA           |   ⬜   | ⬜  | ⬜  | ⬜  |    —     |
 
 ### Pattern memory
+
 ```text
 State → choices → constraints → prune → recurse → undo
 ```
@@ -465,22 +478,22 @@ RETURN
 ```
 
 | Final check                                  | Done |
-|----------------------------------------------|:----:|
-| Recognize Take / Not-Take                    |  ⬜   |
-| Recognize Subset / Combination / Permutation |  ⬜   |
-| Recognize Partition / Expression             |  ⬜   |
-| Handle Grid / Maze                           |  ⬜   |
-| Handle Constraint Backtracking               |  ⬜   |
-| Identify pruning opportunities               |  ⬜   |
-| Explain recursion tree                       |  ⬜   |
-| Estimate complexity                          |  ⬜   |
+| -------------------------------------------- | :--: |
+| Recognize Take / Not-Take                    |  ⬜  |
+| Recognize Subset / Combination / Permutation |  ⬜  |
+| Recognize Partition / Expression             |  ⬜  |
+| Handle Grid / Maze                           |  ⬜  |
+| Handle Constraint Backtracking               |  ⬜  |
+| Identify pruning opportunities               |  ⬜  |
+| Explain recursion tree                       |  ⬜  |
+| Estimate complexity                          |  ⬜  |
 
 ---
 
 # Quick Pattern Recognition
 
 | If you see...         | Think...                                |
-|-----------------------|-----------------------------------------|
+| --------------------- | --------------------------------------- |
 | Include / exclude     | **Take / Not-Take**                     |
 | Generate subsets      | **Subset**                              |
 | Order matters         | **Permutation + used[]**                |
