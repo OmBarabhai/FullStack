@@ -1,4 +1,4 @@
-[00_Recursion_Handbook.md](00_Recursion_Handbook.md)[00_Recursion_Handbook.md](00_Recursion_Handbook.md)# 🚀 Recursion Master Progress Tracker (Part 1)
+[00_Recursion_Handbook.md](A_Part_01/00_Recursion_Handbook.md)[00_Recursion_Handbook.md](A_Part_01/00_Recursion_Handbook.md)# 🚀 Recursion Master Progress Tracker (Part 1)
 
 > Goal: Build a rock-solid recursion foundation.
 >

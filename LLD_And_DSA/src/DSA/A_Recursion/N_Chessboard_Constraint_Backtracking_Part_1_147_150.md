@@ -2131,3 +2131,345 @@ Next learning problem:
 151 — Crossword Puzzle Solver
 ```
 
+---
+
+# 45. N-Queens — Implementation Refinement
+
+The current N-Queens implementation reinforces several important coding patterns.
+
+## A. Keep the safety traversal variable consistent
+
+When checking a direction:
+
+```java
+int row = rowIdx;
+int col = colIdx;
+```
+
+the variable being moved must also be the one used in the condition.
+
+### Left row check
+
+```java
+while (col >= 0) {
+    if (board[row][col] == 1) {
+        return false;
+    }
+    col--;
+}
+```
+
+### Upper-left diagonal
+
+```java
+while (row >= 0 && col >= 0) {
+    if (board[row][col] == 1) {
+        return false;
+    }
+    row--;
+    col--;
+}
+```
+
+### Lower-left diagonal
+
+```java
+while (row < n && col >= 0) {
+    if (board[row][col] == 1) {
+        return false;
+    }
+    row++;
+    col--;
+}
+```
+
+The reusable rule is:
+
+```text
+CHECK THE VARIABLE YOU MOVE
+```
+
+---
+
+# 46. N-Queens — Build the Answer With the Correct Structure
+
+When the required answer is:
+
+```text
+List<List<Integer>>
+```
+
+each complete board must become one complete inner list.
+
+Correct structure:
+
+```java
+if (colIdx >= n) {
+
+    ArrayList<Integer> temp = new ArrayList<>();
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            temp.add(board[i][j]);
+        }
+    }
+
+    ans.add(temp);
+    return;
+}
+```
+
+The important structure is:
+
+```text
+CREATE temp
+   ↓
+COPY ENTIRE BOARD
+   ↓
+ADD temp ONCE
+   ↓
+RETURN
+```
+
+Do not place:
+
+```java
+ans.add(temp);
+return;
+```
+
+inside the board-copying loops.
+
+Those statements belong **after the complete board has been copied**.
+
+---
+
+# 47. Why the Board Must Be Copied Before Backtracking Continues
+
+The board is one shared mutable object.
+
+The recursion repeatedly changes:
+
+```java
+board[row][col] = 1;
+```
+
+and later:
+
+```java
+board[row][col] = 0;
+```
+
+Therefore, when a solution is complete, the answer must store a **snapshot** of the current board.
+
+Mental model:
+
+```text
+shared working board
+        ↓
+complete solution reached
+        ↓
+copy current state
+        ↓
+store copy
+        ↓
+return
+        ↓
+backtracking may modify working board again
+```
+
+The stored solution should represent the completed state at that moment.
+
+---
+
+# 48. Working Board vs Stored Answer
+
+Keep these concepts separate:
+
+```text
+board
+→ temporary working state
+
+temp
+→ snapshot of one completed solution
+
+ans
+→ collection of snapshots
+```
+
+This distinction is useful far beyond N-Queens.
+
+---
+
+# 49. Java Type / Data-Structure Check
+
+Before adding a value, confirm what the collection expects.
+
+For:
+
+```java
+ArrayList<Integer>
+```
+
+a cell value that is already an `int` can simply be added:
+
+```java
+temp.add(board[i][j]);
+```
+
+There is no need to create:
+
+```java
+new int(...)
+```
+
+Mental rule:
+
+```text
+already have an int
+→ add the int
+```
+
+Similarly, when storing a complete row/board, think about whether the required output is:
+
+```text
+one value
+one row
+one board
+```
+
+The output structure should match the problem's required return type.
+
+---
+
+# 50. Braces Are Part of the Algorithm
+
+For recursive code, indentation and braces are not just style.
+
+This:
+
+```java
+for (...) {
+    ...
+}
+
+ans.add(temp);
+return;
+```
+
+means:
+
+```text
+finish copying
+→ add complete solution
+→ return
+```
+
+But placing:
+
+```java
+ans.add(temp);
+return;
+```
+
+inside the loop changes the control flow completely.
+
+So after writing nested loops, mentally mark:
+
+```text
+LOOP START
+LOOP END
+BASE-CASE ACTION
+```
+
+Before debugging the recursion itself, verify the block structure.
+
+---
+
+# 51. N-Queens — Final Implementation Pattern
+
+```text
+solve(current column)
+        ↓
+all columns completed?
+    /           \
+  YES            NO
+   |              |
+copy board      try every row
+   |              |
+store           safe?
+   |           /     \
+ return       NO      YES
+                        |
+                     place Q
+                        |
+                     recurse
+                        |
+                     remove Q
+                        |
+                    next row
+```
+
+The complete pattern is:
+
+```text
+STATE
+  ↓
+BASE CASE
+  ↓
+CHOICE LOOP
+  ↓
+CONSTRAINT CHECK
+  ↓
+MAKE
+  ↓
+RECURSE
+  ↓
+UNDO
+  ↓
+NEXT CHOICE
+```
+
+---
+
+# 52. Revision Checkpoints for This Implementation
+
+When revising this N-Queens implementation, verify:
+
+```text
+[ ] colIdx means current column
+[ ] colIdx + 1 means next recursive state
+[ ] all rows are tried for the current column
+[ ] left row is checked
+[ ] upper-left diagonal is checked
+[ ] lower-left diagonal is checked
+[ ] traversal variables are the variables being updated
+[ ] Queen is placed before recursion
+[ ] Queen is removed after recursion
+[ ] completed board is copied before returning
+[ ] answer is added once per completed board
+[ ] answer is added outside the copy loops
+[ ] stored answers are snapshots, not the mutable working board
+```
+
+---
+
+# 53. A Useful Debugging Order
+
+When a backtracking solution misbehaves, inspect in this order:
+
+```text
+1. Java syntax / braces
+2. parameter order and meanings
+3. loop conditions and updates
+4. base case
+5. constraint checker
+6. make operation
+7. recursive call
+8. undo operation
+9. answer-copying logic
+10. return-value logic
+```
+
+This keeps Java implementation bugs separate from recursion-design problems.
+
