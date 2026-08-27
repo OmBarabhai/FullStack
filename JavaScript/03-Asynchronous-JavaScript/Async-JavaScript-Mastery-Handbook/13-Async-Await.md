@@ -1,888 +1,627 @@
-# Chapter 13 — Async & Await (Complete Handbook)
+# 13 — Async / Await
 
-> **"async/await is just syntactic sugar over Promises. It makes asynchronous code look like normal synchronous code."**
+**Folder:** `03-Asynchronous-JavaScript`
 
-This is one of the most important JavaScript interview topics. React, Node.js, Express, Next.js, APIs, MongoDB, AWS SDK, Firebase, and almost every modern JavaScript framework uses `async/await`.
-
----
-
-# Table of Contents
-
-1. Why Async/Await Was Introduced
-2. What is async?
-3. What is await?
-4. How async Works Internally
-5. How await Works Internally
-6. Execution Flow
-7. Event Loop Interaction
-8. Promise vs Async/Await
-9. Error Handling
-10. Multiple Awaits
-11. Parallel Execution
-12. Common Mistakes
-13. Dry Runs
-14. Internal Diagrams
-15. Real World Examples
-16. Interview Questions
-17. Coding Exercises
-18. Summary
+> **Core idea:** `async`/`await` is Promise-based syntax that makes asynchronous control flow easier to read.
 
 ---
 
-# 1. Why Async/Await Was Introduced
+## 1. Why Async/Await?
 
-Earlier we had
+The progression is:
 
-## Callback Hell
-
-```javascript
-login(() => {
-    profile(() => {
-        posts(() => {
-            comments(() => {
-
-            });
-        });
-    });
-});
+```text
+Callbacks
+   ↓
+Promises
+   ↓
+async / await
 ```
 
-Very difficult to read.
+Promise chain:
 
----
-
-Then Promises came
-
-```javascript
+```js
 login()
-.then(profile)
-.then(posts)
-.then(comments);
+    .then(profile)
+    .then(posts);
 ```
 
-Much cleaner.
+Async/await:
 
----
-
-Then Async/Await came
-
-```javascript
+```js
 async function loadData() {
-
     const user = await login();
-
     const profile = await getProfile();
-
     const posts = await getPosts();
 
+    return posts;
 }
 ```
 
-Looks like synchronous code.
+The async/await version is often easier to read for sequential operations.
 
 ---
 
-# Evolution
+## 2. What Does `async` Do?
 
-```
-Callbacks
+An `async` function always returns a Promise.
 
-↓
-
-Promises
-
-↓
-
-Async/Await
-```
-
----
-
-# 2. What is async?
-
-An **async function always returns a Promise.**
-
-Example
-
-```javascript
+```js
 async function hello() {
-
     return "Hello";
-
 }
+```
 
+Calling:
+
+```js
 console.log(hello());
 ```
 
-Output
+produces a Promise.
 
-```
-Promise { "Hello" }
-```
+Conceptually:
 
-Even though we returned a string,
-
-JavaScript converts it into
-
-```
-Promise.resolve("Hello")
+```text
+return "Hello"
+       ↓
+fulfilled Promise
 ```
 
----
+Therefore:
 
-# Visual Diagram
-
+```js
+hello().then(value => {
+    console.log(value);
+});
 ```
-async function
 
-↓
+prints:
 
-return value
-
-↓
-
-Promise.resolve(value)
+```text
+Hello
 ```
 
 ---
 
-# Example
+## 3. `async` With a Rejected Promise
 
-```javascript
-async function add(){
+An error thrown inside an async function causes the returned Promise to reject.
 
-    return 10;
-
+```js
+async function test() {
+    throw new Error("Failed");
 }
 
-add().then(console.log);
+test().catch(error => {
+    console.log(error.message);
+});
 ```
 
-Output
+Think:
 
-```
-10
-```
-
-Internally
-
-```
-return 10
-
-↓
-
-Promise.resolve(10)
+```text
+async function
+      ↓
+throw
+      ↓
+returned Promise rejects
 ```
 
 ---
 
-# 3. What is await?
+## 4. What Does `await` Do?
 
-`await` waits for a Promise to complete.
+`await` waits for a value/Promise before continuing the current async function.
 
-Example
+Example:
 
-```javascript
-async function test(){
-
+```js
+async function test() {
     const result = await Promise.resolve(50);
 
     console.log(result);
-
 }
 
 test();
 ```
 
-Output
+Output:
 
-```
+```text
 50
 ```
 
----
+Without `await`:
 
-Without await
-
-```javascript
+```js
 const value = Promise.resolve(50);
 
 console.log(value);
 ```
 
-Output
-
-```
-Promise {50}
-```
+you have the Promise itself.
 
 ---
 
-With await
+## 5. `await` Does Not Block JavaScript
 
-```
-Promise
+This is critical.
 
-↓
+Consider:
 
-Resolved
-
-↓
-
-Actual Value
-```
-
----
-
-# 4. How async Works Internally
-
-Example
-
-```javascript
-async function hello(){
-
-    return "Hi";
-
-}
-```
-
-JavaScript converts it into
-
-```javascript
-function hello(){
-
-    return Promise.resolve("Hi");
-
-}
-```
-
-Exactly the same.
-
----
-
-# Internal Flow
-
-```
-async
-
-↓
-
-return value
-
-↓
-
-Promise.resolve()
-
-↓
-
-Promise
-```
-
----
-
-# 5. How await Works Internally
-
-Example
-
-```javascript
-const data = await fetch(url);
-```
-
-Internally
-
-```
-Start Promise
-
-↓
-
-Pause async function
-
-↓
-
-Continue Event Loop
-
-↓
-
-Promise Finished
-
-↓
-
-Resume Function
-```
-
-Notice
-
-The JavaScript engine **does NOT block.**
-
-Only the async function pauses.
-
----
-
-# Visual Diagram
-
-```
-await
-
-↓
-
-Pause current async function
-
-↓
-
-Event Loop continues
-
-↓
-
-Promise finishes
-
-↓
-
-Resume function
-```
-
----
-
-# 6. Execution Flow
-
-Example
-
-```javascript
-console.log("Start");
-
-async function demo(){
-
+```js
+async function demo() {
     console.log("Inside");
 
     await Promise.resolve();
 
     console.log("Done");
-
 }
+
+console.log("Start");
 
 demo();
 
 console.log("End");
 ```
 
----
+Output:
 
-Execution
-
-```
+```text
 Start
-
-↓
-
 Inside
-
-↓
-
-await
-
-↓
-
 End
-
-↓
-
-Microtask Queue
-
-↓
-
 Done
-```
-
-Output
-
-```
-Start
-
-Inside
-
-End
-
-Done
-```
-
----
-
-# Call Stack Diagram
-
-```
-Main()
-
-↓
-
-demo()
-
-↓
-
-await
-
-↓
-
-Function Suspended
-
-↓
-
-Call Stack Empty
-
-↓
-
-Microtask Queue
-
-↓
-
-Resume demo()
-
-↓
-
-Done
-```
-
----
-
-# 7. Event Loop Interaction
-
-Suppose
-
-```javascript
-async function test(){
-
-    await Promise.resolve();
-
-    console.log("A");
-
-}
-
-test();
-
-console.log("B");
-```
-
-Output
-
-```
-B
-
-A
 ```
 
 Why?
 
-Because
-
-```
+```text
+demo starts
+   ↓
+Inside
+   ↓
 await
+   ↓
+demo pauses
+   ↓
+current JavaScript continues
+   ↓
+End
+   ↓
+microtask
+   ↓
+demo resumes
+   ↓
+Done
+```
 
-↓
+Only the current async function's progress is suspended.
 
-Microtask Queue
+The JavaScript runtime does not freeze.
 
-↓
+---
 
-Call Stack Empty
+## 6. Awaiting a Non-Promise
 
-↓
+You can write:
 
-Resume
+```js
+const value = await 5;
+```
+
+Conceptually, the value is treated like an already-fulfilled Promise.
+
+Think:
+
+```text
+await 5
+≈
+await Promise.resolve(5)
 ```
 
 ---
 
-# Diagram
+## 7. Async Function Execution
 
+Example:
+
+```js
+async function demo() {
+    console.log("A");
+
+    await Promise.resolve();
+
+    console.log("B");
+}
+
+console.log("Start");
+
+demo();
+
+console.log("End");
 ```
-Call Stack
 
+Flow:
+
+```text
+Start
 ↓
-
+A
+↓
 await
-
 ↓
-
-Microtask Queue
-
+demo pauses
 ↓
-
-Event Loop
-
+End
 ↓
+microtask checkpoint
+↓
+demo resumes
+↓
+B
+```
 
-Continue Function
+Output:
+
+```text
+Start
+A
+End
+B
 ```
 
 ---
 
-# 8. Promise vs Async/Await
+## 8. Promise vs Async/Await
 
-Promise
+Promise chain:
 
-```javascript
+```js
 fetch(url)
-
-.then(res=>res.json())
-
-.then(console.log)
-
-.catch(console.log);
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.log(error);
+    });
 ```
+
+Async/await:
+
+```js
+async function getData() {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        console.log(data);
+    } catch (error) {
+        console.log(error);
+    }
+}
+```
+
+They use the same Promise model.
+
+Async/await changes how the control flow is written; it does not remove Promises from the underlying model.
 
 ---
 
-Async Await
+## 9. Error Handling
 
-```javascript
-async function getData(){
+Use:
 
-try{
+```js
+try {
+    const response = await fetch(url);
 
-const res = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+    }
 
-const data = await res.json();
+    const data = await response.json();
 
-console.log(data);
-
-}
-
-catch(err){
-
-console.log(err);
-
-}
-
+    console.log(data);
+} catch (error) {
+    console.log(error.message);
 }
 ```
 
-Both are equivalent.
+Flow:
 
----
-
-# Comparison
-
-Promise
-
-```
-then()
-
-↓
-
-then()
-
-↓
-
-catch()
-```
-
-Async
-
-```
+```text
 await
-
-↓
-
-await
-
-↓
-
-try/catch
+ ↓
+Promise rejects / code throws
+ ↓
+catch
 ```
+
+An async function without handling the error will return a rejected Promise.
 
 ---
 
-# 9. Error Handling
+## 10. Multiple Awaits
 
-Example
+This:
 
-```javascript
-async function test(){
-
-try{
-
-await Promise.reject("Error");
-
-}
-
-catch(err){
-
-console.log(err);
-
-}
-
-}
-```
-
-Output
-
-```
-Error
-```
-
----
-
-Flow
-
-```
-Promise Reject
-
-↓
-
-await
-
-↓
-
-catch()
-```
-
----
-
-Without try/catch
-
-```javascript
-await Promise.reject();
-```
-
-Produces
-
-```
-Unhandled Promise Rejection
-```
-
----
-
-# 10. Multiple Awaits
-
-Example
-
-```javascript
-async function load(){
-
+```js
 const a = await getUser();
-
 const b = await getPosts();
-
 const c = await getComments();
-
-}
 ```
 
-Execution
+is sequential.
 
+Conceptually:
+
+```text
+getUser
+   ↓
+finish
+   ↓
+getPosts
+   ↓
+finish
+   ↓
+getComments
 ```
-User
 
-↓
-
-Posts
-
-↓
-
-Comments
-```
-
-Sequential.
+Use this when later work depends on earlier work.
 
 ---
 
-# 11. Parallel Execution
+## 11. Parallel Async Work
 
-Sequential
+If operations are independent, do not unnecessarily wait for them one by one.
 
-```javascript
-await fetch1();
+Instead:
 
-await fetch2();
-
-await fetch3();
-```
-
-Time
-
-```
-1 sec
-
-+
-
-1 sec
-
-+
-
-1 sec
-
-=
-
-3 sec
-```
-
----
-
-Better
-
-```javascript
-const [a,b,c] = await Promise.all([
-
-fetch1(),
-
-fetch2(),
-
-fetch3()
-
+```js
+const [users, posts, comments] = await Promise.all([
+    getUsers(),
+    getPosts(),
+    getComments()
 ]);
 ```
 
-Time
+Conceptually:
 
-```
-1 sec
+```text
+users   ─┐
+posts   ─┼─→ Promise.all() → results
+comments─┘
 ```
 
-All execute together.
+The operations are started without waiting for each previous one to finish.
+
+This is usually faster for independent work.
 
 ---
 
-Diagram
+## 12. Sequential vs Parallel
 
-Sequential
+### Sequential
 
-```
-A
-
-↓
-
-B
-
-↓
-
-C
+```js
+const a = await taskA();
+const b = await taskB();
+const c = await taskC();
 ```
 
-Parallel
+Useful when:
 
+```text
+B depends on A
+C depends on B
 ```
-A
 
-B
+### Parallel
 
-C
+```js
+const [a, b, c] = await Promise.all([
+    taskA(),
+    taskB(),
+    taskC()
+]);
+```
 
-↓
+Useful when:
 
-Together
+```text
+A, B, C are independent
+```
+
+Important:
+
+> Do not use `Promise.all()` blindly. Choose based on dependencies.
+
+---
+
+## 13. Fetch + Async/Await
+
+```js
+async function getUsers() {
+    const response = await fetch(
+        "https://jsonplaceholder.typicode.com/users"
+    );
+
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+    }
+
+    const users = await response.json();
+
+    return users;
+}
+```
+
+Then:
+
+```js
+getUsers()
+    .then(users => {
+        console.log(users);
+    })
+    .catch(error => {
+        console.log(error.message);
+    });
+```
+
+Remember:
+
+```text
+async function
+→ still returns a Promise
 ```
 
 ---
 
-# 12. Common Mistakes
+## 14. Async/Await + Functional JavaScript
+
+Your Folder 02 skills remain useful.
+
+```js
+async function getNames() {
+    const response = await fetch(
+        "https://jsonplaceholder.typicode.com/users"
+    );
+
+    const users = await response.json();
+
+    return users
+        .filter(user => user.id > 5)
+        .map(user => user.name);
+}
+```
+
+Progression:
+
+```text
+Fetch
+ ↓
+await response
+ ↓
+await JSON
+ ↓
+filter
+ ↓
+map
+ ↓
+result
+```
+
+This is exactly the kind of code you will use in React and Node.js.
 
 ---
 
-## Mistake 1
+## 15. Async/Await + DevAPI
 
-Using await outside async
+Your DevAPI can now move from:
 
-Wrong
-
-```javascript
-const data = await fetch(url);
+```text
+setTimeout simulation
+      ↓
+Promise simulation
+      ↓
+Promise chaining
 ```
 
-Produces
+to:
 
+```text
+async function
+      ↓
+await request
+      ↓
+process response
+      ↓
+functional analytics
 ```
-SyntaxError
-```
 
----
+Example structure:
 
-Correct
+```js
+async function analyzeRequests() {
+    const requests = await getRequests();
 
-```javascript
-async function get(){
+    const failed = requests.filter(
+        request => request.status >= 400
+    );
 
-const data = await fetch(url);
+    const totalTime = failed.reduce(
+        (total, request) => total + request.resTime,
+        0
+    );
 
+    return totalTime;
 }
 ```
 
 ---
 
-## Mistake 2
+## 16. Common Mistakes
 
-Forgetting await
+### Using `await` outside a valid context
 
-```javascript
+Normal script/module code has rules around where `await` can appear.
+
+For this stage, use it inside:
+
+```js
+async function ...
+```
+
+or a supported top-level-await module environment.
+
+### Forgetting `await`
+
+```js
 const data = fetch(url);
-
-console.log(data);
 ```
 
-Output
+`data` is still a Promise.
 
-```
-Promise
+### Unnecessary sequential awaits
+
+```js
+const a = await taskA();
+const b = await taskB();
+const c = await taskC();
 ```
 
-Not actual data.
+If independent, consider `Promise.all()`.
+
+### Assuming `await` blocks the whole application
+
+It only suspends continuation of the current async function.
+
+### Forgetting error handling
+
+Use:
+
+```js
+try/catch
+```
+
+when the function should handle failures itself, or let the returned Promise reject for a caller to handle.
 
 ---
 
-## Mistake 3
+## 17. Dry Runs
 
-Too many sequential awaits
+### Example 1
 
-Wrong
+```js
+async function demo() {
+    console.log(1);
 
-```javascript
-await A();
+    await Promise.resolve();
 
-await B();
-
-await C();
-```
-
-Use
-
-```javascript
-Promise.all()
-```
-
----
-
-## Mistake 4
-
-No try/catch
-
-Always
-
-```javascript
-try{
-
-await something();
-
-}
-
-catch(err){
-
-}
-```
-
----
-
-# 13. Dry Runs
-
----
-
-Example 1
-
-```javascript
-async function demo(){
-
-console.log(1);
-
-await Promise.resolve();
-
-console.log(2);
-
+    console.log(2);
 }
 
 demo();
@@ -890,414 +629,176 @@ demo();
 console.log(3);
 ```
 
-Execution
+Output:
 
-```
+```text
 1
-
-↓
-
-await
-
-↓
-
 3
-
-↓
-
-2
-```
-
-Output
-
-```
-1
-
-3
-
 2
 ```
 
 ---
 
-Example 2
+### Example 2
 
-```javascript
-async function test(){
-
-return 100;
-
+```js
+async function test() {
+    return 100;
 }
 
 test().then(console.log);
 ```
 
-Output
+Output:
 
-```
+```text
 100
 ```
 
 ---
 
-Example 3
+### Example 3
 
-```javascript
-async function test(){
-
-const x = await Promise.resolve(20);
-
-return x*2;
-
+```js
+async function test() {
+    const x = await Promise.resolve(20);
+    return x * 2;
 }
 
 test().then(console.log);
 ```
 
-Output
+Output:
 
-```
+```text
 40
 ```
 
 ---
 
-# 14. Internal Diagrams
+### Example 4
 
-Async Function
+```js
+console.log("A");
 
-```
-async
+async function demo() {
+    console.log("B");
 
-↓
+    await Promise.resolve();
 
-Promise
-```
-
----
-
-Await
-
-```
-Promise
-
-↓
-
-Pause Function
-
-↓
-
-Microtask Queue
-
-↓
-
-Resume
-```
-
----
-
-Full Flow
-
-```
-async function
-
-↓
-
-await fetch()
-
-↓
-
-Web API
-
-↓
-
-Promise
-
-↓
-
-Microtask Queue
-
-↓
-
-Resume Function
-
-↓
-
-Return Value
-```
-
----
-
-# 15. Real World Examples
-
-API Call
-
-```javascript
-const users = await fetch("/users");
-```
-
----
-
-MongoDB
-
-```javascript
-const users = await User.find();
-```
-
----
-
-AWS SDK
-
-```javascript
-const data = await s3.send(command);
-```
-
----
-
-Firebase
-
-```javascript
-const user = await getDoc(docRef);
-```
-
----
-
-Express
-
-```javascript
-app.get("/", async(req,res)=>{
-
-const users = await User.find();
-
-res.json(users);
-
-});
-```
-
----
-
-# 16. Interview Questions
-
-### What does async return?
-
-Always a Promise.
-
----
-
-### Can async return a normal value?
-
-Yes.
-
-JavaScript converts it into
-
-```
-Promise.resolve(value)
-```
-
----
-
-### Can await be used outside async?
-
-No.
-
----
-
-### Does await block JavaScript?
-
-No.
-
-It only pauses the current async function.
-
----
-
-### What queue resumes await?
-
-Microtask Queue.
-
----
-
-### Difference between Promise and async/await?
-
-Async/await is syntax built on top of Promises.
-
----
-
-### Why use Promise.all()?
-
-Runs multiple async operations in parallel.
-
----
-
-### What happens if await receives a non-Promise?
-
-JavaScript wraps it in
-
-```
-Promise.resolve(value)
-```
-
-Example
-
-```javascript
-await 5;
-```
-
-Behaves like
-
-```javascript
-await Promise.resolve(5);
-```
-
----
-
-# 17. Coding Exercises
-
-## Exercise 1
-
-Create an async function returning
-
-```
-Hello
-```
-
----
-
-## Exercise 2
-
-Await
-
-```
-Promise.resolve(50)
-```
-
----
-
-## Exercise 3
-
-Fetch data from an API using async/await.
-
----
-
-## Exercise 4
-
-Handle errors using try/catch.
-
----
-
-## Exercise 5
-
-Compare
-
-```
-Sequential await
-```
-
-vs
-
-```
-Promise.all()
-```
-
----
-
-## Exercise 6
-
-Predict Output
-
-```javascript
-console.log(1);
-
-async function demo(){
-
-console.log(2);
-
-await Promise.resolve();
-
-console.log(3);
-
+    console.log("C");
 }
 
 demo();
 
-console.log(4);
+console.log("D");
 ```
 
-Answer
+Output:
 
-```
-1
-
-2
-
-4
-
-3
+```text
+A
+B
+D
+C
 ```
 
 ---
 
-# 18. Summary
+## 18. Interview Questions
 
-- `async` always returns a Promise.
-- `await` waits only inside async functions.
-- `await` pauses the async function, **not** the JavaScript engine.
-- The Event Loop continues running while waiting.
-- After resolution, execution resumes from the Microtask Queue.
-- Use `try/catch` for error handling.
-- Use `Promise.all()` for parallel async operations.
-- Async/await makes Promise-based code much easier to read and maintain.
+### What does `async` return?
+
+Always a Promise.
+
+### Can an async function return a normal value?
+
+Yes. The value becomes the fulfillment value of the returned Promise.
+
+### What does `await` do?
+
+It suspends the current async function's continuation until the awaited value/Promise is settled.
+
+### Does `await` block JavaScript?
+
+No. It does not freeze the entire runtime.
+
+### What happens after an awaited Promise settles?
+
+The async function's continuation is scheduled according to Promise/microtask semantics.
+
+### Difference between Promise chaining and async/await?
+
+Async/await is Promise-based syntax that expresses the same asynchronous model with a more sequential-looking control flow.
+
+### Why use `Promise.all()`?
+
+For independent asynchronous operations that can be started without waiting for each other.
+
+### What happens if an async function throws?
+
+Its returned Promise rejects.
+
+### What happens if `await` receives a non-Promise?
+
+The value is treated as an already-settled value for awaiting purposes.
 
 ---
 
-# Visual Memory Trick
+## 19. Completion Checklist
 
+- [ ] I know what `async` does.
+- [ ] I know an async function returns a Promise.
+- [ ] I understand `await`.
+- [ ] I know `await` does not block the whole runtime.
+- [ ] I understand the execution pause/resume model.
+- [ ] I can use try/catch with async/await.
+- [ ] I understand sequential awaits.
+- [ ] I understand parallel independent operations.
+- [ ] I can use Promise.all().
+- [ ] I can connect async/await to Fetch.
+- [ ] I can combine async/await with map/filter/reduce.
+- [ ] I can apply async/await to DevAPI.
+- [ ] I can dry-run async/await examples.
+
+---
+
+## Quick Revision
+
+```text
+async function
+      ↓
+returns Promise
+
+await Promise
+      ↓
+pause current async function
+      ↓
+runtime continues
+      ↓
+Promise settles
+      ↓
+async function resumes
 ```
-async
 
-↓
+For multiple operations:
 
-Promise
+```text
+Dependent
+→ sequential await
 
-↓
+Independent
+→ Promise.all()
+```
 
+Error:
+
+```text
 await
-
-↓
-
-Pause Function
-
-↓
-
-Promise Completes
-
-↓
-
-Microtask Queue
-
-↓
-
-Resume Function
-
-↓
-
-Return Result
+ ↓
+reject / throw
+ ↓
+try/catch
 ```
 
----
-
-# Next Chapter
-
-➡️ **14-Error-Handling.md**
-
-Topics covered:
-
-- Synchronous vs Asynchronous Errors
-- try/catch/finally
-- throw keyword
-- Promise rejection handling
-- async/await error handling
-- Global error handlers
-- Browser vs Node.js differences
-- Custom Error classes
-- 35+ interview questions
-- Real-world debugging examples
+**Next:** `14-Error-Handling.md`
