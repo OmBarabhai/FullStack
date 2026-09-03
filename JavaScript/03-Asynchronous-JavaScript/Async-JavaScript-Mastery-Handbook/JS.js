@@ -431,12 +431,38 @@ promise.catch(value => {
 
 
 
+//
+//
+//Promise.resolve(5)
+//    .then(value => {
+//        return Promise.resolve(value * 2);
+//    })
+//    .then(value => {
+//        console.log(value);
+//    });
 
+//async function hello(){
+//    return "Hello";
+//}
+//console.log(hello());
+//
+//hello().then(value => {
+//    console.log(value);
+//});
+//
+//async function test(){
+//    const res = await Promise.resolve(50);
+//    console.log(res);
+//}
+//test();
 
-Promise.resolve(5)
-    .then(value => {
-        return Promise.resolve(value * 2);
-    })
-    .then(value => {
-        console.log(value);
-    });
+const http = require('http');
+const server = http.createServer(function(req,res){
+    res.statusCode = 500;
+    res.write("This is my first Server updated once again");
+    res.end();
+});
+
+server.listen(3000,function(){
+    console.log("Server Started")
+})

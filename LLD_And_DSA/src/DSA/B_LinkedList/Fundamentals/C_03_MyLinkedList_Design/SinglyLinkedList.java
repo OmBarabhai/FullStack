@@ -2,11 +2,11 @@ package DSA.B_LinkedList.Fundamentals.C_03_MyLinkedList_Design;
 
 public class SinglyLinkedList {
 
-    static class Node {
-        int data;
-        Node next;
+    public static class Node {
+        public int data;
+        public Node next;
 
-        Node(int data) {
+        public Node(int data) {
             this.data = data;
             this.next = null;
         }
