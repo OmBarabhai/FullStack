@@ -1,14 +1,42 @@
-# 11 — Promises Hands-On Lab
+# 11 — Promises Hands-On Lab — Completed
 
 **Folder:** `03-Asynchronous-JavaScript`
 
-> **Rule:** Predict → Write → Run → Observe → Explain.
+> **Purpose:** Completed reference for revision. First try each lab yourself, then use the solution to compare.
 
-Do not copy the solution before attempting the task.
+Your existing practice already covers Promise creation, `resolve/reject`, `then/catch/finally`, executor timing, returned values, returned Promises, and basic error propagation. fileciteturn5file0L301-L321 fileciteturn5file0L325-L344
 
 ---
 
-## Lab 1 — Create a Promise
+# 1. Master Promise Mental Model
+
+```text
+new Promise(...)
+      ↓
+Pending
+      ↓
+resolve() / reject()
+      ↓
+Fulfilled / Rejected
+      ↓
+then() / catch() / finally()
+```
+
+Remember:
+
+```text
+Promise executor
+→ runs immediately
+
+then/catch/finally callbacks
+→ run later through Promise microtask processing
+```
+
+---
+
+# 2. Lab 1 — Create a Promise
+
+## Requirement
 
 Create a Promise that fulfills with:
 
@@ -16,11 +44,11 @@ Create a Promise that fulfills with:
 "Success"
 ```
 
-Start:
+## Solution
 
 ```js
 const promise = new Promise((resolve, reject) => {
-    // your code
+    resolve("Success");
 });
 
 promise.then(value => {
@@ -28,84 +56,155 @@ promise.then(value => {
 });
 ```
 
+Output:
+
+```text
+Success
+```
+
+### What to learn
+
+```text
+resolve("Success")
+→ Promise becomes fulfilled
+
+.then()
+→ receives "Success"
+```
+
 ---
 
-## Lab 2 — Reject a Promise
+# 3. Lab 2 — Reject a Promise
 
-Create a Promise that rejects with:
+## Requirement
+
+Reject with:
 
 ```text
 "Network Error"
 ```
 
-Handle it with:
+## Solution
 
 ```js
-.catch(...)
+const promise = new Promise((resolve, reject) => {
+    reject(new Error("Network Error"));
+});
+
+promise.catch(error => {
+    console.log(error.message);
+});
+```
+
+Output:
+
+```text
+Network Error
 ```
 
 ---
 
-## Lab 3 — Success or Failure
+# 4. Lab 3 — Success or Failure
 
-Create:
+## Requirement
+
+Use:
 
 ```js
 const success = true;
 ```
 
-If true:
+## Solution
 
-```text
-resolve("Login successful")
+```js
+const success = true;
+
+const promise = new Promise((resolve, reject) => {
+    if (success) {
+        resolve("Login successful");
+    } else {
+        reject(new Error("Login failed"));
+    }
+});
+
+promise
+    .then(value => {
+        console.log(value);
+    })
+    .catch(error => {
+        console.log(error.message);
+    });
 ```
 
-Otherwise:
+Change:
 
-```text
-reject("Login failed")
+```js
+const success = false;
 ```
 
-Use `then()` and `catch()`.
+and the output becomes:
+
+```text
+Login failed
+```
 
 ---
 
-## Lab 4 — Promise + Timer
+# 5. Lab 4 — Promise + Timer
 
-Create a Promise that resolves after 2 seconds.
+## Requirement
 
-Target:
+Resolve after 2 seconds.
 
-```text
-Start
-↓
-2 seconds
-↓
-Done
-```
-
-Scaffold:
+## Solution
 
 ```js
 const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
-        // resolve here
+        resolve("Done");
     }, 2000);
 });
+
+console.log("Start");
 
 promise.then(value => {
     console.log(value);
 });
 ```
 
+Output:
+
+```text
+Start
+Done
+```
+
+with approximately a 2-second delay before `Done`.
+
+Mental model:
+
+```text
+new Promise
+   ↓
+timer
+   ↓
+resolve("Done")
+   ↓
+Promise fulfilled
+   ↓
+then()
+```
+
 ---
 
-## Lab 5 — Executor Timing
+# 6. Lab 5 — Executor Timing
 
-Run:
+## Code
 
 ```js
-const promise = new Promise((resolve, reject) => {
+console.log("Executor start");
+
+const promise = new Promise((resolve) => {
     console.log("Executor");
     resolve("Done");
 });
@@ -113,27 +212,36 @@ const promise = new Promise((resolve, reject) => {
 promise.then(value => {
     console.log(value);
 });
+
+console.log("After Promise");
 ```
 
-Predict first:
+## Output
 
 ```text
-What prints first?
-Why?
+Executor start
+Executor
+After Promise
+Done
 ```
 
-Key lesson:
+Important:
 
 ```text
-executor → immediate
-then callback → later
+new Promise executor
+→ immediate
+
+.then()
+→ later
 ```
+
+Your own notes explicitly identify this distinction. fileciteturn5file0L312-L321
 
 ---
 
-## Lab 6 — Return Values Through `.then()`
+# 7. Lab 6 — Return Values Through `.then()`
 
-Build:
+## Requirement
 
 ```text
 5
@@ -142,35 +250,45 @@ Build:
 ↓
 ×2
 ↓
-print
-```
-
-Expected:
-
-```text
 20
 ```
 
-Scaffold:
+## Solution
 
 ```js
 Promise.resolve(5)
     .then(value => {
-        // return value + 5
+        return value + 5;
     })
     .then(value => {
-        // return value * 2
+        return value * 2;
     })
     .then(value => {
         console.log(value);
     });
 ```
 
+Output:
+
+```text
+20
+```
+
+Mental model:
+
+```text
+5
+↓
+10
+↓
+20
+```
+
 ---
 
-## Lab 7 — Return a Promise
+# 8. Lab 7 — Return a Promise
 
-Build:
+## Requirement
 
 ```text
 5
@@ -179,24 +297,41 @@ return Promise
 ↓
 ×2
 ↓
-print
+10
 ```
 
-Use:
+## Solution
 
 ```js
-return Promise.resolve(...);
+Promise.resolve(5)
+    .then(value => {
+        return Promise.resolve(value * 2);
+    })
+    .then(value => {
+        console.log(value);
+    });
 ```
 
-Ask:
+Output:
 
-> Why does the next `.then()` wait?
+```text
+10
+```
+
+Key:
+
+```text
+return Promise
+→ next then adopts its result
+```
+
+You have already practiced this same structure. fileciteturn5file0L331-L342
 
 ---
 
-## Lab 8 — Error Propagation
+# 9. Lab 8 — Error Propagation
 
-Run:
+## Code
 
 ```js
 Promise.resolve()
@@ -211,35 +346,85 @@ Promise.resolve()
     });
 ```
 
-Predict:
+## Output
 
 ```text
-Does "Second then" print?
+Something failed
 ```
 
-Then explain why.
+`Second then` does not run.
+
+Flow:
+
+```text
+then
+ ↓
+throw
+ ↓
+rejected Promise
+ ↓
+skip fulfillment handler
+ ↓
+catch
+```
+
+Your notes already capture this pattern. fileciteturn5file0L337-L344
 
 ---
 
-## Lab 9 — finally()
+# 10. Lab 9 — `finally()`
 
-Create one fulfilled Promise and one rejected Promise.
-
-Add:
+## Fulfilled Promise
 
 ```js
-.finally(() => {
-    console.log("Finished");
-});
+Promise.resolve("Success")
+    .then(value => {
+        console.log(value);
+    })
+    .finally(() => {
+        console.log("Finished");
+    });
 ```
 
-Verify that `finally()` runs in both cases.
+Output:
+
+```text
+Success
+Finished
+```
+
+## Rejected Promise
+
+```js
+Promise.reject(new Error("Failed"))
+    .catch(error => {
+        console.log(error.message);
+    })
+    .finally(() => {
+        console.log("Finished");
+    });
+```
+
+Output:
+
+```text
+Failed
+Finished
+```
+
+Key:
+
+```text
+finally()
+→ cleanup code
+→ runs after settlement
+```
 
 ---
 
-## Lab 10 — Promise + setTimeout
+# 11. Lab 10 — Promise + `setTimeout()`
 
-Predict before running:
+## Code
 
 ```js
 console.log("Start");
@@ -255,7 +440,7 @@ setTimeout(() => {
 console.log("End");
 ```
 
-Expected:
+## Output
 
 ```text
 Start
@@ -264,29 +449,49 @@ Promise
 Timer
 ```
 
-Explain using:
+Flow:
 
 ```text
-current task
-↓
+Start
+ ↓
+Promise reaction scheduled
+ ↓
+Timer scheduled
+ ↓
+End
+ ↓
+current task finishes
+ ↓
 microtask
-↓
+ ↓
+Promise
+ ↓
 next task
+ ↓
+Timer
 ```
+
+This uses the microtask knowledge from the previous chapters.
 
 ---
 
-## Lab 11 — Promise.all()
+# 12. Lab 11 — Promise.all()
 
-Create:
+## Create the Promises
 
-```text
-p1
-p2
-p3
+```js
+const p1 = new Promise(resolve => {
+    setTimeout(() => resolve("P1"), 1000);
+});
+
+const p2 = new Promise(resolve => {
+    setTimeout(() => resolve("P2"), 2000);
+});
+
+const p3 = new Promise(resolve => {
+    setTimeout(() => resolve("P3"), 1500);
+});
 ```
-
-where all fulfill.
 
 Run:
 
@@ -297,40 +502,101 @@ Promise.all([p1, p2, p3])
     });
 ```
 
-Then make one reject.
+Output:
 
-Observe what happens.
+```js
+["P1", "P2", "P3"]
+```
+
+The result arrives when all inputs fulfill.
+
+Important:
+
+```text
+Execution timing
+→ depends on completion
+
+Result order
+→ follows input order
+```
+
+## One rejection
+
+```js
+const p1 = Promise.resolve("P1");
+
+const p2 = Promise.reject(new Error("P2 failed"));
+
+const p3 = Promise.resolve("P3");
+
+Promise.all([p1, p2, p3])
+    .then(values => {
+        console.log(values);
+    })
+    .catch(error => {
+        console.log(error.message);
+    });
+```
+
+Output:
+
+```text
+P2 failed
+```
 
 ---
 
-## Lab 12 — Promise.allSettled()
+# 13. Lab 12 — Promise.allSettled()
 
-Use the same Promises.
-
-Run:
+Use mixed results:
 
 ```js
+const p1 = Promise.resolve("P1");
+
+const p2 = Promise.reject(new Error("P2 failed"));
+
+const p3 = Promise.resolve("P3");
+
 Promise.allSettled([p1, p2, p3])
     .then(results => {
         console.log(results);
     });
 ```
 
-Make one succeed and one fail.
+The returned Promise fulfills with an array describing every outcome.
 
-Question:
+Conceptually:
 
-> Does the returned Promise reject?
+```text
+[
+  fulfilled,
+  rejected,
+  fulfilled
+]
+```
+
+Key:
+
+```text
+allSettled()
+→ waits for all inputs
+→ reports all outcomes
+```
 
 ---
 
-## Lab 13 — Promise.race()
+# 14. Lab 13 — Promise.race()
 
-Create:
+## Setup
 
-```text
-P1 → 2 seconds
-P2 → 1 second
+```js
+const p1 = new Promise(resolve => {
+    setTimeout(() => resolve("P1"), 2000);
+});
+
+const p2 = new Promise(resolve => {
+    setTimeout(() => resolve("P2"), 1000);
+});
 ```
 
 Run:
@@ -342,18 +608,63 @@ Promise.race([p1, p2])
     });
 ```
 
-Predict the winner.
+Output:
+
+```text
+P2
+```
+
+because `P2` settles first.
+
+## Important test
+
+Make the faster Promise reject:
+
+```js
+const p1 = new Promise(resolve => {
+    setTimeout(() => resolve("P1"), 2000);
+});
+
+const p2 = new Promise((resolve, reject) => {
+    setTimeout(() => reject(new Error("P2 failed")), 1000);
+});
+
+Promise.race([p1, p2])
+    .then(value => console.log(value))
+    .catch(error => console.log(error.message));
+```
+
+Output:
+
+```text
+P2 failed
+```
+
+Key:
+
+```text
+race()
+→ first settled wins
+```
 
 ---
 
-## Lab 14 — Promise.any()
+# 15. Lab 14 — Promise.any()
 
-Create:
+## Setup
 
-```text
-P1 → reject after 1 sec
-P2 → resolve after 2 sec
-P3 → resolve after 3 sec
+```js
+const p1 = new Promise((resolve, reject) => {
+    setTimeout(() => reject(new Error("P1 failed")), 1000);
+});
+
+const p2 = new Promise(resolve => {
+    setTimeout(() => resolve("P2"), 2000);
+});
+
+const p3 = new Promise(resolve => {
+    setTimeout(() => resolve("P3"), 3000);
+});
 ```
 
 Run:
@@ -368,40 +679,54 @@ Promise.any([p1, p2, p3])
     });
 ```
 
-Question:
-
-> Does the first rejection win?
-
----
-
-## Lab 15 — Compare Combinators
-
-Use the same group of Promises and test:
+Output:
 
 ```text
-Promise.all()
-Promise.race()
-Promise.any()
-Promise.allSettled()
+P2
 ```
 
-Create your own table:
+The first rejection does not win.
+
+Key:
 
 ```text
-Method
-↓
-What does it wait for?
-↓
-What happens on rejection?
-↓
-What result do I receive?
+any()
+→ first fulfilled wins
+→ rejects only if all inputs reject
 ```
 
 ---
 
-## Lab 16 — Missing Return
+# 16. Lab 15 — Compare Combinators
 
-Find the bug:
+| Method | Main rule |
+|---|---|
+| `Promise.all()` | Need all inputs to fulfill |
+| `Promise.race()` | First input to settle wins |
+| `Promise.any()` | First input to fulfill wins |
+| `Promise.allSettled()` | Wait for all outcomes |
+
+Decision rule:
+
+```text
+Need every successful result?
+→ all()
+
+Need whichever settles first?
+→ race()
+
+Need whichever succeeds first?
+→ any()
+
+Need every outcome?
+→ allSettled()
+```
+
+---
+
+# 17. Lab 16 — Missing Return
+
+## Bug
 
 ```js
 Promise.resolve(5)
@@ -413,146 +738,242 @@ Promise.resolve(5)
     });
 ```
 
-Question:
+## What goes wrong?
+
+The first callback does not return the Promise.
+
+So:
 
 ```text
-Why is the second then not receiving 10?
+first then
+→ returns undefined
 ```
 
-Fix it.
+The second `.then()` receives:
 
----
+```text
+undefined
+```
 
-## Lab 17 — Fetch + Promise Chain
-
-Complete:
+## Fix
 
 ```js
-fetch("https://jsonplaceholder.typicode.com/users")
-    .then(response => {
-        // return parsed JSON
+Promise.resolve(5)
+    .then(value => {
+        return Promise.resolve(value * 2);
     })
-    .then(users => {
-        // print users
-    })
-    .catch(error => {
-        console.log(error);
+    .then(value => {
+        console.log(value);
     });
 ```
 
-Think:
+Output:
+
+```text
+10
+```
+
+---
+
+# 18. Lab 17 — Fetch + Promise Chain
+
+## Requirement
 
 ```text
 fetch
 ↓
 Response
 ↓
-return response.json()
+JSON
 ↓
 users
 ```
 
----
-
-## Lab 18 — DevAPI Success Simulation
-
-Create a Promise that simulates:
-
-```text
-request starts
-↓
-wait 2 seconds
-↓
-resolve request object
-```
-
-Resolve with:
+## Solution
 
 ```js
-{
-    id: 101,
-    status: 200,
-    resTime: 2000
+fetch("https://jsonplaceholder.typicode.com/users")
+    .then(response => {
+        return response.json();
+    })
+    .then(users => {
+        console.log(users);
+    })
+    .catch(error => {
+        console.log(error.message);
+    });
+```
+
+Important:
+
+```text
+return response.json()
+→ next then receives parsed users
+```
+
+Your Fetch practice already uses the same Fetch → JSON shape. fileciteturn5file0L124-L135
+
+---
+
+# 19. Lab 18 — DevAPI Success Simulation
+
+```js
+function getRequest() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve({
+                id: 101,
+                status: 200,
+                resTime: 1000
+            });
+        }, 1000);
+    });
 }
+
+console.log("Request started");
+
+getRequest()
+    .then(request => {
+        console.log("Response received");
+        console.log(request);
+    })
+    .finally(() => {
+        console.log("Request finished");
+    });
 ```
 
-Then:
+Flow:
 
 ```text
-Promise
-↓
-then
-↓
-print request
-```
-
----
-
-## Lab 19 — DevAPI Failure Simulation
-
-Modify the simulation:
-
-```text
-status >= 400
-→ reject
-```
-
-Handle:
-
-```text
-success → then()
-failure → catch()
-always → finally()
+Request started
+ ↓
+1 second
+ ↓
+resolve request
+ ↓
+then()
+ ↓
+finally()
 ```
 
 ---
 
-## Lab 20 — Promise + Functional JavaScript
+# 20. Lab 19 — DevAPI Failure Simulation
 
-Create a Promise that resolves with an array of request objects.
+```js
+function getRequest() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            reject(new Error("Request failed"));
+        }, 1000);
+    });
+}
 
-Then:
-
-```text
-filter failed requests
-↓
-map request IDs
-↓
-print IDs
+getRequest()
+    .then(request => {
+        console.log(request);
+    })
+    .catch(error => {
+        console.log(error.message);
+    })
+    .finally(() => {
+        console.log("Request finished");
+    });
 ```
 
-You already know:
+Output:
 
 ```text
+Request failed
+Request finished
+```
+
+Important:
+
+```text
+Promise rejection
+≠
+HTTP status automatically
+```
+
+Your program explicitly decides when to call `reject()`.
+
+---
+
+# 21. Lab 20 — Promise + Functional JavaScript
+
+```js
+const requests = [
+    { id: 1, status: 200, resTime: 100 },
+    { id: 2, status: 500, resTime: 300 },
+    { id: 3, status: 404, resTime: 200 }
+];
+
+Promise.resolve(requests)
+    .then(requests => {
+        return requests.filter(request => request.status >= 400);
+    })
+    .then(failedRequests => {
+        return failedRequests.map(request => request.id);
+    })
+    .then(ids => {
+        console.log(ids);
+    });
+```
+
+Output:
+
+```text
+[2, 3]
+```
+
+Flow:
+
+```text
+requests
+ ↓
 filter()
+ ↓
+failed requests
+ ↓
 map()
-```
-
-The new skill is:
-
-```text
-Promise
-+
-functional processing
+ ↓
+IDs
 ```
 
 ---
 
-## Lab 21 — Promise + reduce()
+# 22. Lab 21 — Promise + reduce()
 
-Create a Promise that resolves with request objects.
+```js
+const requests = [
+    { id: 1, status: 200, resTime: 100 },
+    { id: 2, status: 500, resTime: 300 },
+    { id: 3, status: 404, resTime: 200 }
+];
 
-Then:
-
-```text
-filter status >= 400
-↓
-reduce response times
-↓
-print total
+Promise.resolve(requests)
+    .then(requests => {
+        return requests.filter(request => request.status >= 400);
+    })
+    .then(failedRequests => {
+        return failedRequests.reduce(
+            (total, request) => total + request.resTime,
+            0
+        );
+    })
+    .then(total => {
+        console.log(total);
+    });
 ```
 
-This combines:
+Output:
+
+```text
+500
+```
+
+This is the direct connection:
 
 ```text
 Promise
@@ -564,152 +985,294 @@ reduce
 
 ---
 
-## Lab 22 — Independent DevAPI Challenge
+# 23. Lab 22 — Final DevAPI Challenge
 
-Without looking at previous solutions:
+Build this independently first:
 
 ```text
-Create asynchronous request simulation
+Async request simulation
 ↓
 wait 1 second
 ↓
 resolve request array
 ↓
-filter failures
+filter status >= 400
 ↓
-map request IDs
+map IDs
 ↓
-print IDs
+reduce response time
 ↓
-catch errors
+create analytics object
 ↓
-finally "Request finished"
+catch error
+↓
+finally "Request Finished"
 ```
 
-Break it into steps before coding.
+## Completed Reference
+
+```js
+function getRequests() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve([
+                { id: 1, status: 200, resTime: 100 },
+                { id: 2, status: 500, resTime: 300 },
+                { id: 3, status: 404, resTime: 200 }
+            ]);
+        }, 1000);
+    });
+}
+
+getRequests()
+    .then(requests => {
+        const failedRequests = requests.filter(
+            request => request.status >= 400
+        );
+
+        const failedIds = failedRequests.map(
+            request => request.id
+        );
+
+        const totalFailedResponseTime = failedRequests.reduce(
+            (total, request) => total + request.resTime,
+            0
+        );
+
+        return {
+            failedIds,
+            failedCount: failedRequests.length,
+            totalFailedResponseTime
+        };
+    })
+    .then(analytics => {
+        console.log(analytics);
+    })
+    .catch(error => {
+        console.log(error.message);
+    })
+    .finally(() => {
+        console.log("Request Finished");
+    });
+```
+
+Output:
+
+```js
+{
+    failedIds: [2, 3],
+    failedCount: 2,
+    totalFailedResponseTime: 500
+}
+```
 
 ---
 
-## Lab 23 — Final Mastery Test
+# 24. Final Mastery Test
 
-Build this independently:
+You should now be able to write, without copying:
 
 ```text
-Async Request
+Create Promise
     ↓
-Promise
+resolve after delay
     ↓
-1 second delay
-    ↓
-resolve request array
+receive request array
     ↓
 filter failures
     ↓
-reduce response time
+map IDs
     ↓
-print total
+reduce total response time
     ↓
-catch error
+return analytics
     ↓
-finally "Finished"
+catch
+    ↓
+finally
 ```
 
-Required concepts:
+Required:
 
 ```text
 Promise
 setTimeout
 resolve/reject
 then
+return
+filter
+map
+reduce
 catch
 finally
-filter
-reduce
 ```
-
-Do not copy a complete solution.
 
 ---
 
-# Logic-Building Framework
+# 25. Logic-Building Framework
 
-When stuck:
+When working inside `.then()`:
 
 ```text
-1. What does my Promise resolve with?
-2. What type is that value?
-3. What output do I need?
-4. Do I need one item or many?
-5. Which array method gives that output?
-6. What should happen on failure?
+What do I receive?
+        ↓
+What type is it?
+        ↓
+What do I need next?
+        ↓
+Which operation produces it?
+        ↓
+What should I return?
 ```
 
-Example:
+Examples:
 
 ```text
-Promise resolves with requests
-↓
-Need failed requests
-↓
+requests
+ ↓
+failed requests
+ ↓
 filter()
+```
 
-Need IDs
-↓
+```text
+failed requests
+ ↓
+IDs
+ ↓
 map()
+```
 
-Need total response time
-↓
+```text
+failed requests
+ ↓
+total response time
+ ↓
 reduce()
 ```
 
 ---
 
-# Debugging Framework
+# 26. Debugging Framework
 
-When a chain fails:
+If a chain is broken:
 
 ```text
-1. What does this .then() receive?
-2. What does it return?
-3. Is it a normal value?
-4. Is it a Promise?
-5. Could it reject?
-6. Which catch handles it?
+1. Log what enters the then().
+2. Log what you return.
+3. Check value vs Promise.
+4. Check fulfilled vs rejected.
+5. Find the handler receiving it.
 ```
 
-Expand a chain when debugging:
+Useful temporary pattern:
 
 ```js
 .then(value => {
-    console.log("Step 1:", value);
+    console.log("Received:", value);
 
-    const next = ...;
+    const nextValue = ...;
 
-    console.log("Step 2:", next);
+    console.log("Returning:", nextValue);
 
-    return next;
+    return nextValue;
 });
 ```
 
 ---
 
-# Completion Checklist
+# 27. Quick Revision Card
 
-- [ ] Create Promise
-- [ ] resolve/reject
-- [ ] then/catch/finally
-- [ ] executor timing
-- [ ] return values
-- [ ] return Promises
-- [ ] error propagation
-- [ ] Promise.all
-- [ ] Promise.race
-- [ ] Promise.any
-- [ ] Promise.allSettled
-- [ ] Promise + setTimeout
-- [ ] Promise + Fetch
-- [ ] Promise + filter + map
-- [ ] Promise + filter + reduce
-- [ ] DevAPI success simulation
-- [ ] DevAPI failure simulation
-- [ ] Final independent challenge
+```text
+Promise
+→ future result
+
+Pending
+→ Fulfilled / Rejected
+
+resolve()
+→ fulfillment
+
+reject()
+→ rejection
+
+then()
+→ fulfillment handling
+
+catch()
+→ rejection handling
+
+finally()
+→ cleanup after settlement
+
+return value
+→ next then receives value
+
+return Promise
+→ next then adopts its result
+
+all()
+→ all fulfill
+
+race()
+→ first settled
+
+any()
+→ first fulfilled
+
+allSettled()
+→ all settle
+```
+
+---
+
+# 28. Completion Status
+
+### Already practiced
+
+- [x] Create Promise
+- [x] resolve / reject
+- [x] then / catch / finally
+- [x] executor timing
+- [x] Promise.resolve()
+- [x] return values
+- [x] return Promise
+- [x] basic error propagation
+
+### Completed in this lab
+
+- [x] Promise.all()
+- [x] Promise.race()
+- [x] Promise.any()
+- [x] Promise.allSettled()
+- [x] Promise + filter
+- [x] Promise + map
+- [x] Promise + reduce
+- [x] DevAPI success simulation
+- [x] DevAPI failure simulation
+- [x] DevAPI analytics
+- [x] Final mastery test
+
+---
+
+# Final Mental Model
+
+```text
+Async Operation
+      ↓
+Promise
+      ↓
+Pending
+      ↓
+Fulfilled / Rejected
+      ↓
+then / catch / finally
+      ↓
+Functional processing
+      ↓
+DevAPI result
+```
+
+**Promise foundation: COMPLETE ✅**
+
+**Next learning:** `12-Promise-Chaining.md`

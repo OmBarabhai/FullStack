@@ -25,7 +25,7 @@
 > → Random Problem Recognition
 > ```
 >
-> **Part 1 = 65 problems.**
+> **Part 1 = 62 problems.**
 > There is no separate Part 0.
 
 ---
@@ -150,27 +150,24 @@ check current
 ```
 
 ## Problems
-|  # | Problem                       | Platform     | Diff. | Interview | Status | R1 | R2 | R3 | Pattern      |
-|---:|-------------------------------|--------------|:-----:|:---------:|:------:|:--:|:--:|:--:|--------------|
-| 01 | Design Node Class             | Custom       |  🟢   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Node         |
-| 02 | Build Singly Linked List      | Custom       |  🟢   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Design       |
-| 03 | Build List from Array         | Custom       |  🟢   |   ⭐⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | Construction |
-| 04 | Convert Array to Linked List  | Custom       |  🟢   |   ⭐⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | Construction |
-| 05 | Traverse Linked List          | Custom       |  🟢   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Traversal    |
-| 06 | Print Linked List             | GFG          |  🟢   |   ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | Traversal    |
-| 07 | Print in Reverse Recursively  | GFG          |  🟡   |   ⭐⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | Recursion    |
-| 08 | Traverse Circular Linked List | Custom       |  🟡   |    ⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | Circular     |
-| 09 | Search in Linked List         | GFG          |  🟢   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Search       |
-| 10 | Search Recursively            | GFG          |  🟡   |   ⭐⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | Recursion    |
-| 11 | Search in Sorted List         | Custom       |  🟢   |    ⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | Search       |
-| 12 | Count Occurrences             | GFG          |  🟢   |   ⭐⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | Traversal    |
-| 13 | Remove Linked List Elements   | LeetCode 203 |  🟢   |   ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | Dummy        |
-| 14 | Delete Head Using Dummy       | Custom       |  🟢   |   ⭐⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | Dummy        |
-| 15 | Merge Two Lists with Dummy    | LeetCode 21  |  🟢   |   ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | Dummy        |
-| 16 | Length of Linked List         | GFG          |  🟢   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Length       |
-| 17 | Count Nodes Iteratively       | Custom       |  🟢   |   ⭐⭐⭐⭐    |   ☑️   | ⬜  | ⬜  | ⬜  | Length       |
-| 18 | Count Nodes Recursively       | GFG          |  🟢   |    ⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | Recursion    |
-| 19 | Length of Circular List       | Custom       |  🟡   |    ⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | Circular     |
+
+| # | Problem | Platform | Diff. | Interview | Status | R1 | R2 | R3 | Pattern |
+|---:|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
+| 01 | Design Node Class | Custom | 🟢 | ⭐⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Node |
+| 02 | Build Singly Linked List | Custom | 🟢 | ⭐⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Design |
+| 03 | Build List from Array | Custom | 🟢 | ⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Construction |
+| 04 | Convert Array to Linked List | Custom | 🟢 | ⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Construction |
+| 05 | Traverse Linked List | Custom | 🟢 | ⭐⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Traversal |
+| 06 | Print Linked List | GFG | 🟢 | ⭐⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Traversal |
+| 07 | Print in Reverse Recursively | GFG | 🟡 | ⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Recursion |
+| 08 | Traverse Circular Linked List | Custom | 🟡 | ⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Circular |
+| 09 | Search in Linked List | GFG | 🟢 | ⭐⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Search |
+| 10 | Search Recursively | GFG | 🟡 | ⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Recursion |
+| 11 | Count Occurrences | GFG | 🟢 | ⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Traversal |
+| 12 | Length of Linked List | GFG | 🟢 | ⭐⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Length |
+| 13 | Count Nodes Recursively | Custom | 🟢 | ⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Recursion |
+| 14 | Length of Circular List | Custom | 🟡 | ⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Circular |
+
 ---
 
 # 4. Pattern B — Core Operations
@@ -231,28 +228,38 @@ VALUE
 → bypass target
 ```
 
+## Dummy Node
+
+```text
+dummy.next = head
+→ start curr from dummy
+→ return dummy.next
+```
+
+### Why dummy?
+
+```text
+head deletion
+and
+normal deletion
+```
+
+can use the **same logic**.
+
 ## Problems
 
-| # | Problem | Platform | Diff. | Interview | Status | R1 | R2 | R3 | Pattern |
-|---:|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-| 20 | Insert at Head | GFG | 🟢 | ⭐⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Insert |
-| 21 | Delete Head Node | GFG | 🟢 | ⭐⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Delete |
-| 22 | Insert at Tail | GFG | 🟢 | ⭐⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Insert |
-| 23 | Delete Tail Node | GFG | 🟡 | ⭐⭐⭐⭐⭐ | 🔄 | ⬜ | ⬜ | ⬜ | Delete |
-| 24 | Insert at Position | GFG | 🟡 | ⭐⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Insert |
-| 25 | Insert After Given Node | GFG | 🟢 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Rewire |
-| 26 | Insert Before Given Node | Custom | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Rewire |
-| 27 | Sorted Insert | GFG | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Insert |
-| 28 | Insert into Circular Sorted List | LeetCode 708 | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Circular |
-| 29 | Insert into Doubly Linked List | GFG | 🟡 | ⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | DLL |
-| 30 | Delete Node at Position | GFG | 🟡 | ⭐⭐⭐⭐⭐ | 🔄 | ⬜ | ⬜ | ⬜ | Delete |
-| 31 | Delete Node by Key | GFG | 🟡 | ⭐⭐⭐⭐⭐ | 🔄 | ⬜ | ⬜ | ⬜ | Delete |
-| 32 | Delete Node Given Only Node | LeetCode 237 | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Trick |
-| 33 | Remove Linked List Elements | LeetCode 203 | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Dummy |
-| 34 | Delete Entire Linked List | GFG | 🟢 | ⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Utility |
-| 35 | Delete from Circular Linked List | GFG | 🟡 | ⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Circular |
-
----
+|  # | Problem                     | Platform     | Diff. | Interview | Status | R1 | R2 | R3 | Pattern |
+|---:|-----------------------------|--------------|:-----:|:---------:|:------:|:--:|:--:|:--:|---------|
+| 15 | Insert at Head              | Custom       |  🟢   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Insert  |
+| 16 | Insert at Tail              | Custom       |  🟢   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Insert  |
+| 17 | Insert at Position          | Custom       |  🟡   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Insert  |
+| 18 | Delete Head Node            | Custom       |  🟢   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Delete  |
+| 19 | Delete Tail Node            | Custom       |  🟡   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Delete  |
+| 20 | Delete Node at Position     | Custom       |  🟡   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Delete  |
+| 21 | Delete Node by Value        | Custom       |  🟡   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Delete  |
+| 22 | Remove Linked List Elements | LeetCode 203 |  🟢   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Dummy   |
+| 23 | Merge Two Sorted Lists      | LeetCode 21  |  🟢   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Dummy   |
+| 24 | Delete Node Given Only Node | LeetCode 237 |  🟢   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Trick   |
 
 # 5. Pattern C — Two Pointers / Fast-Slow / Gap
 
@@ -289,19 +296,19 @@ Think:
 
 ## Problems
 
-| # | Problem | Platform | Diff. | Interview | Status | R1 | R2 | R3 | Pattern |
-|---:|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-| 36 | Middle using Two Pointers | Custom | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Two Pointer |
-| 37 | Kth Node from End | Custom | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Gap |
-| 38 | One-Pass Pointer Distance | Custom | 🟢 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Gap |
-| 39 | Middle of Linked List | LeetCode 876 | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Slow/Fast |
-| 40 | First Middle Node | Custom | 🟡 | ⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Slow/Fast |
-| 41 | Second Middle Node | Custom | 🟡 | ⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Slow/Fast |
-| 42 | Split List into Two Halves | GFG | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Slow/Fast |
-| 43 | Nth Node from End | GFG | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Gap |
-| 44 | Remove Nth Node From End | LeetCode 19 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Gap + Dummy |
-| 45 | Kth Node from End One Pass | Custom | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Gap |
-| 46 | Kth Node from Beginning | Custom | 🟢 | ⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Position |
+|  # | Problem                    | Platform     | Diff. | Interview | Status | R1 | R2 | R3 | Pattern     |
+|---:|----------------------------|--------------|:-----:|:---------:|:------:|:--:|:--:|:--:|-------------|
+| 25 | Middle using Two Pointers  | Custom       |  🟢   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Two Pointer |
+| 26 | Kth Node from End          | Custom       |  🟢   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Gap         |
+| 27 | Remove Nth Node From End   | Leetcode 19  |  🟢   |   ⭐⭐⭐⭐    |   ☑️   | ⬜  | ⬜  | ⬜  | Gap         |
+| 28 | Middle of Linked List      | LeetCode 876 |  🟢   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Slow/Fast   |
+| 29 | First Middle Node          | Custom       |  🟡   |    ⭐⭐⭐    |   ☑️   | ⬜  | ⬜  | ⬜  | Slow/Fast   |
+| 30 | Second Middle Node         | Custom       |  🟡   |    ⭐⭐⭐    |   ☑️   | ⬜  | ⬜  | ⬜  | Slow/Fast   |
+| 31 | Split List into Two Halves | GFG          |  🟡   |   ⭐⭐⭐⭐    |   ☑️   | ⬜  | ⬜  | ⬜  | Slow/Fast   |
+| 32 | Nth Node from End          | GFG          |  🟡   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Gap         |
+| 33 | Remove Nth Node From End   | LeetCode 19  |  🟡   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Gap + Dummy |
+| 34 | Kth Node from End One Pass | Custom       |  🟡   |   ⭐⭐⭐⭐    |   ☑️   | ⬜  | ⬜  | ⬜  | Gap         |
+| 35 | Kth Node from Beginning    | Custom       |  🟢   |    ⭐⭐⭐    |   ☑️   | ⬜  | ⬜  | ⬜  | Position    |
 
 ---
 
@@ -338,12 +345,12 @@ Think:
 
 ## Problems
 
-| # | Problem | Platform | Diff. | Interview | Status | R1 | R2 | R3 | Pattern |
-|---:|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-| 47 | Reverse Linked List | LeetCode 206 | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Reverse |
-| 48 | Reverse Linked List Recursively | GFG | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Reverse + Recursion |
-| 49 | Reverse Linked List II | LeetCode 92 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Partial |
-| 50 | Reverse First K Nodes | Custom | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Segment |
+|  # | Problem                         | Platform     | Diff. | Interview | Status | R1 | R2 | R3 | Pattern             |
+|---:|---------------------------------|--------------|:-----:|:---------:|:------:|:--:|:--:|:--:|---------------------|
+| 36 | Reverse Linked List             | LeetCode 206 |  🟢   |   ⭐⭐⭐⭐⭐   |  ☑️     | ⬜  | ⬜  | ⬜  | Reverse             |
+| 37 | Reverse Linked List Recursively | GFG          |  🟡   |   ⭐⭐⭐⭐⭐   |  ☑️    | ⬜  | ⬜  | ⬜  | Reverse + Recursion |
+| 38 | Reverse Linked List II          | LeetCode 92  |  🟡   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Partial             |
+| 39 | Reverse First K Nodes           | Custom       |  🟡   |   ⭐⭐⭐⭐    |   ☑️     | ⬜  | ⬜  | ⬜  | Segment             |
 
 ---
 
@@ -374,12 +381,12 @@ detect
 
 ## Problems
 
-| # | Problem | Platform | Diff. | Interview | Status | R1 | R2 | R3 | Pattern |
-|---:|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-| 51 | Linked List Cycle | LeetCode 141 | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Floyd |
-| 52 | Detect Loop in Linked List | GFG | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Floyd |
-| 53 | Count Nodes in Loop | GFG | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Floyd |
-| 54 | Remove Loop | GFG | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Floyd |
+|  # | Problem                    | Platform     | Diff. | Interview | Status | R1 | R2 | R3 | Pattern |
+|---:|----------------------------|--------------|:-----:|:---------:|:------:|:--:|:--:|:--:|---------|
+| 40 | Linked List Cycle          | LeetCode 141 |  🟢   |   ⭐⭐⭐⭐⭐   |    ☑️     | ⬜  | ⬜  | ⬜  | Floyd   |
+| 41 | Detect Loop in Linked List | GFG          |  🟡   |   ⭐⭐⭐⭐⭐   |    ☑️    | ⬜  | ⬜  | ⬜  | Floyd   |
+| 42 | Count Nodes in Loop        | GFG          |  🟡   |   ⭐⭐⭐⭐    |   ☑️     | ⬜  | ⬜  | ⬜  | Floyd   |
+| 43 | Remove Loop                | GFG          |  🟡   |   ⭐⭐⭐⭐    |   ☑️    | ⬜  | ⬜  | ⬜  | Floyd   |
 
 ---
 
@@ -424,19 +431,16 @@ middle
 
 ## Problems
 
-| # | Problem | Platform | Diff. | Interview | Status | R1 | R2 | R3 | Pattern |
-|---:|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-| 55 | Merge Two Sorted Lists | LeetCode 21 | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Dummy |
-| 56 | Intersection of Two Lists | LeetCode 160 | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Sync |
-| 57 | Merge Two Sorted Lists | GFG | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Merge |
-| 58 | Y-Shaped List Intersection | GFG | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Sync |
-| 59 | Palindrome Linked List | LeetCode 234 | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Middle + Reverse |
-| 60 | Remove Nth Node — Integration | LeetCode 19 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Gap + Dummy |
-| 61 | Swap Nodes in Pairs | LeetCode 24 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Rewire |
-| 62 | Odd Even Linked List | LeetCode 328 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Rewire |
-| 63 | Rotate List | LeetCode 61 | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Length + Rewire |
-| 64 | Reorder List | LeetCode 143 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Middle + Reverse + Merge |
-| 65 | Add Two Numbers | LeetCode 2 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Dummy + Carry |
+|  # | Problem                    | Platform     | Diff. | Interview | Status | R1 | R2 | R3 | Pattern                  |
+|---:|----------------------------|--------------|:-----:|:---------:|:------:|:--:|:--:|:--:|--------------------------|
+| 44 | Intersection of Two Lists  | LeetCode 160 |  🟢   |   ⭐⭐⭐⭐⭐   |    ☑️    | ⬜  | ⬜  | ⬜  | Sync                     |
+| 45 | Y-Shaped List Intersection | GFG          |  🟡   |   ⭐⭐⭐⭐⭐   |   ☑️   | ⬜  | ⬜  | ⬜  | Sync                     |
+| 46 | Palindrome Linked List     | LeetCode 234 |  🟢   |   ⭐⭐⭐⭐⭐   |   ☑️    | ⬜  | ⬜  | ⬜  | Middle + Reverse         |
+| 47 | Swap Nodes in Pairs        | LeetCode 24  |  🟡   |   ⭐⭐⭐⭐⭐   |   ☑️    | ⬜  | ⬜  | ⬜  | Rewire                   |
+| 48 | Odd Even Linked List       | LeetCode 328 |  🟡   |   ⭐⭐⭐⭐⭐   |   ☑️    | ⬜  | ⬜  | ⬜  | Rewire                   |
+| 49 | Rotate List                | LeetCode 61  |  🟡   |   ⭐⭐⭐⭐    |   ☑️    | ⬜  | ⬜  | ⬜  | Length + Rewire          |
+| 50 | Reorder List               | LeetCode 143 |  🟡   |   ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | Middle + Reverse + Merge |
+| 51 | Add Two Numbers            | LeetCode 2   |  🟡   |   ⭐⭐⭐⭐⭐   |   ☑️    | ⬜  | ⬜  | ⬜  | Dummy + Carry            |
 
 ---
 
@@ -620,7 +624,7 @@ INTERVIEW INTEGRATION
 ☑ Add Two Numbers
 ```
 
-> **Part 1 = 65 problems.**
+> **Part 1 = 62 problems.**
 > After this, do not restart the basic Linked List material.
 
 ---
@@ -644,4 +648,5 @@ Cycle Entry / Cycle Math
 → Cache
 → Advanced Integration
 ```
+
 

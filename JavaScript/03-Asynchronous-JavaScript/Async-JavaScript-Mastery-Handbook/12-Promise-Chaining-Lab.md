@@ -1,163 +1,78 @@
-# 12 — Promise Chaining Hands-On Lab
+# 12 — Promise Chaining Lab
 
 **Folder:** `03-Asynchronous-JavaScript`
 
-> **Rule:** Predict → Write → Run → Observe → Explain.
-
-The main skill:
-
-```text
-What enters this then?
-        ↓
-What do I need next?
-        ↓
-What should I return?
-```
+> Short revision + completed solutions. No repeated theory.
 
 ---
 
-## Lab 1 — Three-Step Chain
-
-Build:
+## Lab 1 — Value Chain
 
 ```text
-2
-↓
-+2
-↓
-×3
-↓
-print
+2 → +2 → ×3 → print
 ```
-
-Scaffold:
 
 ```js
 Promise.resolve(2)
-    .then(value => {
-        // return value + 2
-    })
-    .then(value => {
-        // return value * 3
-    })
-    .then(value => {
-        console.log(value);
-    });
+    .then(value => value + 2)
+    .then(value => value * 3)
+    .then(console.log);
 ```
+
+**Key:** Returned value → next `.then()`.
 
 ---
 
-## Lab 2 — Track Every Step
+## Lab 2 — Return a Promise
 
-Run:
+```text
+5 → Promise → ×2 → print
+```
 
 ```js
 Promise.resolve(5)
     .then(value => {
-        console.log("Step 1:", value);
-        return value + 5;
+        return Promise.resolve(value * 2);
     })
-    .then(value => {
-        console.log("Step 2:", value);
-        return value * 2;
-    })
-    .then(value => {
-        console.log("Step 3:", value);
-    });
+    .then(console.log);
 ```
 
-Predict every value before running.
+**Key:** Return the Promise when the next step must wait.
 
 ---
 
-## Lab 3 — Missing Return
+## Lab 3 — Missing `return`
 
-Find the bug:
+### Problem
 
 ```js
 Promise.resolve(5)
     .then(value => {
         Promise.resolve(value * 2);
     })
+    .then(console.log);
+```
+
+### Fixed
+
+```js
+Promise.resolve(5)
     .then(value => {
-        console.log(value);
-    });
-```
-
-Questions:
-
-```text
-What does the first then return?
-What reaches the second then?
-```
-
-Fix it.
-
----
-
-## Lab 4 — Return a Promise With Timer
-
-Build:
-
-```text
-5
- ↓
-then
- ↓
-wait 1 second
- ↓
-multiply by 2
- ↓
-next then
- ↓
-print
-```
-
-Try it yourself using:
-
-```js
-return new Promise(...)
-```
-
----
-
-## Lab 5 — Nested to Flat
-
-Convert this:
-
-```js
-Promise.resolve("Login")
-    .then(loginResult => {
-        return Promise.resolve("Profile")
-            .then(profileResult => {
-                return Promise.resolve("Orders");
-            });
+        return Promise.resolve(value * 2);
     })
-    .then(result => {
-        console.log(result);
-    });
+    .then(console.log);
 ```
 
-into a flat chain:
-
-```text
-Login
- ↓
-Profile
- ↓
-Orders
-```
+**Key:** No `return` → next `.then()` gets `undefined`.
 
 ---
 
-## Lab 6 — Error Propagation
-
-Predict:
+## Lab 4 — Error Propagation
 
 ```js
-Promise.resolve("A")
-    .then(value => {
-        console.log(value);
+Promise.resolve()
+    .then(() => {
+        console.log("A");
         throw new Error("Failed");
     })
     .then(() => {
@@ -168,322 +83,187 @@ Promise.resolve("A")
     });
 ```
 
-Questions:
+Output:
 
 ```text
-Does B print?
-Why?
-Which handler receives the error?
+A
+Failed
 ```
 
-Then run it.
+**Key:** Rejection skips fulfillment handlers until `catch()`.
 
 ---
 
-## Lab 7 — Recover From Error
+## Lab 5 — Error Recovery
 
-Build:
-
-```text
-Promise
- ↓
-throw error
- ↓
-catch
- ↓
-return fallback value
- ↓
-next then
+```js
+Promise.reject(new Error("Failed"))
+    .catch(error => {
+        console.log(error.message);
+        return "Recovered";
+    })
+    .then(console.log);
 ```
 
-Target:
+Output:
 
 ```text
+Failed
 Recovered
 ```
 
-Important idea:
-
-```text
-catch()
-→ can recover by returning a value
-```
+**Key:** `catch()` can return a value and continue the chain.
 
 ---
 
-## Lab 8 — Fetch Chaining
-
-Build:
+## Lab 6 — Fetch Chain
 
 ```text
-GET /users
-    ↓
-parse JSON
-    ↓
-take first user's id
-    ↓
-GET /users/{id}
-    ↓
-parse JSON
-    ↓
-print user
+GET users
+→ JSON
+→ first id
+→ GET user
+→ JSON
+→ print
 ```
-
-Start:
 
 ```js
 fetch("https://jsonplaceholder.typicode.com/users")
-    .then(response => {
-        // return response.json()
-    })
+    .then(response => response.json())
     .then(users => {
-        // return second fetch
+        return fetch(
+            `https://jsonplaceholder.typicode.com/users/${users[0].id}`
+        );
     })
-    .then(response => {
-        // return response.json()
-    })
-    .then(user => {
-        // print
-    })
-    .catch(error => {
-        console.log(error);
-    });
+    .then(response => response.json())
+    .then(user => console.log(user))
+    .catch(error => console.log(error.message));
 ```
 
-Build each stage independently.
+**Key:** Return the second Fetch Promise because it depends on the first result.
 
 ---
 
-## Lab 9 — Promise + Functional JavaScript
-
-Create a Promise resolving to request objects.
-
-Then:
-
-```text
-filter failed requests
- ↓
-map request IDs
- ↓
-print IDs
-```
-
-Use your Folder 02 knowledge:
-
-```text
-filter()
-map()
-```
-
----
-
-## Lab 10 — Promise + Reduce
-
-Build:
-
-```text
-Promise
- ↓
-filter status >= 400
- ↓
-reduce response times
- ↓
-print total
-```
-
-Think:
-
-```text
-Promise result
- ↓
-array
- ↓
-filter
- ↓
-array
- ↓
-reduce
- ↓
-number
-```
-
----
-
-## Lab 11 — DevAPI Sequential Flow
-
-Simulate:
-
-```text
-Request received
- ↓
-Validate request
- ↓
-Process request
- ↓
-Generate analytics
- ↓
-Finish
-```
-
-Make each stage return a Promise.
-
-Target pattern:
+## Lab 7 — Promise + `filter()` + `map()`
 
 ```js
-validateRequest()
-    .then(processRequest)
-    .then(generateAnalytics)
-    .then(result => {
-        console.log(result);
-    })
-    .catch(error => {
-        console.log(error.message);
-    });
+const requests = [
+    { id: 1, status: 200, resTime: 100 },
+    { id: 2, status: 500, resTime: 300 },
+    { id: 3, status: 404, resTime: 200 }
+];
+
+Promise.resolve(requests)
+    .then(requests =>
+        requests.filter(request => request.status >= 400)
+    )
+    .then(failed =>
+        failed.map(request => request.id)
+    )
+    .then(console.log);
 ```
 
-Create the functions yourself.
-
----
-
-## Lab 12 — Debug the Chain
-
-Find the problem:
-
-```js
-Promise.resolve([1, 2, 3, 4])
-    .then(numbers => {
-        numbers.filter(num => num > 2);
-    })
-    .then(numbers => {
-        console.log(numbers);
-    });
-```
-
-Ask:
-
-```text
-What does filter return?
-Was it returned?
-What reaches the next then?
-```
-
-Fix it.
-
----
-
-## Lab 13 — Error in the Middle
-
-Build:
-
-```text
-Step 1 → success
-Step 2 → throws
-Step 3 → should skip
-catch → handles error
-```
-
-Verify that Step 3 does not execute.
-
----
-
-## Lab 14 — Independent Challenge
-
-Create:
-
-```text
-Promise resolves with:
-[
-  { id: 1, status: 200, resTime: 100 },
-  { id: 2, status: 500, resTime: 300 },
-  { id: 3, status: 404, resTime: 200 }
-]
-```
-
-Then:
-
-```text
-Promise
- ↓
-filter failures
- ↓
-map IDs
- ↓
-print
-```
-
-Expected:
+Output:
 
 ```text
 [2, 3]
 ```
 
----
-
-## Lab 15 — Independent DevAPI Analytics
-
-Without copying:
-
-```text
-Promise
- ↓
-resolve request array
- ↓
-filter status >= 400
- ↓
-reduce total response time
- ↓
-print total
-```
-
-You should independently choose:
-
-```text
-filter()
-reduce()
-```
+**Key:** Each `.then()` returns the data needed by the next stage.
 
 ---
 
-## Lab 16 — Final Mastery Test
+## Lab 8 — Promise + `filter()` + `reduce()`
 
-Build this without notes:
-
-```text
-1. Simulate an async request with Promise.
-2. Wait 1 second.
-3. Resolve an array of request objects.
-4. Filter failed requests.
-5. Map their IDs.
-6. Print IDs.
-7. Throw an error when a condition fails.
-8. Catch the error.
-9. Finally print "Finished".
+```js
+Promise.resolve(requests)
+    .then(requests =>
+        requests.filter(request => request.status >= 400)
+    )
+    .then(failed =>
+        failed.reduce(
+            (total, request) => total + request.resTime,
+            0
+        )
+    )
+    .then(console.log);
 ```
 
-Required:
+Output:
 
 ```text
-Promise
-setTimeout
-then
-return
-filter
-map
-throw
-catch
-finally
+500
 ```
+
+**Key:** Your Folder 02 methods work directly on Promise results.
 
 ---
 
-# Logic-Building Framework
+## Lab 9 — DevAPI Sequential Flow
 
-For every `.then()`:
+```text
+validate → process → analytics
+```
+
+```js
+function validate(request) {
+    return Promise.resolve(request);
+}
+
+function process(request) {
+    return Promise.resolve(request);
+}
+
+function analytics(request) {
+    return Promise.resolve({
+        id: request.id,
+        status: request.status
+    });
+}
+
+validate({ id: 101, status: 200 })
+    .then(process)
+    .then(analytics)
+    .then(console.log)
+    .catch(error => console.log(error.message));
+```
+
+**Key:** Each stage returns a Promise.
+
+---
+
+## Lab 10 — Promise + Timer
+
+```js
+Promise.resolve("Start")
+    .then(value => {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve(value + " → Done");
+            }, 1000);
+        });
+    })
+    .then(console.log);
+```
+
+Output after about 1 second:
+
+```text
+Start → Done
+```
+
+**Key:** Returning the delayed Promise keeps the chain sequential.
+
+---
+
+# Final Logic Pattern
 
 ```text
 What do I receive?
         ↓
-What do I need next?
+What do I need?
+        ↓
+What operation produces it?
         ↓
 What should I return?
 ```
@@ -491,70 +271,30 @@ What should I return?
 Examples:
 
 ```text
-Receive users
- ↓
-Need user IDs
- ↓
-map()
- ↓
-return IDs
-```
+requests → failed → filter()
 
-```text
-Receive requests
- ↓
-Need failures
- ↓
-filter()
- ↓
-return failed requests
-```
+failed → IDs → map()
 
-```text
-Receive failures
- ↓
-Need total time
- ↓
-reduce()
- ↓
-return total
+failed → total time → reduce()
+
+async next step → return Promise
 ```
 
 ---
 
-# Debugging Framework
+# Completion
 
-When a chain fails:
+- [x] Value chain
+- [x] Return Promise
+- [x] Missing return
+- [x] Error propagation
+- [x] Error recovery
+- [x] Fetch chaining
+- [x] Promise + filter/map
+- [x] Promise + filter/reduce
+- [x] DevAPI flow
+- [x] Promise + timer
 
-```text
-1. What enters this then?
-2. What does this then return?
-3. Is the return value correct?
-4. Is it a Promise?
-5. Which then receives it?
-6. Where would an error go?
-```
+**Promise Chaining Lab — COMPLETE ✅**
 
-During debugging, expand the chain and log intermediate values.
-
----
-
-# Completion Checklist
-
-- [ ] Three-step value chain
-- [ ] Value propagation
-- [ ] Missing return
-- [ ] Return a Promise
-- [ ] Promise with timer
-- [ ] Nested → flat chain
-- [ ] Error propagation
-- [ ] Error recovery
-- [ ] Fetch chaining
-- [ ] Promise + filter/map
-- [ ] Promise + filter/reduce
-- [ ] DevAPI sequential flow
-- [ ] Debug missing return
-- [ ] Independent final challenge
-- [ ] Final mastery test
-
-**Next:** `13-Async-Await.md`
+**Next:** `13-Async-Await-Lab.md`
