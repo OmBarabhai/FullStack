@@ -7,6 +7,11 @@
 >
 > **Part 1 = 50 problems.**
 
+> **Current solved update — September 10, 2026:** ☑️ items are problems evidenced in the user's recent coding activity.
+>
+> First continue with **unsolved problems in the exact pattern order below**. Do not reshuffle based on difficulty alone.
+
+
 ---
 
 # 1. Revision
@@ -141,7 +146,7 @@ Think:
 | # | Problem | Platform | Difficulty | Interview | Status | R1 | R2 | R3 | Pattern |
 |---:|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
 | 01 | Design Stack Using Array | Custom | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Array |
-| 02 | Design Stack Using Linked List | Custom | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Linked |
+| 02 | Design Stack Using Linked List | Custom | 🟢 | ⭐⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Linked |
 | 03 | Push Operation | Custom | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Push |
 | 04 | Pop Operation | Custom | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Pop |
 | 05 | Peek / Top Operation | Custom | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Peek |
@@ -283,7 +288,7 @@ Think:
 
 | # | Problem | Platform | Difficulty | Interview | Status | R1 | R2 | R3 | Pattern |
 |---:|---|---|:---:|:---:|:---:|---:|:---:|:---:|---|
-| 19 | Valid Parentheses | LeetCode 20 | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Matching |
+| 19 | Valid Parentheses | LeetCode 20 | 🟢 | ⭐⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Matching |
 | 20 | Balanced Parentheses | GFG | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Matching |
 | 21 | Redundant / Duplicate Brackets | GFG | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Expression |
 | 22 | Minimum Add to Make Parentheses Valid | LeetCode 921 | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Balance |
@@ -391,13 +396,13 @@ recent unresolved element
 | # | Problem | Platform | Difficulty | Interview | Status | R1 | R2 | R3 | Pattern |
 |---:|---|---|:---:|:---:|:---:|---:|---:|:---:|---|
 | 37 | Backspace String Compare | LeetCode 844 | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Simulation |
-| 38 | Remove All Adjacent Duplicates in String | LeetCode 1047 | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Elimination |
+| 38 | Remove All Adjacent Duplicates in String | LeetCode 1047 | 🟢 | ⭐⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Elimination |
 | 39 | Remove All Adjacent Duplicates II | LeetCode 1209 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Counting Stack |
-| 40 | Asteroid Collision | LeetCode 735 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Simulation |
+| 40 | Asteroid Collision | LeetCode 735 | 🟡 | ⭐⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Simulation |
 | 41 | Simplify Path | LeetCode 71 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Path Stack |
 | 42 | Decode String | LeetCode 394 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Nested State |
 | 43 | Evaluate Reverse Polish Notation | LeetCode 150 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Value Stack |
-| 44 | Baseball Game | LeetCode 682 | 🟢 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Simulation |
+| 44 | Baseball Game | LeetCode 682 | 🟢 | ⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Simulation |
 | 45 | Make The String Great | LeetCode 1544 | 🟢 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Elimination |
 | 46 | Removing Stars From a String | LeetCode 2390 | 🟢 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Undo |
 
