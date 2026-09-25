@@ -107,11 +107,25 @@
 //   );
 // }
 // export default App;
+import { fruits, phones} from "./components/productList";
+// import { ProductCard } from "./components/ProductCard";
+export function ProductCard(productList, productHeading) {
+  <ol>
+    {
+      productList.map(({ sr, phones, price }) => {
+        <li>{sr}</li>,
+        <li>{phones}</li>,
+        <li>{price}</li>
+      })
+  }
+  </ol>
+}
 
 function App() {
   return (
     <>
-      
+      <ProductCard productList={fruits} heading={"fruits"} />
+      <ProductCard productList={phones} heading = {"phones"}/>
     </>
 )
  }

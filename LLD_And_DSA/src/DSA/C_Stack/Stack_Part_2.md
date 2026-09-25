@@ -1,513 +1,826 @@
-# C — Stack — Part 2
-## Monotonic Stack • Histogram • Matrix • Greedy Stack • Advanced Design • Hard Interview Problems
+# C — Stack — Part 2 MASTER TRACKER
+## Monotonic Stack • Histogram • Matrix • Greedy Stack • Advanced Simulation • Stack Design • Contribution
 
-> **Goal:** Master the advanced Stack patterns that repeatedly appear in interviews.
+> **Goal:** Finish Stack at an interview-ready level by mastering reusable templates, not isolated solutions.
 >
-> Part 2 assumes Part 1 is complete.
+> **This file is the single Part 2 tracker.**
 >
-> **Part 2 = 60 problems.**
+> ```text
+> NGE / NSE
+> ↓
+> PGE / PSE
+> ↓
+> Monotonic Stack Template
+> ↓
+> Span / Distance / Visibility
+> ↓
+> Histogram Boundary Template
+> ↓
+> Matrix → Histogram
+> ↓
+> Greedy Monotonic Stack
+> ↓
+> Advanced Stack Simulation
+> ↓
+> Stack Design
+> ↓
+> Contribution / Subarray Template
+> ↓
+> Hard Integration
+> ```
 
----
-
-# 1. Revision
+# 1. Revision System
 
 | Mark | When | What to do |
 |---|---|---|
-| R0 | Same day | Close notes → explain invariant + dry run |
-| R1 | 2–3 days | Rebuild the state from memory |
+| R0 | Same day | Close solution → explain invariant + dry run |
+| R1 | 2–3 days | Rebuild the template from memory |
 | R2 | ~7 days | Solve / trace without notes |
 | R3 | ~30 days | Quick recall; retry only if weak |
 
----
+`⬜` Not Started · `🟨` In Progress · `☑️` Problem Solved · `🔄` Needs Revision
 
-# 2. Part 2 Pattern Map
+`🟢` Strong · `🟡` Medium · `🔴` Weak / unclear
+
+> **Important:** A problem can be solved but the pattern can still be unmastered. Track them separately.
+
+# 2. Part 2 Master Rule
+
+For every problem, first write:
 
 ```text
-A — Monotonic Stack
-    next greater
-    next smaller
-    previous greater
-    previous smaller
-    span
-
-B — Boundary / Histogram
-    nearest smaller
-    left boundary
-    right boundary
-    largest rectangle
-
-C — Matrix + Stack
-    histogram rows
-    maximal rectangle
-    binary matrix
-
-D — Greedy Stack
-    remove digits
-    lexicographic minimization
-    most competitive subsequence
-
-E — Advanced Expression / Simulation
-    longest valid parentheses
-    calculator
-    nested state
-
-F — Special Stack Design
-    min stack
-    max stack
-    N stacks
-    constant-time extra operations
-
-G — Hard Integration
-    subarray minimums
-    subarray ranges
-    constrained stack problems
+1. What does the answer represent?
+2. What does the stack store?
+3. Which direction do I scan?
+4. What makes the top useless?
+5. What does the stack top mean?
+6. When do I pop?
+7. When do I push?
+8. What do I return when the stack is empty?
 ```
 
----
+Never start by copying a template.
 
-# 3. Pattern A — Monotonic Stack ⭐
-
-## Purpose
-
-Solve problems asking for the nearest element that is greater or smaller.
+# 3. Pattern A — Monotonic Stack CORE ⭐⭐⭐⭐⭐
 
 ## Recognition
 
 ```text
-Next Greater
-Next Smaller
-Previous Greater
-Previous Smaller
-Nearest Greater
-Nearest Smaller
-Span
+nearest greater
+nearest smaller
+next greater
+next smaller
+previous greater
+previous smaller
+first greater
+first smaller
 ```
 
-↓
+→ **Monotonic Stack**
 
-Think:
+## Canonical comparison table
 
-> **MONOTONIC STACK**
+| Problem | Direction | Stack keeps | Remove while |
+|---|---|---|---|
+| Next Greater | Right → Left | decreasing candidates | `top <= current` |
+| Next Smaller | Right → Left | increasing candidates | `top >= current` |
+| Previous Greater | Left → Right | decreasing candidates | `top <= current` |
+| Previous Smaller | Left → Right | increasing candidates | `top >= current` |
 
-## Core pattern
+## Master distinction
 
 ```text
-for each current element:
+st.push(i)
+→ stack stores INDEX
 
-    while stack is not empty
-    AND current makes stack.top() useless:
-        pop
-
-    answer for popped item = current
-    push current
+st.push(arr[i])
+→ stack stores VALUE
 ```
 
-The exact comparison determines whether the stack is increasing or decreasing.
+If stack stores indexes:
+
+```text
+st.peek()       → index
+arr[st.peek()]  → value
+```
+
+Before coding, identify whether the answer wants:
+
+```text
+VALUE
+INDEX
+DISTANCE
+COUNT
+BOUNDARY
+```
 
 ## Problems
 
-| # | Problem | Platform | Difficulty | Interview | Status | R1 | R2 | R3 | Pattern |
-|---:|---|---|:---:|:---:|:---:|---:|---:|:---:|---|
-| 51 | Next Greater Element I | LeetCode 496 | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | NGE |
-| 52 | Next Greater Element II | LeetCode 503 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Circular NGE |
-| 53 | Next Smaller Element | GFG | 🟢 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | NSE |
-| 54 | Previous Greater Element | GFG/Custom | 🟢 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | PGE |
-| 55 | Previous Smaller Element | GFG/Custom | 🟢 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | PSE |
-| 56 | Nearest Greater to Left | GFG | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | PGE |
-| 57 | Nearest Smaller to Left | GFG | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | PSE |
-| 58 | Nearest Greater to Right | GFG | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | NGE |
-| 59 | Nearest Smaller to Right | GFG | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | NSE |
-| 60 | Daily Temperatures | LeetCode 739 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | NGE |
-| 61 | Stock Span | GFG | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | PGE |
-| 62 | Online Stock Span | LeetCode 901 | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Span |
+| # | Problem | Platform | Difficulty | Pattern | Status | R1 | R2 | R3 |
+|---:|---|---|:---:|---|:---:|:---:|:---:|:---:|
+| 01 | Next Greater Element I | LeetCode 496 | 🟢 | NGE | ☑️ | ⬜ | ⬜ | ⬜ |
+| 02 | Next Greater Element II | LeetCode 503 | 🟡 | Circular NGE | ☑️ | ⬜ | ⬜ | ⬜ |
+| 03 | Next Smaller Element | Coding Ninjas / GFG | 🟢 | NSE | ☑️ | ⬜ | ⬜ | ⬜ |
+| 04 | Previous Greater Element | GFG / Interview | 🟢 | PGE | ⬜ | ⬜ | ⬜ | ⬜ |
+| 05 | Previous Smaller Element | GFG / Interview | 🟢 | PSE | ⬜ | ⬜ | ⬜ | ⬜ |
+| 06 | Nearest Greater to Left | GFG | 🟡 | PGE | ⬜ | ⬜ | ⬜ | ⬜ |
+| 07 | Nearest Smaller to Left | GFG | 🟡 | PSE | ⬜ | ⬜ | ⬜ | ⬜ |
+| 08 | Nearest Greater to Right | GFG | 🟡 | NGE | ⬜ | ⬜ | ⬜ | ⬜ |
+| 09 | Nearest Smaller to Right | GFG | 🟡 | NSE | ⬜ | ⬜ | ⬜ | ⬜ |
+| 10 | Daily Temperatures | LeetCode 739 | 🟡 | NGE + Distance | ☑️ | ⬜ | ⬜ | ⬜ |
+| 11 | Stock Span | GFG | 🟡 | PGE + Span | ☑️ | ⬜ | ⬜ | ⬜ |
+| 12 | Online Stock Span | LeetCode 901 | 🟡 | Span | ☑️ | ⬜ | ⬜ | ⬜ |
+| 13 | Number of Visible People in a Queue | LeetCode 1944 | 🟡 | Decreasing Stack | ☑️ | ⬜ | ⬜ | ⬜ |
+| 14 | Next Greater Node in Linked List | LeetCode 1019 | 🟡 | NGE + Linked List | ⬜ | ⬜ | ⬜ | ⬜ |
 
-### Pattern memory
+> **Checkpoint:** NGE, NSE, PGE and PSE should each be reproducible from memory.
 
-```text
-“nearest greater/smaller”
-→ monotonic stack
-```
-
----
-
-# 4. Pattern B — Boundary / Histogram ⭐
+# 4. Pattern B — Circular Monotonic Stack
 
 ## Core idea
 
-For every bar:
-
 ```text
-left smaller
-+
-right smaller
+array wraps around
+↓
+simulate two passes
+↓
+index = i % n
 ```
 
-Then calculate:
+Typical structure:
+
+```java
+for (int i = 2 * n - 1; i >= 0; i--) {
+    int idx = i % n;
+}
+```
+
+## Problems
+
+| # | Problem | Platform | Difficulty | Pattern | Status | R1 | R2 | R3 |
+|---:|---|---|:---:|---|:---:|:---:|:---:|:---:|
+| 15 | Next Greater Element II | LeetCode 503 | 🟡 | Circular NGE | ☑️ | ⬜ | ⬜ | ⬜ |
+| 16 | Circular Next Smaller Element | GFG / Custom | 🟡 | Circular NSE | ⬜ | ⬜ | ⬜ | ⬜ |
+| 17 | Circular Previous Greater | Custom | 🟡 | Circular PGE | ⬜ | ⬜ | ⬜ | ⬜ |
+| 18 | Circular Previous Smaller | Custom | 🟡 | Circular PSE | ⬜ | ⬜ | ⬜ | ⬜ |
+
+# 5. Pattern C — Histogram Boundary Template ⭐⭐⭐⭐⭐
+
+For each bar:
 
 ```text
-width = right - left - 1
+PSE → left boundary
+NSE → right boundary
+```
+
+Your easier-to-understand version:
+
+```text
+start = PSE + 1
+end   = NSE - 1
+
+width = end - start + 1
 
 area = height × width
 ```
 
-## Recognition
+Equivalent:
 
 ```text
-histogram
-largest rectangle
-maximum area
-rectangle using consecutive elements
+width = NSE - PSE - 1
 ```
 
-↓
+Why:
 
-Think:
-
-> **Nearest Smaller + Width**
+```text
+PSE / NSE themselves are smaller boundary bars.
+Only positions BETWEEN them are usable.
+```
 
 ## Problems
 
-| # | Problem | Platform | Difficulty | Interview | Status | R1 | R2 | R3 | Pattern |
-|---:|---|---|:---:|:---:|:---:|---:|---:|---:|---|
-| 63 | Largest Rectangle in Histogram | LeetCode 84 | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Histogram |
-| 64 | Largest Rectangle in Histogram — Two Pass | GFG | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Boundaries |
-| 65 | Largest Rectangle — One Pass Stack | Interview | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | One Pass |
-| 66 | Largest Rectangle With Equal Heights | Custom | 🟡 | ⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Histogram |
-| 67 | Maximum Rectangle Area From Bars | Custom | 🟡 | ⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Histogram |
-| 68 | Sum of Subarray Minimums | LeetCode 907 | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Boundaries |
-| 69 | Sum of Subarray Ranges | LeetCode 2104 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Min/Max |
-| 70 | Find the Sum of Subarray Minimums — Contribution | Interview | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Contribution |
-| 71 | Maximum Width Ramp | LeetCode 962 | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Decreasing Stack |
-| 72 | Remove Nodes From Linked List | LeetCode 2487 | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Monotonic |
+| # | Problem | Platform | Difficulty | Pattern | Status | R1 | R2 | R3 |
+|---:|---|---|:---:|---|:---:|:---:|:---:|:---:|
+| 19 | Largest Rectangle in Histogram | LeetCode 84 | 🔴 | PSE + NSE + Width | ☑️ | ⬜ | ⬜ | ⬜ |
+| 20 | Largest Rectangle — Two Pass | GFG | 🔴 | Same Boundary Template | ⬜ | ⬜ | ⬜ | ⬜ |
+| 21 | Largest Rectangle — One Pass Stack | Interview | 🔴 | One-Pass Boundary | ⬜ | ⬜ | ⬜ | ⬜ |
+| 22 | Largest Rectangle With Equal Heights | Controlled Practice | 🟡 | Histogram | ⬜ | ⬜ | ⬜ | ⬜ |
+| 23 | Largest Rectangle With Zeros | Controlled Practice | 🟡 | Boundary Reset | ⬜ | ⬜ | ⬜ | ⬜ |
+| 24 | Sum of Subarray Minimums | LeetCode 907 | 🔴 | Boundary Contribution | ⬜ | ⬜ | ⬜ | ⬜ |
+| 25 | Sum of Subarray Ranges | LeetCode 2104 | 🟡 | Min + Max Contribution | ⬜ | ⬜ | ⬜ | ⬜ |
+| 26 | Valid Subarray Size | LeetCode 2334 | 🔴 | Boundary Width | ⬜ | ⬜ | ⬜ | ⬜ |
+| 27 | Maximum Subarray Min-Product | LeetCode 1856 | 🔴 | Boundary + Prefix Sum | ⬜ | ⬜ | ⬜ | ⬜ |
 
----
-
-# 5. Pattern C — Matrix + Stack
+# 6. Pattern D — Matrix → Histogram → Stack ⭐⭐⭐⭐⭐
 
 ## Core idea
 
-Convert each row of a binary matrix into a histogram.
-
 ```text
-row 1 → heights
-row 2 → update heights
-row 3 → update heights
-...
-```
-
-For each row:
-
-```text
-largest rectangle in histogram
-```
-
-## Recognition
-
-```text
-matrix of 0/1
-largest rectangle
-maximum area
-consecutive ones
-```
-
+char[][] matrix
 ↓
+int[] height
+↓
+each row becomes a histogram
+↓
+Largest Rectangle in Histogram
+```
 
-Think:
+Height update:
 
-> **Matrix → Histogram → Monotonic Stack**
+```java
+if (matrix[row][col] == '1') {
+    height[col]++;
+} else {
+    height[col] = 0;
+}
+```
 
 ## Problems
 
-| # | Problem | Platform | Difficulty | Interview | Status | R1 | R2 | R3 | Pattern |
-|---:|---|---|:---:|:---:|:---:|---:|---:|---:|---|
-| 73 | Maximal Rectangle | LeetCode 85 | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Matrix + Histogram |
-| 74 | Maximum Rectangle of 1s | GFG | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Matrix |
-| 75 | Binary Matrix Largest Rectangle | Custom | 🔴 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Histogram |
-| 76 | Row-wise Histogram Construction | Custom | 🟢 | ⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | State |
-| 77 | Largest Square of 1s | GFG / LeetCode 221 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Comparison |
-| 78 | Largest Plus / Cross of 1s | Interview | 🟡 | ⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Matrix State |
-| 79 | Count All-1 Rectangles | LeetCode 1504 | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Matrix |
-| 80 | Count Submatrices With All Ones | GFG | 🔴 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Histogram |
-| 81 | Maximum Binary Rectangle With Constraints | Interview | 🔴 | ⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Matrix |
-| 82 | Maximal Rectangle — Optimized Row Processing | Custom | 🔴 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Optimization |
+| # | Problem | Platform | Difficulty | Pattern | Status | R1 | R2 | R3 |
+|---:|---|---|:---:|---|:---:|:---:|:---:|:---:|
+| 28 | Maximal Rectangle | LeetCode 85 | 🔴 | Matrix → Histogram | ☑️ | ⬜ | ⬜ | ⬜ |
+| 29 | Maximum Rectangle of 1s | GFG | 🔴 | Matrix Histogram | ⬜ | ⬜ | ⬜ | ⬜ |
+| 30 | Row-wise Histogram Construction | Controlled Practice | 🟢 | Height State | ⬜ | ⬜ | ⬜ | ⬜ |
+| 31 | Maximal Rectangle — Rebuild From Scratch | Interview Practice | 🔴 | Full Integration | ⬜ | ⬜ | ⬜ | ⬜ |
+| 32 | Count Submatrices With All Ones | LeetCode 1504 / GFG | 🟡 | Matrix + Stack | ⬜ | ⬜ | ⬜ | ⬜ |
 
----
+> **Checkpoint:** Write the matrix → height[] → histogram conversion without looking at old code.
 
-# 6. Pattern D — Greedy Stack
+# 7. Pattern E — Stack Simulation / Unresolved State ⭐⭐⭐⭐
 
-## Purpose
-
-Use the stack to keep the best possible prefix while removing elements that make the result worse.
-
-## Recognition
+Recognition:
 
 ```text
-remove K elements
-smallest number
+collision
+nested state
+remove previous
+backspace
+adjacent duplicates
+undo
+most recent unresolved item
+```
+
+Template:
+
+```text
+read current
+↓
+while previous state is invalid / dominated
+    pop
+↓
+resolve current
+↓
+push current
+```
+
+## Problems
+
+| # | Problem | Platform | Difficulty | Pattern | Status | R1 | R2 | R3 |
+|---:|---|---|:---:|---|:---:|:---:|:---:|:---:|
+| 33 | Asteroid Collision | LeetCode 735 | 🟡 | Collision Simulation | ☑️ | ⬜ | ⬜ | ⬜ |
+| 34 | Remove All Adjacent Duplicates | LeetCode 1047 | 🟢 | Elimination | ☑️ | ⬜ | ⬜ | ⬜ |
+| 35 | Remove All Adjacent Duplicates II | LeetCode 1209 | 🟡 | Counting Stack | ⬜ | ⬜ | ⬜ | ⬜ |
+| 36 | Backspace String Compare | LeetCode 844 | 🟢 | Undo Simulation | ⬜ | ⬜ | ⬜ | ⬜ |
+| 37 | Removing Stars From a String | LeetCode 2390 | 🟢 | Undo Simulation | ⬜ | ⬜ | ⬜ | ⬜ |
+| 38 | Simplify Path | LeetCode 71 | 🟡 | Path Stack | ⬜ | ⬜ | ⬜ | ⬜ |
+| 39 | Decode String | LeetCode 394 | 🟡 | Nested State | ⬜ | ⬜ | ⬜ | ⬜ |
+| 40 | Baseball Game | LeetCode 682 | 🟢 | Simulation | ☑️ | ⬜ | ⬜ | ⬜ |
+| 41 | Remove Nodes From Linked List | LeetCode 2487 | 🟡 | Monotonic Stack | ☑️ | ⬜ | ⬜ | ⬜ |
+
+# 8. Pattern F — Expression Stack ⭐⭐⭐⭐
+
+Recognition:
+
+```text
+infix
+prefix
+postfix
+operator precedence
+calculator
+expression evaluation
+```
+
+## Problems
+
+| # | Problem | Platform | Difficulty | Pattern | Status | R1 | R2 | R3 |
+|---:|---|---|:---:|---|:---:|:---:|:---:|:---:|
+| 42 | Evaluate Reverse Polish Notation | LeetCode 150 | 🟡 | Value Stack | ☑️ | ⬜ | ⬜ | ⬜ |
+| 43 | Infix to Postfix | GFG | 🟡 | Operator Stack | ⬜ | ⬜ | ⬜ | ⬜ |
+| 44 | Infix to Prefix | GFG | 🟡 | Operator Stack | ⬜ | ⬜ | ⬜ | ⬜ |
+| 45 | Postfix to Infix | GFG | 🟡 | Conversion | ⬜ | ⬜ | ⬜ | ⬜ |
+| 46 | Prefix to Infix | GFG | 🟡 | Conversion | ⬜ | ⬜ | ⬜ | ⬜ |
+| 47 | Longest Valid Parentheses | LeetCode 32 | 🔴 | Stack + Index | ⬜ | ⬜ | ⬜ | ⬜ |
+| 48 | Basic Calculator | LeetCode 224 | 🔴 | Expression Stack | ⬜ | ⬜ | ⬜ | ⬜ |
+| 49 | Basic Calculator II | LeetCode 227 | 🟡 | Expression Stack | ⬜ | ⬜ | ⬜ | ⬜ |
+| 50 | Verify Preorder Serialization | LeetCode 331 | 🟡 | Stack State | ⬜ | ⬜ | ⬜ | ⬜ |
+
+# 9. Pattern G — Greedy + Monotonic Stack ⭐⭐⭐⭐⭐
+
+Recognition:
+
+```text
+remove K
+make smallest
 lexicographically smallest
-most competitive
+remove worse previous choices
 keep best subsequence
-current element makes previous choice worse
 ```
 
-↓
-
-Think:
-
-> **Greedy + Monotonic Stack**
-
-## Problems
-
-| # | Problem | Platform | Difficulty | Interview | Status | R1 | R2 | R3 | Pattern |
-|---:|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-| 83 | Remove K Digits | LeetCode 402 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Greedy |
-| 84 | Most Competitive Subsequence | LeetCode 1673 | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Greedy |
-| 85 | Create Maximum Number | LeetCode 321 | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Greedy Stack |
-| 86 | Remove Duplicate Letters | LeetCode 316 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Greedy |
-| 87 | Smallest Subsequence of Distinct Characters | LeetCode 1081 | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Greedy |
-| 88 | Final Prices With Special Discount | LeetCode 1475 | 🟢 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Monotonic |
-| 89 | Make Array Zero by Subtracting Equal Amounts | Interview | 🟡 | ⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Stack Insight |
-| 90 | Build Array With Stack Operations | LeetCode 1441 | 🟢 | ⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Simulation |
-| 91 | Build an Array With Permitted Operations | Custom | 🟢 | ⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Simulation |
-| 92 | Stack-Based Lexicographic Selection | Interview | 🟡 | ⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Greedy |
-
-### Pattern memory
+Master rule:
 
 ```text
-current is better than previous
+current is better
 +
-previous can be safely removed
+previous can safely be removed
 → POP
 ```
 
----
+## Problems
 
-# 7. Pattern E — Advanced Expression / Simulation
+| # | Problem | Platform | Difficulty | Pattern | Status | R1 | R2 | R3 |
+|---:|---|---|:---:|---|:---:|:---:|:---:|:---:|
+| 51 | Remove K Digits | LeetCode 402 | 🟡 | Greedy Stack | ⬜ | ⬜ | ⬜ | ⬜ |
+| 52 | Most Competitive Subsequence | LeetCode 1673 | 🟡 | Greedy Monotonic | ⬜ | ⬜ | ⬜ | ⬜ |
+| 53 | Remove Duplicate Letters | LeetCode 316 | 🟡 | Greedy + Frequency | ⬜ | ⬜ | ⬜ | ⬜ |
+| 54 | Smallest Subsequence of Distinct Characters | LeetCode 1081 | 🟡 | Greedy Stack | ⬜ | ⬜ | ⬜ | ⬜ |
+| 55 | Create Maximum Number | LeetCode 321 | 🔴 | Greedy Stack | ⬜ | ⬜ | ⬜ | ⬜ |
+| 56 | Final Prices With a Special Discount | LeetCode 1475 | 🟢 | Monotonic Stack | ⬜ | ⬜ | ⬜ | ⬜ |
+| 57 | Steps to Make Array Non-Decreasing | LeetCode 2289 | 🟡 | Monotonic Stack | ⬜ | ⬜ | ⬜ | ⬜ |
 
-## Recognition
+# 10. Pattern H — Special Stack Design ⭐⭐⭐⭐⭐
+
+Recognition:
 
 ```text
-nested expression
-multiple operators
-most recent unresolved state
-matching + index
-collision / elimination
+Normal Stack
++
+extra operation required in O(1)
+```
+
+→ maintain auxiliary state / invariant.
+
+## Problems
+
+| # | Problem | Platform | Difficulty | Pattern | Status | R1 | R2 | R3 |
+|---:|---|---|:---:|---|:---:|:---:|:---:|:---:|
+| 58 | Min Stack | LeetCode 155 | 🟡 | Auxiliary Minimum | ☑️ | ⬜ | ⬜ | ⬜ |
+| 59 | Min Stack Using One Stack | GFG | 🟡 | Encoding / Invariant | ⬜ | ⬜ | ⬜ | ⬜ |
+| 60 | Two Stacks in One Array | GFG | 🟡 | Shared Storage | ⬜ | ⬜ | ⬜ | ⬜ |
+| 61 | N Stacks in an Array | GFG | 🔴 | Shared Storage | ⬜ | ⬜ | ⬜ | ⬜ |
+| 62 | Max Stack | LeetCode 716 | 🔴 | Design | ⬜ | ⬜ | ⬜ | ⬜ |
+| 63 | Stack With O(1) Middle Element | GFG / Interview | 🔴 | Design | ⬜ | ⬜ | ⬜ | ⬜ |
+
+# 11. Pattern I — Contribution / Subarray ⭐⭐⭐⭐⭐
+
+This is where PSE/NSE becomes more powerful.
+
+Instead of:
+
+```text
+“What is the nearest smaller?”
+```
+
+we ask:
+
+```text
+“How many subarrays use this element
+as the minimum / maximum?”
+```
+
+Core:
+
+```text
+left choices
+×
+right choices
+×
+current value
+```
+
+Typical minimum contribution:
+
+```text
+left choices  = i - PSE[i]
+right choices = NSE[i] - i
+
+contribution =
+left choices × right choices × arr[i]
 ```
 
 ## Problems
 
-| # | Problem | Platform | Difficulty | Interview | Status | R1 | R2 | R3 | Pattern |
-|---:|---|---|:---:|:---:|:---:|---:|:---:|:---:|---|
-| 93 | Longest Valid Parentheses | LeetCode 32 | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Stack Index |
-| 94 | Basic Calculator | LeetCode 224 | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Expression |
-| 95 | Basic Calculator II | LeetCode 227 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Expression |
-| 96 | Basic Calculator III | LeetCode 772 | 🔴 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Nested Expression |
-| 97 | Decode String | LeetCode 394 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Nested Stack |
-| 98 | Asteroid Collision | LeetCode 735 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Simulation |
-| 99 | Verify Preorder Serialization of Binary Tree | LeetCode 331 | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | State |
-| 100 | Remove Invalid Parentheses — Stack Thinking | Interview | 🔴 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Constraint |
+| # | Problem | Platform | Difficulty | Pattern | Status | R1 | R2 | R3 |
+|---:|---|---|:---:|---|:---:|:---:|:---:|:---:|
+| 64 | Sum of Subarray Minimums | LeetCode 907 | 🔴 | Contribution + PSE/NSE | ⬜ | ⬜ | ⬜ | ⬜ |
+| 65 | Sum of Subarray Ranges | LeetCode 2104 | 🟡 | Min + Max Contribution | ⬜ | ⬜ | ⬜ | ⬜ |
+| 66 | Valid Subarray Size | LeetCode 2334 | 🔴 | Boundary Width | ⬜ | ⬜ | ⬜ | ⬜ |
+| 67 | Maximum Subarray Min-Product | LeetCode 1856 | 🔴 | Boundary + Prefix Sum | ⬜ | ⬜ | ⬜ | ⬜ |
+| 68 | Sum of Total Strength of Wizards | LeetCode 2281 | 🔴 | Advanced Contribution | ⬜ | ⬜ | ⬜ | ⬜ |
 
----
+# 12. Pattern J — Hard Monotonic Integration
 
-# 8. Pattern F — Special Stack Design
+| # | Problem | Platform | Difficulty | Pattern | Status | R1 | R2 | R3 |
+|---:|---|---|:---:|---|:---:|:---:|:---:|:---:|
+| 69 | Trapping Rain Water — Stack Approach | LeetCode 42 | 🔴 | Monotonic Stack | ☑️* | ⬜ | ⬜ | ⬜ |
+| 70 | Maximum Width Ramp | LeetCode 962 | 🟡 | Decreasing Stack | ⬜ | ⬜ | ⬜ | ⬜ |
+| 71 | Car Fleet | LeetCode 853 | 🟡 | Monotonic Reasoning | ⬜ | ⬜ | ⬜ | ⬜ |
+| 72 | Number of Visible People in a Queue | LeetCode 1944 | 🟡 | Decreasing Stack | ☑️ | ⬜ | ⬜ | ⬜ |
+| 73 | Valid Subarray Size | LeetCode 2334 | 🔴 | Boundary | ⬜ | ⬜ | ⬜ | ⬜ |
+| 74 | Maximum Subarray Min-Product | LeetCode 1856 | 🔴 | Contribution | ⬜ | ⬜ | ⬜ | ⬜ |
+| 75 | Sum of Total Strength of Wizards | LeetCode 2281 | 🔴 | Advanced Contribution | ⬜ | ⬜ | ⬜ | ⬜ |
 
-## Core idea
+`* Problem is marked solved, but verify/rebuild the Stack approach separately if the accepted solution used another approach.`
 
-Normal stack gives:
+# 13. YOUR CURRENT SOLVED STACK SET
 
-```text
-push
-pop
-top
-```
-
-But the problem asks for another operation in O(1).
-
-Therefore:
+Clearly evidenced from your supplied coding activity / code:
 
 ```text
-store extra state
-→ maintain invariant
+☑️ Implement Stack With Linked List
+☑️ Valid Parentheses
+☑️ Baseball Game
+☑️ Remove All Adjacent Duplicates
+☑️ Asteroid Collision
+
+☑️ Next Greater Element I
+☑️ Next Greater Element II
+☑️ Next Smaller Element
+☑️ Daily Temperatures
+☑️ Stock Span
+☑️ Online Stock Span
+☑️ Number of Visible People in a Queue
+
+☑️ Min Stack
+☑️ Evaluate Reverse Polish Notation
+☑️ Remove Nodes From Linked List
+
+☑️ Trapping Rain Water
+☑️ Largest Rectangle in Histogram
+☑️ Maximal Rectangle
 ```
 
-## Problems
+# 14. Pattern Mastery Status
 
-| # | Problem | Platform | Difficulty | Interview | Status | R1 | R2 | R3 | Pattern |
-|---:|---|---|:---:|:---:|:---:|---:|:---:|:---:|---|
-| 101 | Min Stack | LeetCode 155 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Auxiliary State |
-| 102 | Min Stack Using One Stack | GFG | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Encoding |
-| 103 | Max Stack | LeetCode 716 | 🔴 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Design |
-| 104 | N Stacks in an Array | GFG/Interview | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Shared Storage |
-| 105 | Two Stacks in One Array | GFG | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Shared Storage |
-| 106 | Stack With Get Minimum in O(1) | Interview | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Invariant |
-| 107 | Stack With Get Maximum in O(1) | Interview | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Invariant |
-| 108 | Design Stack With Middle Operation | GFG | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | DLL/Stack |
-| 109 | Delete Middle in O(1) Design | Interview | 🔴 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Design |
-| 110 | Stack With O(1) Middle Element | Interview | 🔴 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Design |
-
-### Pattern memory
+## Template 1 — NGE
 
 ```text
-Question asks:
-"Can I get X in O(1)?"
-
-→ maintain X while pushing/popping
+☑️ solved
+→ revise
 ```
 
----
-
-# 9. Pattern G — Hard Integration
-
-## Problems
-
-| # | Problem | Platform | Difficulty | Interview | Status | R1 | R2 | R3 | Pattern |
-|---:|---|---|:---:|:---:|:---:|---:|:---:|:---:|---|
-| 111 | Sum of Subarray Minimums | LeetCode 907 | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Contribution |
-| 112 | Sum of Subarray Ranges | LeetCode 2104 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Contribution |
-| 113 | Trapping Rain Water | LeetCode 42 | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Stack / Boundary |
-| 114 | Number of Visible People in a Queue | LeetCode 1944 | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Visibility |
-| 115 | Car Fleet | LeetCode 853 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Monotonic Reasoning |
-| 116 | Maximum Width Ramp | LeetCode 962 | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Decreasing Stack |
-| 117 | Valid Subarray Size | LeetCode 2334 | 🔴 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Boundaries |
-| 118 | Maximum Subarray Min-Product | LeetCode 1856 | 🔴 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Monotonic |
-| 119 | Steps to Make Array Non-Decreasing | LeetCode 2289 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Monotonic |
-| 120 | Sum of Total Strength of Wizards | LeetCode 2281 | 🔴 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Advanced Contribution |
-
----
-
-# 10. Part 2 Recognition Sheet
+## Template 2 — NSE
 
 ```text
-nearest greater / smaller
-→ MONOTONIC STACK
+☑️ solved
+→ revise
+```
+
+## Template 3 — PGE
+
+```text
+⬜ not yet explicitly solved
+```
+
+## Template 4 — PSE
+
+```text
+⬜ not yet explicitly solved
+```
+
+Therefore your **next target is PGE**, then **PSE**.
+
+Do not jump to another hard problem before these two are comfortable.
+
+# 15. Personal Monotonic Stack Master Template
+
+### Value Stack
+
+```java
+Stack<Integer> st = new Stack<>();
+
+for (int i = n - 1; i >= 0; i--) {
+
+    while (!st.isEmpty() && st.peek() >= arr[i]) {
+        st.pop();
+    }
+
+    ans[i] = st.isEmpty() ? -1 : st.peek();
+
+    st.push(arr[i]);
+}
+```
+
+### Index Stack
+
+```java
+Stack<Integer> st = new Stack<>();
+
+for (int i = n - 1; i >= 0; i--) {
+
+    while (!st.isEmpty() && arr[st.peek()] >= arr[i]) {
+        st.pop();
+    }
+
+    ans[i] = st.isEmpty() ? n : st.peek();
+
+    st.push(i);
+}
+```
+
+### Distance / Span
+
+```text
+current index - boundary index
+```
+
+### Histogram
+
+```java
+int start = pse[i] + 1;
+int end = nse[i] - 1;
+
+int width = end - start + 1;
+
+int area = heights[i] * width;
+```
+
+### Contribution
+
+```text
+previous boundary
++
+next boundary
+↓
+left choices
+×
+right choices
+×
+current value
+```
+
+# 16. Strict vs Non-Strict Comparisons
+
+Never blindly copy `>`, `>=`, `<`, or `<=`.
+
+Ask:
+
+```text
+Should equal values be removed?
+Should equal values stay?
+Could equal values cause duplicate counting?
+```
+
+For simple “strictly smaller” boundary problems:
+
+```text
+remove greater/equal
+→ while (top >= current)
+```
+
+For “strictly greater”:
+
+```text
+remove smaller/equal
+→ while (top <= current)
+```
+
+Contribution problems may intentionally use different strictness on the left and right to avoid double-counting equal minima/maxima.
+
+# 17. Problem-Type Recognition
+
+```text
+Nearest greater/smaller
+→ Monotonic Stack
 ```
 
 ```text
-histogram
-→ NEAREST SMALLER
-→ WIDTH
-→ AREA
+Span / waiting distance
+→ Monotonic Stack + index difference
 ```
 
 ```text
-binary matrix + largest rectangle
-→ HISTOGRAM EACH ROW
-→ MONOTONIC STACK
+Histogram
+→ PSE + NSE + width
 ```
 
 ```text
-remove K to make result smallest
-→ GREEDY MONOTONIC STACK
+Binary matrix + largest rectangle
+→ Matrix → Histogram → Stack
 ```
 
 ```text
-current makes previous worse
-→ POP previous
+Current makes previous choice worse
+→ Greedy Stack
 ```
 
 ```text
-O(1) min/max operation
-→ AUXILIARY STATE
+Nested / unresolved state
+→ Stack simulation
 ```
 
 ```text
-subarray minimum / maximum contribution
-→ BOUNDARIES + MONOTONIC STACK
+O(1) extra operation
+→ Auxiliary Stack State
 ```
 
----
+```text
+Subarray min/max contribution
+→ Boundaries + Contribution
+```
 
-# 11. Stack Mastery Test
+# 18. Problems That Should NOT Be Forced Into Stack
 
-You are Stack-ready when you can solve these without notes:
+Keep the Stack roadmap focused.
 
-### Foundation
+```text
+Count Smaller Numbers After Self
+→ Merge Sort / Fenwick / ordered structure
+```
 
-- [ ] Implement Stack using Array
-- [ ] Implement Stack using Linked List
-- [ ] Push / Pop / Peek
-- [ ] Overflow / Underflow
+```text
+Maximum Sum Rectangle
+→ 2D Kadane / row compression
+```
 
-### Recursion + Stack
+```text
+General Queue problems
+→ Queue
+```
 
-- [ ] Insert at Bottom
-- [ ] Reverse Stack
-- [ ] Delete Middle
-- [ ] Sort Stack
+```text
+General BFS
+→ Queue
+```
 
-### Matching / Expressions
+The fact that a `Stack` appears in an implementation does not automatically make the problem a Stack-pattern problem.
+
+# 19. Revision of ONLY Problems You Solved
+
+For your workflow:
+
+```text
+Solve
+↓
+☑️ mark
+↓
+pattern name
+↓
+what stack stores
+↓
+pop condition
+↓
+why pop is safe
+↓
+dry run
+↓
+R1
+↓
+R2
+↓
+R3
+```
+
+Do not revise every unsolved problem.
+
+Only the problems you have actually solved become revision candidates.
+
+# 20. Long-Run Stack Completion Order
+
+```text
+NGE ✅
+↓
+NSE ✅
+↓
+PGE
+↓
+PSE
+↓
+4-direction template mastery
+↓
+Daily Temperatures ✅
+↓
+Stock Span ✅
+↓
+Online Stock Span ✅
+↓
+Visible People ✅
+↓
+Histogram ✅
+↓
+One-Pass Histogram
+↓
+Maximal Rectangle ✅
+↓
+Trapping Rain Water Stack approach
+↓
+Remove K Digits
+↓
+Remove Duplicate Letters
+↓
+Most Competitive Subsequence
+↓
+Min Stack ✅
+↓
+Two Stacks
+↓
+N Stacks
+↓
+Subarray Minimums
+↓
+Subarray Ranges
+↓
+Valid Subarray Size
+↓
+Min-Product
+↓
+Advanced Contribution
+```
+
+# 21. FINAL STACK MASTERY TEST
+
+### Monotonic Core
+
+- [ ] NGE
+- [ ] NSE
+- [ ] PGE
+- [ ] PSE
+- [ ] Circular NGE
+
+### Span / Distance
+
+- [ ] Daily Temperatures
+- [ ] Stock Span
+- [ ] Online Stock Span
+- [ ] Visible People
+
+### Histogram
+
+- [ ] Largest Rectangle
+- [ ] One-Pass Histogram
+- [ ] Maximal Rectangle
+
+### Simulation / Expression
 
 - [ ] Valid Parentheses
-- [ ] Redundant Brackets
-- [ ] Infix → Postfix
-- [ ] Postfix Evaluation
-- [ ] Basic Calculator
+- [ ] RPN
+- [ ] Asteroid Collision
+- [ ] Decode String
+- [ ] Simplify Path
+- [ ] Longest Valid Parentheses
 
-### Monotonic Stack
+### Greedy
 
-- [ ] Next Greater
-- [ ] Next Smaller
-- [ ] Previous Greater
-- [ ] Previous Smaller
-- [ ] Stock Span
-- [ ] Daily Temperatures
-
-### Advanced
-
-- [ ] Largest Rectangle in Histogram
-- [ ] Maximal Rectangle
-- [ ] Sum of Subarray Minimums
 - [ ] Remove K Digits
 - [ ] Remove Duplicate Letters
-- [ ] Longest Valid Parentheses
+- [ ] Most Competitive Subsequence
+
+### Design
+
 - [ ] Min Stack
-- [ ] N Stacks in Array
+- [ ] Two Stacks in One Array
+- [ ] N Stacks
 
----
+### Contribution
 
-# 12. Final Stack Pattern Map
+- [ ] Sum of Subarray Minimums
+- [ ] Sum of Subarray Ranges
+- [ ] Valid Subarray Size
+- [ ] Maximum Subarray Min-Product
+
+# 22. Definition of Stack Mastery
+
+You are finished when a new problem gives clues like:
 
 ```text
-                 STACK
-                   │
-      ┌────────────┼────────────┐
-      ↓            ↓            ↓
-     LIFO       MATCHING      NESTED
-      │            │            │
-   reverse      brackets     expressions
-   undo         valid         decode
-      │            │            │
-      └────────────┼────────────┘
-                   ↓
-          MONOTONIC STACK
-                   │
-       ┌───────────┼───────────┐
-       ↓           ↓           ↓
-   NGE / NSE    HISTOGRAM   CONTRIBUTION
-       │           │           │
-   span etc.    rectangle    subarrays
+nearest
+next / previous
+greater / smaller
+span
+distance to next greater
+histogram
+largest rectangle
+subarray minimum
+remove K
+current dominates previous
 ```
 
-> **Main goal:** Do not memorize 120 Stack solutions.
+and your first thought is:
+
+```text
+“What monotonic stack state should I maintain?”
+```
+
+Then you immediately decide:
+
+```text
+VALUE or INDEX?
+LEFT or RIGHT?
+GREATER or SMALLER?
+STRICT or NON-STRICT?
+VALUE / INDEX / DISTANCE / COUNT / BOUNDARY / CONTRIBUTION?
+```
+
+> **The long-run goal is not 100+ memorized Stack solutions.**
 >
-> Learn to recognize:
->
-> ```text
-> LIFO
-> → Stack
->
-> Nested / matching
-> → Stack
->
-> Nearest greater/smaller
-> → Monotonic Stack
->
-> Histogram
-> → Monotonic Stack + boundaries
->
-> Greedy removal
-> → Monotonic Stack
->
-> O(1) special operation
-> → Stack + extra state
-> ```
+> **The goal is one small set of templates that lets you solve their variations.**

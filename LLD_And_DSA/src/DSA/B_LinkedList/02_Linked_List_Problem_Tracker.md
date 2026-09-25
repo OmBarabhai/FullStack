@@ -22,24 +22,24 @@
 
 # 1. Revision
 
-| Mark | When | What to do |
-|---|---|---|
-| R0 | Same day | Close notes → explain pattern + dry run |
-| R1 | 2–3 days | Rebuild the pointer state from memory |
-| R2 | ~7 days | Solve / trace without notes |
-| R3 | ~30 days | Quick recall; retry only where needed |
+| Mark | When     | What to do                              |
+|------|----------|-----------------------------------------|
+| R0   | Same day | Close notes → explain pattern + dry run |
+| R1   | 2–3 days | Rebuild the pointer state from memory   |
+| R2   | ~7 days  | Solve / trace without notes             |
+| R3   | ~30 days | Quick recall; retry only where needed   |
 
 ---
 
 # 2. Part 2 Roadmap
 
-| Section | Focus | Problems |
-|---|---|---:|
-| A | Advanced Pointer Manipulation | 10 |
-| B | Multi-List Algorithms & Sorting | 11 |
-| C | Special Linked List Structures | 14 |
-| D | Design / Cache / Company Favorites | 15 |
-| **Total** | | **50** |
+| Section   | Focus                              | Problems |
+|-----------|------------------------------------|---------:|
+| A         | Advanced Pointer Manipulation      |       10 |
+| B         | Multi-List Algorithms & Sorting    |       11 |
+| C         | Special Linked List Structures     |       14 |
+| D         | Design / Cache / Company Favorites |       15 |
+| **Total** |                                    |   **50** |
 
 ---
 
@@ -90,10 +90,10 @@ Think:
 
 | # | Problem | Platform | Diff. | Interview | Status | R1 | R2 | R3 | Pattern |
 |---:|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-| 66 | Reverse Nodes in k-Group | LeetCode 25 | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Reverse |
-| 67 | Reverse Alternate k Nodes | GFG | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Reverse |
-| 68 | Reverse Every k Nodes (Recursive) | GFG | 🔴 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Reverse + Recursion |
-| 69 | Reverse Even Length Groups | LeetCode 2074 | 🔴 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Group |
+| 66 | Reverse Nodes in k-Group | LeetCode 25 | 🔴 | ⭐⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Reverse |
+| 67 | Reverse Alternate k Nodes | GFG | 🔴 | ⭐⭐⭐⭐⭐ | ☑️ | ⬜ | ⬜ | ⬜ | Reverse |
+| 68 | Reverse Every k Nodes (Recursive) | GFG | 🔴 | ⭐⭐⭐⭐ |☑️ | ⬜ | ⬜ | ⬜ | Reverse + Recursion |
+| 69 | Reverse Even Length Groups | LeetCode 2074 | 🔴 | ⭐⭐⭐⭐ |☑️ | ⬜ | ⬜ | ⬜ | Group |
 | 70 | Reverse Doubly Linked List | GFG | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | DLL Reverse |
 
 ### Pattern memory
@@ -139,12 +139,12 @@ Think:
 ### Problems
 
 | # | Problem | Platform | Diff. | Interview | Status | R1 | R2 | R3 | Pattern |
-|---:|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-| 71 | Partition List | LeetCode 86 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Dummy Chains |
-| 72 | Segregate Even and Odd Nodes | GFG | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Chains |
-| 73 | Segregate 0s, 1s and 2s | GFG | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Chains |
-| 74 | Rearrange Linked List in Zig-Zag | GFG | 🟡 | ⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Reorder |
-| 75 | Sort Linked List of 0s, 1s and 2s | GFG | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Grouping |
+|---:|---|---|:---:|:---:|:------:|:---:|:---:|:---:|---|
+| 71 | Partition List | LeetCode 86 | 🟡 | ⭐⭐⭐⭐⭐ |  ☑️    | ⬜ | ⬜ | ⬜ | Dummy Chains |
+| 72 | Segregate Even and Odd Nodes | GFG | 🟡 | ⭐⭐⭐⭐ |   ☑️    | ⬜ | ⬜ | ⬜ | Chains |
+| 73 | Segregate 0s, 1s and 2s | GFG | 🟡 | ⭐⭐⭐⭐⭐ |   ☑️    | ⬜ | ⬜ | ⬜ | Chains |
+| 74 | Rearrange Linked List in Zig-Zag | GFG | 🟡 | ⭐⭐⭐ |   ⬜    | ⬜ | ⬜ | ⬜ | Reorder |
+| 75 | Sort Linked List of 0s, 1s and 2s | GFG | 🟡 | ⭐⭐⭐⭐ |   ☑️    | ⬜ | ⬜ | ⬜ | Grouping |
 
 ### Pattern memory
 
@@ -191,14 +191,14 @@ Think:
 
 ### Problems
 
-| # | Problem | Platform | Diff. | Interview | Status | R1 | R2 | R3 | Pattern |
-|---:|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-| 76 | Merge K Sorted Lists | LeetCode 23 | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Heap |
-| 77 | Merge K Sorted Linked Lists | GFG | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | D&C |
-| 78 | Flattening a Linked List | GFG | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Merge |
-| 79 | Flatten a Multilevel Doubly Linked List | LeetCode 430 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Flatten |
-| 80 | Merge Nodes in Between Zeros | LeetCode 2181 | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | State Grouping |
-| 81 | Splice Two Linked Lists | LeetCode 1669 | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Reconnect |
+|  # | Problem                                 | Platform      | Diff. | Interview | Status | R1 | R2 | R3 | Pattern        |
+|---:|-----------------------------------------|---------------|:-----:|:---------:|:------:|:--:|:--:|:--:|----------------|
+| 76 | Merge K Sorted Lists                    | LeetCode 23   |  🔴   |   ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | Heap           |
+| 77 | Merge K Sorted Linked Lists             | GFG           |  🔴   |   ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | D&C            |
+| 78 | Flattening a Linked List                | GFG           |  🔴   |   ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | Merge          |
+| 79 | Flatten a Multilevel Doubly Linked List | LeetCode 430  |  🟡   |   ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | Flatten        |
+| 80 | Merge Nodes in Between Zeros            | LeetCode 2181 |  🟡   |   ⭐⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | State Grouping |
+| 81 | Splice Two Linked Lists                 | LeetCode 1669 |  🟡   |   ⭐⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | Reconnect      |
 
 ### Pattern memory
 
@@ -242,13 +242,13 @@ Think:
 
 ### Problems
 
-| # | Problem | Platform | Diff. | Interview | Status | R1 | R2 | R3 | Pattern |
-|---:|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-| 82 | Sort List | LeetCode 148 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Merge Sort |
-| 83 | Merge Sort for Linked List | GFG | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Merge Sort |
-| 84 | Insertion Sort List | LeetCode 147 | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Insertion Sort |
-| 85 | Quick Sort on Singly Linked List | GFG | 🔴 | ⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Advanced |
-| 86 | Sort a Nearly Sorted Linked List | Custom | 🔴 | ⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Heap / Sort |
+|  # | Problem                          | Platform     | Diff. | Interview | Status | R1 | R2 | R3 | Pattern        |
+|---:|----------------------------------|--------------|:-----:|:---------:|:------:|:--:|:--:|:--:|----------------|
+| 82 | Sort List                        | LeetCode 148 |  🟡   |   ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | Merge Sort     |
+| 83 | Merge Sort for Linked List       | GFG          |  🔴   |   ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | Merge Sort     |
+| 84 | Insertion Sort List              | LeetCode 147 |  🟡   |   ⭐⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | Insertion Sort |
+| 85 | Quick Sort on Singly Linked List | GFG          |  🔴   |    ⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | Advanced       |
+| 86 | Sort a Nearly Sorted Linked List | Custom       |  🔴   |    ⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | Heap / Sort    |
 
 ### Pattern memory
 
@@ -292,11 +292,11 @@ Think:
 
 ### Problems
 
-| # | Problem | Platform | Diff. | Interview | Status | R1 | R2 | R3 | Pattern |
-|---:|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-| 87 | Copy List with Random Pointer | LeetCode 138 | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | HashMap |
-| 88 | Clone a Linked List with Random Pointer | GFG | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Clone |
-| 89 | Clone Random Pointer O(1) Extra Space | Custom | 🔴 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Interleave |
+|  # | Problem                                 | Platform     | Diff. | Interview | Status | R1 | R2 | R3 | Pattern    |
+|---:|-----------------------------------------|--------------|:-----:|:---------:|:------:|:--:|:--:|:--:|------------|
+| 87 | Copy List with Random Pointer           | LeetCode 138 |  🔴   |   ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | HashMap    |
+| 88 | Clone a Linked List with Random Pointer | GFG          |  🔴   |   ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | Clone      |
+| 89 | Clone Random Pointer O(1) Extra Space   | Custom       |  🔴   |   ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | Interleave |
 
 ### Pattern memory
 
@@ -339,12 +339,12 @@ Think:
 
 ### Problems
 
-| # | Problem | Platform | Diff. | Interview | Status | R1 | R2 | R3 | Pattern |
-|---:|---|---|:---:|:---:|:---:|:---:|:---:|:---:|---|
-| 90 | Insert in Doubly Linked List | GFG | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Prev/Next |
-| 91 | Delete in Doubly Linked List | GFG | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Prev/Next |
-| 92 | Reverse Doubly Linked List | GFG | 🟡 | ⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | Reverse |
-| 93 | Design Browser History | LeetCode 1472 | 🟡 | ⭐⭐⭐⭐⭐ | ⬜ | ⬜ | ⬜ | ⬜ | DLL Application |
+|  # | Problem                      | Platform      | Diff. | Interview | Status | R1 | R2 | R3 | Pattern         |
+|---:|------------------------------|---------------|:-----:|:---------:|:------:|:--:|:--:|:--:|-----------------|
+| 90 | Insert in Doubly Linked List | GFG           |  🟡   |   ⭐⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | Prev/Next       |
+| 91 | Delete in Doubly Linked List | GFG           |  🟡   |   ⭐⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | Prev/Next       |
+| 92 | Reverse Doubly Linked List   | GFG           |  🟡   |   ⭐⭐⭐⭐    |   ⬜    | ⬜  | ⬜  | ⬜  | Reverse         |
+| 93 | Design Browser History       | LeetCode 1472 |  🟡   |   ⭐⭐⭐⭐⭐   |   ⬜    | ⬜  | ⬜  | ⬜  | DLL Application |
 
 ### Pattern memory
 
