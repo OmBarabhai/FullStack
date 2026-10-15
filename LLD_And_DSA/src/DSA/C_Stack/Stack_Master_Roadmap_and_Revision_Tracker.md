@@ -30,8 +30,8 @@ _Last updated: 15 October 2026_
 | 4 | Minimum String Length After Removing Substrings (LC 2696) | LeetCode | ✓ Independent | ☑️ | ⬜ | ⬜ |
 | 5 | Simplify Path (LC 71) | LeetCode | ✓ Independent | ☑️ | ⬜ | ⬜ |
 | 6 | Decode String (LC 394) | LeetCode | ✓ Independent |☑️ | ⬜ | ⬜ |
-| 7 | Build an Array With Stack Operations (LC 1441) | LeetCode | **NEXT / To do** | ☑️ | ⬜ | ⬜ |
-| 8 | Baseball Game (LC 682) | LeetCode | Previously solved / review if needed | ⬜ | ⬜ | ⬜ |
+| 7 | Build an Array With Stack Operations (LC 1441) | LeetCode |✓ Independent | ☑️ | ⬜ | ⬜ |
+| 8 | Baseball Game (LC 682) | LeetCode | ✓ Independent | ⬜ | ⬜ | ⬜ |
 | 9 | Reverse String Using Stack (LC 344 / practice) | LeetCode / practice | To do | ⬜ | ⬜ | ⬜ |
 | 10 | Backspace String Compare (LC 844) | LeetCode | To do | ⬜ | ⬜ | ⬜ |
 | 11 | Removing Stars From a String (LC 2390) | LeetCode | To do | ⬜ | ⬜ | ⬜ |
