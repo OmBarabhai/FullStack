@@ -5,6 +5,25 @@ duplicate entries. **Acceptance:** Sort Stack showed 10/10 tests, 40/40
 EXP. User confirmed the other submitted solutions accepted. **Revision
 rounds:** R1/R2/R3 remain unchecked until completed independently.
 
+## Revision navigation
+
+### Learn the pattern first
+
+- [Pattern idea](#pattern-idea)
+- [Covered problems and progress](#covered-problems---deduplicated)
+
+### Problem-by-problem revision
+
+| # | Problem | Main idea |
+|---:|---|---|
+| 1 | [Insert an Element at the Bottom](https://www.naukri.com/code360/problems/insert-an-element-at-its-bottom-in-a-given-stack_1171166) | Pop all → push the new value → restore saved values |
+| 2 | [Reverse a Stack using Recursion](https://www.naukri.com/code360/problems/reverse-stack-using-recursion_631875?leftPanelTabValue=PROBLEM) | Pop → reverse the rest → insert the saved value at the bottom |
+| 3 | [Sort a Stack using Recursion](https://www.naukri.com/code360/problems/sort-a-stack_985275) | Pop → sort the remaining stack → insert in the correct position |
+
+> Each problem title opens its corresponding **Naukri Code360** problem statement.
+
+---
+
 ## Pattern idea
 
 Recursion temporarily removes stack elements, processes the smaller
@@ -21,14 +40,14 @@ stack.
   -----------------------------------------------------------------------
   Problem                 Original code included  Progress
   ----------------------- ----------------------- -----------------------
-  Sort a Stack using      Yes                     Accepted; 10/10 tests,
-  Recursion                                       40/40 EXP shown
-
   Insert an Element at    Yes                     User confirmed accepted
   the Bottom                                      
 
   Reverse a Stack using   Yes                     User confirmed accepted
   Recursion                                       
+
+  Sort a Stack using      Yes                     Accepted; 10/10 tests,
+  Recursion                                       40/40 EXP shown
 
   Check if Stack Is       Not in current chat     Previously practiced
   Sorted                                          per user
@@ -45,7 +64,149 @@ The later recursive stack-sort snippet is another implementation of
 
 ------------------------------------------------------------------------
 
-# 1. Sort a Stack using Recursion
+# 1. [Insert an Element at the Bottom](https://www.naukri.com/code360/problems/insert-an-element-at-its-bottom-in-a-given-stack_1171166)
+
+## Goal
+
+Insert `x` below every existing stack element, preserving the existing
+order.
+
+## Your accepted code
+
+``` java
+import java.util.*;
+import java.io.*;
+
+public class Solution {
+    public static Stack<Integer> pushAtBottom(Stack<Integer> myStack, int x) {
+        if (myStack.isEmpty()) {
+            myStack.push(x);
+            return myStack;
+        }
+
+        int popVal = myStack.pop();
+        pushAtBottom(myStack, x);
+        myStack.push(popVal);
+        return myStack;
+    }
+}
+```
+
+## Intuition
+
+Pop until empty; push `x`; restore each saved value while recursion
+returns.
+
+## Dry run
+
+Initial bottom → top: `[1, 2, 3]`; insert `0`.
+
+  Action           Stack
+  ---------------- ----------------
+  Pop 3            `[1, 2]`
+  Pop 2            `[1]`
+  Pop 1            `[]`
+  Push 0 at base   `[0]`
+  Restore 1        `[0, 1]`
+  Restore 2        `[0, 1, 2]`
+  Restore 3        `[0, 1, 2, 3]`
+
+## Edge cases
+
+-   Empty → `[x]`.
+-   One element → `x` becomes bottom, old value stays above it.
+-   `x` smaller/larger/equal → same behavior; no comparison required.
+-   Existing duplicates remain unchanged.
+
+## Revision checkpoints
+
+-   Base case pushes `x`.
+-   Save popped value in `popVal`.
+-   Recursive call before restoration.
+-   Restore `popVal`, not `x`.
+-   This is bottom insertion, not sorted insertion.
+
+**Complexity:** Time `O(n)`; auxiliary recursion space `O(n)`.
+
+
+------------------------------------------------------------------------
+
+# 2. [Reverse a Stack using Recursion](https://www.naukri.com/code360/problems/reverse-stack-using-recursion_631875?leftPanelTabValue=PROBLEM)
+
+## Goal
+
+Reverse element order. This is not sorting: no value comparisons are
+made.
+
+## Your accepted code
+
+``` java
+import java.util.Stack;
+
+public class Solution {
+    public static Stack<Integer> pushAtBottom(Stack<Integer> myStack, int x) {
+        if (myStack.isEmpty()) {
+            myStack.push(x);
+            return myStack;
+        }
+
+        int popVal = myStack.pop();
+        pushAtBottom(myStack, x);
+        myStack.push(popVal);
+        return myStack;
+    }
+
+    public static void reverseStack(Stack<Integer> stack) {
+        if (stack.isEmpty()) {
+            return;
+        }
+
+        int preVal = stack.pop();
+        reverseStack(stack);
+        pushAtBottom(stack, preVal);
+    }
+}
+```
+
+## Intuition
+
+Pop top → reverse remaining stack → insert saved value at bottom.
+
+## Dry run
+
+Initial bottom → top: `[1, 2, 3]` (top 3).
+
+**Remove phase:** `3` → `2` → `1`; stack becomes empty.
+
+**Return phase:** - Insert `1` at bottom → `[1]` - Insert `2` at bottom
+→ `[2, 1]` - Insert `3` at bottom → `[3, 2, 1]`
+
+Final bottom → top: **`[3, 2, 1]`**; top is `1`.
+
+## Edge cases
+
+-   Empty → empty.
+-   One element → unchanged.
+-   Two elements → swapped.
+-   Duplicates → all retained.
+-   Negative values → unaffected.
+
+## Revision checkpoints
+
+-   Base case is empty stack.
+-   Save popped value in `preVal`.
+-   Reverse the remaining stack before `pushAtBottom`.
+-   Bottom insertion is what makes the order reverse.
+-   Do not confuse reversing with sorting.
+
+**Complexity:** Time `O(n²)` because each bottom insertion can traverse
+the stack; auxiliary space `O(n)` recursion depth, with nested
+bottom-insertion recursion.
+
+
+------------------------------------------------------------------------
+
+# 3. [Sort a Stack using Recursion](https://www.naukri.com/code360/problems/sort-a-stack_985275)
 
 ## Goal
 
@@ -185,145 +346,6 @@ Final bottom → top: **`[1, 2, 3]`**. Top is `3`.
 **Complexity:** Time `O(n²)` worst case; auxiliary recursion space
 `O(n)`.
 
-------------------------------------------------------------------------
-
-# 2. Insert an Element at the Bottom
-
-## Goal
-
-Insert `x` below every existing stack element, preserving the existing
-order.
-
-## Your accepted code
-
-``` java
-import java.util.*;
-import java.io.*;
-
-public class Solution {
-    public static Stack<Integer> pushAtBottom(Stack<Integer> myStack, int x) {
-        if (myStack.isEmpty()) {
-            myStack.push(x);
-            return myStack;
-        }
-
-        int popVal = myStack.pop();
-        pushAtBottom(myStack, x);
-        myStack.push(popVal);
-        return myStack;
-    }
-}
-```
-
-## Intuition
-
-Pop until empty; push `x`; restore each saved value while recursion
-returns.
-
-## Dry run
-
-Initial bottom → top: `[1, 2, 3]`; insert `0`.
-
-  Action           Stack
-  ---------------- ----------------
-  Pop 3            `[1, 2]`
-  Pop 2            `[1]`
-  Pop 1            `[]`
-  Push 0 at base   `[0]`
-  Restore 1        `[0, 1]`
-  Restore 2        `[0, 1, 2]`
-  Restore 3        `[0, 1, 2, 3]`
-
-## Edge cases
-
--   Empty → `[x]`.
--   One element → `x` becomes bottom, old value stays above it.
--   `x` smaller/larger/equal → same behavior; no comparison required.
--   Existing duplicates remain unchanged.
-
-## Revision checkpoints
-
--   Base case pushes `x`.
--   Save popped value in `popVal`.
--   Recursive call before restoration.
--   Restore `popVal`, not `x`.
--   This is bottom insertion, not sorted insertion.
-
-**Complexity:** Time `O(n)`; auxiliary recursion space `O(n)`.
-
-------------------------------------------------------------------------
-
-# 3. Reverse a Stack using Recursion
-
-## Goal
-
-Reverse element order. This is not sorting: no value comparisons are
-made.
-
-## Your accepted code
-
-``` java
-import java.util.Stack;
-
-public class Solution {
-    public static Stack<Integer> pushAtBottom(Stack<Integer> myStack, int x) {
-        if (myStack.isEmpty()) {
-            myStack.push(x);
-            return myStack;
-        }
-
-        int popVal = myStack.pop();
-        pushAtBottom(myStack, x);
-        myStack.push(popVal);
-        return myStack;
-    }
-
-    public static void reverseStack(Stack<Integer> stack) {
-        if (stack.isEmpty()) {
-            return;
-        }
-
-        int preVal = stack.pop();
-        reverseStack(stack);
-        pushAtBottom(stack, preVal);
-    }
-}
-```
-
-## Intuition
-
-Pop top → reverse remaining stack → insert saved value at bottom.
-
-## Dry run
-
-Initial bottom → top: `[1, 2, 3]` (top 3).
-
-**Remove phase:** `3` → `2` → `1`; stack becomes empty.
-
-**Return phase:** - Insert `1` at bottom → `[1]` - Insert `2` at bottom
-→ `[2, 1]` - Insert `3` at bottom → `[3, 2, 1]`
-
-Final bottom → top: **`[3, 2, 1]`**; top is `1`.
-
-## Edge cases
-
--   Empty → empty.
--   One element → unchanged.
--   Two elements → swapped.
--   Duplicates → all retained.
--   Negative values → unaffected.
-
-## Revision checkpoints
-
--   Base case is empty stack.
--   Save popped value in `preVal`.
--   Reverse the remaining stack before `pushAtBottom`.
--   Bottom insertion is what makes the order reverse.
--   Do not confuse reversing with sorting.
-
-**Complexity:** Time `O(n²)` because each bottom insertion can traverse
-the stack; auxiliary space `O(n)` recursion depth, with nested
-bottom-insertion recursion.
 
 ------------------------------------------------------------------------
 
@@ -331,9 +353,9 @@ bottom-insertion recursion.
 
   Problem asks       Recursion action
   ------------------ -----------------------------------------------------
-  Sort stack         Pop → sort rest → insert in correct sorted position
   Insert at bottom   Pop all → push new value → restore
   Reverse stack      Pop → reverse rest → insert popped value at bottom
+  Sort stack         Pop → sort rest → insert in correct sorted position
 
 ## Before submitting
 
