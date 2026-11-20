@@ -120,3 +120,27 @@ format [width, height]. Show the image provided in the response on DOM. Use HTML
 JS template in REPL or Vanilla template in CodeSandbox for this question.
 Dimensions can be 200/300/100. For example you can pass [200, 200] or [200, 300], etc.
 */
+// Dimensions: [width, height]
+const dimensions = [200, 300];
+
+// Call fakeFetch with URL and dimensions
+fakeFetch("https://example.com/getImage", dimensions)
+  .then((result) => {
+    console.log(result);
+
+    // Create image element
+    const img = document.createElement("img");
+
+    // Set image URL from response
+    img.src = result.data.imageUrl;
+
+    // Set dimensions
+    img.width = dimensions[0];
+    img.height = dimensions[1];
+
+    // Display image on DOM
+    document.body.appendChild(img);
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
