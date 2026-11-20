@@ -30,11 +30,11 @@ There are two techniques in this pattern:
 
 ## Revision Navigation
 
-| No. | Problem                                                                                    | Main Pattern                   |
-| --: | ------------------------------------------------------------------------------------------ | ------------------------------ |
-|   1 | First Negative Integer in Every Window of Size K — GFG                                     | FIFO Deque of negative indices |
-|   2 | Sliding Window Maximum — LeetCode 239                                                      | Decreasing Monotonic Deque     |
-|   3 | Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit — LeetCode 1438 | Two Monotonic Deques           |
+| No. | Problem | Main Pattern |
+|---:|---|---|
+| 1 | First Negative Integer in Every Window of Size K — GFG | FIFO Deque of negative indices |
+| 2 | Sliding Window Maximum — LeetCode 239 | Decreasing Monotonic Deque |
+| 3 | Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit — LeetCode 1438 | Two Monotonic Deques |
 
 This revision file gives the complete walkthrough for Problem 1, which has been covered so far. Problems 2 and 3 are listed for the next stage; their full explanations and implementations are not added here yet.
 
@@ -83,11 +83,11 @@ Why indices instead of values?
 
 We use the Deque like a normal FIFO Queue:
 
-| Operation    | Meaning                                  |
-| ------------ | ---------------------------------------- |
-| `Q.add(i)`   | Insert index `i` at the rear             |
-| `Q.peek()`   | Read the front index without removing it |
-| `Q.remove()` | Remove the front index                   |
+| Operation | Meaning |
+|---|---|
+| `Q.add(i)` | Insert index `i` at the rear |
+| `Q.peek()` | Read the front index without removing it |
+| `Q.remove()` | Remove the front index |
 
 **Remember:** We only add at the rear and remove from the front. We do not remove from the rear to maintain sorted values.
 
@@ -162,14 +162,14 @@ start = i
 end   = i + k - 1
 ```
 
-| Window start `i` | Window elements | Queue after expiry check | Front check                         | Answer |
-| ---------------: | --------------- | ------------------------ | ----------------------------------- | -----: |
-|                0 | `[12, -1, -7]`  | `[1, 2, 4]`              | `1` belongs to `[0, 2]`             |     -1 |
-|                1 | `[-1, -7, 8]`   | `[1, 2, 4]`              | `1` belongs to `[1, 3]`             |     -1 |
-|                2 | `[-7, 8, -15]`  | `[2, 4]`                 | Remove `1`; `2` belongs to `[2, 4]` |     -7 |
-|                3 | `[8, -15, 30]`  | `[4]`                    | Remove `2`; `4` belongs to `[3, 5]` |    -15 |
-|                4 | `[-15, 30, 16]` | `[4]`                    | `4` belongs to `[4, 6]`             |    -15 |
-|                5 | `[30, 16, 28]`  | `[]`                     | Remove `4`; no negative remains     |      0 |
+| Window start `i` | Window elements | Queue after expiry check | Front check | Answer |
+|---:|---|---|---|---:|
+| 0 | `[12, -1, -7]` | `[1, 2, 4]` | `1` belongs to `[0, 2]` | -1 |
+| 1 | `[-1, -7, 8]` | `[1, 2, 4]` | `1` belongs to `[1, 3]` | -1 |
+| 2 | `[-7, 8, -15]` | `[2, 4]` | Remove `1`; `2` belongs to `[2, 4]` | -7 |
+| 3 | `[8, -15, 30]` | `[4]` | Remove `2`; `4` belongs to `[3, 5]` | -15 |
+| 4 | `[-15, 30, 16]` | `[4]` | `4` belongs to `[4, 6]` | -15 |
+| 5 | `[30, 16, 28]` | `[]` | Remove `4`; no negative remains | 0 |
 
 **Final Answer**
 
@@ -181,7 +181,7 @@ end   = i + k - 1
 
 The image below focuses only on the dry run: the input, initial Queue of negative indices, each window, and the resulting answer.
 
-![First Negative Integer — sliding-window dry run](Queue*Dry_Run* First_Negatives.png)
+![First Negative Integer — sliding-window dry run](Queue_Dry_Run_First_Negatives.png)
 
 ### Understand the Two Important Conditions
 
@@ -223,13 +223,13 @@ for (int i = 0; i < n - k + 1; i++)
 
 ### Complexity Analysis
 
-| Part                     |        Complexity | Reason                                      |
-| ------------------------ | ----------------: | ------------------------------------------- |
-| Collect negative indices |            `O(n)` | Visit every array element once              |
-| Process all windows      |    `O(n)` overall | Each negative index is removed at most once |
-| **Total time**           |        **`O(n)`** | Two linear passes                           |
-| Deque space              | `O(n)` worst case | Every array element could be negative       |
-| Answer list              |    `O(n - k + 1)` | One answer per window                       |
+| Part | Complexity | Reason |
+|---|---:|---|
+| Collect negative indices | `O(n)` | Visit every array element once |
+| Process all windows | `O(n)` overall | Each negative index is removed at most once |
+| **Total time** | **`O(n)`** | Two linear passes |
+| Deque space | `O(n)` worst case | Every array element could be negative |
+| Answer list | `O(n - k + 1)` | One answer per window |
 
 **Auxiliary space excluding the returned answer:** `O(n)` worst case.
 
@@ -265,11 +265,11 @@ First Negative in Every Window:
 
 ### Technique Summary
 
-| Problem                                   | Main technique                 | Key operation                         |
-| ----------------------------------------- | ------------------------------ | ------------------------------------- |
-| First Negative Integer in Every Window    | FIFO Deque of negative indices | Expire old indices from the front     |
-| Sliding Window Maximum                    | Decreasing Monotonic Deque     | Remove expired and smaller candidates |
-| Longest Subarray With Absolute Diff Limit | Two Monotonic Deques           | Track maximum and minimum together    |
+| Problem | Main technique | Key operation |
+|---|---|---|
+| First Negative Integer in Every Window | FIFO Deque of negative indices | Expire old indices from the front |
+| Sliding Window Maximum | Decreasing Monotonic Deque | Remove expired and smaller candidates |
+| Longest Subarray With Absolute Diff Limit | Two Monotonic Deques | Track maximum and minimum together |
 
 ### Self-Revision
 

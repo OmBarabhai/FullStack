@@ -1148,8 +1148,6 @@ public class Solution {
 | Interleaving `while` loop | Build the required pairs, but in reverse overall order |
 | Last two `while` loops    | Reverse the complete Queue to get the final answer     |
 
-**Import note:** `java.util.*` already includes `Queue` and `Deque`, so `import java.util.Queue;` is redundant. `java.io.*` is not used here. These imports are harmless, and they have been retained because the submitted code is being preserved.
-
 #### Complexity Analysis
 
 Let `n` be the total number of Queue elements.

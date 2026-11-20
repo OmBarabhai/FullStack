@@ -13,7 +13,7 @@
 | 4 | Level Order Traversal (flat level-order output) | Code360 | [x] Practised; revise independently |
 | 5 | Binary Tree Level Order Traversal II | LeetCode 107 | [x] Practised; revise independently |
 | 6 | Binary Tree Right Side View | LeetCode 199 | [x] Practised; revise independently |
-| 7 | Left View of a Binary Tree | GeeksforGeeks | Code added; revise independently |
+| 7 | Left View of a Binary Tree | GeeksforGeeks | Print and return implementations added; revise independently |
 
 ---
 
@@ -1100,4 +1100,104 @@ Example tree:
 ### Quick Recall
 
 `BFS + save level size + print the first node (`i == 1`) + enqueue left before right = Left View.`
+
+### Alternative Implementation — Return the Left View in an ArrayList
+
+This version uses the same BFS idea, but instead of printing each visible node, it returns the left-view values in an `ArrayList<Integer>`.
+
+### Java Implementation — Submitted Code
+
+```java
+import java.util.*;
+public class Solution 
+{
+    public static ArrayList<Integer> getLeftView(TreeNode<Integer> root) 
+    {
+        ArrayList<Integer> ans = new ArrayList<>();
+        if(root == null){
+            return ans;
+        }
+        Deque<TreeNode> Q = new ArrayDeque<>();
+        Q.add(root);
+        while(!Q.isEmpty()){
+            int size_currLvl = Q.size();
+            Deque<Integer> curr = new ArrayDeque<>();
+            for(int i = 1; i <= size_currLvl; i++){
+                TreeNode<Integer> frontNode = Q.remove();
+                if(frontNode.left != null){
+                    Q.add(frontNode.left);
+                }
+                if(frontNode.right != null){
+                    Q.add(frontNode.right);
+                }
+                if(i == 1){
+                    curr.add(frontNode.data);
+                }
+            }
+            ans.addAll(curr);
+        }
+        return ans;
+    }
+}
+```
+
+### How This Version Works
+
+1. **Create the answer list:** `ans` stores one left-view value for each level.
+2. **Handle an empty tree:** When `root == null`, return the empty list immediately. This also avoids adding `null` to an `ArrayDeque`.
+3. **Start BFS:** Add the root to `Q`. The queue processes nodes level by level.
+4. **Save the current level size:** `size_currLvl = Q.size()` records how many nodes belong to this level before their children are added.
+5. **Process the level:** The `for` loop removes exactly `size_currLvl` nodes. Each node's left child is added before its right child, preserving left-to-right order for the next level.
+6. **Select the leftmost node:** `i` starts at `1`, so `i == 1` is true only for the first node removed at the current level. Its value is added to `curr`.
+7. **Store the selected value:** After the level is fully processed, `ans.addAll(curr)` appends that level's selected value to the answer. `curr` is newly created for every level and contains either one value or no values.
+8. **Return the result:** Once the queue is empty, `ans` contains the leftmost visible node from every level, from top to bottom.
+
+**Why does the first removed node represent the left view?** The queue is FIFO, and children are always enqueued left before right. Therefore nodes at each next level are removed from left to right. The first one removed is the leftmost node at that level.
+
+### Dry Run
+
+Example tree:
+
+```text
+          1
+        /   \\
+       2     3
+        \\   / \\
+         5  6   7
+```
+
+| Level | Queue at start | `size_currLvl` | First node (`i == 1`) | `curr` | `ans` after level |
+|---:|---|---:|---:|---|---|
+| 1 | `[1]` | 1 | 1 | `[1]` | `[1]` |
+| 2 | `[2, 3]` | 2 | 2 | `[2]` | `[1, 2]` |
+| 3 | `[5, 6, 7]` | 3 | 5 | `[5]` | `[1, 2, 5]` |
+
+**Returned value:** `[1, 2, 5]`
+
+### Why Use `curr` and `ans.addAll(curr)`?
+
+- `curr` is a temporary deque for the current level's selected value. Since the code adds a value only when `i == 1`, it contains at most one element.
+- `ans.addAll(curr)` transfers that selected value to the final `ArrayList` after the entire level has been processed.
+- The temporary `curr` is valid but not essential; the same selected value could be added directly to `ans` inside `if (i == 1)`. This revision keeps your submitted structure unchanged so the role of each operation stays clear.
+
+### Difference Between the Two Left View Methods
+
+| `printLeftView()` | `getLeftView()` |
+|---|---|
+| Prints each selected value using `System.out.print()`. | Returns the selected values in an `ArrayList<Integer>`. |
+| Does not build a result collection. | Uses `ans` as the result collection. |
+| The submitted version assumes a non-null root. | Checks `root == null` and returns an empty list. |
+
+### Complexity
+
+Let `N` be the number of nodes, `W` the maximum width, and `H` the number of levels.
+
+- **Time:** `O(N)` — each node is enqueued and removed once. Each level contributes at most one value to the result.
+- **Auxiliary space:** `O(W)` for the BFS queue. `curr` holds at most one integer, so it uses `O(1)` additional temporary space.
+- **Output space:** `O(H)` — one value is stored for each level.
+
+### Quick Recall
+
+`BFS + save level size + choose the first removed node (`i == 1`) + enqueue left before right + add to ans = Left View.`
+
 

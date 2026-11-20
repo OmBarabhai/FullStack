@@ -1,23 +1,27 @@
 # Pattern 4 — Root-to-Leaf & Path Problems
 
-> **Language:** Java
+> **Language:** Java  
+> **Revision style:** Tree-first dry runs, recursion state, return values, and concise complexity notes.
 
 ## Revision Navigation
 
-| Problem | Focus |
-|---|---|
-| LeetCode 129 — Sum Root to Leaf Numbers | Carry the number formed along each root-to-leaf path |
-| LeetCode 112 — Path Sum | Carry the remaining target and validate it only at a leaf |
-| Coding-platform path count variant | Count all root-to-leaf paths whose sum equals the target |
-| Root-to-Leaf Paths | Store every root-to-leaf path as a separate list |
-| LeetCode 257 — Binary Tree Paths | Build each root-to-leaf path as a string using `StringBuilder` |
-| LeetCode 113 — Path Sum II | Collect all root-to-leaf paths whose sum equals the target |
+| No. | Problem | What to track | Status |
+|---:|---|---|---|
+| 1 | [Sum Root to Leaf Numbers — LeetCode 129](#1-sum-root-to-leaf-numbers--leetcode-129) | Number built along each path; add leaf returns | Practised; revise independently |
+| 2 | [Path Sum — LeetCode 112](#2-path-sum--leetcode-112) | Remaining target; boolean result at a leaf | Practised; revise independently |
+| 3 | [Path Sum Count — Code360](#3-path-sum-count--code360) | Remaining target; add counts from both branches | Practised; revise independently |
+| 4 | [Root-to-Leaf Paths](#4-root-to-leaf-paths--store-all-paths) | Working list, saved copy, backtracking | Practised; revise independently |
+| 5 | [Binary Tree Paths — LeetCode 257](#5-binary-tree-paths--leetcode-257) | StringBuilder length and restore point | Practised; revise independently |
+| 6 | [Path Sum II — LeetCode 113](#6-path-sum-ii--leetcode-113) | Remaining target, matching leaf, copied path | Practised; revise independently |
 
-## 1. LeetCode 129 — Sum Root to Leaf Numbers
+---
 
-**Problem:** [Sum Root to Leaf Numbers — LeetCode 129](https://leetcode.com/problems/sum-root-to-leaf-numbers/)
+## 1. Sum Root to Leaf Numbers — LeetCode 129
 
-**Idea:** Build the number while moving from the root to each leaf. Add the numbers formed by all root-to-leaf paths.
+**Problem:** [Sum Root to Leaf Numbers](https://leetcode.com/problems/sum-root-to-leaf-numbers/)  
+**Task:** Each root-to-leaf path forms a number. Return the sum of all those numbers.
+
+### Java implementation — carry the number
 
 ```java
 class Solution {
@@ -40,24 +44,37 @@ class Solution {
 }
 ```
 
-**How it works:**
-- `sum * 10 + root.val` appends the current digit to the number.
-- At a leaf, return the completed path number.
-- Otherwise, add the results from the left and right paths.
-
-**Example:** The two root-to-leaf paths form `12` and `13`; answer = `25`.
+### Tree dry run
 
 ```text
-    1
-   / \
-  2   3
+       1
+      / \
+     2   3
 ```
 
-**Complexity:** `O(n)` time, `O(h)` recursion stack.
+Start at `1` with `sum = 0`.
 
-### Alternative implementation — Handle child cases separately
+```text
+At node 1: sum = 0 * 10 + 1 = 1
+             /             \
+            2               3
+sum = 1 * 10 + 2 = 12   sum = 1 * 10 + 3 = 13
+        leaf                   leaf
+        return 12              return 13
+```
 
-This version explicitly checks whether the current node has only a left child, only a right child, or both children. If neither child exists, the node is a leaf and the completed number is returned.
+| Call | Number entering node | Updated number | Result |
+|---|---:|---:|---:|
+| `sumNumbersHelp(1, 0)` | 0 | 1 | Waits for both children |
+| `sumNumbersHelp(2, 1)` | 1 | 12 | Leaf returns `12` |
+| `sumNumbersHelp(3, 1)` | 1 | 13 | Leaf returns `13` |
+| Back at node `1` | — | — | `left + right = 12 + 13 = 25` |
+
+**Final answer:** `25`
+
+**What the recursion carries:** the number formed so far, not a remaining target. `sum * 10 + root.val` appends the next digit.
+
+### Alternative implementation — explicit child cases
 
 ```java
 class Solution {
@@ -83,21 +100,33 @@ class Solution {
 }
 ```
 
-**How the conditions work:**
-- **Only left child:** continue through `root.left`.
-- **Only right child:** continue through `root.right`.
-- **Both children:** calculate the number from each subtree and add the results.
-- **No children (leaf):** return `sum * 10 + root.val`, because the root-to-leaf number is complete.
+### Dry run of the child conditions
 
-This is equivalent to the first implementation, but spells out the child cases. The first implementation is shorter because it calls both children and lets the `root == null` base case return `0` for a missing child.
+At each node, this version chooses the existing child links:
 
-## 2. LeetCode 112 — Path Sum
+```text
+          1                 1 has both children
+         / \
+        2   3               2 has no children → leaf
+                             3 has no children → leaf
+```
 
-**Problem:** [Path Sum — LeetCode 112](https://leetcode.com/problems/path-sum/)
+- At `1`, both children exist, so it calls the left and right sides and adds their returns.
+- At `2`, neither child exists, so it returns `12` as a completed number.
+- At `3`, neither child exists, so it returns `13`.
 
-**Goal:** Check whether at least one root-to-leaf path has a sum equal to `targetSum`.
+It produces the same result: `12 + 13 = 25`. The first implementation is shorter because the `null` base case handles missing children.
 
-### Complete concise implementation
+**Complexity — both implementations:** `O(N)` time, `O(H)` recursion stack. `N` is the number of nodes and `H` is the tree height.
+
+---
+
+## 2. Path Sum — LeetCode 112
+
+**Problem:** [Path Sum](https://leetcode.com/problems/path-sum/)  
+**Task:** Return `true` only when a root-to-leaf path adds up to `targetSum`.
+
+### Java implementation
 
 ```java
 class Solution {
@@ -116,57 +145,48 @@ class Solution {
 }
 ```
 
-### Key logic
-
-- `root == null` → return `false`; an empty branch cannot complete a path.
-- `root.left == null && root.right == null` → the current node is a leaf.
-- At a leaf, `targetSum == root.val` checks whether the remaining sum matches the leaf value.
-- Otherwise, subtract `root.val` and search both children. `||` means either side can contain a valid path.
-
-**Why not check `targetSum == 0` at any node?** The remaining sum can become zero before reaching a leaf. The path is valid only after reaching a leaf and matching its value.
-
-### Dry run
-
-Tree:
+### Tree dry run — follow the remaining target
 
 ```text
-      5
-     /
-    4
-   /
-  11
-    \
-     2
+       5
+      /
+     4
+    /
+   11
+     \
+      2
 ```
 
-`targetSum = 22`
+`targetSum = 22`. Each child receives the target left after subtracting the current node.
 
-| Node | Remaining target | Result |
-|---:|---:|---|
-| 5 | 22 | Pass `22 - 5 = 17` |
-| 4 | 17 | Pass `17 - 4 = 13` |
-| 11 | 13 | Pass `13 - 11 = 2` |
-| 2 | 2 | Leaf and `2 == 2` → `true` |
+| Current node | Target on entry | Value passed to child | Result |
+|---:|---:|---:|---|
+| `5` | 22 | `22 - 5 = 17` | Continue left |
+| `4` | 17 | `17 - 4 = 13` | Continue left |
+| `11` | 13 | `13 - 11 = 2` | Continue right |
+| `2` | 2 | — | Leaf: `2 == 2`, return `true` |
 
-Path: `5 → 4 → 11 → 2`; sum = `22`.
+The matching path is:
 
-**Complexity:** `O(N)` time; `O(H)` auxiliary recursion stack, where `H` is the tree height.
+```text
+5 → 4 → 11 → 2
+5 + 4 + 11 + 2 = 22
+```
 
+The result returns upward through the recursive calls. At a node, `leftResult || rightResult` is true when either branch finds a valid path.
 
-## 3. Code360 — Path Sum (Count Root-to-Leaf Paths)
+**Leaf check matters:** a matching remaining target at an internal node is not enough. The path must finish at a leaf.
 
-**Problem:** [Path Sum — Code360](https://www.naukri.com/code360/problems/path-sum_3170353?leftPanelTabValue=PROBLEM)
+**Complexity:** `O(N)` time, `O(H)` recursion stack.
 
-**What is required?** Return the **number of leaf nodes** for which the sum of the nodes from the root to that leaf is equal to `target`.
+---
 
-A valid path must:
-- Start at the root.
-- End at a leaf (a node with no left or right child).
-- Have a total sum equal to `target`.
+## 3. Path Sum Count — Code360
 
-The function returns a count. It does not return just `true` or `false`.
+**Problem:** [Path Sum — Code360](https://www.naukri.com/code360/problems/path-sum_3170353?leftPanelTabValue=PROBLEM)  
+**Task:** Return the **number** of root-to-leaf paths whose sum equals `target`. This is a count (`int`), not a boolean.
 
-### Implementation
+### Java implementation — submitted Code360 version
 
 ```java
 public class Solution {
@@ -185,68 +205,56 @@ public class Solution {
 }
 ```
 
-### How the recursion works
-
-The `target` parameter represents the **sum still required** from the current node down to a leaf.
-
-1. **Empty node:** If `root == null`, return `0`. An empty branch cannot form a valid root-to-leaf path.
-2. **Leaf node:** If both children are `null`, compare the remaining `target` with `root.data`. If they match, return `1` because one valid path has been found.
-3. **Internal node:** The current node is not the end of a path yet. Subtract its value from `target`, then recursively count valid paths in both subtrees.
-4. **Combine counts:** Add the left and right results. Both subtrees may contain valid paths, so use `+`, not `||`.
-
-**Why do we subtract the current node?** The current node's value has now been included in the path. The child calls only need to find the part of the sum that is still required.
-
-**When a leaf does not match:** This implementation continues to the recursive return statement. Since both children of that leaf are `null`, the two calls return `0`, so that leaf contributes `0` to the count.
-
-### Dry run — Code360 Sample 1, first test case
-
-**Tree:**
+### Tree dry run — count matching leaves
 
 ```text
-      3
-     / \
-    1   9
+        3
        / \
-      6  10
+      1   9
+         / \
+        6  10
 ```
 
 `target = 4`
 
-The possible root-to-leaf paths are:
-- `3 → 1` = `4` — valid.
-- `3 → 9 → 6` = `18` — not valid.
-- `3 → 9 → 10` = `22` — not valid.
+```text
+Path 3 → 1       = 4   ✓
+Path 3 → 9 → 6   = 18  ✗
+Path 3 → 9 → 10  = 22  ✗
+```
 
-Now trace the recursive calls. Each call is shown as `pathSum(node, remainingTarget)`:
+The method passes the **remaining target** to each child:
 
-| Recursive call | What happens | Returned count |
+| Call | What happens | Returned count |
 |---|---|---:|
-| `pathSum(3, 4)` | `3` is not a leaf. Remaining target becomes `4 - 3 = 1`; check both children. | `1` |
-| `pathSum(1, 1)` | `1` is a leaf and `1 == 1`. This is one valid path. | `1` |
-| `pathSum(9, 1)` | `9` is not a leaf. Remaining target becomes `1 - 9 = -8`; check both children. | `0` |
-| `pathSum(6, -8)` | Leaf does not match. Its two `null` child calls return `0`. | `0` |
-| `pathSum(10, -8)` | Leaf does not match. Its two `null` child calls return `0`. | `0` |
+| `pathSum(3, 4)` | Internal node; children receive `4 - 3 = 1` | `1` overall |
+| `pathSum(1, 1)` | Leaf matches `1` | `1` |
+| `pathSum(9, 1)` | Children receive `1 - 9 = -8` | `0` |
+| `pathSum(6, -8)` | Leaf does not match; null children return `0` | `0` |
+| `pathSum(10, -8)` | Leaf does not match; null children return `0` | `0` |
 
-**Return values combine from the bottom up:**
+Returns combine with `+`:
 
 ```text
-Node 9:  0 + 0 = 0
-Node 3:  1 + 0 = 1
+At node 9:  0 + 0 = 0
+At node 3:  1 + 0 = 1
 ```
 
 **Final answer:** `1`
 
-### Key takeaway
+**Important difference from LeetCode 112:** `||` answers whether a path exists; `+` adds the number of valid paths found in both subtrees.
 
-At every node, carry the **remaining target**. A leaf contributes `1` only when its value matches that remaining target. Add the counts from the left and right subtrees to get the total number of valid paths.
+**Code detail:** when a leaf does not match, this submitted implementation falls through to the two recursive calls on `null` children. Both return `0`, so that leaf contributes zero.
 
-**Complexity:** `O(N)` time because each node is visited once. Auxiliary recursion space is `O(H)`, where `H` is the tree height (`O(N)` in a skewed tree).
+**Complexity:** `O(N)` time, `O(H)` recursion stack.
+
+---
 
 ## 4. Root-to-Leaf Paths — Store All Paths
 
-**Goal:** Return every path from the root to a leaf. Each path is stored as a separate `ArrayList<Integer>`.
+**Task:** Return each root-to-leaf path as its own `ArrayList<Integer>`.
 
-### Implementation
+### Java implementation — copy the path at a leaf
 
 ```java
 class Solution {
@@ -276,74 +284,43 @@ class Solution {
 }
 ```
 
-### Key logic
+### Tree dry run — watch `op` and `ans`
 
-- `op` stores the path currently being explored.
-- Add `root.data` when entering a node.
-- When the node is a leaf, add `new ArrayList<>(op)` to `ans`. This copy keeps the completed path independent of later backtracking.
-- Otherwise, explore the left and right children.
-- Remove the current node from `op` before returning, so the next branch starts with the correct path.
-- The `root == null` check handles an empty tree and missing child calls.
+```text
+       1
+      / \
+     2   3
+      \
+       5
+```
 
-### Why use `new ArrayList<>(op)`?
+- `op` is one reusable working path.
+- `ans` stores separate copies when a leaf is reached.
+- After exploring a branch, `op.remove(op.size() - 1)` removes the node added by that call.
 
-The same `op` list is reused while recursion explores the tree. This is intentional: each recursive call receives a reference to that same list, so changes made during recursion are visible to the other calls. Backtracking then removes the last node to restore the path for the next branch.
+| DFS event | `op` after event | `ans` |
+|---|---|---|
+| Enter `1` | `[1]` | `[]` |
+| Enter `2` | `[1, 2]` | `[]` |
+| Enter leaf `5`; save a copy | `[1, 2, 5]` | `[[1, 2, 5]]` |
+| Backtrack from `5`, then `2` | `[1]` | `[[1, 2, 5]]` |
+| Enter leaf `3`; save a copy | `[1, 3]` | `[[1, 2, 5], [1, 3]]` |
+| Backtrack from `3`, then `1` | `[]` | `[[1, 2, 5], [1, 3]]` |
 
-But when a complete path is found, we must save a **separate copy** of its current values.
+**Final answer:** `[[1, 2, 5], [1, 3]]`
+
+### Why copy the list?
+
+These two statements do different things:
 
 ```java
 ans.add(op);                   // Stores the same list object
 ans.add(new ArrayList<>(op));  // Stores a new list with the current values
 ```
 
-**What goes wrong with `ans.add(op)`?**
+`ans.add(op)` stores the same list object. Later backtracking changes that object. The copied list keeps the path values as they were when the leaf was reached.
 
-For this tree:
-
-```text
-    1
-   / \
-  2   3
-   \
-    5
-```
-
-When the DFS reaches leaf `5`, `op` is `[1, 2, 5]`. If we use `ans.add(op)`, `ans` stores a reference to the original `op` list; it does not save a snapshot. Backtracking then removes `5` and `2`. When DFS reaches leaf `3`, the same list becomes `[1, 3]`. The earlier entry changes too, because it still refers to that same list. After the final backtracking, the shared list becomes empty.
-
-**What happens with `new ArrayList<>(op)`?**
-
-The copy constructor creates a different list and copies the current elements into it. The saved path stays `[1, 2, 5]` even when the original `op` list is later changed. The next leaf is saved as another independent list, `[1, 3]`.
-
-| Operation | Original `op` | Saved paths in `ans` when using a copy |
-|---|---|---|
-| Reach leaf `5` and save | `[1, 2, 5]` | `[[1, 2, 5]]` |
-| Backtrack to node `1` | `[1]` | `[[1, 2, 5]]` |
-| Reach leaf `3` and save | `[1, 3]` | `[[1, 2, 5], [1, 3]]` |
-| Finish backtracking | `[]` | `[[1, 2, 5], [1, 3]]` |
-
-**Remember the difference:** pass `op` into recursive calls to reuse one working path; copy it when adding a completed path to `ans` so the saved result does not change during backtracking.
-
-**Example:**
-
-```text
-    1
-   / \
-  2   3
-   \
-    5
-```
-
-The root-to-leaf paths are:
-
-```text
-[[1, 2, 5], [1, 3]]
-```
-
-**Complexity:** `O(N + total output size)` time. Auxiliary recursion and current-path space are `O(H)`, where `H` is the tree height. The returned paths require additional output space.
-
-### Alternative implementation — Copy using `addAll()` (screenshot approach)
-
-This version follows the same DFS and backtracking idea. At a leaf, it first adds the leaf value, then creates a new list and copies the current path into it using `addAll()`.
+### Alternative implementation — copy with `addAll()`
 
 ```java
 class Solution {
@@ -379,11 +356,13 @@ class Solution {
 }
 ```
 
-**What does `list.addAll(arr)` do?** It copies all elements currently present in `arr` into the new `list`. So these two ways both save an independent copy of the current path:
+The copy operation in this version is:
 
 ```java
 ans.add(new ArrayList<>(arr));
 ```
+
+It can also be written as:
 
 ```java
 ArrayList<Integer> list = new ArrayList<>();
@@ -391,15 +370,18 @@ list.addAll(arr);
 ans.add(list);
 ```
 
-Both implementations produce the same result. The `addAll()` version handles the leaf separately: add the leaf, copy the path, remove the leaf, and return. The earlier implementation is easier to revise because it follows one consistent order for every node: **add current value → process leaf or children → remove current value**. Use that earlier implementation as the primary version; remember `addAll()` as an equivalent way to make the copy.
+Both implementations save an independent copy. The first implementation uses the same simple order at every node: add the current value → explore/save → remove the current value. The alternative handles the leaf separately by adding it, copying, removing it, and returning.
 
-## 5. LeetCode 257 — Binary Tree Paths
+**Complexity:** Traversal is `O(N)`. Copying paths takes time proportional to the total number of values in the returned paths. Auxiliary path and recursion space are `O(H)`; returned paths are output space.
 
-**Problem:** [Binary Tree Paths — LeetCode 257](https://leetcode.com/problems/binary-tree-paths/)
+---
 
-**Goal:** Return every root-to-leaf path as a string, with node values separated by `->`.
+## 5. Binary Tree Paths — LeetCode 257
 
-### Implementation
+**Problem:** [Binary Tree Paths](https://leetcode.com/problems/binary-tree-paths/)  
+**Task:** Return every root-to-leaf path as a string, separating values with `->`.
+
+### Java implementation — StringBuilder + restore length
 
 ```java
 class Solution {
@@ -431,41 +413,41 @@ class Solution {
 }
 ```
 
-### Key logic
-
-- `len` saves the current `StringBuilder` length before adding this node's value.
-- Add `->` only when the path already contains a node; then append `root.val`.
-- At a leaf, `sb.toString()` creates a `String` containing the complete path and stores it in `ans`.
-- Otherwise, explore both children using the same `StringBuilder`.
-- `sb.setLength(len)` removes everything added in this call and restores the path to its previous state before returning. This handles both the node value and the `->` separator, including multi-digit values.
-
-**Example:**
+### Tree dry run — trace the StringBuilder
 
 ```text
-    1
-   / \
-  2   3
-   \
-    5
+       1
+      / \
+     2   3
+      \
+       5
 ```
 
-Output:
+`len` records the StringBuilder length **before** the current node is appended. On return, `setLength(len)` restores that exact earlier state.
 
-```text
-["1->2->5", "1->3"]
-```
+| DFS event | `len` saved | `sb` after append / save | Action on return |
+|---|---:|---|---|
+| Enter `1` | 0 | `1` | Restore to `""` |
+| Enter `2` | 1 | `1->2` | Restore to `1` |
+| Enter `5` | 4 | `1->2->5` | Save path; restore to `1->2` |
+| Return from `2` | — | `1->2` | `2` call restores to `1` |
+| Enter `3` | 1 | `1->3` | Save path; restore to `1` |
+| Return from `1` | — | `1` | Root restores to `""` |
 
-**Remember:** `StringBuilder` is reused during recursion, so restore it after exploring a node. `sb.toString()` saves an independent `String` for each completed path.
+**Final answer:** `["1->2->5", "1->3"]`
 
-**Complexity:** `O(N + total output length)` time. Auxiliary path and recursion space are `O(H)`, where `H` is the tree height; the returned strings require additional output space.
+`sb.toString()` saves a separate immutable string in `ans`. The working `StringBuilder` is then reused for the next branch.
 
-## 6. LeetCode 113 — Path Sum II
+**Complexity:** `O(N + total output characters)` time. Auxiliary recursion stack and current path are `O(H)`; returned strings are output space.
 
-**Problem:** [Path Sum II — LeetCode 113](https://leetcode.com/problems/path-sum-ii/)
+---
 
-**Goal:** Return all root-to-leaf paths whose node values add up to `targetSum`.
+## 6. Path Sum II — LeetCode 113
 
-### Implementation
+**Problem:** [Path Sum II](https://leetcode.com/problems/path-sum-ii/)  
+**Task:** Return all root-to-leaf paths whose values add up to `targetSum`.
+
+### Java implementation — path list + remaining target
 
 ```java
 class Solution {
@@ -493,17 +475,9 @@ class Solution {
 }
 ```
 
-### Key logic
+### Tree dry run — follow both matching paths and backtracking
 
-- `curr` stores the path currently being explored. Add `currNode.val` when entering a node.
-- `targetSum` is the **remaining sum required**. When moving to a child, subtract the current node's value.
-- Save a path only when the current node is a **leaf** and `targetSum == currNode.val`.
-- `new ArrayList<>(curr)` stores an independent copy of the completed path. The working list `curr` is reused during DFS.
-- Backtrack by removing the current node. In the matching-leaf case, remove it before `return`; in other cases, remove it after exploring both children.
-
-### Dry run
-
-For this tree with `targetSum = 22`:
+`targetSum = 22`
 
 ```text
               5
@@ -515,20 +489,69 @@ For this tree with `targetSum = 22`:
       7    2      5   1
 ```
 
-The branches show the exact parent-child relationships: `5` has children `4` and `8`; `11` has children `7` and `2`; and the right-side `4` has children `5` and `1`.
+The call carries the remaining target. The current node is added to `curr`; at a matching leaf, a copy is saved.
 
-The first valid path is `5 → 4 → 11 → 2`:
+**Left side of the tree**
 
-| Node visited | Remaining target passed to this node | Current path |
-|---:|---:|---|
-| 5 | 22 | `[5]` |
-| 4 | 17 | `[5, 4]` |
-| 11 | 13 | `[5, 4, 11]` |
-| 2 | 2 | `[5, 4, 11, 2]` |
+| Node | Remaining target on entry | Current path | Leaf result |
+|---:|---:|---|---|
+| `5` | 22 | `[5]` | Internal node; children get 17 |
+| `4` | 17 | `[5, 4]` | Internal node; child gets 13 |
+| `11` | 13 | `[5, 4, 11]` | Internal node; children get 2 |
+| `7` | 2 | `[5, 4, 11, 7]` | `7 != 2`; no path saved |
+| `2` | 2 | `[5, 4, 11, 2]` | `2 == 2`; save `[5, 4, 11, 2]` |
 
-At leaf `2`, the remaining target is `2`, so the path is copied into `ans`. DFS later finds the other valid path, `5 → 8 → 4 → 5`.
+After the left subtree finishes, backtracking restores `curr` to `[5]` before the right subtree starts.
 
-**Output:** `[[5, 4, 11, 2], [5, 8, 4, 5]]`
+**Right side of the tree**
 
-**Complexity:** `O(N + total output size)` time; in the worst case, path copying can take `O(NH)`, where `H` is the tree height. Auxiliary recursion and current-path space are `O(H)`, excluding the returned answer.
+| Node | Remaining target on entry | Current path | Leaf result |
+|---:|---:|---|---|
+| `8` | 17 | `[5, 8]` | Children get 9 |
+| `13` | 9 | `[5, 8, 13]` | `13 != 9`; no path saved |
+| `4` | 9 | `[5, 8, 4]` | Children get 5 |
+| `5` | 5 | `[5, 8, 4, 5]` | `5 == 5`; save `[5, 8, 4, 5]` |
+| `1` | 5 | `[5, 8, 4, 1]` | `1 != 5`; no path saved |
 
+**Final answer:**
+
+```text
+[
+  [5, 4, 11, 2],
+  [5, 8, 4, 5]
+]
+```
+
+**Pointer to the important lines:**
+
+- `curr.add(currNode.val)` — enter the current node.
+- `targetSum - currNode.val` — pass the remaining amount to the children.
+- `ans.add(new ArrayList<>(curr))` — save an independent copy only at a matching leaf.
+- `curr.remove(curr.size() - 1)` — undo the current node before returning to the parent/next branch.
+
+**Complexity:** Each node is visited once (`O(N)` traversal). Copying all successful paths adds work proportional to the total output size; in a worst case this can be `O(NH)`. Auxiliary recursion and current-path space are `O(H)`, excluding the returned answer.
+
+---
+
+## Quick Comparison — What Does Each Recursive Call Carry?
+
+| Problem | State passed down | What comes back / gets saved |
+|---|---|---|
+| Sum Root to Leaf Numbers | Number built so far | Completed number at each leaf; add the returns |
+| Path Sum (boolean) | Remaining target | `true` / `false` from either branch |
+| Path Sum Count | Remaining target | Count from left + count from right |
+| Store All Paths | Current path list | Copy of each completed root-to-leaf path |
+| Binary Tree Paths | StringBuilder + saved length | String copy at each leaf; restore builder |
+| Path Sum II | Remaining target + current path | Copy only when a leaf matches |
+
+## Self-Revision Checklist
+
+- [ ] Sum Root to Leaf Numbers: trace `1 → 2` as `12` and `1 → 3` as `13`; add the leaf returns.
+- [ ] Path Sum: subtract the current value and check equality only at a leaf.
+- [ ] Path Sum Count: explain why the left and right counts are added with `+`.
+- [ ] Store All Paths: trace `op`, `ans`, and each backtracking removal.
+- [ ] Explain why `new ArrayList<>(op)` is required to save a path copy.
+- [ ] Binary Tree Paths: trace `sb` and show why `setLength(len)` restores the parent path.
+- [ ] Path Sum II: trace both valid paths and at least one non-matching leaf.
+- [ ] Explain the difference between boolean existence, integer count, and collecting all paths.
+- [ ] Reimplement each approach independently.
