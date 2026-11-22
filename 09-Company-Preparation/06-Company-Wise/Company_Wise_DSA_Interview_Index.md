@@ -66,4 +66,4 @@ A company set is ready when its questions map to learned patterns, duplicates ar
 
 ## Canonical problem bank
 
-Use the [Three-Year Pattern-Wise Final Problem Bank](../../02-DSA/00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v2.md) as the single location for problem entries. Company tags are filters only; do not create duplicate company-specific copies of solutions.
+Use the [Three-Year DSA Interview Master Bank — Final 350](../../02-DSA/00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v3.md) as the single location for problem entries. Company tags are filters only; do not create duplicate company-specific copies of solutions.
