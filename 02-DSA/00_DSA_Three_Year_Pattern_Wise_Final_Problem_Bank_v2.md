@@ -1,3 +1,5 @@
+> **ARCHIVED / SUPERSEDED:** This 236-problem pattern-wise draft is retained for history only. The active final schedule is [Three-Year DSA Interview Master Bank — Final 350 v3](00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v3.md). Do not use this v2 file as the current schedule.
+
 # Three-Year Pattern-Wise DSA Interview Problem Bank — Final v2
 
 > **Scope:** Interview-focused DSA for fresher / SDE-1 and product-company coding interviews. This is a deliberately curated bank, not a competitive-programming syllabus and not a list of every problem available online.
