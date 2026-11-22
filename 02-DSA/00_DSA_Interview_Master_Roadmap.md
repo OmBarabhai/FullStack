@@ -119,3 +119,7 @@ Change the plan only when evidence identifies a gap.
 - [Interview fundamentals discussion](https://www.reddit.com/r/developersIndia/comments/1vgvat6/unpopular_opinion_most_software_engineers_suck/): individual interviewer perspective on logic, assumptions and communication.
 
 Community posts are anecdotes, not statistical guarantees. The interpretation for this roadmap is to prioritise fundamentals, reasoning, implementation and explanation over raw volume.
+
+## Active three-year problem schedule
+
+Use [00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v2.md](00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v2.md) as the single active problem list. It contains 236 unique, interview-focused problems across 33 patterns. The calendar runs 23 November 2026–22 November 2029: 784 weekdays, 100 additional weekday buffer days, and 684 planned weekday sessions. Weekends have no new-problem target and are reserved for weekly review and rest. The remaining weekday sessions are for spaced revision, variations, mixed practice, company-specific selection and mock interviews.
