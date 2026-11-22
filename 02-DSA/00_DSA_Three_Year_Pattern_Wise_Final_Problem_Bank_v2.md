@@ -380,50 +380,50 @@ Company codes: AMZ Amazon; MSFT Microsoft; GOO Google; ADB Adobe; ATL Atlassian;
 | # | LeetCode problem | Difficulty | Phase | Company dataset tags | Existing-work note |
 |---:|---|---|---|---|---|
 | 184 | [Climbing Stairs — LC 70](https://leetcode.com/problems/climbing-stairs/) | Easy | Y2 | MSFT*, ACC, GS | Check existing DP notes first |
-| 185 | [Min Cost Climbing Stairs — LC 746](https://leetcode.com/problems/min-cost-climbing-stairs/) | Easy | Y3 | — | Check existing DP notes first |
+| 185 | [Min Cost Climbing Stairs — LC 746](https://leetcode.com/problems/min-cost-climbing-stairs/) | Easy | Y2 | — | Check existing DP notes first |
 | 186 | [House Robber — LC 198](https://leetcode.com/problems/house-robber/) | Medium | Y2 | AMZ*, GOO*, MSFT, ADB, UBER, PHONEPE | Check existing DP notes first |
-| 187 | [House Robber II — LC 213](https://leetcode.com/problems/house-robber-ii/) | Medium | Y3 | — | Check existing DP notes first |
-| 188 | [Delete and Earn — LC 740](https://leetcode.com/problems/delete-and-earn/) | Medium | Y3 | MORGAN | Check existing DP notes first |
+| 187 | [House Robber II — LC 213](https://leetcode.com/problems/house-robber-ii/) | Medium | Y2 | — | Check existing DP notes first |
+| 188 | [Delete and Earn — LC 740](https://leetcode.com/problems/delete-and-earn/) | Medium | Y2 | MORGAN | Check existing DP notes first |
 | 189 | [Maximum Subarray — LC 53](https://leetcode.com/problems/maximum-subarray/) | Medium | Y2 | AMZ*, GOO*, MSFT, ADB, ATL, UBER, PHONEPE, GS, MORGAN, ACC | Review — Kadane's previously practised |
-| 190 | [Best Time to Buy and Sell Stock — LC 121](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/) | Easy | Y3 | AMZ*, MSFT*, GOO*, ADB, ATL, UBER, FLIP, PHONEPE, GS, MORGAN, ACC | New / verify |
-| 191 | [Best Time to Buy and Sell Stock II — LC 122](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/) | Medium | Y3 | GS, ACC | Check existing DP notes first |
-| 192 | [House Robber III — LC 337](https://leetcode.com/problems/house-robber-iii/) | Medium | Y3 | — | Check existing Tree/DP notes first |
-| 193 | [Maximum Product Subarray — LC 152](https://leetcode.com/problems/maximum-product-subarray/) | Medium | Y3 | MORGAN | Check existing DP notes first |
+| 190 | [Best Time to Buy and Sell Stock — LC 121](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/) | Easy | Y2 | AMZ*, MSFT*, GOO*, ADB, ATL, UBER, FLIP, PHONEPE, GS, MORGAN, ACC | New / verify |
+| 191 | [Best Time to Buy and Sell Stock II — LC 122](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/) | Medium | Y2 | GS, ACC | Check existing DP notes first |
+| 192 | [House Robber III — LC 337](https://leetcode.com/problems/house-robber-iii/) | Medium | Y2 | — | Check existing Tree/DP notes first |
+| 193 | [Maximum Product Subarray — LC 152](https://leetcode.com/problems/maximum-product-subarray/) | Medium | Y2 | MORGAN | Check existing DP notes first |
 
 ## 25. DP Knapsack / Subset Sum — 4 problems
 
 | # | LeetCode problem | Difficulty | Phase | Company dataset tags | Existing-work note |
 |---:|---|---|---|---|---|
-| 194 | [Coin Change — LC 322](https://leetcode.com/problems/coin-change/) | Medium | Y3 | AMZ*, MSFT, GOO, ADB, UBER, PHONEPE, GS, MORGAN | Check existing DP notes first |
-| 195 | [Coin Change II — LC 518](https://leetcode.com/problems/coin-change-2/) | Medium | Y3 | — | Check existing DP notes first |
-| 196 | [Partition Equal Subset Sum — LC 416](https://leetcode.com/problems/partition-equal-subset-sum/) | Medium | Y3 | MSFT | Check existing DP notes first |
-| 197 | [Target Sum — LC 494](https://leetcode.com/problems/target-sum/) | Medium | Y3 | — | Check existing DP notes first |
+| 194 | [Coin Change — LC 322](https://leetcode.com/problems/coin-change/) | Medium | Y2 | AMZ*, MSFT, GOO, ADB, UBER, PHONEPE, GS, MORGAN | Check existing DP notes first |
+| 195 | [Coin Change II — LC 518](https://leetcode.com/problems/coin-change-2/) | Medium | Y2 | — | Check existing DP notes first |
+| 196 | [Partition Equal Subset Sum — LC 416](https://leetcode.com/problems/partition-equal-subset-sum/) | Medium | Y2 | MSFT | Check existing DP notes first |
+| 197 | [Target Sum — LC 494](https://leetcode.com/problems/target-sum/) | Medium | Y2 | — | Check existing DP notes first |
 
 ## 26. DP Grid / Matrix Paths — 6 problems
 
 | # | LeetCode problem | Difficulty | Phase | Company dataset tags | Existing-work note |
 |---:|---|---|---|---|---|
-| 198 | [Unique Paths — LC 62](https://leetcode.com/problems/unique-paths/) | Medium | Y3 | — | Check existing DP notes first |
-| 199 | [Unique Paths II — LC 63](https://leetcode.com/problems/unique-paths-ii/) | Medium | Y3 | — | Check existing DP notes first |
-| 200 | [Minimum Path Sum — LC 64](https://leetcode.com/problems/minimum-path-sum/) | Medium | Y3 | GS | Check existing DP notes first |
-| 201 | [Triangle — LC 120](https://leetcode.com/problems/triangle/) | Medium | Y3 | — | Check existing DP notes first |
-| 202 | [Maximal Square — LC 221](https://leetcode.com/problems/maximal-square/) | Medium | Y3 | GOO*, AMZ, MSFT, GOO, FLIP, PHONEPE | New |
+| 198 | [Unique Paths — LC 62](https://leetcode.com/problems/unique-paths/) | Medium | Y2 | — | Check existing DP notes first |
+| 199 | [Unique Paths II — LC 63](https://leetcode.com/problems/unique-paths-ii/) | Medium | Y2 | — | Check existing DP notes first |
+| 200 | [Minimum Path Sum — LC 64](https://leetcode.com/problems/minimum-path-sum/) | Medium | Y2 | GS | Check existing DP notes first |
+| 201 | [Triangle — LC 120](https://leetcode.com/problems/triangle/) | Medium | Y2 | — | Check existing DP notes first |
+| 202 | [Maximal Square — LC 221](https://leetcode.com/problems/maximal-square/) | Medium | Y2 | GOO*, AMZ, MSFT, GOO, FLIP, PHONEPE | New |
 | 203 | [Dungeon Game — LC 174](https://leetcode.com/problems/dungeon-game/) | Hard | Y3 | AMZ, MSFT, GOO, UBER, FLIP | Selective |
 
 ## 27. DP Subsequences / Strings / Palindromes — 10 problems
 
 | # | LeetCode problem | Difficulty | Phase | Company dataset tags | Existing-work note |
 |---:|---|---|---|---|---|
-| 204 | [Longest Increasing Subsequence — LC 300](https://leetcode.com/problems/longest-increasing-subsequence/) | Medium | Y3 | AMZ, MSFT, GOO, UBER, FLIP, GS, MORGAN | Check existing DP notes first |
-| 205 | [Number of Longest Increasing Subsequence — LC 673](https://leetcode.com/problems/number-of-longest-increasing-subsequence/) | Medium | Y3 | — | Check existing DP notes first |
-| 206 | [Longest Common Subsequence — LC 1143](https://leetcode.com/problems/longest-common-subsequence/) | Medium | Y3 | MORGAN | Check existing DP notes first |
-| 207 | [Edit Distance — LC 72](https://leetcode.com/problems/edit-distance/) | Medium | Y3 | — | Check existing DP notes first |
+| 204 | [Longest Increasing Subsequence — LC 300](https://leetcode.com/problems/longest-increasing-subsequence/) | Medium | Y2 | AMZ, MSFT, GOO, UBER, FLIP, GS, MORGAN | Check existing DP notes first |
+| 205 | [Number of Longest Increasing Subsequence — LC 673](https://leetcode.com/problems/number-of-longest-increasing-subsequence/) | Medium | Y2 | — | Check existing DP notes first |
+| 206 | [Longest Common Subsequence — LC 1143](https://leetcode.com/problems/longest-common-subsequence/) | Medium | Y2 | MORGAN | Check existing DP notes first |
+| 207 | [Edit Distance — LC 72](https://leetcode.com/problems/edit-distance/) | Medium | Y2 | — | Check existing DP notes first |
 | 208 | [Distinct Subsequences — LC 115](https://leetcode.com/problems/distinct-subsequences/) | Hard | Y3 | — | Check existing DP notes first |
-| 209 | [Word Break — LC 139](https://leetcode.com/problems/word-break/) | Medium | Y3 | — | Check existing DP notes first |
-| 210 | [Longest Palindromic Substring — LC 5](https://leetcode.com/problems/longest-palindromic-substring/) | Medium | Y3 | AMZ, MSFT, GOO, ADB, UBER, FLIP, PHONEPE, GS, ACC | New |
+| 209 | [Word Break — LC 139](https://leetcode.com/problems/word-break/) | Medium | Y2 | — | Check existing DP notes first |
+| 210 | [Longest Palindromic Substring — LC 5](https://leetcode.com/problems/longest-palindromic-substring/) | Medium | Y2 | AMZ, MSFT, GOO, ADB, UBER, FLIP, PHONEPE, GS, ACC | New |
 | 211 | [Longest Palindromic Subsequence — LC 516](https://leetcode.com/problems/longest-palindromic-subsequence/) | Medium | Y3 | GS | Selective |
-| 212 | [Palindromic Substrings — LC 647](https://leetcode.com/problems/palindromic-substrings/) | Medium | Y3 | GS* | New |
-| 213 | [Decode Ways — LC 91](https://leetcode.com/problems/decode-ways/) | Medium | Y3 | AMZ, MSFT, GOO, ADB, UBER, GS | New |
+| 212 | [Palindromic Substrings — LC 647](https://leetcode.com/problems/palindromic-substrings/) | Medium | Y2 | GS* | New |
+| 213 | [Decode Ways — LC 91](https://leetcode.com/problems/decode-ways/) | Medium | Y2 | AMZ, MSFT, GOO, ADB, UBER, GS | New |
 
 ## 28. DP State Machine / Scheduling — 4 problems
 
@@ -438,9 +438,9 @@ Company codes: AMZ Amazon; MSFT Microsoft; GOO Google; ADB Adobe; ATL Atlassian;
 
 | # | LeetCode problem | Difficulty | Phase | Company dataset tags | Existing-work note |
 |---:|---|---|---|---|---|
-| 218 | [Longest Common Prefix — LC 14](https://leetcode.com/problems/longest-common-prefix/) | Easy | Y3 | AMZ*, MSFT*, GOO*, ADB, UBER, PHONEPE | New |
-| 219 | [Implement Trie (Prefix Tree) — LC 208](https://leetcode.com/problems/implement-trie-prefix-tree/) | Medium | Y3 | — | New |
-| 220 | [Design Add and Search Words Data Structure — LC 211](https://leetcode.com/problems/design-add-and-search-words-data-structure/) | Medium | Y3 | — | New |
+| 218 | [Longest Common Prefix — LC 14](https://leetcode.com/problems/longest-common-prefix/) | Easy | Y2 | AMZ*, MSFT*, GOO*, ADB, UBER, PHONEPE | New |
+| 219 | [Implement Trie (Prefix Tree) — LC 208](https://leetcode.com/problems/implement-trie-prefix-tree/) | Medium | Y2 | — | New |
+| 220 | [Design Add and Search Words Data Structure — LC 211](https://leetcode.com/problems/design-add-and-search-words-data-structure/) | Medium | Y2 | — | New |
 
 ## 30. Bit Manipulation — 6 problems
 
@@ -464,17 +464,17 @@ Company codes: AMZ Amazon; MSFT Microsoft; GOO Google; ADB Adobe; ATL Atlassian;
 
 | # | LeetCode problem | Difficulty | Phase | Company dataset tags | Existing-work note |
 |---:|---|---|---|---|---|
-| 229 | [Set Matrix Zeroes — LC 73](https://leetcode.com/problems/set-matrix-zeroes/) | Medium | Y3 | — | New |
-| 230 | [Spiral Matrix — LC 54](https://leetcode.com/problems/spiral-matrix/) | Medium | Y3 | — | New — matrix boundary traversal |
-| 231 | [Rotate Image — LC 48](https://leetcode.com/problems/rotate-image/) | Medium | Y3 | — | New — in-place matrix transformation |
-| 232 | [Search a 2D Matrix II — LC 240](https://leetcode.com/problems/search-a-2d-matrix-ii/) | Medium | Y3 | — | New — matrix search / staircase |
+| 229 | [Set Matrix Zeroes — LC 73](https://leetcode.com/problems/set-matrix-zeroes/) | Medium | Y2 | — | New |
+| 230 | [Spiral Matrix — LC 54](https://leetcode.com/problems/spiral-matrix/) | Medium | Y2 | — | New — matrix boundary traversal |
+| 231 | [Rotate Image — LC 48](https://leetcode.com/problems/rotate-image/) | Medium | Y2 | — | New — in-place matrix transformation |
+| 232 | [Search a 2D Matrix II — LC 240](https://leetcode.com/problems/search-a-2d-matrix-ii/) | Medium | Y2 | — | New — matrix search / staircase |
 
 ## 33. Data Structure Design — 4 problems
 
 | # | LeetCode problem | Difficulty | Phase | Company dataset tags | Existing-work note |
 |---:|---|---|---|---|---|
-| 233 | [LRU Cache — LC 146](https://leetcode.com/problems/lru-cache/) | Medium | Y3 | AMZ, MSFT, GOO, ADB, ATL, UBER, FLIP, PHONEPE, GS, MORGAN, ACC | New — HashMap + doubly linked list |
-| 234 | [Time Based Key-Value Store — LC 981](https://leetcode.com/problems/time-based-key-value-store/) | Medium | Y3 | — | New — HashMap + binary search |
+| 233 | [LRU Cache — LC 146](https://leetcode.com/problems/lru-cache/) | Medium | Y2 | AMZ, MSFT, GOO, ADB, ATL, UBER, FLIP, PHONEPE, GS, MORGAN, ACC | New — HashMap + doubly linked list |
+| 234 | [Time Based Key-Value Store — LC 981](https://leetcode.com/problems/time-based-key-value-store/) | Medium | Y2 | — | New — HashMap + binary search |
 | 235 | [Insert Delete GetRandom O(1) — LC 380](https://leetcode.com/problems/insert-delete-getrandom-o1/) | Medium | Y3 | — | Selective — data structure design |
 | 236 | [Logger Rate Limiter — LC 359](https://leetcode.com/problems/logger-rate-limiter/) | Easy | Y3 | — | Selective — map + queue/time window |
 
