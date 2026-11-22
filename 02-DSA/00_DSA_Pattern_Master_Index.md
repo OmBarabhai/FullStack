@@ -1,3 +1,5 @@
+> **Active problem list:** [Three-Year Pattern-Wise Final Problem Bank v2](00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v2.md) is the canonical problem schedule. Use this index for pattern navigation; do not maintain a competing problem list here.
+
 # DSA Pattern Master Index — Interview Track
 
 > **Language:** Java. **Scope:** Software engineering coding interviews, especially entry-level and SDE-1. This file is navigation; detailed explanations and your submitted code stay in the existing topic folders.
