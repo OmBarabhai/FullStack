@@ -492,7 +492,7 @@ A prior accepted submission, watched explanation or stored code is not automatic
 
 ## 7. Source selection and research basis
 
-Company tags were checked against [liquidslr/leetcode-company-wise-problems](https://github.com/liquidslr/leetcode-company-wise-problems). The repository's latest checked update was [21 October 2026 UTC](https://github.com/liquidslr/leetcode-company-wise-problems/commit/2b71796266751b4736a7ef180efb6847879166ee); it provides per-company 30-day and all-time CSVs. Frequency tags are platform data and should not be interpreted as guarantees.
+Company tags were checked against [liquidslr/leetcode-company-wise-problems](https://github.com/liquidslr/leetcode-company-wise-problems). Its README still labels the dataset “Updated as of 20 Oct, 2025”, but a later source commit dated [21 October 2026 UTC](https://github.com/liquidslr/leetcode-company-wise-problems/commit/2b71796266751b4736a7ef180efb6847879166ee) modified company CSV files, including the selected companies. Therefore, the tags in this bank are a checked snapshot, not a live feed. Recheck the current company CSV before using it to prepare for a specific interview. Frequency tags are platform data and should not be interpreted as guarantees.
 
 Pattern ordering was cross-checked with the [NeetCode roadmap](https://neetcode.io/roadmap), which organises interview preparation around Arrays & Hashing, Two Pointers, Stack, Linked List, Binary Search, Sliding Window, Trees, Tries, Heap, Backtracking, Graphs and Dynamic Programming.
 
