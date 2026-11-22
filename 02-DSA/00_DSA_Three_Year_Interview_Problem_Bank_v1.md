@@ -1,4 +1,4 @@
-> **ARCHIVED / SUPERSEDED:** This data-structure-wise 240-question draft is retained for history only. Do not use it as the active schedule. The active curated, pattern-wise list is [DSA Three-Year Pattern-Wise Final Problem Bank v2](00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v2.md).
+> **ARCHIVED / SUPERSEDED:** This data-structure-wise 240-question draft is retained for history only. Do not use it as the active schedule. The active curated, pattern-wise list is [DSA Three-Year Interview Master Bank — Final 350 v3](00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v3.md).
 
 # Three-Year DSA Interview Problem Bank — v1
 
