@@ -1,3 +1,5 @@
+> **ARCHIVED / SUPERSEDED:** This data-structure-wise 240-question draft is retained for history only. Do not use it as the active schedule. The active curated, pattern-wise list is [DSA Three-Year Pattern-Wise Final Problem Bank v2](00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v2.md).
+
 # Three-Year DSA Interview Problem Bank — v1
 
 > **Purpose:** A bounded, pattern-wise list for software engineering coding interviews (SDE-1 / fresher through stronger product-company interviews). This is not a competitive-programming syllabus.
