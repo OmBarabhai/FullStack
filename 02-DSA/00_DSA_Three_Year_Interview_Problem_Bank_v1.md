@@ -253,7 +253,7 @@ A company tag without an asterisk means the problem appears in that company's al
 | 159 | [Gas Station — LC 134](https://leetcode.com/problems/gas-station/) | Medium | Y2 | AMZ, MSFT, GOO, ADB, FLIP, PHONEPE, GS | New |
 | 160 | [Candy — LC 135](https://leetcode.com/problems/candy/) | Hard | Y2 | GS, MORGAN, ACC | Selective |
 | 161 | [Partition Labels — LC 763](https://leetcode.com/problems/partition-labels/) | Medium | Y2 | — | New |
-| 162 | [Assign Cookies — LC 455](https://leetcode.com/problems/assign-cookies/) | Medium | Y2 | — | New |
+| 162 | [Assign Cookies — LC 455](https://leetcode.com/problems/assign-cookies/) | Easy | Y2 | — | New |
 | 163 | [Maximum Length of Pair Chain — LC 646](https://leetcode.com/problems/maximum-length-of-pair-chain/) | Medium | Y2 | — | New |
 | 164 | [Two City Scheduling — LC 1029](https://leetcode.com/problems/two-city-scheduling/) | Medium | Y2 | — | New |
 
