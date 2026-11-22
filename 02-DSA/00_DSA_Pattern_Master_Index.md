@@ -54,44 +54,47 @@ Fenwick/Segment Trees; KMP/Z/rolling hash; SCC, bridges and articulation points;
 
 Create a revision file only when beginning a pattern. Each file should contain: core idea, recognition cues/lookalikes, invariant/state, brute-force-to-optimised derivation, selected problem order, Java implementation, dry run, complexity, edge cases, common mistakes, R1/R2/R3 and a mastery test. Do not create one file per problem.
 
-## Active 33-pattern sequence and problem counts
+## Active 35-pattern sequence and problem counts
 
-The final schedule is grouped by problem-solving pattern (some are sub-patterns of a broader data structure). The counts below total 236 unique problems.
+The final bank is pattern-first and contains 350 unique problems across 35 related problem-solving patterns. It is the only active three-year problem list.
+
+[Open the Three-Year DSA Interview Master Bank — Final 350 v3](00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v3.md)
 
 | Order | Pattern | Problems |
 |---:|---|---:|
-| 1 | HashMap / HashSet / Frequency Counting | 15 |
-| 2 | Two Pointers / In-place Partitioning | 12 |
-| 3 | Sliding Window | 10 |
-| 4 | Prefix Sum / Difference Array | 8 |
-| 5 | Binary Search / Search on Answer | 11 |
-| 6 | Sorting / Merge Intervals / Sweep Line | 9 |
-| 7 | Cyclic Sort / Index Placement | 2 |
-| 8 | Fast & Slow Pointers / Linked List Cycles | 6 |
-| 9 | Linked List Reversal / Dummy Node / Merge | 8 |
-| 10 | Monotonic Stack / Next Greater / Histogram | 6 |
-| 11 | Stack Parsing / Simulation | 8 |
-| 12 | Queue / Deque / Monotonic Queue | 8 |
-| 13 | Backtracking / Subsets / Combinations / Permutations | 9 |
+| 1 | HashMap / HashSet / Frequency Counting | 21 |
+| 2 | Two Pointers / In-place Partitioning | 17 |
+| 3 | Sliding Window | 15 |
+| 4 | Prefix Sum / Difference Array | 12 |
+| 5 | Binary Search / Search on Answer | 16 |
+| 6 | Sorting / Merge Intervals / Sweep Line | 13 |
+| 7 | Cyclic Sort / Index Placement | 3 |
+| 8 | Fast & Slow Pointers / Linked List Cycles | 7 |
+| 9 | Linked List Reversal / Dummy Node / Merge | 13 |
+| 10 | Monotonic Stack / Next Greater / Histogram | 9 |
+| 11 | Stack Parsing / Simulation | 11 |
+| 12 | Queue / Deque / Monotonic Queue | 10 |
+| 13 | Backtracking / Subsets / Combinations / Permutations | 16 |
 | 14 | Backtracking / Grid Search and Partitioning | 3 |
-| 15 | Tree DFS / Recursion / Path State | 20 |
-| 16 | Tree BFS / Level Order | 5 |
-| 17 | Binary Search Tree | 5 |
-| 18 | Heap / Top K / Two Heaps | 7 |
+| 15 | Tree DFS / Recursion / Path State | 26 |
+| 16 | Tree BFS / Level Order | 7 |
+| 17 | Binary Search Tree | 8 |
+| 18 | Heap / Top K / Two Heaps | 13 |
 | 19 | K-Way Merge | 2 |
-| 20 | Greedy / Reachability / Scheduling | 9 |
-| 21 | Graph DFS / BFS / Grid Components | 7 |
-| 22 | Topological Sort / Union-Find | 8 |
-| 23 | Shortest Path / Minimum Spanning Tree | 5 |
-| 24 | DP 1D / Take-Skip | 10 |
-| 25 | DP Knapsack / Subset Sum | 4 |
-| 26 | DP Grid / Matrix Paths | 6 |
-| 27 | DP Subsequences / Strings / Palindromes | 10 |
-| 28 | DP State Machine / Scheduling | 4 |
-| 29 | Trie / Prefix Search | 3 |
-| 30 | Bit Manipulation | 6 |
-| 31 | Basic Math / Number Patterns | 2 |
-| 32 | Matrix Traversal / In-place Matrix Transform | 4 |
-| 33 | Data Structure Design | 4 |
-
-See [00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v2.md](00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v2.md) for the canonical ordered LeetCode list, difficulty, suggested year, company tags and previous-work notes.
+| 20 | Greedy / Reachability / Scheduling | 14 |
+| 21 | Graph DFS / BFS / Grid Components | 12 |
+| 22 | Topological Sort / Union-Find | 10 |
+| 23 | Shortest Path / Minimum Spanning Tree | 8 |
+| 24 | DP 1D / Take-Skip | 14 |
+| 25 | DP Knapsack / Subset Sum | 6 |
+| 26 | DP Grid / Matrix Paths | 8 |
+| 27 | DP Subsequences / Strings / Palindromes | 13 |
+| 28 | DP State Machine / Scheduling | 5 |
+| 29 | Trie / Prefix Search | 6 |
+| 30 | Bit Manipulation | 9 |
+| 31 | Basic Math / Number Patterns | 5 |
+| 32 | Matrix Traversal / In-place Matrix Transform | 6 |
+| 33 | Data Structure Design | 8 |
+| 34 | Divide and Conquer | 2 |
+| 35 | String Matching / Rolling Hash | 2 |
+| **Total** | **35 patterns** | **350** |
