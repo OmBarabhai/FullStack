@@ -62,3 +62,8 @@ A tag does not guarantee that the company will ask that question. It may not ide
 ## 5. Completion gate
 
 A company set is ready when its questions map to learned patterns, duplicates are removed, recent tagged problems are sampled (not memorised), you can solve representative questions without labels, and you can explain solutions under interview conditions.
+
+
+## Canonical problem bank
+
+Use the [Three-Year Pattern-Wise Final Problem Bank](../../02-DSA/00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v2.md) as the single location for problem entries. Company tags are filters only; do not create duplicate company-specific copies of solutions.
