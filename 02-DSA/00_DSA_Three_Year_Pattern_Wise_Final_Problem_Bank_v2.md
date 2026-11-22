@@ -29,13 +29,13 @@ The 100-day buffer is intentionally twice the original 50-day allowance. It is a
 
 ## 2. How the 684 weekday sessions will be used
 
-The curated bank contains **236 distinct problems**. Do not inflate it to 684 just to occupy every weekday. Re-solving and interview execution are more valuable than adding low-value questions.
+The curated bank contains **236 distinct problems across 33 pattern groups**. Do not inflate it to 684 just to occupy every weekday. Re-solving and interview execution are more valuable than adding low-value questions.
 
 | Year | First-time problems from this bank | Remaining weekday sessions for revision, variations, mixed practice and mocks |
 |---|---:|---:|
 | Year 1 — pattern foundations | 100 | 128 |
-| Year 2 — trees, graphs, greedy, backtracking and core DP | 86 | 142 |
-| Year 3 — integration, selective advanced patterns and interview execution | 50 | 178 |
+| Year 2 — trees, graphs, greedy, backtracking and core DP | 119 | 109 |
+| Year 3 — selective advanced patterns, integration and interview execution | 17 | 211 |
 | **Total** | **236** | **448** |
 
 Every planned weekday remains one focused DSA session. On a “revision” weekday, the task is to solve or reconstruct one previously selected problem, not to add a random new problem.
