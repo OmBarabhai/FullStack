@@ -6,7 +6,7 @@
 
 | Source | What it offers | Use | Caution |
 |---|---|---|---|
-| [liquidslr/leetcode-company-wise-problems](https://github.com/liquidslr/leetcode-company-wise-problems) | Company folders/CSV datasets; 30-, 60-, 90-day and all-time windows where available | Primary source for company-tagged LeetCode selection | Repository page says data updated 20 Oct 2025; snapshot, not a live guarantee |
+| [liquidslr/leetcode-company-wise-problems](https://github.com/liquidslr/leetcode-company-wise-problems) | Company folders/CSV datasets; 30-, 60-, 90-day and all-time windows where available | Primary source for company-tagged LeetCode selection | README still says 20 Oct 2025; a later CSV update commit was dated 21 Oct 2026 UTC. Snapshot, not a live guarantee |
 | [codewithjaspreet/Company-Wise](https://github.com/codewithjaspreet/Company-Wise) | Microsoft, Morgan Stanley, Top75 folders and core-subject material | Supplementary company sheets and older revision | Main README surfaced on GitHub is largely OS interview Q&A; small set of company folders and older content |
 | [LeetCode 75](https://leetcode.com/studyplan/leetcode-75/) | 75-question baseline | Compact gap-check / revision | Not a complete multi-year curriculum |
 | [NeetCode Roadmap](https://neetcode.io/roadmap) | Pattern-organised problems and ordered learning | Pattern cross-check and explanations | Reference, not an extra mandatory checklist |
