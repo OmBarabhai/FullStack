@@ -20,3 +20,7 @@ This is an additive interview-preparation system for the existing FullStack repo
 5. Use LeetCode as primary, Code360 (if this is the intended platform) and GeeksforGeeks as supporting platforms.
 6. A historical checkbox is not proof of current independent mastery: re-test before upgrading status.
 7. Create one pattern file when starting a pattern; don't create a separate Markdown file per problem.
+
+## Active three-year schedule
+
+Use [DSA Three-Year Pattern-Wise Final Problem Bank v2](02-DSA/00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v2.md) as the single active problem list: 236 unique problems across 33 patterns, planned over 684 weekday sessions from 23 Nov 2026 to 22 Nov 2029. Saturday and Sunday have no new-problem target; use them to review that week's five weekday problems. A further 100 weekdays are reserved as a life/holiday buffer. The earlier data-structure-wise 240-problem file is archived and superseded.
