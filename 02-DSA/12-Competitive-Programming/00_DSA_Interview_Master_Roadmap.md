@@ -1,4 +1,4 @@
-# DSA Interview Master Roadmap
+`# DSA Interview Master Roadmap
 
 > **Mission:** Build durable problem-solving ability for software engineering coding interviews over three years. This is an interview-preparation system, not a competitive-programming syllabus.
 >
