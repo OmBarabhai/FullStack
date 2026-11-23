@@ -1,4 +1,4 @@
-> **Active problem list:** [Three-Year Pattern-Wise Final Problem Bank v2](00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v2.md) is the canonical problem schedule. Use this index for pattern navigation; do not maintain a competing problem list here.
+> **Active problem list:** [Three-Year DSA Interview Master Bank — Final 375 v4](00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v4.md) is the canonical problem schedule. Use this index for pattern navigation; do not maintain a competing problem list here.
 
 # DSA Pattern Master Index — Interview Track
 
@@ -54,47 +54,48 @@ Fenwick/Segment Trees; KMP/Z/rolling hash; SCC, bridges and articulation points;
 
 Create a revision file only when beginning a pattern. Each file should contain: core idea, recognition cues/lookalikes, invariant/state, brute-force-to-optimised derivation, selected problem order, Java implementation, dry run, complexity, edge cases, common mistakes, R1/R2/R3 and a mastery test. Do not create one file per problem.
 
-## Active 35-pattern sequence and problem counts
+## Active 36-pattern sequence and problem counts
 
-The final bank is pattern-first and contains 350 unique problems across 35 related problem-solving patterns. It is the only active three-year problem list.
+The final schedule is pattern-first and contains **375 unique questions across 36 problem-solving patterns**. This is the single active three-year DSA list.
 
-[Open the Three-Year DSA Interview Master Bank — Final 350 v3](00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v3.md)
+[Open the Three-Year DSA Interview Master Bank — Final 375 v4](00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v4.md)
 
 | Order | Pattern | Problems |
 |---:|---|---:|
 | 1 | HashMap / HashSet / Frequency Counting | 21 |
-| 2 | Two Pointers / In-place Partitioning | 17 |
+| 2 | Two Pointers / In-place Partitioning | 18 |
 | 3 | Sliding Window | 15 |
 | 4 | Prefix Sum / Difference Array | 12 |
-| 5 | Binary Search / Search on Answer | 16 |
-| 6 | Sorting / Merge Intervals / Sweep Line | 13 |
+| 5 | Binary Search / Search on Answer | 18 |
+| 6 | Sorting / Merge Intervals / Sweep Line | 14 |
 | 7 | Cyclic Sort / Index Placement | 3 |
 | 8 | Fast & Slow Pointers / Linked List Cycles | 7 |
 | 9 | Linked List Reversal / Dummy Node / Merge | 13 |
-| 10 | Monotonic Stack / Next Greater / Histogram | 9 |
-| 11 | Stack Parsing / Simulation | 11 |
+| 10 | Monotonic Stack / Next Greater / Histogram | 10 |
+| 11 | Stack Parsing / Simulation | 12 |
 | 12 | Queue / Deque / Monotonic Queue | 10 |
-| 13 | Backtracking / Subsets / Combinations / Permutations | 16 |
-| 14 | Backtracking / Grid Search and Partitioning | 3 |
+| 13 | Backtracking / Subsets / Combinations / Permutations | 17 |
+| 14 | Backtracking / Grid Search and Partitioning | 6 |
 | 15 | Tree DFS / Recursion / Path State | 26 |
-| 16 | Tree BFS / Level Order | 7 |
-| 17 | Binary Search Tree | 8 |
+| 16 | Tree BFS / Level Order | 8 |
+| 17 | Binary Search Tree | 9 |
 | 18 | Heap / Top K / Two Heaps | 13 |
 | 19 | K-Way Merge | 2 |
-| 20 | Greedy / Reachability / Scheduling | 14 |
-| 21 | Graph DFS / BFS / Grid Components | 12 |
-| 22 | Topological Sort / Union-Find | 10 |
-| 23 | Shortest Path / Minimum Spanning Tree | 8 |
-| 24 | DP 1D / Take-Skip | 14 |
-| 25 | DP Knapsack / Subset Sum | 6 |
+| 20 | Greedy / Reachability / Scheduling | 15 |
+| 21 | Graph DFS / BFS / Grid Components | 14 |
+| 22 | Topological Sort / Union-Find | 11 |
+| 23 | Shortest Path / Minimum Spanning Tree | 11 |
+| 24 | DP 1D / Take-Skip | 15 |
+| 25 | DP Knapsack / Subset Sum | 7 |
 | 26 | DP Grid / Matrix Paths | 8 |
-| 27 | DP Subsequences / Strings / Palindromes | 13 |
+| 27 | DP Subsequences / Strings / Palindromes | 14 |
 | 28 | DP State Machine / Scheduling | 5 |
 | 29 | Trie / Prefix Search | 6 |
 | 30 | Bit Manipulation | 9 |
 | 31 | Basic Math / Number Patterns | 5 |
 | 32 | Matrix Traversal / In-place Matrix Transform | 6 |
 | 33 | Data Structure Design | 8 |
-| 34 | Divide and Conquer | 2 |
+| 34 | Divide and Conquer | 4 |
 | 35 | String Matching / Rolling Hash | 2 |
-| **Total** | **35 patterns** | **350** |
+| 36 | DP Interval / Partition | 1 |
+| **Total** | **36 patterns** | **375** |
