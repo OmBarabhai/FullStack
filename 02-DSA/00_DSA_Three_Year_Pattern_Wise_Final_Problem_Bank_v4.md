@@ -197,7 +197,7 @@ Tags retain the checked company CSV values and older sheet annotations where ava
 | 95 | LeetCode | [Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/) | Medium | Y1 | CORE | AMZ, MSFT, GOO, META, ATL, UBER, GS | Not mapped in six-sheet export | New candidate — check existing notes |
 | 96 | LeetCode | [Remove Covered Intervals](https://leetcode.com/problems/remove-covered-intervals/) | Medium | Y1 | CORE | AMZ, MSFT, GOO, META | Not mapped in six-sheet export | New candidate — check existing notes |
 | 97 | LeetCode | [My Calendar I](https://leetcode.com/problems/my-calendar-i/) | Medium | Y1 | CORE | AMZ, MSFT, GOO, META, UBER | Not mapped in six-sheet export | New candidate — check existing notes |
-| 98 | GeeksforGeeks | [Chocolate Distribution Problem](https://www.geeksforgeeks.org/problems/chocolate-distribution-problem3825/1) | Easy | Y1 | CORE | AMZ | Love Babbar 450, Shradha Khapra, Siddharth Singh | Added after popular-sheet audit |
+| 98 | GeeksforGeeks | [Chocolate Distribution Problem](https://www.geeksforgeeks.org/dsa/chocolate-distribution-problem/) | Easy | Y1 | CORE | AMZ | Love Babbar 450, Shradha Khapra, Siddharth Singh | Added after popular-sheet audit |
 
 ## 07. Cyclic Sort / Index Placement — 3 problems
 
@@ -315,7 +315,7 @@ Tags retain the checked company CSV values and older sheet annotations where ava
 | 173 | LeetCode | [Word Search II](https://leetcode.com/problems/word-search-ii/) | Hard | Y2 | CORE | AMZ*, MSFT, GOO, META, UBER | Not mapped in six-sheet export | Selective |
 | 174 | LeetCode | [Sudoku Solver](https://leetcode.com/problems/sudoku-solver/) | Hard | Y2 | COMPANY / STRETCH | — | Love Babbar 450, Siddharth Singh | Added after popular-sheet audit |
 | 175 | GeeksforGeeks | [Rat in a Maze](https://www.geeksforgeeks.org/problems/rat-in-a-maze-problem/1) | Medium | Y3 | COMPANY / STRETCH | — | Striver A2Z | Added after popular-sheet audit |
-| 176 | GeeksforGeeks | [M-Coloring Problem](https://www.geeksforgeeks.org/dsa/m-coloring-problem/) | Medium | Y3 | COMPANY / STRETCH | AMZ, UBER | Love Babbar 450, Shradha Khapra, Siddharth Singh | Added after popular-sheet audit |
+| 176 | GeeksforGeeks | [M-Coloring Problem](https://www.geeksforgeeks.org/problems/m-coloring-problem-1587115620/1) | Medium | Y3 | COMPANY / STRETCH | AMZ, UBER | Love Babbar 450, Shradha Khapra, Siddharth Singh | Added after popular-sheet audit |
 
 ## 15. Tree DFS / Recursion / Path State — 26 problems
 
@@ -453,7 +453,7 @@ Tags retain the checked company CSV values and older sheet annotations where ava
 | 271 | LeetCode | [Evaluate Division](https://leetcode.com/problems/evaluate-division/) | Medium | Y2 | CORE | AMZ*, MSFT, GOO, META, UBER, FLIP, PHONEPE, GS | Fraz, Siddharth Singh | New |
 | 272 | LeetCode | [Smallest String With Swaps](https://leetcode.com/problems/smallest-string-with-swaps/) | Medium | Y2 | CORE | AMZ, MSFT, GOO, PHONEPE, GS | Not mapped in six-sheet export | New candidate — check existing notes |
 | 273 | LeetCode | [Redundant Connection II](https://leetcode.com/problems/redundant-connection-ii/) | Hard | Y2 | CORE | GOO | Fraz | New candidate — check existing notes |
-| 274 | LeetCode | [Alien Dictionary](https://leetcode.com/problems/alien-dictionary/) | Hard | Y2 | CORE | — | Striver A2Z, Siddharth Singh, AlgoPrep 151 | Added after popular-sheet audit |
+| 274 | GeeksforGeeks | [Alien Dictionary](https://www.geeksforgeeks.org/problems/alien-dictionary/1) | Hard | Y2 | CORE | — | Striver A2Z, Siddharth Singh, AlgoPrep 151 | Added after popular-sheet audit |
 
 ## 23. Shortest Path / Minimum Spanning Tree — 11 problems
 
@@ -629,13 +629,13 @@ Tags retain the checked company CSV values and older sheet annotations where ava
 ## 8. Resource audit — what was compared
 
 ### Striver / takeUforward
-The current public A2Z page lists **495** questions organised into 20 sections: beginner, sorting, arrays, hashing, binary search, strings, recursion, linked lists, bit manipulation, greedy, sliding-window/two-pointers, stacks/queues, trees/BST, heaps, graphs, DP, tries, advanced strings and maths. This is a full learning course, not a 495-question interview quota.
+The current official Striver A2Z page lists **495** questions organised into 20 sections: beginner, sorting, arrays, hashing, binary search, strings, recursion, linked lists, bit manipulation, greedy, sliding-window/two-pointers, stacks/queues, trees/BST, heaps, graphs, DP, tries, advanced strings and maths. This is a full learning course, not a 495-question interview quota.
 
 ### Love Babbar 450
 The classic GFG sheet covers 15 topics: arrays, matrix, strings, searching/sorting, linked list, bit manipulation, greedy, backtracking, DP, stacks/queues, binary trees, BST, graphs, heap and trie. Copies appear as 445, 448 or 450 depending on version and duplicates. It is a broad source bank, not a compulsory checklist.
 
 ### Shradha Khapra / Apna College
-Public copies of the Apna College workbook disagree on one count. A legacy workbook tracker reports 375 rows reduced to 365 unique entries; another public tracker lists 193 questions (154 LeetCode and 39 non-LeetCode). The original Apna College sheet is at [dsa.apnacollege.in](https://dsa.apnacollege.in/). Use the version you are actually studying; do not create duplicate work to reconcile old copies.
+The current official Apna College DSA sheet displays **192 problems** and describes them as the major DSA types for placement preparation. Use that current sheet as the source of truth; older downloadable workbook snapshots and public mirrors have different counts. The live sheet is at [dsa.apnacollege.in](https://dsa.apnacollege.in/).
 
 ### Cross-sheet aggregation
 The public [BooleanStack DSA Sheets repository](https://github.com/orkait-abhay/dsa-sheets) combines AlgoPrep 151, Shradha Khapra, Siddharth Singh, Love Babbar 450, Fraz and Striver A2Z. Its README reports 2,105 raw entries mapped to 1,552 canonical problems. These exported snapshots are older and have inconsistent row counts, so they were used as overlap evidence, not as the official current count of a creator's sheet. **225** questions in this bank map to that six-sheet export by canonical title or URL; no match means “not mapped in this export”, not “absent from the latest creator sheet”.
