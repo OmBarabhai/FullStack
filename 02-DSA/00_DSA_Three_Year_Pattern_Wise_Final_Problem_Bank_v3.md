@@ -1,3 +1,5 @@
+> **ARCHIVED / SUPERSEDED:** This 350-question pattern-wise draft is retained for history only. The active problem schedule is [Three-Year DSA Interview Master Bank — Final 375 v4](00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v4.md). Do not use v3 as the current schedule.
+
 # Three-Year DSA Interview Master Bank — Final 350 v3
 
 > **Canonical schedule:** 350 unique LeetCode problems across 35 problem-solving patterns. Pattern-first, not data-structure-first. Java only. Designed for fresher / SDE-1 and product-company coding interviews; not competitive programming.
