@@ -6,7 +6,7 @@
 
 ## 1. Mastery over problem count
 
-Use a curated working target of roughly **220–300 distinct interview-quality problems across all DSA topics**, including useful problems you have already studied. This is a planning range, not a quota. The remaining time is for re-solving, variations, mixed practice, mock interviews and communication.
+Use the curated [Three-Year DSA Interview Master Bank — Final 375 v4](00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v4.md): **375 unique questions across 36 patterns**, split into 262 CORE questions and 113 COMPANY / STRETCH questions. The plan uses 684 weekday sessions over three years, with weekends reserved for reviewing the five weekday problems and a separate 100-weekday buffer for life and holidays. Do not add more questions merely to increase the count.
 
 A problem status means:
 - **Seen:** read the prompt or watched an explanation.
@@ -55,9 +55,9 @@ Do not reset an entire topic because one problem was forgotten. Revise weak prob
 - 5 min: update status and revision dates.
 
 ### Weekly
-- 5 days: one new problem or scheduled re-solve.
-- 1 day: mixed/unseen problem without a pattern label.
-- 1 day: light revision, backlog recovery or rest.
+- Monday–Friday: one new problem or planned third attempt, according to the master bank calendar.
+- Saturday and Sunday: no new-problem target; revisit the five problems from the weekdays, record mistakes and rest.
+- Use planned weekday sessions for mixed/unseen questions, company sets and mock interviews.
 
 ## 5. Three-year progression
 
@@ -78,7 +78,7 @@ Re-solve weak problems after delays, complete company-specific sets for real tar
 
 ## 6. What is core and what is optional?
 
-Use `00_DSA_Pattern_Master_Index.md` for the sequence. Core patterns are expected in broad interview preparation; Important patterns follow the core; Selective topics depend on target roles; Optional advanced topics are not blockers for ordinary SDE-1 interviews.
+Use `00_DSA_Pattern_Master_Index.md` for navigation and `00_DSA_Three_Year_Pattern_Wise_Final_Problem_Bank_v4.md` for the canonical question sequence. The 262 CORE problems get three planned attempts; the 113 COMPANY / STRETCH problems get at least two. Selective advanced questions are not blockers for ordinary SDE-1 interviews.
 
 Do not expand the syllabus merely because a problem has a DSA tag.
 
