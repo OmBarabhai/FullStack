@@ -632,13 +632,13 @@ Tags retain the checked company CSV values and older sheet annotations where ava
 The current official Striver A2Z page lists **495** questions organised into 20 sections: beginner, sorting, arrays, hashing, binary search, strings, recursion, linked lists, bit manipulation, greedy, sliding-window/two-pointers, stacks/queues, trees/BST, heaps, graphs, DP, tries, advanced strings and maths. This is a full learning course, not a 495-question interview quota.
 
 ### Love Babbar 450
-The classic GFG sheet covers 15 topics: arrays, matrix, strings, searching/sorting, linked list, bit manipulation, greedy, backtracking, DP, stacks/queues, binary trees, BST, graphs, heap and trie. Copies appear as 445, 448 or 450 depending on version and duplicates. It is a broad source bank, not a compulsory checklist.
+The classic [Love Babbar 450 DSA Cracker Sheet](https://drive.google.com/file/d/1FMdN_OCfOI0iAeDlqswCiC2DZzD4nPsb/view) covers arrays, matrix, strings, searching/sorting, linked lists, bit manipulation, greedy, backtracking, DP, stacks/queues, trees, BST, graphs, heap and trie. Public mirrors disagree slightly on row counts (for example, one current mirror reports 445), so the title “450” is a sheet name, not a requirement to force exactly 450 distinct questions into your plan. It is a broad source bank, not a compulsory checklist.
 
 ### Shradha Khapra / Apna College
 The current official Apna College DSA sheet displays **192 problems** and describes them as the major DSA types for placement preparation. Use that current sheet as the source of truth; older downloadable workbook snapshots and public mirrors have different counts. The live sheet is at [dsa.apnacollege.in](https://dsa.apnacollege.in/).
 
 ### Cross-sheet aggregation
-The public [BooleanStack DSA Sheets repository](https://github.com/orkait-abhay/dsa-sheets) combines AlgoPrep 151, Shradha Khapra, Siddharth Singh, Love Babbar 450, Fraz and Striver A2Z. Its README reports 2,105 raw entries mapped to 1,552 canonical problems. These exported snapshots are older and have inconsistent row counts, so they were used as overlap evidence, not as the official current count of a creator's sheet. **225** questions in this bank map to that six-sheet export by canonical title or URL; no match means “not mapped in this export”, not “absent from the latest creator sheet”.
+The public [BooleanStack DSA Sheets repository](https://github.com/orkait-abhay/dsa-sheets) combines AlgoPrep 151, Shradha Khapra, Siddharth Singh, Love Babbar 450, Fraz and Striver A2Z. Its README reports 2,105 raw entries mapped to 1,552 canonical problems. These exported snapshots are older and have inconsistent row counts (notably its Shradha and Striver files), so they were used as overlap evidence, not as the official current count of a creator's sheet. **225** questions in this bank map to that six-sheet export by canonical title or URL; no match means “not mapped in this export”, not “absent from the latest creator sheet”.
 
 Source-export matches:
 - Striver A2Z: 75
@@ -649,10 +649,12 @@ Source-export matches:
 - AlgoPrep 151: 39
 
 ### Company-wise data and wider interview cross-checks
-Company tags are drawn from selected all-time company-wise CSVs and older sheet annotations. The company index is a filter over the canonical bank, not a second problem list. These datasets are reported/crowd-sourced, not official syllabi.
+Company tags are drawn from selected all-time company-wise CSVs and older sheet annotations. The [liquidslr company-wise dataset](https://github.com/liquidslr/leetcode-company-wise-problems) provides per-company CSVs, including time-window and all-time files where available; its README still displays an older October 2025 data label, while the checked repository history includes a CSV update commit dated 21 October 2026. The [BooleanStack company PYQ export](https://github.com/orkait-abhay/dsa-sheets) reports 3,257 unique LeetCode PYQs across 471 company folders, according to its README. Treat those as dataset maintainer counts and crowdsourced tags, not official interview statistics. The company index is a filter over the canonical bank, not a second problem list.
 
 - [GeeksforGeeks SDE Sheet](https://www.geeksforgeeks.org/explore?curated%5B%5D=1&curated_names%5B%5D=SDE+Sheet&page=1) provides another selected interview set.
 - [LeetCode 75](https://leetcode.com/studyplan/leetcode-75/) is a compact baseline, not a three-year syllabus.
+- [Apna College / Shradha Khapra DSA Sheet](https://dsa.apnacollege.in/) currently displays 192 interview-focused problems.
+- [Love Babbar 450 tracker](https://450dsa.com/) is a public progress mirror; use the original sheet or a mirror as a cross-check, not a separate full mandatory list.
 - [NeetCode Roadmap](https://neetcode.io/roadmap) is a pattern-order cross-check, not an additional must-solve list.
 
 ## 9. What was deliberately left out
