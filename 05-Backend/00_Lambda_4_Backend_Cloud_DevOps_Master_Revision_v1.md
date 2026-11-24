@@ -980,3 +980,107 @@ Success / retry / dead-letter handling
 
 Use jobs for email, notifications, media transcoding and slow non-interactive work. Workers need idempotency, bounded concurrency, retry/backoff and failure tracking.
 
+
+# 10. System design and distributed systems
+
+## 10.1 Requirements before architecture
+
+Clarify users/core operations, data model/ownership, traffic volume, read/write ratio, payload size, latency, availability, durability, privacy and security. Separate:
+- **Functional requirements:** what system does.
+- **Non-functional requirements:** performance, availability, durability, security, privacy and maintainability.
+
+## 10.2 Latency, throughput, bandwidth and QPS
+
+**Lecture-backed — Lecture 08 / storage-latency-capacity material.**
+
+| Metric | Meaning |
+|---|---|
+| Latency | Time one operation/request takes |
+| Throughput | Completed work per unit time |
+| Bandwidth | Data-transfer capacity |
+| QPS/RPS | Queries/requests per second |
+
+~~~text
+Average requests/second = requests per day / 86,400
+~~~
+
+Average rate hides peaks. Latency can include network transit, queueing, application processing, storage and response transfer. Find the bottleneck before adding infrastructure.
+
+## 10.3 Load balancers, reverse proxies and gateways
+
+| Component | Role |
+|---|---|
+| Load balancer | Distributes traffic across instances |
+| Reverse proxy | Accepts client traffic and forwards it to internal services; may terminate TLS |
+| API gateway | Front door for API routing/policies such as auth integration, quotas and rate limits |
+
+- **L4:** transport-level routing (TCP/UDP address/port).
+- **L7:** application-aware HTTP routing (host/path/headers).
+- **NGINX:** commonly used as web server/reverse proxy.
+- **Kong:** API gateway platform.
+
+## 10.4 Vertical and horizontal scaling
+
+- **Vertical:** add CPU/RAM/storage to one machine.
+- **Horizontal:** add instances and distribute requests.
+- Horizontal scaling requires state outside each process: shared DB, cache/session store, object storage or broker.
+- Use health checks, graceful shutdown and connection draining.
+- More instances do not fix a saturated DB or slow dependency.
+
+## 10.5 CAP and consistency
+
+During a network partition, a distributed data system trades off:
+- **Consistency:** reads see the latest committed value according to the guarantee.
+- **Availability:** requests to non-failing nodes receive responses.
+- **Partition tolerance:** operation despite network partition.
+
+CAP is about trade-offs during partitions; real designs also consider latency, replication, quorum and isolation.
+
+## 10.6 Consistent hashing
+
+Consistent hashing maps keys and nodes onto a hash ring. Each key maps to the next node in ring order. Adding/removing a node moves only part of the keyspace. Virtual nodes improve distribution. Useful for distributed caches/partition routing; it does not by itself solve replication, recovery or consistency.
+
+## 10.7 Reliability patterns
+
+- **Rate limiting:** bound requests per caller/window.
+- **Quota:** longer-period usage allowance.
+- **Circuit breaker:** stop repeated calls to an unhealthy dependency; allow later probe.
+- **Timeout:** limit waiting time.
+- **Retry:** repeat transient failures with bounded backoff/jitter.
+- **Bulkhead:** isolate resource pools so one workload does not consume all capacity.
+- **CORS:** browser mechanism controlling which origins may read responses; not authentication.
+
+Retry only if repeating the operation is safe or protected by an idempotency key.
+
+# 11. Messaging and queues
+
+**Syllabus revision — no complete matching messaging lecture note found.**
+
+## 11.1 Kafka vs RabbitMQ
+
+| Kafka | RabbitMQ |
+|---|---|
+| Distributed append-only event log with partitions/offsets | Broker with exchanges, routing rules and queues |
+| Strong for event streams, replay and throughput | Strong for task queues and flexible routing |
+| Consumer groups coordinate partition work | Consumers receive queue messages and acknowledge |
+| Ordering is per partition | Ordering depends on queue/consumer arrangement |
+
+Core terms:
+- **Producer:** publishes message/event.
+- **Consumer:** reads/processes.
+- **Topic:** named Kafka event stream.
+- **Partition:** ordered log segment.
+- **Consumer group:** consumers divide partition work.
+- **Exchange/binding/routing key:** RabbitMQ routing concepts.
+- **Acknowledgement:** tells broker message was handled.
+- **DLQ:** dead-letter queue for messages that cannot be processed normally.
+
+## 11.2 Delivery and retries
+
+- **At-most-once:** no retry; messages may be lost.
+- **At-least-once:** retries; duplicate deliveries may occur.
+- Exactly-once claims depend on scope. Broker guarantees do not automatically make external DB/payment effects exactly once.
+- Consumers should be idempotent.
+- Use retry limits, backoff, DLQ and poison-message handling.
+- Ordering constraints can limit parallelism; preserve only when required.
+
