@@ -800,3 +800,183 @@ Booking example: two users attempt the same room/time. Protect availability at t
 - **RTO:** acceptable recovery time.
 - Define backup schedule, retention, encryption, access and restore drills.
 
+
+# 8. Authentication and security
+
+**Project-backed at high level in Comsy/NexusMeet; full session/OAuth lecture not found.**
+
+## 8.1 Authentication vs authorization
+
+- **Authentication:** who is making the request?
+- **Authorization:** what may that identity do?
+
+### Password storage
+
+Never store plaintext passwords. Use a password-specific hashing algorithm such as bcrypt or Argon2 with salt and suitable work factor. Hashing is not encryption.
+
+### Session authentication
+
+~~~text
+User logs in
+    ↓
+Server creates session record
+    ↓
+Browser receives session ID cookie
+    ↓
+Browser sends cookie on later requests
+    ↓
+Server resolves session → identity
+~~~
+
+Server-side revocation is straightforward, but multiple app instances need shared session storage.
+
+### JWT authentication
+
+A JWT commonly has header, payload and signature. Its payload is encoded, not encrypted by default; never put secrets in it.
+
+~~~text
+Credentials
+   ↓
+Server verifies password
+   ↓
+Issues short-lived access token
+   ↓
+Client sends Authorization: Bearer token
+   ↓
+Middleware verifies signature, expiry and claims
+   ↓
+Request continues with identity
+~~~
+
+- Validate signature, expiry, issuer, audience and allowed algorithm.
+- Keep access tokens short-lived.
+- Refresh tokens need secure storage, rotation and revocation strategy.
+- A valid token proves identity/claims, not permission to every resource.
+- Cookie-based authentication requires CSRF consideration.
+
+### OAuth 2.0 and OpenID Connect
+
+OAuth 2.0 is an authorization framework for delegated access. OpenID Connect adds an identity/authentication layer. OAuth is not simply another name for password login.
+
+### RBAC
+
+Role-based access control groups permissions into roles (admin, faculty, student). Check permissions on every protected server action. Hiding frontend buttons is not authorization.
+
+## 8.2 Web security essentials
+
+- HTTPS/TLS in transit.
+- Validate every untrusted input boundary.
+- Escape/encode output to prevent XSS.
+- Protect cookie-authenticated browser actions against CSRF.
+- Use parameterized queries/safe database APIs to prevent injection.
+- Enforce object ownership and role checks on the server.
+- Rate-limit sensitive endpoints such as login.
+- Limit request and file sizes.
+- Keep secrets outside Git.
+- Avoid logging passwords, tokens and unnecessary personal data.
+
+# 9. Real-time systems, uploads and caching
+
+## 9.1 WebSocket, Socket.IO and SSE
+
+**Project-backed for Socket.IO/WebSocket; detailed comparison is syllabus revision.**
+
+| Technology | Model |
+|---|---|
+| HTTP | Request then response |
+| WebSocket | Persistent bidirectional connection |
+| Socket.IO | Higher-level real-time event library with rooms/reconnection; not identical to raw WebSocket |
+| SSE | Server pushes events over HTTP; client-to-server actions generally use HTTP |
+
+- **Event:** named message such as issueCreated or userJoined.
+- **Room:** group of sockets for targeted broadcast.
+- **Namespace:** separates logical channels.
+- **Acknowledgement:** optional confirmation callback.
+- **Presence:** tracks active connections; reconnects and multiple devices complicate it.
+
+Security/scale:
+- Authenticate the connection and authorize sensitive events.
+- Broadcast only to intended rooms/users.
+- Multi-instance deployments need a shared adapter/pub-sub so broadcasts reach sockets on other instances.
+- Persist critical messages; socket delivery is not durable storage.
+
+WebRTC handles media transport. Socket.IO is commonly used for signaling/control, not as media transport.
+
+## 9.2 File uploads, Multer and S3
+
+**Syllabus revision.**
+
+~~~text
+Client chooses file
+      ↓ multipart/form-data
+Express upload middleware parses file
+      ↓
+Validate size/type/ownership
+      ↓
+Store object in S3 (or stream directly)
+      ↓
+Save object key + metadata in database
+      ↓
+Return safe reference / URL
+~~~
+
+- **Multer:** parses multipart/form-data in Express.
+- **S3:** object storage for file bytes.
+- **Presigned URL:** time-limited permission for a specific upload/download operation.
+- Direct-to-S3 avoids routing large file bytes through the application server, but the server must authorize and verify completion.
+
+Security:
+- Enforce size and allowed format.
+- Don't trust client filename or Content-Type alone.
+- Generate object keys server-side.
+- Keep buckets private by default.
+- Authorize downloads.
+- Avoid storing large file bytes in ordinary DB rows without a reason.
+
+## 9.3 Redis and caching
+
+**Syllabus revision.** Redis is an in-memory data store with strings, hashes, lists, sets, sorted sets and streams.
+
+Common uses: cache frequently accessed values; session/short-lived state; rate-limit counters; queue/job coordination; geospatial lookup.
+
+### Cache-aside
+
+~~~text
+Request
+  ↓
+Check cache
+  |-- hit --> return cached value
+  |
+  +-- miss --> query database
+                 ↓
+               store with TTL
+                 ↓
+               return value
+~~~
+
+- **Hit:** data found in cache.
+- **Miss:** data must be fetched/computed.
+- **TTL:** entry expiry.
+- **Invalidation:** remove/refresh stale data.
+- **Cache stampede:** many requests miss a hot key and overload the source.
+
+Caching reduces repeated work but adds freshness, memory and invalidation concerns. The database normally remains source of truth.
+
+## 9.4 BullMQ and background jobs
+
+~~~text
+API request
+   ↓
+Validate + persist main state
+   ↓
+Enqueue job
+   ↓
+Return response
+   ↓
+Worker processes later
+   ↓
+Success / retry / dead-letter handling
+~~~
+
+Use jobs for email, notifications, media transcoding and slow non-interactive work. Workers need idempotency, bounded concurrency, retry/backoff and failure tracking.
+
