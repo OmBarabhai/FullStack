@@ -658,3 +658,145 @@ An idempotency-key design:
 
 Useful for payments, bookings, orders and job submissions. A disabled frontend button is not a correctness guarantee.
 
+
+# 7. Databases and data engineering
+
+**Project-backed for MongoDB/Mongoose; syllabus revision for advanced database topics.**
+
+## 7.1 SQL vs NoSQL
+
+| Relational SQL | Document NoSQL |
+|---|---|
+| Tables, rows, columns and relationships | Collections and documents |
+| Schema and constraints | Flexible document shape; validate in application/schema |
+| Joins and relational constraints | Embed/reference by access pattern |
+| Good for relational/transactional data | Good for document/aggregate access patterns |
+
+Choose based on relationships, query patterns, transactions and consistency—not because one is always faster.
+
+## 7.2 MySQL and relational modelling
+
+- Database contains tables.
+- Row is one record; column is one attribute.
+- Primary key uniquely identifies a row.
+- Foreign key enforces relationship.
+- Unique constraint prevents duplicates.
+- NOT NULL prevents missing values.
+- JOIN combines related tables.
+- Indexes accelerate selected query patterns.
+
+Normalization:
+- **1NF:** atomic values; avoid repeating groups.
+- **2NF:** 1NF plus non-key attributes depend on the whole candidate key.
+- **3NF:** 2NF plus no transitive dependency of non-key attributes on the key.
+
+Normalization reduces duplication/update anomalies. Denormalization can be justified for measured read performance but adds consistency work.
+
+## 7.3 MongoDB and Mongoose
+
+| Term | Meaning |
+|---|---|
+| Database | Contains collections |
+| Collection | Group of documents |
+| Document | BSON record with fields, nested objects and arrays |
+| _id | Unique document identifier |
+| Schema | Mongoose structure, field types and validation |
+| Model | Mongoose object compiled from schema, used for queries/writes |
+| Document | Mongoose instance representing a record |
+| Populate | Resolves configured references; not the same as SQL JOIN |
+
+Typical Mongoose operations:
+- Create: Model.create()
+- Read: Model.find(), findOne(), findById()
+- Update: updateOne(), findByIdAndUpdate()
+- Delete: deleteOne(), findByIdAndDelete()
+
+Comsy project notes identify MongoDB/Mongoose for users, labs/computers, bookings, issue reports and attendance. The Todo system-design exercise uses PostgreSQL as an illustrative alternative; that does not mean Comsy used PostgreSQL.
+
+### Embed vs reference
+
+- **Embed** related bounded data read/updated together.
+- **Reference** shared/independently managed or unbounded data.
+- Consider update frequency, growth and query patterns.
+
+## 7.4 Indexes and query planning
+
+An index helps the database find matching rows/documents without scanning everything.
+
+- Index fields frequently used for filters, joins and sorting.
+- Composite index field order matters.
+- Unique indexes enforce uniqueness.
+- Indexes consume storage and add work to writes.
+- Too many indexes increase write/maintenance costs.
+- Use EXPLAIN/query-plan tools; do not guess.
+
+Query tuning:
+1. Identify slow endpoint/query.
+2. Inspect filters and sort order.
+3. Check query plan and rows examined.
+4. Add/adjust an index for a real workload.
+5. Re-measure reads and writes.
+
+## 7.5 Aggregation pipeline
+
+~~~text
+Collection
+  ↓ $match     filter documents early
+  ↓ $project   select/reshape fields
+  ↓ $group     aggregate by key
+  ↓ $sort      order results
+  ↓ $limit     bound output
+Result
+~~~
+
+Other stages: $unwind expands arrays; $lookup joins collections; $addFields derives fields; $count counts results. Watch document count and array expansion.
+
+## 7.6 Transactions, ACID and isolation
+
+| ACID | Meaning |
+|---|---|
+| Atomicity | All required changes commit or roll back |
+| Consistency | Constraints/invariants hold before and after |
+| Isolation | Concurrent transactions are controlled |
+| Durability | Committed data survives failures according to database guarantees |
+
+Common anomalies:
+- **Dirty read:** read another transaction's uncommitted data.
+- **Non-repeatable read:** repeated row read sees a different committed value.
+- **Phantom read:** repeated predicate query sees a changed set.
+- **Lost update:** concurrent writes overwrite one another.
+
+Isolation levels trade concurrency against anomaly prevention; exact guarantees vary by database.
+
+**Optimistic concurrency:** assume conflicts are uncommon; use version/conditional update and reject/retry if changed.
+
+**Pessimistic concurrency:** lock relevant data before modifying it.
+
+Prefer atomic conditional updates where possible. A read-then-write sequence may race.
+
+Booking example: two users attempt the same room/time. Protect availability at the database/transaction boundary, not only in the UI.
+
+## 7.7 Partitioning, replication and sharding
+
+| Technique | What it does | Why |
+|---|---|---|
+| Partitioning | Splits one logical table/collection into smaller parts | Manage large data and prune query scope |
+| Replication | Copies data to multiple nodes | Availability/read capacity |
+| Sharding | Distributes partitions across database nodes | Horizontal capacity/storage/write scale |
+
+- Async replication can have lag.
+- Replicas improve reads only when consistency semantics are acceptable.
+- Replication is not backup; deletions/corruption can replicate.
+- Poor shard keys create hot spots/uneven distribution.
+- Cross-shard reads/transactions are more complex.
+
+## 7.8 ORM/ODM and recovery
+
+- **ORM:** maps relational data to application objects (Prisma).
+- **ODM:** maps document data to application objects/schema abstractions (Mongoose).
+- Inspect generated queries in performance-sensitive code.
+- A backup is useful only if it can be restored.
+- **RPO:** acceptable data-loss window.
+- **RTO:** acceptable recovery time.
+- Define backup schedule, retention, encryption, access and restore drills.
+
