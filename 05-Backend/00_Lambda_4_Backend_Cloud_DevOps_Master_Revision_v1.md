@@ -1084,3 +1084,132 @@ Core terms:
 - Use retry limits, backoff, DLQ and poison-message handling.
 - Ordering constraints can limit parallelism; preserve only when required.
 
+
+# 12. AWS, deployment and DevOps
+
+**Cross-reference:** your repository already contains a separate 06-DevOps/DevOps-and-Linux course. Do not duplicate its detailed AWS/Linux notes.
+
+## 12.1 AWS services in the course
+
+| Service | Main role |
+|---|---|
+| EC2 | Virtual compute instance |
+| ALB/NLB/ELB | Distributes traffic; ALB is HTTP-aware, NLB transport/network-level |
+| Auto Scaling | Adds/removes instances based on metrics/policies |
+| S3 | Object storage |
+| RDS | Managed relational database |
+| DynamoDB | Managed key-value/document database |
+| DocumentDB | Managed document database service with MongoDB compatibility; not identical in all details |
+| Redshift | Analytics warehouse |
+| Lambda | Event-driven serverless compute |
+| IAM | Identities, roles, permissions and policies |
+| CloudWatch | Metrics, logs, alarms and monitoring |
+| CloudFront | Content delivery network |
+| Route 53 | DNS service |
+| ElastiCache | Managed cache |
+
+IAM principles: least privilege, prefer workload roles to hard-coded access keys, separate human/service permissions and rotate/revoke credentials.
+
+## 12.2 AWS Lambda
+
+- A function runs in response to an invocation/event.
+- Design handlers as stateless and retry-safe.
+- Configure timeout, memory, concurrency and IAM permissions.
+- In-memory state is not durable between invocations.
+- Consider cold starts, concurrency limits and downstream connection handling.
+- Use for event-driven/short-lived work when the model fits. Persistent WebSocket connections/long-running workers may need another hosting model.
+
+## 12.3 Deployment lifecycle
+
+~~~text
+Code commit
+   ↓
+CI checks (lint + tests + build)
+   ↓
+Versioned artifact/container image
+   ↓
+Deploy to compute/hosting
+   ↓
+Health check + smoke test
+   ↓
+Observe logs/metrics
+   ↓
+Roll forward or rollback
+~~~
+
+- **Environment variables:** environment-specific configuration; secrets belong in a secret manager/platform store, not Git.
+- **PM2/process manager:** keeps Node processes alive, manages restarts and can run multiple instances; not a replacement for application design.
+- **Graceful shutdown:** stop accepting new work, complete/close active connections and release resources.
+- **Health endpoint:** reports liveness/readiness based on a clear definition.
+- **Blue-green:** old/new environments exist; switch traffic.
+- **Canary:** release to a small traffic portion then expand.
+- **Rolling:** replace instances gradually.
+
+## 12.4 Docker
+
+| Term | Meaning |
+|---|---|
+| Image | Template/layers to create containers |
+| Container | Running isolated process from image |
+| Volume | Persistent/shared storage mount |
+| Network | Connectivity between containers/services |
+| Dockerfile | Instructions to build an image |
+| Registry | Stores/publishes images |
+
+Docker supports repeatable runtime environments. Keep secrets outside images, use trusted base images, prefer non-root users and use multi-stage builds to reduce runtime image size.
+
+## 12.5 Kubernetes overview
+
+**Extended syllabus revision; verify detailed commands in your DevOps notes.**
+
+| Object | Role |
+|---|---|
+| Pod | Smallest deployable unit; one or more tightly coupled containers |
+| Deployment | Manages replicas and rolling updates |
+| Service | Stable network identity/load-balancing to pods |
+| Ingress/Gateway | HTTP routing into cluster |
+| ConfigMap | Non-secret configuration |
+| Secret | Sensitive configuration; protect with cluster controls/encryption |
+| HPA | Adjusts replica count based on metrics |
+
+Kubernetes adds orchestration complexity. Do not introduce it for a small application without deployment/scale needs.
+
+## 12.6 CI/CD and observability
+
+- **CI:** run checks when code changes (lint, tests, build, security checks).
+- **CD:** deliver/deploy validated changes through controlled environments.
+- GitHub Actions/Jenkins can orchestrate pipelines.
+- Keep CI credentials in secret storage and use least privilege.
+- Make deployment repeatable and rollback possible.
+
+| Signal | Helps answer |
+|---|---|
+| Logs | What event/error occurred? |
+| Metrics | How often/how fast/how much? |
+| Traces | Where did one request spend time across services? |
+
+Prometheus collects metrics; Grafana visualizes them. CloudWatch is AWS-native logs/metrics/alarms. Monitor request rate, error rate, latency, resource saturation and dependency health. Avoid logging secrets/tokens/personal data.
+
+# 13. Testing and reliability
+
+**Syllabus revision; Postman/API testing is project-backed.**
+
+| Test type | What it checks |
+|---|---|
+| Unit | Small function/service in isolation |
+| Integration | Components work together (route + database) |
+| End-to-end | Full user workflow |
+| Load/performance | Latency/throughput under workload |
+| Regression | Previously fixed behaviour remains correct |
+
+Tools in the course outline:
+- **Jest:** test runner, assertions and mocks.
+- **Sinon:** spies, stubs and mocks.
+- **Supertest:** HTTP requests against Node/Express apps.
+- **Postman:** manual/API collection testing.
+- **k6:** load/performance testing.
+
+A practical API test set includes valid CRUD, invalid body, unknown IDs, authorization failure, duplicate/retry requests, DB failures, pagination boundaries, concurrent booking conflicts and persistence after restart.
+
+Reliability basics: timeouts on external calls; bounded retries with backoff; idempotency for retried operations; resource cleanup and graceful shutdown; structured logs and safe error responses.
+
