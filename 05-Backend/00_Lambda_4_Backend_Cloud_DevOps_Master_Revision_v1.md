@@ -411,3 +411,250 @@ The live lesson introduces load balancing as a way to handle more traffic and me
 
 The advanced L4/L7 comparison appears later as syllabus revision; Lecture 07 introduces the problem at a high level.
 
+
+# 5. TypeScript, OOP and code design
+
+**Syllabus revision — no complete TypeScript/OOP lecture transcript found in the audited library.**
+
+## 5.1 TypeScript essentials
+
+TypeScript adds static type checking to JavaScript development. Types are erased at runtime, so incoming HTTP JSON still needs runtime validation.
+
+~~~ts
+type Todo = {
+  id: string;
+  title: string;
+  completed: boolean;
+};
+
+function markComplete(todo: Todo): Todo {
+  return { ...todo, completed: true };
+}
+~~~
+
+| Feature | Purpose |
+|---|---|
+| type alias | Name or compose a type |
+| interface | Describe an object contract |
+| union | Allow one of several types |
+| generic | Reuse logic while preserving input/output types |
+| utility type | Derive a type from another type |
+| mapped type | Transform object properties |
+
+Useful utility types:
+- Partial<T>: make properties optional.
+- Pick<T, K>: select properties.
+- Omit<T, K>: exclude properties.
+- Readonly<T>: readonly properties at type level.
+- Record<K, V>: keyed object with values of type V.
+
+~~~ts
+function first<T>(items: T[]): T | undefined {
+  return items[0];
+}
+~~~
+
+The generic T keeps the output type connected to the input array's element type.
+
+## 5.2 OOP and SOLID
+
+- **Encapsulation:** keep state and behaviour together and control access.
+- **Abstraction:** expose required behaviour while hiding implementation details.
+- **Inheritance:** derive a type from a base type; use for a genuine is-a relationship.
+- **Polymorphism:** different implementations share a contract.
+- **Composition:** combine collaborators; often easier to evolve than deep inheritance.
+
+| Principle | Meaning |
+|---|---|
+| Single Responsibility | One coherent reason for a module to change |
+| Open/Closed | Extend behaviour without repeatedly changing stable core code |
+| Liskov Substitution | A subtype should honour the base contract |
+| Interface Segregation | Prefer focused interfaces over large interfaces |
+| Dependency Inversion | High-level policy should depend on abstractions |
+
+## 5.3 Design patterns
+
+| Pattern | Core idea | Backend example |
+|---|---|---|
+| Singleton | One shared instance in a defined scope | Shared configuration/client |
+| Factory | Centralize object creation | Choose payment provider |
+| Builder | Construct complex objects step by step | Build query/configuration |
+| Facade | Simplify a complex subsystem | One storage interface over providers |
+| Strategy | Swap behaviour behind a contract | Pricing/retry policy |
+| Observer | Notify subscribers about events | Domain event subscribers |
+| Adapter | Convert one interface to another | Wrap third-party API |
+
+Patterns are reusable design ideas, not a requirement to create classes for every feature.
+
+## 5.4 Go overview
+
+**Extended syllabus revision.** Keep JavaScript/TypeScript as the primary backend track unless Go exercises are required.
+
+Go is statically typed and compiled. It uses goroutines for concurrent execution, channels for communication, and mutexes for shared-state coordination. The net/http package provides HTTP server/client primitives. Use context for cancellation/deadlines. Do not confuse Go goroutines with Node's event loop or libuv worker pool.
+
+# 6. Express and API engineering
+
+**Project-backed for Todo CRUD; lecture-backed for HTTP/REST.**
+
+## 6.1 Express request lifecycle
+
+~~~text
+HTTP request
+    ↓
+Middleware (registration order)
+    ↓
+Router matches method + path
+    ↓
+Controller / route handler
+    ↓
+Service and database (when needed)
+    ↓
+HTTP response
+~~~
+
+Essential Express concepts:
+- express() creates the application.
+- app.use() registers middleware.
+- Router groups related routes.
+- req.body contains parsed body data when a parser is installed.
+- req.params contains named path values such as /todos/:id.
+- req.query contains URL query-string values.
+- req.headers contains request metadata.
+- res.status(), res.json() and res.send() build a response.
+- next() passes control to later middleware; errors should reach error handling.
+
+express.json() parses JSON. It does not validate fields, types or business rules. Middleware order matters.
+
+## 6.2 Middleware, controller, service and repository
+
+| Layer | Responsibility |
+|---|---|
+| Route | Maps method/path to handler |
+| Controller | Reads HTTP input, calls service and builds response |
+| Service | Applies business rules/workflow |
+| Repository | Performs database reads/writes |
+| Model/schema | Describes data and persistence rules |
+| Middleware | Shared auth, validation, logging or error handling |
+
+A single index.js is fine for a small exercise. Split code when it improves clarity and testability, not just to imitate a big application.
+
+## 6.3 REST and HTTP methods
+
+REST is an architectural style. Resource-oriented HTTP APIs commonly use nouns in URLs and HTTP method semantics.
+
+| Method | Intent | Safe? | Idempotent? |
+|---|---|---:|---:|
+| GET | Retrieve | Yes | Yes |
+| POST | Submit/create/process | No | Usually no |
+| PUT | Replace target representation | No | Intended yes |
+| PATCH | Partial modification | No | Depends on operation |
+| DELETE | Remove | No | Intended yes |
+
+- **Safe:** intended effect is read-only.
+- **Idempotent:** repeating the same request has the same intended effect.
+
+~~~text
+GET    /api/v1/todos
+GET    /api/v1/todos/:id
+POST   /api/v1/todos
+PATCH  /api/v1/todos/:id
+DELETE /api/v1/todos/:id
+~~~
+
+Status codes:
+
+| Code | Meaning |
+|---|---|
+| 200 | Successful request with response |
+| 201 | Resource created |
+| 204 | Success with no response body |
+| 400 | Invalid/missing input |
+| 401 | Missing/invalid authentication |
+| 403 | Request is not permitted |
+| 404 | Resource/route not found |
+| 409 | Conflict with current state |
+| 422 | Syntactically valid but semantically invalid (API convention) |
+| 429 | Too many requests |
+| 500 | Unexpected server error |
+| 503 | Temporarily unavailable |
+
+A REST-style API needs more than JSON: resource semantics, suitable methods/status codes, consistent representations and stateless request handling matter.
+
+## 6.4 API styles
+
+| Style | Main idea | Typical fit |
+|---|---|---|
+| REST | Resource-oriented HTTP endpoints | Public APIs and CRUD |
+| GraphQL | Client selects fields through a typed schema | Clients need different response shapes |
+| gRPC | Typed RPC, commonly Protocol Buffers over HTTP/2 | Service-to-service communication and streaming |
+| tRPC | TypeScript-first typed procedures | TypeScript-aligned client/server applications |
+
+GraphQL:
+- Schema defines types, queries and mutations.
+- Resolver implements field retrieval.
+- N+1 query issue can occur; batching can help.
+- Authorization still needs to be enforced.
+
+gRPC:
+- Define messages/services in .proto files.
+- Generate typed client/server code.
+- Supports unary and streaming RPC.
+- Use for typed service contracts and service-to-service communication.
+
+tRPC:
+- Server exposes typed procedures.
+- Client types can be inferred from server definitions.
+- It is TypeScript-aligned; it is not the same protocol style as REST.
+
+## 6.5 MVC, monolith, microservices and monorepo
+
+- **MVC:** separates model/data, view/presentation and controller/request coordination.
+- **Modular monolith:** one deployable application with clear internal modules.
+- **Microservices:** independently deployable services aligned to business boundaries.
+- **Monorepo:** one repository containing multiple apps/packages; not an application architecture.
+- **Polyrepo:** separate repositories.
+
+| Monolith | Microservices |
+|---|---|
+| Simpler deployment and local calls | Independent deployment/scaling |
+| Easier initial transactions/debugging | Network failures and distributed consistency |
+| Shared release/runtime | More operational and monitoring overhead |
+
+Start with a modular monolith unless a real requirement justifies service separation.
+
+## 6.6 Zod and runtime validation
+
+**Syllabus revision.** TypeScript types do not validate untrusted JSON at runtime.
+
+~~~ts
+import { z } from "zod";
+
+const createTodoSchema = z.object({
+  title: z.string().trim().min(1).max(200),
+  completed: z.boolean().optional()
+});
+
+const parsed = createTodoSchema.safeParse(req.body);
+
+if (!parsed.success) {
+  return res.status(400).json({ error: parsed.error.flatten() });
+}
+
+// Use parsed.data only after successful validation.
+~~~
+
+Validate type, length, format, allowed fields, missing vs null and query parameters. Validation is not authorization or database integrity.
+
+## 6.7 Idempotent APIs and retries
+
+A retry may cause the same create/payment/booking request to arrive more than once.
+
+An idempotency-key design:
+1. Client creates a key for one logical operation.
+2. Server stores key, caller/scope and operation result/state.
+3. Repeated requests with the same key return the prior result.
+4. Concurrent duplicates need atomic uniqueness/locking rules.
+5. Key retention is defined.
+
+Useful for payments, bookings, orders and job submissions. A disabled frontend button is not a correctness guarantee.
+
