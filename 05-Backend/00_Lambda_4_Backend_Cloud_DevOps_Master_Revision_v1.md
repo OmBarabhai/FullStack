@@ -1343,3 +1343,71 @@ Never execute arbitrary user code inside the main API process.
 
 The repository already contains nine concise detailed Node.js lecture notes. No complete original transcript for every later advanced module was located in this audit.
 
+
+# 16. Existing notes and navigation
+
+The nine detailed Node.js notes remain in:
+
+~~~text
+05-Backend/
+└── 01-Node.js/
+    └── NodeJS-Backend-Interview-Notes-Refined-01-to-09/
+        ├── README.md
+        ├── 01-NodeJS-Runtime-and-V8.md
+        ├── 02-Processes-Threads-and-Concurrency.md
+        ├── 03-NodeJS-Threading-Model.md
+        ├── 04-libuv-Event-Loop-and-Microtasks.md
+        ├── 05-NodeJS-Modules-and-npm.md
+        ├── 06-File-IO-Paths-and-Rendering.md
+        ├── 07-Networking-DNS-TCP-IP.md
+        ├── 08-Storage-Latency-and-Scaling.md
+        └── 09-HTTP-APIs-and-REST.md
+~~~
+
+Project-specific implementation notes belong with the project:
+- **Todo App:** Express CRUD, request/response, middleware, array methods and implementation bugs.
+- **Comsy:** MongoDB/Mongoose, JWT/bcrypt, RBAC, issue workflow and WebSocket notifications.
+- **NexusMeet:** REST APIs, JWT, Socket.IO/WebRTC, session metadata and screen-sharing consent.
+
+For AWS/Linux/DevOps, reuse the existing 06-DevOps/DevOps-and-Linux README. Do not duplicate EC2, S3, IAM, VPC, CloudWatch and deployment notes here.
+
+# 17. Interview self-check
+
+Try explaining these without reading:
+
+1. Difference between JavaScript, V8, Node.js and libuv?
+2. Why is "Node.js is single-threaded" incomplete?
+3. Difference between concurrency and parallelism?
+4. What blocks the Node.js event loop?
+5. How are Promise microtasks different from event-loop phases?
+6. Why use streams instead of loading a large file fully into memory?
+7. Difference between Express middleware, route, controller, service and repository?
+8. When would REST, GraphQL or gRPC be suitable?
+9. Why are TypeScript types alone insufficient for incoming JSON?
+10. How do SQL tables/constraints differ from MongoDB documents/collections?
+11. How do indexes improve reads, and what is their cost?
+12. What does a transaction protect? Name one isolation anomaly.
+13. Difference between replication, partitioning and sharding?
+14. When would you embed vs reference MongoDB data?
+15. Difference between authentication and authorization?
+16. What is inside a JWT, and why is its payload not secret by default?
+17. How does cache-aside work? What is cache invalidation?
+18. Why must queue consumers be idempotent?
+19. Difference between WebSocket, Socket.IO and SSE?
+20. Difference between reverse proxy, load balancer and API gateway?
+21. What does CAP describe during a network partition?
+22. What is consistent hashing useful for?
+23. When is a modular monolith preferable to microservices?
+24. What does CI/CD automate?
+25. What do logs, metrics and traces each reveal?
+
+## Revision method
+
+1. Read the relevant master section.
+2. Open an existing lecture/project note only when you need more detail.
+3. Close the notes and explain the request/data flow aloud.
+4. Draw one small architecture/execution diagram from memory.
+5. Test one edge case or failure case.
+6. Mark a topic complete only when you can explain its trade-off, not merely define the term.
+
+**Core principle:** build the smallest correct system first. Add a cache, queue, replica, microservice or orchestrator only when a requirement or measured bottleneck justifies it.
