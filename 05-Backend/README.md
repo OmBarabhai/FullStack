@@ -26,6 +26,12 @@ The nine existing detailed notes are preserved:
 
 Use the master revision first; open an individual lecture note only when you need more depth.
 
+## Database design
+
+**[Open Lambda 4.0 database notes](02-Databases/README.md)**
+
+Section 10 covers the database-design approach and the available Booking.com exercise. The announced Twitter schema exercise remains unverified until its remaining transcript/recording is available.
+
 ## Project-backed learning
 
 Keep implementation and debugging notes alongside the actual projects:
