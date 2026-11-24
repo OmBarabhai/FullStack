@@ -187,3 +187,227 @@ setTimeout(fn, 0) is not immediate. setImmediate runs in the Check phase. Their 
 
 **Event-loop blockers:** long synchronous JavaScript, CPU-heavy loops and synchronous APIs.
 
+
+# 3. Node.js modules, npm and file I/O
+
+**Lecture-backed — Lectures 05–06.**
+
+## 3.1 CommonJS, ESM and npm
+
+A module is a reusable unit of code. It separates responsibilities and exposes values other files need.
+
+CommonJS:
+
+~~~js
+// math.cjs
+const add = (a, b) => a + b;
+module.exports = { add };
+
+// app.cjs
+const { add } = require("./math.cjs");
+~~~
+
+ES modules:
+
+~~~js
+// math.js
+export const add = (a, b) => a + b;
+
+// app.js
+import { add } from "./math.js";
+~~~
+
+| CommonJS | ES modules |
+|---|---|
+| require() | import |
+| module.exports | export / export default |
+| .cjs explicitly means CJS | .mjs explicitly means ESM |
+| .js follows package-scope rules | "type": "module" makes package-scope .js files ESM |
+
+- exports initially refers to module.exports; reassigning exports alone does not replace module.exports.
+- **npm** installs and manages packages.
+- **package.json** stores metadata, scripts and dependency declarations.
+- **package-lock.json** records the resolved dependency tree.
+- **dependencies** are needed at runtime; **devDependencies** are mainly development/testing tools.
+
+~~~bash
+npm init -y
+npm install express
+npm install --save-dev nodemon
+npm run dev
+~~~
+
+## 3.2 File-system APIs
+
+Node's built-in filesystem module supports reading, writing, appending, deleting and watching files.
+
+| API | Completion style |
+|---|---|
+| node:fs | Common callback APIs |
+| node:fs/promises | Promise APIs used with async/await |
+
+~~~js
+import { readFile } from "node:fs/promises";
+
+const text = await readFile(
+  new URL("./data.txt", import.meta.url),
+  "utf8"
+);
+~~~
+
+- With "utf8", readFile returns text.
+- Without an encoding, it returns a Buffer (raw bytes).
+- Synchronous file operations block the JavaScript thread.
+- Async I/O lets JavaScript do other work while the file operation is pending.
+
+## 3.3 CommonJS and ESM path handling
+
+Lecture 06 demonstrates that __dirname is available in CommonJS module scope but is not directly available in ES modules.
+
+| Expression | Meaning |
+|---|---|
+| __dirname | Current CommonJS module directory |
+| import.meta.url | Current ES module URL |
+| process.cwd() | Process working directory; may differ from script directory |
+| node:path helpers | Build filesystem paths |
+
+A path can be:
+- **Absolute:** full path from a filesystem root.
+- **Relative:** path interpreted from a base/current directory.
+
+For ESM, new URL("./file.html", import.meta.url) locates a file relative to the module. Do not assume process.cwd() equals the directory containing the script.
+
+### Top-level await
+
+ES modules support top-level await. In CommonJS, place await inside an async function. Module format changes which syntax and module variables are available.
+
+## 3.4 Templates, CSR and SSR
+
+A **template** contains reusable markup/placeholders. A template engine combines it with data to generate output, often HTML. Examples include EJS and Handlebars.
+
+- Escape untrusted values; inserting raw HTML can create XSS.
+- **CSR:** much of the UI is rendered/updated in the browser.
+- **SSR:** server generates HTML for the request; client JavaScript may hydrate/run afterwards.
+- Templating and SSR are related but not identical. Writing an HTML file is not automatically a complete SSR request.
+
+## 3.5 Backend engineering priorities from Lecture 06
+
+The instructor's discussion names **databases, networking and scaling** as the first backend engineering foundations, before the technology stack. The practical order is:
+
+1. Design data/storage properly.
+2. Understand how machines communicate over networks.
+3. Understand how to scale without failures/data loss.
+4. Then choose the language/framework that fits the workload and team.
+
+The lecture uses monoliths and different language stacks to emphasize that architecture/data/networking decisions often matter more than choosing a fashionable language prematurely.
+
+# 4. Networking and web request flow
+
+**Lecture-backed — Lecture 07.**
+
+## 4.1 Client, server and IP
+
+- A **client** is a process capable of raising a request.
+- A **server** is a process/machine capable of accepting a request, processing it and returning a response.
+- A machine is addressed on an IP network using an IP address.
+- A URL is human-friendly and identifies a resource; it is not the same as an IP address.
+- IP addresses may be static or dynamic. In AWS, a stable public IPv4 address can be provided using an Elastic IP.
+
+## 4.2 DNS resolution
+
+When a user enters a domain such as www.example.com, the client needs an IP address to contact.
+
+~~~text
+Client enters URL
+      |
+      v
+Check available local/browser/OS DNS cache
+      |
+      v
+Ask configured DNS resolver if needed
+      |
+      v
+DNS returns address record(s)
+      |
+      v
+Client connects to destination IP
+~~~
+
+The lecture explains:
+- The client and server need IP addresses for network communication.
+- The client typically asks a configured DNS resolver for the address corresponding to the domain.
+- DNS is itself a server system.
+- DNS answers can be cached to avoid repeated lookups.
+- DNS is hierarchical (root, top-level domains and authoritative records).
+- Domain registrars manage DNS records/updates; changes may take time to propagate.
+- Not every company runs its own DNS infrastructure.
+
+The transcript gives Google Public DNS 8.8.8.8 as an example. Treat IP examples as illustrative, not as a value to hard-code in an application.
+
+## 4.3 Protocols and layers
+
+A **protocol** is a set of rules for communication. Network protocols define how messages are formatted, addressed, transmitted and interpreted.
+
+~~~text
+URL parsing
+   |
+   v
+DNS resolution (if cache does not have answer)
+   |
+   v
+Connect to destination IP + port
+   |
+   v
+Transport protocol (TCP for conventional HTTP/1.1 or HTTP/2)
+   |
+   v
+TLS for HTTPS
+   |
+   v
+HTTP request → server handles request → HTTP response
+~~~
+
+This is a conceptual path; connections and DNS answers can be reused. HTTP/3 uses QUIC over UDP.
+
+### TCP vs UDP
+
+| TCP | UDP |
+|---|---|
+| Reliable, ordered byte stream | Datagrams without built-in delivery/order guarantee |
+| Retransmission, flow and congestion control | No built-in retransmission/ordering |
+| Used for HTTP/1.1 and HTTP/2 in common deployments | Used by real-time systems and QUIC under HTTP/3 |
+
+TCP three-way handshake:
+
+~~~text
+Client  ---- SYN ---->   Server
+Client  <-- SYN-ACK --   Server
+Client  ---- ACK ---->   Server
+Connection established
+~~~
+
+## 4.4 Web server vs application server vs database server
+
+The lecture introduces different server responsibilities:
+
+| Server role | Main responsibility |
+|---|---|
+| Web server | Handles HTTP and commonly serves static HTML/CSS/JS/assets |
+| Application server | Executes dynamic business logic and produces data/responses |
+| Database server | Stores and queries persistent data |
+
+Modern products can overlap in capabilities; the distinction is about responsibilities, not an absolute rule that one machine performs only one role.
+
+Static content is mostly pre-existing assets. Dynamic content depends on data/business logic (for example, a personalized profile or account balance).
+
+## 4.5 Load balancing and separation of concerns
+
+The live lesson introduces load balancing as a way to handle more traffic and mentions a backup load balancer.
+
+- One server can become overloaded or fail.
+- A load balancer distributes requests among healthy servers.
+- Health checking/failover improves availability.
+- Multiple servers should not rely on isolated in-memory state if requests can reach any instance.
+
+The advanced L4/L7 comparison appears later as syllabus revision; Lecture 07 introduces the problem at a high level.
+
