@@ -1213,3 +1213,133 @@ A practical API test set includes valid CRUD, invalid body, unknown IDs, authori
 
 Reliability basics: timeouts on external calls; bounded retries with backoff; idempotency for retried operations; resource cleanup and graceful shutdown; structured logs and safe error responses.
 
+
+# 14. Course project patterns
+
+These are practice designs named in the Lambda 4.0 outline; they are not required production builds.
+
+## 14.1 Twitter-style backend
+
+Entities: User, Post, Follow, Like, Reply and media metadata.
+
+Key decisions: feed generation, high-follower accounts, indexes, fan-out-on-read vs fan-out-on-write, duplicate likes/follows and idempotency.
+
+- **Fan-out-on-read:** build feed when user asks; simple writes, potentially expensive reads.
+- **Fan-out-on-write:** precompute feed at post creation; faster reads, more write/queue work and celebrity-account special cases.
+
+Avoid unbounded arrays of posts/followers in one user document.
+
+## 14.2 URL shortener
+
+~~~text
+Validate destination URL
+       ↓
+Generate unique short code
+       ↓
+Persist code → destination
+       ↓
+Return short URL
+       ↓
+Request short code
+       ↓
+Look up destination + redirect
+~~~
+
+Use uniqueness constraints to protect code collisions. Add caching for hot mappings after the database path works. Expiry/analytics/abuse prevention are additional requirements, not mandatory MVP features.
+
+## 14.3 Booking backend
+
+Entities: User, Listing/Room, Availability, Reservation and Payment.
+
+Main correctness risk: two users must not reserve the same inventory/time slot. Use transaction/constraint/lock/atomic conditional update. Persist valid reservation state transitions (pending, confirmed, cancelled). Use idempotency keys for retries. Send notifications after booking state is safely persisted.
+
+## 14.4 Uber-style nearby search
+
+- Geospatial indexes or spatial partitions locate nearby candidates.
+- Geohash/grid cells or quadtrees partition geographic space.
+- Search neighbouring cells at boundaries, then calculate exact distance.
+- Location updates are frequent; consider write rate and freshness.
+- WebSockets can deliver trip/driver updates.
+- Avoid broadcasting every location update to all users.
+
+## 14.5 Movie/live streaming
+
+- **RTMP:** commonly used for ingest from encoder software such as OBS.
+- **HLS:** HTTP adaptive streaming; playlist and media segments; clients can switch quality based on bandwidth.
+- **Transcoding:** converts source media into multiple bitrates/formats using CPU-heavy background jobs.
+- **WebRTC:** low-latency real-time media; signaling is separate from media transport.
+- Store media in object storage; do not send huge media through ordinary JSON routes.
+
+## 14.6 LeetCode/code-execution backend
+
+Submitted code is untrusted:
+1. Validate submission request.
+2. Persist metadata/status.
+3. Enqueue execution job.
+4. Execute inside isolated container/sandbox.
+5. Restrict CPU, memory, process count, network and filesystem.
+6. Run test cases and capture stdout/stderr/exit code.
+7. Compare expected output.
+8. Persist result and notify client.
+
+Never execute arbitrary user code inside the main API process.
+
+## 14.7 CodeSandbox-style backend
+
+- Editor/API stores project metadata.
+- Object storage/versioned storage keeps files.
+- Execution service starts isolated containers.
+- Queue controls build/run jobs.
+- WebSocket streams logs/status to browser.
+- Quotas/sandbox controls prevent one user's project affecting others.
+
+# 15. Coverage audit: what already exists and what remains
+
+"Available" means relevant material was found; it does not mean every advanced subtopic already has a complete lecture revision.
+
+| Course area | Material found | Status |
+|---|---|---|
+| Node.js runtime, V8, libuv, event loop | Detailed notes 01–04 + transcripts | **Lecture-backed — strong** |
+| Processes, threads, concurrency | Lecture 02 + transcript | **Lecture-backed — strong** |
+| Node.js modules/npm | Lecture 05 + transcript | **Lecture-backed — strong** |
+| File I/O, paths, rendering | Lecture 06 + transcript | **Lecture-backed — good** |
+| Networking, DNS, TCP/IP | Lecture 07 and related source | **Lecture-backed — good** |
+| Storage, latency, capacity, scaling | Lecture 08/system-design notes | **Lecture-backed — good** |
+| HTTP, APIs, REST | Lecture 09 + Todo API | **Lecture/project-backed** |
+| Express CRUD and middleware | Todo App code/revision | **Project-backed — practical beginner level** |
+| MVC/service/repository/modular monolith | Todo system-design revision | **Project-backed — foundation** |
+| TypeScript, generics, OOP/design patterns | Course outline/expanded mirror | **Syllabus revision** |
+| Go | Expanded syllabus mirror | **Extended syllabus only** |
+| Streams/raw HTTP | Public course description/expanded syllabus | **Syllabus revision** |
+| GraphQL/gRPC/tRPC | Course outline | **Syllabus revision** |
+| Zod/runtime validation | Course outline; manual validation in Todo | **Partial** |
+| Microservices/monolith/monorepo | Basic monolith trade-off in Todo | **Partial** |
+| File uploads/Multer/S3 | Project/course outline | **Project/syllabus-backed; no full lecture note found** |
+| WebSocket/Socket.IO/WebRTC | Comsy/NexusMeet material | **Project-backed** |
+| MySQL/normalization | DevAPI learning outline | **Outline-backed; no complete Lambda DB lecture note found** |
+| MongoDB/Mongoose | Comsy project docs/Mongoose references | **Project-backed** |
+| Indexes/query plans | General storage notes + course outline | **Partial** |
+| Transactions/isolation | Course outline | **Syllabus revision** |
+| Partitioning/replication/sharding | Course outline | **Syllabus revision** |
+| JWT/bcrypt/RBAC | Comsy/NexusMeet project docs | **Project-backed** |
+| OAuth/session/refresh-token flows | Course outline | **Needs hands-on depth** |
+| Redis/BullMQ/geospatial | Course outline | **Syllabus revision** |
+| AWS EC2/ELB/Auto Scaling/RDS/DynamoDB/S3/Lambda/IAM | Separate 06-DevOps track | **Cross-reference existing DevOps folder** |
+| Docker/Kubernetes/CI/CD | DevOps track and course outline | **Cross-reference; verify Kubernetes details there** |
+| Kafka/RabbitMQ/DLQ | Course outline | **Syllabus revision** |
+| API gateway/proxies/rate limiting/circuit breaker/CORS | Course outline | **Syllabus revision** |
+| Jest/Sinon/Supertest/k6 | Course outline + Postman practice | **Partial** |
+| Prometheus/Grafana/observability | DevOps/CloudWatch notes + outline | **Partial/cross-reference** |
+
+## Original lecture transcripts located
+
+- **Lect_1.txt:** Node.js runtime/V8 internals; transcript begins partway through the recording.
+- **Lect_2.txt:** Processing at scale / fundamentals of threads.
+- **Lect_3.txt:** Is Node.js single-threaded?
+- **Lect_4.txt:** Internals of libuv and event loop.
+- **Lec_5.txt:** Node.js modules and npm.
+- **Lect_6.txt:** File I/O, Node paths, rendering and the instructor's backend-priority discussion (databases, networking, scaling before tech-stack choice).
+- **Lect_7.txt:** client/server, IP, DNS, domain registration/propagation and caching, communication protocols, HTTP, web vs application vs database server, and an introductory social-media architecture/load-balancing discussion.
+
+The repository already contains nine concise detailed Node.js lecture notes. No complete original transcript for every later advanced module was located in this audit.
+
