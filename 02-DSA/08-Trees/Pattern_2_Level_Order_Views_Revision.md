@@ -1,38 +1,85 @@
 # Pattern 2 — Level Order, Views & Positional Traversals
 
-> **Status:** In progress  
-> **Language:** Java
+> **Language:** Java  
+> **Study style:** Tree first → queue trace → code → output → complexity  
+> **Rule:** The submitted Java implementations below are kept unchanged. The explanations and dry runs are reorganized for faster revision.
 
 ## Revision Navigation
 
-| No. | Problem | Platform | Status |
+| No. | Problem | Platform | Main pattern |
 |---:|---|---|---|
-| 1 | Binary Tree Level Order Traversal | LeetCode 102 | [x] Practised; revise independently |
-| 2 | Binary Tree Zigzag Level Order Traversal | LeetCode 103 | [x] Practised; revise independently |
-| 3 | ZigZag Traversal (flat level-order output) | Code360 | [x] Practised; revise independently |
-| 4 | Level Order Traversal (flat level-order output) | Code360 | [x] Practised; revise independently |
-| 5 | Binary Tree Level Order Traversal II | LeetCode 107 | [x] Practised; revise independently |
-| 6 | Binary Tree Right Side View | LeetCode 199 | [x] Practised; revise independently |
-| 7 | Left View of a Binary Tree | GeeksforGeeks | Print and return implementations added; revise independently |
+| 1 | Binary Tree Level Order Traversal | LeetCode 102 | BFS + one list per level |
+| 2 | Binary Tree Zigzag Level Order Traversal | LeetCode 103 | BFS + alternate insertion direction |
+| 3 | ZigZag Traversal (flat output) | Code360 | BFS + reverse / deque |
+| 4 | Level Order Traversal (flat output) | Code360 | BFS + `addAll()` |
+| 5 | Binary Tree Level Order Traversal II | LeetCode 107 | BFS + reverse level lists |
+| 6 | Binary Tree Right Side View | LeetCode 199 | Last node at each level |
+| 7 | Left View of a Binary Tree | GeeksforGeeks | First node at each level |
+| 8 | Boundary Traversal of a Binary Tree | Code360 | Root + left boundary + leaves + reversed right boundary (recursive and iterative) |
+
+---
+
+## Before These Problems — Understand the BFS Queue
+
+For all BFS problems, use this tree first:
+
+```text
+              1
+           /     \
+          2       3
+         / \    / \
+        4   5   6   7
+```
+
+The queue is FIFO: the first node added is the first node removed.
+
+**One level at a time:**
+
+| Level | Queue at start | Nodes removed (visit order) | Children added | Queue after level |
+|---:|---|---|---|---|
+| 1 | `[1]` | `1` | `2, 3` | `[2, 3]` |
+| 2 | `[2, 3]` | `2, 3` | `4, 5, 6, 7` | `[4, 5, 6, 7]` |
+| 3 | `[4, 5, 6, 7]` | `4, 5, 6, 7` | — | `[]` |
+
+**The important line:**
+
+```java
+int currLevelSize = Q.size();
+```
+
+Save the queue size before processing the level. Children added during the `for` loop must wait for the next level.
 
 ---
 
 ## 1. LeetCode 102 — Binary Tree Level Order Traversal
 
-**Problem:** [Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)
+**Problem:** [Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)  
+**Goal:** Return a separate list for every level, from left to right.
 
-**Goal:** Return the node values grouped by level, from left to right.
+### Tree and dry run
 
-### Core Logic — BFS + Queue
+```text
+              1
+           /     \
+          2       3
+         / \    / \
+        4   5   6   7
+```
 
-1. Add the root to the queue.
-2. Save `Q.size()` before processing a level. This is the number of nodes in the current level.
-3. Remove exactly that many nodes, add each node's value to the level list, and enqueue its non-null children.
-4. Add the completed level list to the answer. Repeat until the queue is empty.
+| Level | Saved size | `Q` removes | `op` collected | `Q` after adding children |
+|---:|---:|---|---|---|
+| 1 | 1 | `1` | `[1]` | `[2, 3]` |
+| 2 | 2 | `2, 3` | `[2, 3]` | `[4, 5, 6, 7]` |
+| 3 | 4 | `4, 5, 6, 7` | `[4, 5, 6, 7]` | `[]` |
 
-**Key idea:** Save the level size before the loop. Nodes added while processing the current level belong to the next level.
+**Output:**
 
-### Complete Concise Implementation
+```text
+[[1], [2, 3], [4, 5, 6, 7]]
+```
+
+### Java implementation — submitted code
+
 
 ```java
 class Solution {
@@ -70,59 +117,57 @@ class Solution {
 }
 ```
 
-### Mistakes Fixed From the Attempts
+### Follow the loop
 
-- Add `front.val` to the current level list, not the children's values.
-- Process all nodes from one level together, not just one node per `while` iteration.
-- Do not use `i <= Q.size()` as the loop condition because the queue size changes when children are added. Save it first: `int currLevelSize = Q.size()`.
-- For `root == null`, return the empty `ans` list, not `null`.
+1. `Q.remove()` gives the next node in the current level.
+2. `op.add(front.val)` stores that node's value.
+3. Add `front.left`, then `front.right`, to the queue.
+4. After exactly `currLevelSize` removals, add `op` to `ans`.
 
-### Dry Run
-
-Example:
-
-```text
-        3
-       / \\
-      9   20
-         /  \\
-        15   7
-```
-
-| Level | Queue at start | Saved currLevelSize | Values collected | Queue after level |
-|---:|---|---:|---|---|
-| 1 | `[3]` | 1 | `[3]` | `[9, 20]` |
-| 2 | `[9, 20]` | 2 | `[9, 20]` | `[15, 7]` |
-| 3 | `[15, 7]` | 2 | `[15, 7]` | `[]` |
-
-**Output:** `[[3], [9, 20], [15, 7]]`
+**Boundary check:** If `root == null`, return the empty `ans`. `ArrayDeque` does not accept `null`.
 
 ### Complexity
 
-- **Time:** `O(N)` — each node is enqueued and removed once.
-- **Auxiliary space:** `O(W)` — the queue stores at most a level's worth of nodes, where `W` is the maximum tree width.
+- **Time:** `O(N)` — each node is added to and removed from the queue once.
+- **Auxiliary space:** `O(W)` — `W` is the maximum number of nodes at any level. The result list is output space.
 
-### Quick Recall
-
-`Queue + saved level size + process exactly currLevelSize nodes = Level Order Traversal.`
+**Quick recall:** `Queue + saved level size + one list per level`.
 
 ---
 
 ## 2. LeetCode 103 — Binary Tree Zigzag Level Order Traversal
 
-**Problem:** [Binary Tree Zigzag Level Order Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/)
+**Problem:** [Binary Tree Zigzag Level Order Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/)  
+**Goal:** Return levels in alternating directions: left-to-right, then right-to-left.
 
-**Goal:** Return the node values level by level, alternating the direction at each level: left to right, then right to left.
+### Tree and dry run
 
-### Core Logic — BFS + Queue + Current-Level List
+Use the same tree:
 
-1. Use `Q` for normal BFS. Save `Q.size()` before processing each level, then process exactly that many nodes.
-2. Use `op` to build the current level. When `leftToRight` is `true`, insert values with `addLast()`; otherwise, insert with `addFirst()`.
-3. Enqueue the left and right children normally. After completing the level, add `op` to `ans` and toggle `leftToRight`.
+```text
+              1
+           /     \
+          2       3
+         / \    / \
+        4   5   6   7
+```
 
-**Key idea:** The queue always visits nodes in normal BFS order. Only the insertion direction in the current level's deque changes. Do not use `currLevelSize % 2` to decide the direction; alternate it with the boolean flag.
+The queue always removes nodes in normal BFS order. Only the insertion direction into `op` changes.
 
-### Java Implementation
+| Level | Direction | Queue removes | Insertions into `op` | Completed `op` |
+|---:|---|---|---|---|
+| 1 | Left → right | `1` | `addLast(1)` | `[1]` |
+| 2 | Right → left | `2, 3` | `addFirst(2)`, then `addFirst(3)` | `[3, 2]` |
+| 3 | Left → right | `4, 5, 6, 7` | `addLast()` in visit order | `[4, 5, 6, 7]` |
+
+**Output:**
+
+```text
+[[1], [3, 2], [4, 5, 6, 7]]
+```
+
+### Java implementation — submitted code
+
 
 ```java
 /**
@@ -174,75 +219,53 @@ class Solution {
 }
 ```
 
-### Why `List<Integer>` Supports `addFirst()` and `addLast()` (Java 21+)
+### Important Java version note
 
-Your implementation is valid when using **Java 21 or later**. Java 21 added the `SequencedCollection` interface, and `List` extends it. This gives lists methods such as `addFirst()` and `addLast()`.
-
-```java
-List<Integer> curr = new ArrayList<>();
-
-if (rightToLeft) {
-    curr.addFirst(front.val); // Insert at the beginning
-} else {
-    curr.addLast(front.val);  // Insert at the end
-}
-```
-
-- `addFirst(value)` places the value at the beginning of the list.
-- `addLast(value)` places the value at the end of the list.
-- These methods are available on `List` implementations such as `ArrayList` starting with Java 21. They are not available when compiling with Java 20 or earlier.
-
-**Performance note:** `ArrayList.addFirst()` shifts existing elements, so it takes `O(k)` time for a level containing `k` values. `addLast()` is amortized `O(1)`. For better performance when inserting at both ends, use `Deque<Integer> curr = new ArrayDeque<>()`; its `addFirst()` and `addLast()` operations are amortized `O(1)`.
-
-### Dry Run
-
-Example tree:
-
-```text
-        3
-       / \
-      9   20
-         /  \
-        15   7
-```
-
-| Level | Direction | Values processed from `Q` | Insertions into `op` | Completed level |
-|---:|---|---|---|---|
-| 0 | Left to right | `3` | `addLast(3)` | `[3]` |
-| 1 | Right to left | `9`, `20` | `addFirst(9)`, then `addFirst(20)` | `[20, 9]` |
-| 2 | Left to right | `15`, `7` | `addLast(15)`, then `addLast(7)` | `[15, 7]` |
-
-**Output:** `[[3], [20, 9], [15, 7]]`
+The submitted implementation declares `op` as `List<Integer>` and calls `addFirst()` / `addLast()`. Those `List` methods require **Java 21+**. For Java 17, use the Code360 deque-style implementation in Problem 3, where the current-level container is declared as `Deque<Integer>`.
 
 ### Complexity
 
-- **Time:** With `ArrayList`, `addFirst()` shifts the values already collected in that level. The worst-case time can therefore be `O(N²)` for a wide tree. `addLast()` is amortized `O(1)`.
-- **Auxiliary space:** `O(W)` — the BFS queue and current-level list store at most a level's worth of nodes, where `W` is the maximum tree width.
+- With `ArrayList.addFirst()`, inserting at the beginning shifts existing values. Worst-case time can reach `O(N²)` for a very wide level.
+- **Auxiliary space:** `O(W)` for the queue and current-level collection, excluding the returned result.
 
-### Quick Recall
-
-`BFS + saved level size + addLast/addFirst + toggle direction = Zigzag Level Order Traversal.`
-
+**Quick recall:** BFS order stays normal; only the current level's value insertion direction alternates.
 
 ---
 
 ## 3. Code360 — ZigZag Traversal (Flat List)
 
-**Problem:** ZigZag Traversal — Code360
+**Goal:** Return all values in one flat list, while alternating the direction of each level.
 
-**Goal:** Traverse the tree level by level, alternating the direction at each level, and return all values in one flat `List<Integer>`.
+### Tree and expected output
 
-### Core Logic — BFS + Current-Level List + Reverse
+```text
+              1
+           /     \
+          2       3
+         / \    / \
+        4   5   6   7
+```
 
-1. Add the root to the queue. The queue always processes nodes in normal BFS order: left child first, then right child.
-2. At the start of each level, save `Q.size()` in `currLevelSize`. This freezes the number of nodes that belong to the current level.
-3. Use the `for` loop to remove exactly `currLevelSize` nodes. Add each node's value to `curr` in normal left-to-right order, and enqueue its non-null children.
-4. When `rightToLeft` is `true`, reverse the current level using `Collections.reverse(curr)`.
-5. Append the current level to the final flat answer with `ans.addAll(curr)`, then toggle the direction for the next level.
+Level result:
 
-**Why the `for` loop is needed:** It is not related to returning a list of lists. It makes sure every node in the current level is processed before the direction changes. The `while` loop handles the whole tree; the `for` loop handles one level at a time.
+```text
+Level 1: [1]
+Level 2: [3, 2]
+Level 3: [4, 5, 6, 7]
 
-### Java Implementation — `Collections.reverse()`
+Flat output: [1, 3, 2, 4, 5, 6, 7]
+```
+
+### Approach A — collect, then reverse
+
+For each level:
+- Collect values in normal queue order.
+- When `rightToLeft` is `true`, reverse only that level's `curr`.
+- Append the completed level using `ans.addAll(curr)`.
+- Toggle direction once, after the level is complete.
+
+#### Java implementation — submitted code
+
 
 ```java
 import java.util.* ;
@@ -286,9 +309,24 @@ public class Solution {
 }
 ```
 
-### Deque Implementation — Java 6+
+### Approach A — level-by-level trace
 
-This implementation works with **Java 6 and later**, not just Java 17. `Deque` and `ArrayDeque` are available from Java 6. Here, `curr` is a `Deque<Integer>`, so `addFirst()` and `addLast()` can be used without relying on the Java 21 `List` methods.
+| Level | Queue removes | `curr` before reversal | Action | Values appended to `ans` |
+|---:|---|---|---|---|
+| 1 | `1` | `[1]` | No reverse | `[1]` |
+| 2 | `2, 3` | `[2, 3]` | Reverse | `[3, 2]` |
+| 3 | `4, 5, 6, 7` | `[4, 5, 6, 7]` | No reverse | `[4, 5, 6, 7]` |
+
+Final `ans`: `[1, 3, 2, 4, 5, 6, 7]`.
+
+### Approach B — use a deque for the current level
+
+Instead of collecting and reversing, insert values directly at the correct end:
+- Left-to-right: `addLast(value)`.
+- Right-to-left: `addFirst(value)`.
+
+#### Java implementation — submitted code
+
 
 ```java
 import java.util.* ;
@@ -349,168 +387,62 @@ public class Solution {
 }
 ```
 
-### How This Deque Version Works
+### Approach B — level 2 pointer-free trace
 
-- `Q` is still the BFS queue. It always removes nodes in normal left-to-right order and adds the left child before the right child.
-- `curr` is a separate deque containing only the values of the current level.
-- When `rightToLeft == false`, `addLast()` keeps the values in the order they are processed.
-- When `rightToLeft == true`, `addFirst()` places each new value at the beginning. This makes the current level appear in reverse order without calling `Collections.reverse()`.
-- `ans.addAll(curr)` appends the completed level to the final flat list. Then the boolean is toggled for the next level.
-
-### Visual Dry Run — `Deque` Version
-
-Example tree:
+Queue removes nodes in the same order: `2`, then `3`.
 
 ```text
-              1
-            /   \
-           2     3
-          / \   / \
-         4   5  6   7
+rightToLeft = true
+
+Start curr:        []
+Remove node 2
+addFirst(2):       [2]
+
+Remove node 3
+addFirst(3):       [3, 2]
+
+Completed level:   [3, 2]
 ```
 
-The queue always processes each level from left to right. Only the way values enter `curr` changes.
+The queue still enqueues children left first, then right. Only `curr` changes direction.
 
-**Level 1 — left to right (`rightToLeft = false`)**
+### Compare the two implementations
 
-```text
-Queue removes: 1
-addLast(1):    [1]
-```
+| Approach | How it forms a reversed level | Time |
+|---|---|---:|
+| `ArrayList` + `Collections.reverse()` | Collect normally, then reverse | `O(N)` overall |
+| `Deque` + `addFirst()` / `addLast()` | Insert at the required end | `O(N)` overall |
 
-Completed level: `[1]`
+**Java compatibility:** `Deque` and `ArrayDeque` work from Java 6 onward. The deque implementation is suitable for Java 17.
 
-**Level 2 — right to left (`rightToLeft = true`)**
-
-```text
-Queue removes: 2, then 3
-
-Start:         []
-addFirst(2):   [2]
-addFirst(3):   [3, 2]
-```
-
-Notice: the queue still removes `2` before `3`. `addFirst()` changes only the order inside `curr`.
-
-Completed level: `[3, 2]`
-
-**Level 3 — left to right (`rightToLeft = false`)**
-
-```text
-Queue removes: 4, then 5, then 6, then 7
-
-Start:         []
-addLast(4):    [4]
-addLast(5):    [4, 5]
-addLast(6):    [4, 5, 6]
-addLast(7):    [4, 5, 6, 7]
-```
-
-Completed level: `[4, 5, 6, 7]`
-
-**Final flat output:** `[1, 3, 2, 4, 5, 6, 7]`
-
-### Why Use This Instead of `Collections.reverse()`?
-
-| `ArrayList` + `Collections.reverse()` | `Deque` + `addFirst()` / `addLast()` |
-|---|---|
-| First collect the level in normal order. | Insert each value at the required end while processing the level. |
-| Reverse the whole current-level list on alternate levels. | No separate reverse operation is needed. |
-| Reversing a level of `k` values takes `O(k)` time. | Adding at either end of an `ArrayDeque` takes amortized `O(1)` per value. |
-| Total time across all levels is `O(N)`. | Total time across all levels is also `O(N)`. |
-
-**Important:** Both approaches are already `O(N)` overall. The deque version avoids the separate reversal step and is a natural fit when values must be inserted at both ends. It does not change the BFS traversal or skip any nodes.
-
-### Complexity — `Deque` Version
-
-- **Time:** `O(N)` — each node is enqueued and removed once, and each value is inserted into `curr` once using an amortized `O(1)` end operation.
-- **Auxiliary space:** `O(W)` — the BFS queue and current-level deque store at most a level's worth of nodes/values, where `W` is the maximum tree width. The returned `ans` is output space.
-
-### Understand the Variables
-
-| Variable | Purpose |
-|---|---|
-| `Q` | Stores tree nodes for BFS. It always enqueues left child before right child. |
-| `currLevelSize` | Number of nodes to process in the current level; save it before adding children. |
-| `curr` | Stores values for only the current level, initially in normal left-to-right order. |
-| `rightToLeft` | Controls whether the current level must be reversed. It starts as `false`, so the root level stays left to right. |
-| `ans` | Final flat result containing all completed levels. |
-
-### Dry Run
-
-Example tree:
-
-```text
-              1
-            /   \
-           2     3
-          / \   / \
-         4   5  6   7
-```
-
-| Level | `rightToLeft` at start | Nodes removed from queue | `curr` before reverse | `curr` after direction is applied | `ans` after `ans.addAll(curr)` |
-|---:|---|---|---|---|---|
-| 1 | `false` | `[1]` | `[1]` | `[1]` | `[1]` |
-| 2 | `true` | `[2, 3]` | `[2, 3]` | `[3, 2]` | `[1, 3, 2]` |
-| 3 | `false` | `[4, 5, 6, 7]` | `[4, 5, 6, 7]` | `[4, 5, 6, 7]` | `[1, 3, 2, 4, 5, 6, 7]` |
-
-**Output:** `[1, 3, 2, 4, 5, 6, 7]`
-
-### Why These Operations Matter
-
-```java
-curr.add(front.data);
-```
-
-Collects the current level in the normal BFS order.
-
-```java
-if (rightToLeft) {
-    Collections.reverse(curr);
-}
-```
-
-Reverses only the current level when its direction must be right to left. It does not change the queue or the order in which the next level's nodes are discovered.
-
-```java
-ans.addAll(curr);
-```
-
-Appends every value from the completed level to the final flat list. Use `addAll()` because `ans` expects individual `Integer` values; `ans.add(curr)` would try to add a whole list as one element and is incompatible with `List<Integer>`.
-
-```java
-rightToLeft = !rightToLeft;
-```
-
-Changes direction once, after the entire level has been processed—not after each node.
-
-### Complexity
-
-- **Time:** `O(N)` — each node is enqueued and removed once, and reversing all current-level lists takes at most `O(N)` total across the tree.
-- **Auxiliary space:** `O(W)` — the queue and current-level list store at most a level's worth of nodes, where `W` is the maximum tree width. The returned `ans` is output space.
-
-### Quick Recall
-
-`BFS + save level size + collect normal order + reverse alternate levels + addAll = Flat ZigZag Traversal.`
-
+**Quick recall:** `BFS + alternate current-level order + addAll()`.
 
 ---
 
 ## 4. Code360 — Level Order Traversal (Flat List)
 
-**Goal:** Visit the tree level by level from left to right and return all node values in one flat `List<Integer>`.
+**Goal:** Return level-order values in one flat list, left to right.
 
-### Core Logic — BFS + Saved Level Size
+### Tree and dry run
 
-1. Add the root to the queue.
-2. At the start of each level, save `Q.size()` in `currLevelSize`. This tells us exactly how many nodes belong to this level.
-3. Remove exactly `currLevelSize` nodes. Add each removed node's value to `curr`, then add its non-null left and right children to the queue.
-4. After processing the level, use `ans.addAll(curr)` to append that level's values to the final flat answer.
-5. Continue until the queue is empty.
+```text
+              1
+           /     \
+          2       3
+         / \    / \
+        4   5   6   7
+```
 
-**Important:** The queue stores tree nodes and controls BFS order. `curr` only collects the values from the current level. In this code, `curr` is a `Deque<Integer>`, but it is used with ordinary `add()` and `addAll()`; it does not perform any reversal.
+| Level | Queue removes | `curr` grows to | `ans` after `addAll()` |
+|---:|---|---|---|
+| 1 | `1` | `[1]` | `[1]` |
+| 2 | `2, 3` | `[2, 3]` | `[1, 2, 3]` |
+| 3 | `4, 5, 6, 7` | `[4, 5, 6, 7]` | `[1, 2, 3, 4, 5, 6, 7]` |
 
-### Your Implementation — `Deque<Integer>`
+**Output:** `[1, 2, 3, 4, 5, 6, 7]`
+
+### Java implementation — submitted code
+
 
 ```java
 /*********************************************************
@@ -565,101 +497,72 @@ public class Solution {
 }
 ```
 
-### Java Version Compatibility
+### What the two loops do
 
-This code is **not specific to Java 17**. `Deque` and `ArrayDeque` have been available since **Java 6**, so this implementation works on Java 6 and later (including Java 8, 11, 17, and newer versions). It does not require Java 21's `List.addFirst()` or `List.addLast()` methods.
+- `while (!Q.isEmpty())` continues until all levels are processed.
+- `currLevelSize = Q.size()` freezes the current-level count.
+- The `for` loop processes exactly those nodes.
+- `curr.add(frontNode.data)` collects values for this level.
+- `ans.addAll(curr)` appends those values to the flat result.
 
-### Visual Dry Run
-
-Example tree:
-
-```text
-              1
-            /   \\
-           2     3
-          / \\   / \\
-         4   5  6   7
-```
-
-**Level 1**
-
-```text
-Tree node processed: 1
-Q before: [1]
-currLevelSize = 1
-curr: [] -> [1]
-Q after: [2, 3]
-ans after addAll: [1]
-```
-
-**Level 2**
-
-```text
-Tree nodes processed: 2, then 3
-Q before: [2, 3]
-currLevelSize = 2
-curr: [] -> [2] -> [2, 3]
-Q after: [4, 5, 6, 7]
-ans after addAll: [1, 2, 3]
-```
-
-**Level 3**
-
-```text
-Tree nodes processed: 4, then 5, then 6, then 7
-Q before: [4, 5, 6, 7]
-currLevelSize = 4
-curr: [] -> [4] -> [4, 5] -> [4, 5, 6] -> [4, 5, 6, 7]
-Q after: []
-ans after addAll: [1, 2, 3, 4, 5, 6, 7]
-```
-
-**Final output:** `[1, 2, 3, 4, 5, 6, 7]`
-
-### Why Do We Need Both `while` and `for`?
-
-- `while (!Q.isEmpty())` repeats until every level has been processed.
-- `currLevelSize = Q.size()` records how many nodes are in the current level before their children are added.
-- `for (int i = 1; i <= currLevelSize; i++)` processes exactly those current-level nodes. Newly added children wait in the queue for the next `while` iteration.
-
-Without the saved `currLevelSize`, the loop could also process children added during the same level, so the level boundary would be lost.
-
-### Why `Deque<Integer> curr` and `ans.addAll(curr)`?
-
-- `curr.add(frontNode.data)` appends the current node's value to the end of the current-level deque. `Deque` supports `add()` as an end-insertion operation.
-- `ans.addAll(curr)` copies all values from the completed level into the final `List<Integer>` in iteration order.
-- Because `ans` is a flat list, `addAll()` is appropriate. It appends individual integer values, not the deque as one nested element.
-- A `List<Integer>` could also be used for `curr`; using `Deque<Integer>` here is valid, but it is not necessary because this level-order version only appends values.
+`curr` is a `Deque<Integer>` in the submitted code, but this problem only appends values; a `List<Integer>` would also work.
 
 ### Complexity
 
-- **Time:** `O(N)` — each node is enqueued once, removed once, and its value is added once.
-- **Auxiliary space:** `O(W)` — the queue and current-level deque hold up to a level's worth of nodes/values, where `W` is the maximum tree width. The returned `ans` is output space.
+- **Time:** `O(N)`.
+- **Auxiliary space:** `O(W)` for the queue and current-level collection; returned `ans` is output space.
 
-### Quick Recall
-
-`BFS queue + save level size + collect current level + addAll = Flat Level Order Traversal.`
-
+**Quick recall:** Save level size → process that many nodes → `addAll()`.
 
 ---
 
 ## 5. LeetCode 107 — Binary Tree Level Order Traversal II
 
-**Problem:** [Binary Tree Level Order Traversal II](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/)
+**Problem:** [Binary Tree Level Order Traversal II](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/)  
+**Goal:** Return levels from bottom to top. Values within each level stay left to right.
 
-**Goal:** Return the tree's level-order traversal from the bottom level to the root level. Values inside each level must remain in normal left-to-right order.
+### Tree and dry run
 
-### Core Logic — BFS + Current-Level Deque + Reverse Outer List
+```text
+              1
+           /     \
+          2       3
+         / \    / \
+        4   5   6   7
+```
 
-1. Use `Q` for normal BFS. Add the root first and process nodes from left to right.
-2. At the start of each level, save `Q.size()` in `currLevelSize`. This freezes the number of nodes belonging to that level.
-3. Create `curr` to collect only the values from the current level. Remove exactly `currLevelSize` nodes, append each value using `curr.add()`, and enqueue the node's non-null left and right children.
-4. After the complete level has been processed, convert `curr` into a `List` and add it to `ans` with `ans.add(new ArrayList<>(curr))`.
-5. Once BFS has processed every level, reverse `ans` using `Collections.reverse(ans)`. This reverses the order of the level-lists, not the values inside each level.
+First, normal BFS builds:
 
-**Important distinction:** Do not reverse `curr`. The nodes inside every level must stay left to right. Only the order of the completed levels changes from top-to-bottom to bottom-to-top.
+```text
+Level 1: [1]
+Level 2: [2, 3]
+Level 3: [4, 5, 6, 7]
+```
 
-### Your Implementation
+Before reversing `ans`:
+
+```text
+[
+  [1],
+  [2, 3],
+  [4, 5, 6, 7]
+]
+```
+
+After `Collections.reverse(ans)`:
+
+```text
+[
+  [4, 5, 6, 7],
+  [2, 3],
+  [1]
+]
+```
+
+**Output:** `[[4, 5, 6, 7], [2, 3], [1]]`
+
+### Java implementation — submitted code
+
 
 ```java
 /**
@@ -706,152 +609,56 @@ class Solution {
 }
 ```
 
-### Understand the Important Lines
-
-**1. Save the number of nodes in the current level**
-
-```java
-int currLevelSize = Q.size();
-```
-
-At this moment, the queue contains the nodes waiting to be processed at the current level. Store that count before adding children. During the `for` loop, children are added to the queue, but they must wait for the next level. The saved `currLevelSize` makes the loop process only the nodes that were already in the queue at the start of this level.
-
-**2. Collect values in their normal left-to-right order**
-
-```java
-curr.add(frontNode.val);
-```
-
-`curr` is a `Deque<Integer>`. Its `add()` method appends the value at the end, so the values remain in the same order in which BFS removes their nodes: left to right. No `addFirst()` or level reversal is needed.
-
-**3. Convert the current deque into a list before adding it**
+### Follow the two important operations
 
 ```java
 ans.add(new ArrayList<>(curr));
 ```
 
-- `ans` has type `List<List<Integer>>`, so each item added to it must be a `List<Integer>`.
-- `curr` has type `Deque<Integer>`, so `ans.add(curr)` would be a type mismatch.
-- `new ArrayList<>(curr)` creates a list containing the deque's values in iteration order. That completed level is then stored as one row in `ans`.
-
-**4. Reverse the completed levels, not the values inside them**
+Copies the current level into `ans` as one `List<Integer>`.
 
 ```java
 Collections.reverse(ans);
 ```
 
-`ans` is a list of level-lists. Reversing it changes the order of those level-lists while keeping each individual level unchanged. This is exactly what bottom-up level order requires.
-
-### Visual Dry Run
-
-Example tree:
-```text
-              1
-            /   \
-           2     3
-          / \   / \
-         4   5  6   7
-```
-
-**Traversal order:** BFS / level order, visiting each level from left to right.
-
-**Level 1 — process node `1`**
-
-```text
-Queue before:       [1]
-currLevelSize:      1
-Remove:             1
-curr:               [] -> [1]
-Add children:       2, 3
-Queue after:        [2, 3]
-ans after level:    [[1]]
-```
-
-**Level 2 — process nodes `2`, then `3`**
-
-```text
-Queue before:       [2, 3]
-currLevelSize:      2
-Remove 2:           curr = [2]
-Add children:       4, 5
-Remove 3:           curr = [2, 3]
-Add children:       6, 7
-Queue after:        [4, 5, 6, 7]
-ans after level:    [[1], [2, 3]]
-```
-
-**Level 3 — process nodes `4`, `5`, `6`, then `7`**
-
-```text
-Queue before:       [4, 5, 6, 7]
-currLevelSize:      4
-Remove 4:           curr = [4]
-Remove 5:           curr = [4, 5]
-Remove 6:           curr = [4, 5, 6]
-Remove 7:           curr = [4, 5, 6, 7]
-Queue after:        []
-ans after level:    [[1], [2, 3], [4, 5, 6, 7]]
-```
-
-**Now reverse `ans` once BFS is finished:**
-
-```text
-Before Collections.reverse(ans):
-[
-  [1],
-  [2, 3],
-  [4, 5, 6, 7]
-]
-
-After Collections.reverse(ans):
-[
-  [4, 5, 6, 7],
-  [2, 3],
-  [1]
-]
-```
-
-**Final output:** `[[4, 5, 6, 7], [2, 3], [1]]`
-
-### Why Reverse `ans` Instead of `curr`?
-
-| Operation | What it reverses | Result for this example |
-|---|---|---|
-| `Collections.reverse(curr)` | Values inside one level | `[3, 2]` instead of `[2, 3]` — not wanted |
-| `Collections.reverse(ans)` | Order of the level-lists | Bottom level first, with values inside each level unchanged — correct |
-
-The BFS part builds the levels in their natural order: root first, bottom level last. Reversing the outer list after BFS is complete changes only the level order. There is no need to change how the queue visits nodes.
+Reverses the outer list of levels. It does **not** reverse values inside an individual level.
 
 ### Complexity
 
-- **Time:** `O(N)` — every node is enqueued and removed once. Reversing the outer `ans` list takes `O(L)`, where `L` is the number of levels; since `L <= N`, the total remains `O(N)`.
-- **Auxiliary space:** `O(W)` for the BFS queue and current-level deque, where `W` is the maximum tree width. The returned `ans` stores all `N` node values and is output space.
+- **Time:** `O(N)` — BFS visits every node once; reversing the list of levels is at most `O(N)`.
+- **Auxiliary space:** `O(W)` for the queue and current-level deque, excluding the returned result.
 
-### Quick Recall
-
-`Normal BFS + collect each level left to right + add each level to ans + reverse ans once = Bottom-Up Level Order Traversal.`
-
+**Quick recall:** Normal BFS first; reverse the completed list of levels once at the end.
 
 ---
 
 ## 6. LeetCode 199 — Binary Tree Right Side View
 
-**Problem:** [Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)
+**Problem:** [Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)  
+**Goal:** Select the rightmost visible node at each level.
 
-**Goal:** Return the value of the rightmost visible node at every level, starting from the root.
+### Tree and dry run
 
-### Core Logic — BFS + Saved Level Size + Last Processed Node
+```text
+          1
+         / \
+        2   3
+       /     \
+      4       5
+```
 
-1. Add the root to the queue. If the root is `null`, return the empty answer.
-2. At the start of each level, save `Q.size()` in `currLevelSize`. This tells the `for` loop exactly how many nodes belong to this level.
-3. Set `lastNodeRight` to a starting value. Process exactly `currLevelSize` nodes from left to right.
-4. For every removed node, enqueue its left child first and its right child second. Then assign its value to `lastNodeRight`.
-5. After the `for` loop finishes, `lastNodeRight` contains the value of the last node processed at this level. Add it to `ans`.
-6. Repeat for every level.
+The queue processes each level from left to right because the code enqueues left child before right child.
 
-**Why does the last processed node work?** The queue processes each level from left to right because children are enqueued left first and right second. Therefore, the last node removed from a level is its rightmost node. This also works when a level has only a left child: that left child is the only node visible from the right at that level.
+| Level | Nodes removed | `lastNodeRight` changes | Value added to `ans` |
+|---:|---|---|---:|
+| 1 | `1` | `1` | `1` |
+| 2 | `2`, `3` | `2 → 3` | `3` |
+| 3 | `4`, `5` | `4 → 5` | `5` |
 
-### Your Implementation
+**Output:** `[1, 3, 5]`
+
+### Java implementation — submitted code
+
 
 ```java
 /**
@@ -897,147 +704,68 @@ class Solution {
 }
 ```
 
-### Understand the Important Lines
-
-**1. Freeze the current level's node count**
-
-```java
-int currLevelSize = Q.size();
-```
-
-The queue may grow when children are added. Saving the count before the `for` loop ensures that only the nodes already waiting at the start of this level are processed now. Their children are processed in the next `while` iteration.
-
-**2. Keep the queue in left-to-right BFS order**
-
-```java
-if (frontNode.left != null) {
-    Q.add(frontNode.left);
-}
-if (frontNode.right != null) {
-    Q.add(frontNode.right);
-}
-```
-
-Enqueueing left before right makes nodes come out of the queue from left to right at each level. Do not swap these two insertions when using the `lastNodeRight` approach.
-
-**3. Keep updating the candidate rightmost value**
+### Follow the pointer to the answer
 
 ```java
 lastNodeRight = frontNode.val;
 ```
 
-This line runs for every node in the current level. Each processed node replaces the previous candidate. After the final iteration, the variable holds the value of the last (rightmost) node in that level.
-
-**4. Add one answer per completed level**
+This assignment runs for every node in the current level. The last node overwrites earlier candidates.
 
 ```java
 ans.add(lastNodeRight);
 ```
 
-This line is outside the `for` loop, so only one value is added after the whole level has been processed.
+This is after the `for` loop, so exactly one value is added per level.
 
-### Visual Dry Run
-
-Example tree:
+### Important edge case — a level has only a left child
 
 ```text
-          1
-         / \
-        2   3
-       /     \
-      4       5
+    1
+   /
+  2
+   \
+    3
 ```
 
-**Traversal order:** BFS / level order. The queue visits each level from left to right. The right-side view takes the final node processed at each level.
-
-**Level 1 — process node `1`**
-
-```text
-Queue before:       [1]
-currLevelSize:      1
-Remove:             1
-lastNodeRight:      1
-Add children:       2, 3
-Queue after:        [2, 3]
-ans after level:    [1]
-```
-
-**Level 2 — process nodes `2`, then `3`**
-
-```text
-Queue before:       [2, 3]
-currLevelSize:      2
-Remove 2:           lastNodeRight = 2
-Add child:          4
-Remove 3:           lastNodeRight = 3
-Add child:          5
-Queue after:        [4, 5]
-ans after level:    [1, 3]
-```
-
-Notice that `lastNodeRight` first becomes `2`, then gets overwritten by `3`. Node `3` is the last node processed at this level.
-
-**Level 3 — process nodes `4`, then `5`**
-
-```text
-Queue before:       [4, 5]
-currLevelSize:      2
-Remove 4:           lastNodeRight = 4
-Remove 5:           lastNodeRight = 5
-Queue after:        []
-ans after level:    [1, 3, 5]
-```
-
-**Final output:** `[1, 3, 5]`
-
-### Important Edge Case — Only a Left Child
-
-```text
-        1
-       /
-      2
-       \
-        3
-```
-
-At the second level, node `2` is the only node. It is still the last node processed at that level, so it is included in the right-side view. At the next level, node `3` is the only node and is also included.
-
-**Output:** `[1, 2, 3]`
-
-The right-side view means the node visible from the right, not necessarily a node that has a right child or is itself a right child.
-
-### Why `lastNodeRight` Is Initialized Inside the `while` Loop
-
-```java
-int lastNodeRight = 0;
-```
-
-It is reset for every level because each level needs its own rightmost value. The value `0` is only an initial placeholder: the `for` loop always runs at least once while the queue is non-empty, and the variable is assigned a node value before it is added to `ans`. So a tree node whose value is `0` is also handled correctly.
+The right-side view is `[1, 2, 3]`. A node does not need to be a right child to be visible from the right; it can be the only node at that level.
 
 ### Complexity
 
-- **Time:** `O(N)` — every node is enqueued once, removed once, and processed once.
-- **Auxiliary space:** `O(W)` — the BFS queue stores at most a level's worth of nodes, where `W` is the maximum tree width. The returned `ans` stores one value per level and is output space.
+- **Time:** `O(N)`.
+- **Auxiliary space:** `O(W)` for the BFS queue, excluding the returned answer.
 
-### Quick Recall
-
-`BFS + save currLevelSize + enqueue left then right + keep overwriting lastNodeRight + add once per level = Right Side View.`
+**Quick recall:** Process left to right → keep overwriting the candidate → add the final candidate once per level.
 
 ---
 
 ## 7. GeeksforGeeks — Left View of a Binary Tree
 
-**Problem:** [Left View of a Binary Tree](https://www.geeksforgeeks.org/problems/left-view-of-binary-tree/1)
+**Problem:** [Left View of a Binary Tree](https://www.geeksforgeeks.org/problems/left-view-of-binary-tree/1)  
+**Goal:** Select the first visible node at every level.
 
-**Goal:** Print the first node visible at every level when the tree is viewed from the left side.
+### Tree and dry run
 
-### Core Logic — BFS + First Node of Each Level
+```text
+          1
+         / \
+        2   3
+         \ / \
+          5 6   7
+```
 
-- Process the tree level by level using a queue.
-- Save `Q.size()` before processing a level so only the nodes at that level are removed in the current `for` loop.
-- Since left children are enqueued before right children, the first node removed at each level (`i == 1`) is the leftmost node of that level.
+| Level | Queue at start | First node removed (`i == 1`) | Left-view value |
+|---:|---|---:|---:|
+| 1 | `[1]` | `1` | `1` |
+| 2 | `[2, 3]` | `2` | `2` |
+| 3 | `[5, 6, 7]` | `5` | `5` |
 
-### Java Implementation — Updated Submitted Code
+**Left view:** `1 2 5`
+
+### Approach A — print the left view
+
+#### Java implementation — submitted code
+
 
 ```java
 import java.util.*;
@@ -1064,48 +792,22 @@ public class Solution {
 }
 ```
 
-### Dry Run
+### Where the selection happens
 
-Example tree:
-
-```text
-          1
-        /   \\
-       2     3
-        \\   / \\
-         5  6   7
+```java
+if (i == 1) {
+    System.out.print(frontNode.data + " ");
+}
 ```
 
-| Level | Queue at start | First node removed (`i == 1`) | Printed | Queue after level |
-|---:|---|---:|---:|---|
-| 1 | `[1]` | 1 | 1 | `[2, 3]` |
-| 2 | `[2, 3]` | 2 | 2 | `[5, 6, 7]` |
-| 3 | `[5, 6, 7]` | 5 | 5 | `[]` |
+`i == 1` selects the first node removed at each level. Since left children are enqueued before right children, this is the leftmost node of that level.
 
-**Output:** `1 2 5`
+**Input assumption:** This submitted print version expects a non-null root. `ArrayDeque` does not accept `null`.
 
-### Important Points
+### Approach B — return the left view in an ArrayList
 
-- `sizeCurrLevel = Q.size()` stores the number of nodes in the current level.
-- `i == 1` selects the first node removed at that level.
-- Enqueue left before right to preserve left-to-right BFS order.
-- The submitted code assumes a non-null root. If the input can be an empty tree, return before calling `Q.add(root)`, because `ArrayDeque` does not accept `null`.
+#### Java implementation — submitted code
 
-### Complexity
-
-- **Time:** `O(N)` — every node is enqueued and removed once.
-- **Auxiliary space:** `O(W)` — the queue stores up to the maximum width of the tree.
-- **Output space:** `O(1)` — values are printed directly rather than stored in a result collection.
-
-### Quick Recall
-
-`BFS + save level size + print the first node (`i == 1`) + enqueue left before right = Left View.`
-
-### Alternative Implementation — Return the Left View in an ArrayList
-
-This version uses the same BFS idea, but instead of printing each visible node, it returns the left-view values in an `ArrayList<Integer>`.
-
-### Java Implementation — Submitted Code
 
 ```java
 import java.util.*;
@@ -1141,63 +843,353 @@ public class Solution
 }
 ```
 
-### How This Version Works
-
-1. **Create the answer list:** `ans` stores one left-view value for each level.
-2. **Handle an empty tree:** When `root == null`, return the empty list immediately. This also avoids adding `null` to an `ArrayDeque`.
-3. **Start BFS:** Add the root to `Q`. The queue processes nodes level by level.
-4. **Save the current level size:** `size_currLvl = Q.size()` records how many nodes belong to this level before their children are added.
-5. **Process the level:** The `for` loop removes exactly `size_currLvl` nodes. Each node's left child is added before its right child, preserving left-to-right order for the next level.
-6. **Select the leftmost node:** `i` starts at `1`, so `i == 1` is true only for the first node removed at the current level. Its value is added to `curr`.
-7. **Store the selected value:** After the level is fully processed, `ans.addAll(curr)` appends that level's selected value to the answer. `curr` is newly created for every level and contains either one value or no values.
-8. **Return the result:** Once the queue is empty, `ans` contains the leftmost visible node from every level, from top to bottom.
-
-**Why does the first removed node represent the left view?** The queue is FIFO, and children are always enqueued left before right. Therefore nodes at each next level are removed from left to right. The first one removed is the leftmost node at that level.
-
-### Dry Run
-
-Example tree:
+### Approach B — same tree, same selected nodes
 
 ```text
-          1
-        /   \\
-       2     3
-        \\   / \\
-         5  6   7
+Level 1: first node = 1  → ans = [1]
+Level 2: first node = 2  → ans = [1, 2]
+Level 3: first node = 5  → ans = [1, 2, 5]
 ```
 
-| Level | Queue at start | `size_currLvl` | First node (`i == 1`) | `curr` | `ans` after level |
-|---:|---|---:|---:|---|---|
-| 1 | `[1]` | 1 | 1 | `[1]` | `[1]` |
-| 2 | `[2, 3]` | 2 | 2 | `[2]` | `[1, 2]` |
-| 3 | `[5, 6, 7]` | 3 | 5 | `[5]` | `[1, 2, 5]` |
+Returned value: `[1, 2, 5]`.
 
-**Returned value:** `[1, 2, 5]`
+The submitted `curr` deque holds at most one value per level because it adds only when `i == 1`. `ans.addAll(curr)` then appends that value to the answer.
 
-### Why Use `curr` and `ans.addAll(curr)`?
-
-- `curr` is a temporary deque for the current level's selected value. Since the code adds a value only when `i == 1`, it contains at most one element.
-- `ans.addAll(curr)` transfers that selected value to the final `ArrayList` after the entire level has been processed.
-- The temporary `curr` is valid but not essential; the same selected value could be added directly to `ans` inside `if (i == 1)`. This revision keeps your submitted structure unchanged so the role of each operation stays clear.
-
-### Difference Between the Two Left View Methods
+### Compare the two versions
 
 | `printLeftView()` | `getLeftView()` |
 |---|---|
-| Prints each selected value using `System.out.print()`. | Returns the selected values in an `ArrayList<Integer>`. |
-| Does not build a result collection. | Uses `ans` as the result collection. |
-| The submitted version assumes a non-null root. | Checks `root == null` and returns an empty list. |
+| Prints values directly. | Returns an `ArrayList<Integer>`. |
+| Submitted code assumes a non-null root. | Checks `root == null` and returns an empty list. |
+| No result collection. | Stores one value per level. |
 
 ### Complexity
 
-Let `N` be the number of nodes, `W` the maximum width, and `H` the number of levels.
+- **Time:** `O(N)` — each node is enqueued and removed once.
+- **Auxiliary space:** `O(W)` for the queue; the temporary `curr` deque holds at most one value.
+- **Output space:** `O(H)` for `getLeftView()`, one value per level. The print version writes directly to output.
 
-- **Time:** `O(N)` — each node is enqueued and removed once. Each level contributes at most one value to the result.
-- **Auxiliary space:** `O(W)` for the BFS queue. `curr` holds at most one integer, so it uses `O(1)` additional temporary space.
-- **Output space:** `O(H)` — one value is stored for each level.
+**Quick recall:** Enqueue left before right → choose the first removed node (`i == 1`).
 
-### Quick Recall
+---
 
-`BFS + save level size + choose the first removed node (`i == 1`) + enqueue left before right + add to ans = Left View.`
+## 8. Boundary Traversal of a Binary Tree
 
+**Practice:** [Code360 — Boundary Traversal of a Binary Tree](https://www.naukri.com/code360/problems/boundary-traversal_790725?leftPanelTabValue=PROBLEM&count=25&page=1&search=&sort_entity=order&sort_order=ASC)  
+**Goal:** Return the outer boundary of the tree in anti-clockwise order:
 
+1. Root (once).
+2. Left boundary from top to bottom, excluding leaf nodes.
+3. All leaf nodes from left to right.
+4. Right boundary from bottom to top, excluding leaf nodes.
+
+### Tree and expected output
+
+```text
+          1
+         / \
+        2   3
+       / \  / \
+      4   5 6   7
+     /      / \
+    8      9  10
+```
+
+| Part | Values added | Why |
+|---|---|---|
+| Root | `1` | Add the root first. |
+| Left boundary | `2, 4` | Follow left when available; otherwise follow right. Skip leaves. |
+| Leaf nodes | `8, 5, 9, 10, 7` | Visit leaves left to right. |
+| Right boundary | `3` | Follow right when available; otherwise follow left. Add while recursion returns. |
+
+**Output:** `[1, 2, 4, 8, 5, 9, 10, 7, 3]`
+
+### Approach A — Recursive implementation
+
+#### Java implementation — submitted code
+
+```java
+import java.util.*;
+
+public class Solution {
+    public static List<Integer> traverseBoundary(TreeNode root){
+        List<Integer> ans = new ArrayList<>();
+        if(root == null) return ans;
+
+        //including root Node 
+        ans.add(root.data);
+        if(root.left == null && root.right == null) return ans;
+
+        //including root.left Node 
+        leftBoundry(root.left, ans); 
+        //all leaf node 
+        leafNode(root, ans);      
+        //including root.right Node 
+        rightBoundry(root.right, ans);
+        return ans;
+    }
+    public static void leftBoundry(TreeNode root, List<Integer> ans){
+        if(root == null) return;
+        if(root.left == null && root.right == null) return;
+        ans.add(root.data);
+        if(root.left != null) leftBoundry(root.left, ans);  
+        else leftBoundry(root.right, ans);
+    }
+    public static void leafNode(TreeNode root, List<Integer> ans){
+        if(root == null) return;
+        if(root.left == null && root.right == null) ans.add(root.data);
+        leafNode(root.left, ans);  
+        leafNode(root.right, ans);
+    }
+    public static void rightBoundry(TreeNode root, List<Integer> ans){
+        if(root == null) return;
+        if(root.left == null && root.right == null) return;
+        if(root.right != null) rightBoundry(root.right, ans);  
+        else rightBoundry(root.left, ans);
+        ans.add(root.data);
+    }
+}
+```
+
+### How the three helper methods work
+
+**`leftBoundry(root, ans)` — top to bottom**
+
+- Stop for `null` or a leaf. Leaves are added by `leafNode()` instead.
+- Add the current non-leaf node before the recursive call.
+- Prefer the left child; if it does not exist, continue through the right child.
+
+**`leafNode(root, ans)` — left to right**
+
+- Visit the complete tree in left-first DFS order.
+- Add a node only when both children are `null`.
+- This collects every leaf once, including leaves that lie on the left or right edge.
+
+**`rightBoundry(root, ans)` — bottom to top**
+
+- Stop for `null` or a leaf to avoid duplicating leaves.
+- Prefer the right child; if it does not exist, continue through the left child.
+- Add the current node after the recursive call. This return-time addition reverses the boundary order without another list.
+
+### Important edge cases
+
+| Tree shape | Expected result | Why |
+|---|---|---|
+| Empty tree | `[]` | `root == null` is checked before accessing children. |
+| Single node `1` | `[1]` | Add root, then return because it is already a leaf. |
+| Left-skewed tree `1 → 2 → 3` | `[1, 2, 3]` | Left boundary excludes leaf `3`; leaf traversal adds it. |
+| Right-skewed tree `1 → 2 → 3` | `[1, 3, 2]` | The leaf `3` is added first; non-leaf right-boundary node `2` is added bottom-up. |
+
+**Important:** The root is handled separately. The helper methods exclude leaves, and the leaf traversal handles them. This prevents duplicate boundary values.
+
+### Complexity
+
+- **Time:** `O(N)` — the boundary helpers and leaf traversal together visit nodes only a constant number of times.
+- **Auxiliary space:** `O(H)` for recursive call stacks, where `H` is tree height.
+- **Output space:** `O(N)` for the returned boundary list.
+
+**Quick recall:** Root → Left boundary (preorder-style) → Leaves (left to right) → Right boundary (postorder-style).
+
+### Approach B — Iterative implementation (loops + stacks)
+
+This is the same boundary traversal, but the helper methods avoid recursion:
+
+- `leftBoundry()` uses a `while` loop and moves down the left boundary.
+- `leafNode()` uses a stack to perform left-to-right DFS.
+- `rightBoundry()` stores non-leaf boundary values in a stack, then pops them in reverse order.
+
+#### Java implementation — submitted code (kept unchanged)
+
+```java
+import java.util.*;
+
+public class Solution {
+    public static List<Integer> traverseBoundary(TreeNode root){
+        List<Integer> ans = new ArrayList<>();
+        if(root == null) return ans;
+
+        //including root Node 
+        ans.add(root.data);
+        if(root.left == null && root.right == null) return ans;
+
+        //including root.left Node 
+        leftBoundry(root.left, ans); 
+        //all leaf node 
+        leafNode(root, ans);      
+        //including root.right Node 
+        rightBoundry(root.right, ans);
+        return ans;
+    }
+    public static void leftBoundry(TreeNode root, List<Integer> ans){
+        while(root != null) {
+            if(root.left == null && root.right == null) break;
+            ans.add(root.data);
+            if(root.left != null) root = root.left;
+            else root = root.right;
+        }
+    }
+    public static void leafNode(TreeNode root, List<Integer> ans){
+        if(root == null) return;
+        Deque<TreeNode> st = new ArrayDeque<>();
+        st.push(root);
+        while(!st.isEmpty()){
+            TreeNode top = st.pop();
+            if(top.left == null && top.right == null) ans.add(top.data);
+            if(top.right != null) st.push(top.right);
+            if(top.left != null) st.push(top.left);
+        }
+    }
+    public static void rightBoundry(TreeNode root, List<Integer> ans){
+       if(root == null) return;
+        Deque<Integer> st = new ArrayDeque<>();
+        while(root != null){
+            if(root.left == null && root.right == null) break;
+            st.push(root.data);
+            if(root.right != null) root = root.right;
+            else root = root.left;
+        }
+        while(!st.isEmpty()){
+            ans.add(st.pop());
+        }
+
+    }
+}
+```
+
+#### Dry run — Code360 Sample Input 1
+
+```text
+          10
+         /  \
+        5    20
+       / \  /  \
+      3  8 18  25
+        /
+       7
+```
+
+Expected boundary: `[10, 5, 3, 7, 18, 25, 20]`.
+
+**1. Root**
+
+```text
+ans = [10]
+```
+
+**2. Left boundary — `leftBoundry(root.left, ans)`**
+
+| Current node | Action | `ans` |
+|---:|---|---|
+| `5` | Not a leaf, add it; prefer left child `3` | `[10, 5]` |
+| `3` | Leaf, stop without adding it here | `[10, 5]` |
+
+The leaf `3` is deliberately left for `leafNode()`.
+
+**3. Leaves — `leafNode(root, ans)`**
+
+The stack pushes the right child first and the left child second. Because it is LIFO, the left child is popped first.
+
+| Popped `top` | Stack after adding its children (top first) | Action / `ans` |
+|---:|---|---|
+| `10` | `[5, 20]` | Not a leaf |
+| `5` | `[3, 8, 20]` | Not a leaf |
+| `3` | `[8, 20]` | Leaf → `[10, 5, 3]` |
+| `8` | `[7, 20]` | Not a leaf |
+| `7` | `[20]` | Leaf → `[10, 5, 3, 7]` |
+| `20` | `[18, 25]` | Not a leaf |
+| `18` | `[25]` | Leaf → `[10, 5, 3, 7, 18]` |
+| `25` | `[]` | Leaf → `[10, 5, 3, 7, 18, 25]` |
+
+**Why push right before left?** The stack reverses insertion order. Pushing right, then left makes left pop first, so leaves are collected left to right.
+
+**4. Right boundary — `rightBoundry(root.right, ans)`**
+
+| Current node | Action | Stack (top first) |
+|---:|---|---|
+| `20` | Non-leaf: push `20`, then follow right to `25` | `[20]` |
+| `25` | Leaf: stop without pushing it | `[20]` |
+| Pop | Add `20` to `ans` | `[10, 5, 3, 7, 18, 25, 20]` |
+
+Final output: `[10, 5, 3, 7, 18, 25, 20]`.
+
+#### Where you got stuck — mistakes to remember
+
+| Earlier mistake | Why it failed | Correct rule in this implementation |
+|---|---|---|
+| Adding the current node after moving to its child in the right boundary | It could add a leaf immediately, then `leafNode()` added the same leaf again; it also built the boundary in top-down order. | Push the current **non-leaf** value before moving. Pop the stack after the walk. |
+| Following `root.left` first in the right boundary | That walks the wrong side when a right child exists. | Prefer `root.right`; use `root.left` only when the right child is absent. |
+| Adding leaves inside left/right boundary methods | The same boundary leaf could appear twice. | Both boundary methods stop at a leaf. `leafNode()` is the only method that adds leaves. |
+| Checking `root.left` / `root.right` inside the stack loop | `root` is the traversal's starting reference, not the node just popped. | Check `top.left` and `top.right`, because `top` is the current popped node. Your submitted code now does this correctly. |
+| Pushing left before right in `leafNode()` | The right node would be popped first, reversing the intended leaf order. | Push right first, then left; LIFO visits left first. |
+| Forgetting the root-only case | The root could be added once as root and again as a leaf, or a single-node tree could return an empty list. | Check `root == null`, add root once, then return if it has no children. |
+
+#### Important edge cases for revision
+
+| Tree | Expected boundary | What this checks |
+|---|---|---|
+| Empty tree | `[]` | `root == null` is handled before accessing children. |
+| Single node `1` | `[1]` | Root is added once; return before `leafNode()` can add it again. |
+| Left-skewed: `1` has left `2`, and `2` has left `3` | `[1, 2, 3]` | Left boundary excludes leaf `3`; leaf traversal adds it. |
+| Right-skewed: `1` has right `2`, and `2` has right `3` | `[1, 3, 2]` | Leaf `3` is added before non-leaf right-boundary node `2`. |
+| Root has only a right leaf `2` | `[1, 2]` | The leaf is not added by `rightBoundry()`; it is added by `leafNode()`. |
+
+**Do not use `ans.contains(top.data)` to remove duplicates.** The correct way is to keep leaf nodes out of both boundary walks. Different tree nodes may also hold the same value, so values alone are not node identities.
+
+#### Why the right-boundary stack works
+
+For a right boundary `20 → 25` (where `25` is a leaf):
+
+```text
+Walk down: push 20
+Stop at leaf 25 without pushing it
+Stack top: 20
+Pop: add 20
+```
+
+The stack naturally reverses the top-to-bottom collection into bottom-to-top output. No `Collections.reverse()` or extra list is needed.
+
+#### Complexity — iterative approach
+
+- **Time:** `O(N)` — left boundary, leaf traversal, and right boundary together visit nodes only a constant number of times.
+- **Auxiliary space:** `O(H)` for the DFS stack and right-boundary stack, where `H` is tree height.
+- **Output space:** `O(N)` for `ans`.
+
+**Quick recall:** Root once → left boundary (stop before leaf) → leaves using right-then-left stack pushes → right boundary (push non-leaves, follow right else left, then pop).
+
+### Recursive vs iterative — what changes?
+
+| Part | Recursive approach | Iterative approach |
+|---|---|---|
+| Left boundary | Recursive call, then continue down left (else right) | `while` loop, continue down left (else right) |
+| Leaves | Recursive DFS: left call before right call | Stack DFS: push right, then left so left pops first |
+| Right boundary | Add the node after the recursive call returns | Push non-leaf values while going down, then pop |
+| How bottom-up order is achieved | Function return order | Stack LIFO order |
+| Extra call stack | `O(H)` | No recursion; explicit stacks use `O(H)` |
+
+The boundary output and the rules about excluding leaves are identical in both approaches. Only the way the traversal is controlled changes.
+
+---
+
+## Final Pattern Comparison
+
+| Problem | Which nodes are selected / how output changes |
+|---|---|
+| Level Order | Keep all nodes in each level, left to right |
+| Zigzag | Keep all nodes; alternate direction inside each level |
+| Flat Zigzag | Same zigzag order, but append all levels into one list |
+| Flat Level Order | Append all levels in normal left-to-right order |
+| Bottom-Up Level Order | Keep normal order inside levels; reverse the order of levels |
+| Right Side View | Keep the last node processed at each level |
+| Left View | Keep the first node processed at each level |
+| Boundary Traversal | Root → left boundary → leaves left to right → right boundary bottom to top |
+
+## Self-Revision Checklist
+
+- [ ] Explain why `currLevelSize` must be saved before the `for` loop.
+- [ ] Trace the queue after each level on paper.
+- [ ] Explain why zigzag changes the current-level insertion order, not the queue order.
+- [ ] Explain the difference between reversing `curr` and reversing `ans`.
+- [ ] Explain why right view selects the last node and left view selects the first node.
+- [ ] For Boundary Traversal, add root once, exclude leaves from both boundaries, and collect leaves left to right.
+- [ ] Explain why the iterative leaf stack pushes right before left, and why the right-boundary stack is popped.
+- [ ] Reimplement each BFS / boundary pattern without looking at the code.
