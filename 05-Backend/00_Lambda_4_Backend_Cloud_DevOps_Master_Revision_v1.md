@@ -692,6 +692,12 @@ Normalization:
 
 Normalization reduces duplication/update anomalies. Denormalization can be justified for measured read performance but adds consistency work.
 
+## 7.2A Section 10 — Database schema design
+
+The dedicated [Section 10 — Designing DB Schema revision](02-Databases/01-Database-Schema-Design-Section-10.md) covers the instructor's relational-schema approach and the available Booking.com exercise. It includes M:N join tables, 1:N foreign-key placement, room categories vs physical rooms, date-wise availability, the date index, space–time trade-off and overbooking risk.
+
+**Coverage note:** The instructor also announces Twitter DB schema design as the second exercise, but its detailed walkthrough is not in the available transcript/study notes. It is not marked complete.
+
 ## 7.3 MongoDB and Mongoose
 
 | Term | Meaning |
@@ -1316,10 +1322,10 @@ Never execute arbitrary user code inside the main API process.
 | Microservices/monolith/monorepo | Basic monolith trade-off in Todo | **Partial** |
 | File uploads/Multer/S3 | Project/course outline | **Project/syllabus-backed; no full lecture note found** |
 | WebSocket/Socket.IO/WebRTC | Comsy/NexusMeet material | **Project-backed** |
-| MySQL/normalization | DevAPI learning outline | **Outline-backed; no complete Lambda DB lecture note found** |
+| Database schema design / normalization | Section 10 transcript + Booking.com study notes | **Lecture/study-note-backed — see 02-Databases** |
 | MongoDB/Mongoose | Comsy project docs/Mongoose references | **Project-backed** |
-| Indexes/query plans | General storage notes + course outline | **Partial** |
-| Transactions/isolation | Course outline | **Syllabus revision** |
+| Date-wise availability indexing | Section 10 Booking.com study notes | **Study-note-backed; `date_of_availability` index discussed** |
+| Booking concurrency / overbooking | Section 10 Booking.com study notes | **Study-note-backed; general isolation-level details remain syllabus revision** |
 | Partitioning/replication/sharding | Course outline | **Syllabus revision** |
 | JWT/bcrypt/RBAC | Comsy/NexusMeet project docs | **Project-backed** |
 | OAuth/session/refresh-token flows | Course outline | **Needs hands-on depth** |
@@ -1340,6 +1346,7 @@ Never execute arbitrary user code inside the main API process.
 - **Lec_5.txt:** Node.js modules and npm.
 - **Lect_6.txt:** File I/O, Node paths, rendering and the instructor's backend-priority discussion (databases, networking, scaling before tech-stack choice).
 - **Lect_7.txt:** client/server, IP, DNS, domain registration/propagation and caching, communication protocols, HTTP, web vs application vs database server, and an introductory social-media architecture/load-balancing discussion.
+- **Section 10 — Designing DB Schema:** timestamped transcript covers the design approach, RDBMS interview baseline, requirement clarification, initial Booking.com entities, M:N join tables and review business-rule choices. The separate Booking.com study note contains the later room/date-availability, indexing and concurrency material. The detailed Twitter schema walkthrough is not present in the available source.
 
 The repository already contains nine concise detailed Node.js lecture notes. No complete original transcript for every later advanced module was located in this audit.
 
